@@ -375,7 +375,7 @@ function init_gear_sets()
         ammo = "Knobkierrie",
         head = "Nyame Helm",
         body = "Nyame Mail",
-        hands = "Meg. Gloves +2",
+        hands = "Nyame Gauntlets",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets",
         neck = "Light Gorget",
