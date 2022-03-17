@@ -351,9 +351,23 @@ function init_gear_sets()
         right_ring = "Petrov Ring",
         back = gear.wsd_jse_back
     }
-    sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS.Acc, {})
-    sets.precast.WS['Resolution'].HighAcc = set_combine(sets.precast.WS.HighAcc, {})
-    sets.precast.WS['Resolution'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
+    sets.precast.WS['Resolution'].Inquartata = {
+        ammo = "Seeth. Bomblet +1",
+        head = "Nyame Helm",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets",
+        neck = "Light Gorget",
+        waist = "Fotia Belt",
+        left_ear = "Moonshade Earring",
+        right_ear = "Sherida Earring",
+        left_ring = "Epona's Ring",
+        right_ring = "Petrov Ring",
+        back = gear.wsd_jse_back
+    }
+    sets.precast.WS['Resolution'].Magic = sets.precast.WS['Resolution'].Inquartata
+    sets.precast.WS['Resolution'].TP = sets.precast.WS['Resolution']
 
     sets.precast.WS['Dimidiation'] = {
         ammo = "Knobkierrie",
@@ -437,6 +451,40 @@ function init_gear_sets()
         right_ring = "Stikini Ring",
         back = "Moonbeam Cape"
     }
+
+    sets.midcast['Aquaveil'] = {
+        ammo = "Staunch Tathlum +1",
+        head = "Agwu's Cap",
+        body = "Nyame Mail",
+        hands = "Rawhide Gloves",
+        legs = "Carmine Cuisses +1",
+        feet = gear.taeon_regensird_feet,
+        neck = "Moonbeam Necklace",
+        waist = "Audumbla Sash",
+        left_ear = "Magnetic Earring",
+        right_ear = "Odnowa Earring +1",
+        left_ring = "Gelatinous Ring +1",
+        right_ring = "Defending Ring",
+        back = gear.enmity_jse_back
+
+    }
+
+    sets.midcast['Temper'] = {
+        ammo = "Sapience Orb",
+        head = "Erilaz Galea +1",
+        body = "Runeist's Coat +3",
+        hands = "Runeist's Mitons +2",
+        legs = "Carmine Cuisses +1",
+        feet = "Carmine Greaves +1",
+        neck = "Incanter's Torque",
+        waist = "Olympus Sash",
+        left_ear = "Mimir Earring",
+        right_ear = "Andoaa Earring",
+        left_ring = "Stikini Ring",
+        right_ring = "Stikini Ring",
+        back = "Merciful Cape"
+    }
+
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
         feet = gear.herculean_phalanx_feet
     })
