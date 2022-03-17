@@ -55,7 +55,6 @@ function user_job_setup()
     send_command('bind @f8 gs c toggle AutoTankMode')
     send_command('bind @f10 gs c toggle TankAutoDefense')
     send_command('bind ^@!` gs c cycle SkillchainMode')
-    -- send_command('bind !b gs c weapons Lionheart;gs c update')
 
     select_default_macro_book()
 end
@@ -372,9 +371,23 @@ function init_gear_sets()
         back = gear.wsd_jse_back
     }
 
-    sets.precast.WS['Dimidiation'].Acc = sets.precast.WS['Dimidiation']
-    sets.precast.WS['Dimidiation'].HighAcc = sets.precast.WS['Dimidiation']
-    sets.precast.WS['Dimidiation'].FullAcc = sets.precast.WS['Dimidiation']
+    sets.precast.WS['Dimidiation'].Inquartata = {
+        ammo = "Knobkierrie",
+        head = "Nyame Helm",
+        body = "Nyame Mail",
+        hands = "Meg. Gloves +2",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets",
+        neck = "Light Gorget",
+        waist = "Grunfeld Rope",
+        left_ear = "Moonshade Earring",
+        right_ear = "Sherida Earring",
+        left_ring = "Petrov Ring",
+        right_ring = "Ilabrat Ring",
+        back = gear.wsd_jse_back
+    }
+    sets.precast.WS['Dimidiation'].Magic = sets.precast.WS['Dimidiation'].Inquartata
+    sets.precast.WS['Dimidiation'].TP = sets.precast.WS['Dimidiation']
 
     sets.precast.WS['Ground Strike'] = set_combine(sets.precast.WS, {})
     sets.precast.WS['Ground Strike'].Acc = set_combine(sets.precast.WS.Acc, {})
@@ -697,7 +710,7 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book
-    set_macro_page(1, 2)
+    set_macro_page(1, 22)
     if player.sub_job == 'BLU' then
         set_macro_page(3, 22)
         -- elseif player.sub_job == 'RDM' then
