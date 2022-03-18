@@ -38,7 +38,7 @@ function user_job_setup()
     send_command('bind ^backspace input /ja "Mantra" <me>')
     send_command('bind @` gs c cycle SkillchainMode')
 
-    select_default_macro_book()
+    -- select_default_macro_book()
     user_job_lockstyle()
 
 end
@@ -550,20 +550,20 @@ function init_gear_sets()
 end
 
 -- Select default macro book on initial load or subjob change.
-function select_default_macro_book()
-    -- Default macro set/book
-    if player.sub_job == 'DNC' then
-        set_macro_page(5, 2)
-    elseif player.sub_job == 'NIN' then
-        set_macro_page(4, 2)
-    elseif player.sub_job == 'THF' then
-        set_macro_page(6, 2)
-    elseif player.sub_job == 'RUN' then
-        set_macro_page(7, 2)
-    else
-        set_macro_page(6, 2)
-    end
-end
+-- function select_default_macro_book()
+--     -- Default macro set/book
+--     if player.sub_job == 'DNC' then
+--         set_macro_page(5, 2)
+--     elseif player.sub_job == 'NIN' then
+--         set_macro_page(4, 2)
+--     elseif player.sub_job == 'THF' then
+--         set_macro_page(6, 2)
+--     elseif player.sub_job == 'RUN' then
+--         set_macro_page(7, 2)
+--     else
+--         set_macro_page(6, 2)
+--     end
+-- end
 
 function user_job_lockstyle()
     windower.chat.input('/lockstyleset 002')
