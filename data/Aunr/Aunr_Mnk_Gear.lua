@@ -16,14 +16,12 @@ function user_job_setup()
 
     gear.tp_jse_back = {
         name = "Segomo's Mantle",
-        augments = {'DEX+20', 'Accuracy+10 Attack+10'}
-        -- augments = {'DEX+20', 'Accuracy+20 Attack+20', 'DEX+10', '"Double Attack"+10'}
+        augments = {'DEX+20', 'Accuracy+20 Attack+20', 'DEX+10', '"Dbl.Atk."+10'}
     }
 
     gear.strda_jse_back = {
         name = "Segomo's Mantle",
-        augments = {'STR+20', 'Accuracy+19 Attack+19'}
-        -- augments = {'STR+20', 'Accuracy+20 Attack+20', 'STR+10', '"Double Attack"+10'}
+        augments = {'STR+20', 'Accuracy+20 Attack+20', 'STR+1', '"Dbl.Atk."+10'}
     }
     gear.strcrit_jse_back = {
         name = "Segomo's Mantle",
