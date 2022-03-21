@@ -113,16 +113,17 @@ gear.herculean_wsd_body = {
     augments = {'Accuracy+11', 'Weapon skill damage +5%', 'DEX+7'}
 }
 gear.herculean_wsd_legs = {
-    name = "Herculean Trousers",
-    augments = {'Weapon skill damage +5%', 'DEX+8', 'Accuracy+13', 'Attack+14'}
+    name = "Herculean Boots",
+    augments = {'Pet: Accuracy+13 Pet: Rng. Acc.+13', 'Pet: Attack+3 Pet: Rng.Atk.+3', 'Weapon skill damage +6%'}
 }
+
 gear.herculean_acc_feet = {
     name = "Herculean Boots",
     augments = {'Accuracy+25 Attack+25', 'Crit. hit damage +1%', 'DEX+10', 'Accuracy+14', 'Attack+1'}
 }
 gear.herculean_ta_feet = {
     name = "Herculean Boots",
-    augments = {'Accuracy+19 Attack+19', '"Triple Atk."+4', 'DEX+5', 'Accuracy+8', 'Attack+11'}
+    augments = {'"Triple Atk."+4', '"Dbl.Atk."+2'}
 }
 gear.herculean_refresh_feet = {
     name = "Herculean Boots",

@@ -752,7 +752,7 @@ function init_gear_sets()
         body = "Malignance Tabard",
         hands = "Malignance Gloves",
         legs = "Meg. Chausses +2",
-        feet = "Mummu Gamash. +2",
+        feet = gear.herculean_ta_feet,
         neck = "Sanctity Necklace",
         waist = "Sailfi Belt +1",
         left_ear = "Cessance Earring",

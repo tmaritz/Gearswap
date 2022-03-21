@@ -6,7 +6,7 @@ function user_job_setup()
     state.PhysicalDefenseMode:options('PDT')
     state.MagicalDefenseMode:options('MDT')
     state.ResistDefenseMode:options('MEVA')
-    state.Weapons:options('Sakpata', 'Staff', 'ProcStaff', 'ProcClub', 'Barehanded', 'ProcSword', 'ProcGreatSword',
+    state.Weapons:options('Karambit', 'Staff', 'ProcStaff', 'ProcClub', 'Barehanded', 'ProcSword', 'ProcGreatSword',
         'ProcScythe', 'ProcPolearm', 'ProcGreatKatana')
 
     state.ExtraMeleeMode = M {
@@ -509,8 +509,8 @@ function init_gear_sets()
     }
 
     -- Weapons sets
-    sets.weapons.Sakpata = {
-        main = "Sakpata's Fists"
+    sets.weapons.Karambit = {
+        main = "Karambit"
     }
     sets.weapons.Barehanded = {
         main = empty

@@ -1,0 +1,17 @@
+sets.exported={
+    main="Kaja Knife",
+    sub={ name="Shijo", augments={'DEX+15','"Dual Wield"+5','"Triple Atk."+2',}},
+    ammo="Staunch Tathlum",
+    head="Meghanada Visor +2",
+    body="Malignance Tabard",
+    hands="Malignance Gloves",
+    legs="Meg. Chausses +2",
+    feet={ name="Herculean Boots", augments={'Pet: Accuracy+13 Pet: Rng. Acc.+13','Pet: Attack+3 Pet: Rng.Atk.+3','Weapon skill damage +6%',}},
+    neck="Loricate Torque",
+    waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+    left_ear="Cessance Earring",
+    right_ear="Dedition Earring",
+    left_ring="Warp Ring",
+    right_ring="Gelatinous Ring +1",
+    back={ name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+7',}},
+}

@@ -1185,7 +1185,9 @@ function init_gear_sets()
         legs = "Carmine Cuisses +1"
     }
     sets.TreasureHunter = {
-        ear1 = gear.herculean_th_feet
+        feet = gear.herculean_th_feet,
+        waist = "Chaac Belt",
+        ammo = "Per. Lucky Egg"
     }
 
     -- Weapons sets
