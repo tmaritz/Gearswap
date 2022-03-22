@@ -592,7 +592,7 @@ function init_gear_sets()
     sets.idle = {
         main = "Daybreak",
         sub = "Genbu's Shield",
-        ammo = "Staunch Tathlum",
+        ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         body = "Agwu's Robe",
         hands = "Nyame Gauntlets",
@@ -610,7 +610,7 @@ function init_gear_sets()
     sets.idle.DT = {
         main = "Malignance Pole",
         sub = "Irenic Strap",
-        ammo = "Staunch Tathlum",
+        ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
@@ -628,7 +628,7 @@ function init_gear_sets()
     sets.idle.DTMeva = {
         main = "Malignance Pole",
         sub = "Irenic Strap",
-        ammo = "Staunch Tathlum",
+        ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         body = "Agwu's Robe",
         hands = "Nyame Gauntlets",
@@ -709,7 +709,7 @@ function init_gear_sets()
     sets.idle.Weak = {
         main = "Malignance Pole",
         sub = "Irenic Strap",
-        ammo = "Staunch Tathlum",
+        ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         body = "Agwu's Robe",
         hands = "Nyame Gauntlets",
