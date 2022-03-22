@@ -176,7 +176,23 @@ function init_gear_sets()
         ring1 = "Karieyh Ring +1",
         ring2 = "Rufescent Ring",
         back = "Alaunus's Cape",
-        waist = "Grunfled Rope",
+        waist = "Grunfeld Rope",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
+
+    sets.precast.WS['Black Halo'] = {
+        ammo = "Floestone",
+        head = "Nyame Helm",
+        neck = "Cleric's Torque",
+        ear1 = "Moonshade Earring",
+        ear2 = "Ishvara Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Karieyh Ring +1",
+        ring2 = "Rufescent Ring",
+        back = "Alaunus's Cape",
+        waist = "Grunfeld Rope",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
