@@ -20,9 +20,15 @@ beta_examples_and_information/*
 libs/Mote-*
 libs/rev1/*
 
+# OS generated files #
+######################
 .DS_Store
-
-
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 libs/closetCleaner.lua
 
