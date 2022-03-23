@@ -6,7 +6,7 @@ function user_job_setup()
     state.PhysicalDefenseMode:options('DT')
     state.MagicalDefenseMode:options('MDT')
     state.ResistDefenseMode:options('Refresh')
-    state.Weapons:options('None', 'Trial', 'MeleeWeapons', 'LowDmg')
+    state.Weapons:options('None', 'DualWield', 'Trial', 'MeleeWeapons', 'LowDmg')
 
     -- state.BarElement = M{['description']='BarElement', 'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
     -- state.BarStatus = M{['description']='BarStatus', 'Baramnesra', 'Barvira', 'Barparalyzra', 'Barsilencera', 'Barpetra', 'Barpoisonra', 'Barblindra', 'Barsleepra'}
@@ -75,6 +75,12 @@ function init_gear_sets()
         main = "Maxentius",
         sub = "Culminus"
     }
+
+    sets.weapons.DualWield = {
+        main = "C. Palug Hammer",
+        sub = "Maxentius"
+    }
+
     sets.weapons.Trial = {
         main = "Yagrush",
         sub = "Ammurapi Shield"

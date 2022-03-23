@@ -7,7 +7,7 @@ function user_job_setup()
     state.PhysicalDefenseMode:options('PDT', 'NukeLock', 'GeoLock', 'PetPDT')
     state.MagicalDefenseMode:options('MDT', 'NukeLock')
     state.ResistDefenseMode:options('MEVA')
-    state.Weapons:options('None', 'Hammertime')
+    state.Weapons:options('None', 'Hammertime', 'Malignance')
 
     gear.nuke_jse_back = {
         name = "Nantosuelta's Cape",
@@ -857,6 +857,11 @@ function init_gear_sets()
     sets.weapons.Hammertime = {
         main = "C. Palug Hammer",
         sub = 'Genbu\'s Shield'
+    }
+
+    sets.weapons.Malignance = {
+        main = "Malignance Pole",
+        sub = "Irenic Strap"
     }
 
     sets.weapons.Nehushtan = {
