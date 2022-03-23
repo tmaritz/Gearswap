@@ -20,6 +20,8 @@ beta_examples_and_information/*
 libs/Mote-*
 libs/rev1/*
 
+.DS_Store
+
 
 
 libs/closetCleaner.lua
