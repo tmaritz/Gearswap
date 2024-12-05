@@ -5,6 +5,8 @@ function user_job_setup()
     state.CastingMode:options('Normal','Resistant','AoE')
     state.IdleMode:options('Normal','NoRefresh','DT')
 	state.Weapons:options('None','Naegling','Aeneas','DualWeapons','DualNaegling','DualTauret','DualAeolian')
+	-- Whether to use Carn (or song daggers in general) under a certain threshhold even when weapons are locked.
+	state.CarnMode = M{'Always','300','1000','Never'}
 
 	gear.melee_jse_back = {name="Intarabus's Cape",augments={'Accuracy+20 Attack+20'}}
 	gear.magic_jse_back = {name="Intarabus's Cape",augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10','Damage taken-5%',}}
@@ -26,6 +28,7 @@ function user_job_setup()
 	send_command('bind !r gs c weapons None;gs c update')
 	send_command('bind !q gs c weapons NukeWeapons;gs c update')
 	send_command('bind ^q gs c weapons Swords;gs c update')
+	send_command('bind !f7 gs c cycle CarnMode')
 
 	select_default_macro_book()
 end
@@ -87,7 +90,6 @@ function init_gear_sets()
 	sets.precast.FC.Daurdabla = set_combine(sets.precast.FC.BardSong, {range=info.ExtraSongInstrument})
 	sets.precast.DaurdablaDummy = sets.precast.FC.Daurdabla
 		
-	
 	-- Precast sets to enhance JAs
 	
 	sets.precast.JA.Nightingale = {feet="Bihu Slippers +1"}
@@ -125,7 +127,6 @@ function init_gear_sets()
 
 	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
-
 	-- Midcast Sets
 
 	-- General set for recast times.
@@ -155,14 +156,13 @@ function init_gear_sets()
 	sets.midcast['Magic Finale'] = {range="Blurred Harp +1"}
 	sets.midcast.Mazurka = {range="Marsyas"}
 	
-
 	-- For song buffs (duration and AF3 set bonus)
 	sets.midcast.SongEffect = {main="Kali",sub="Genmei Shield",range="Blurred Harp +1",ammo=empty,
 		head="Fili Calot +1",neck="Mnbw. Whistle +1",ear1="Enchntr. Earring +1",ear2="Loquac. Earring",
 		body="Fili Hongreline +1",hands="Inyan. Dastanas +2",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
 		back=gear.magic_jse_back,waist="Kobo Obi",legs="Inyanga Shalwar +2",feet="Brioso Slippers +2"}
 		
-	sets.midcast.SongEffect.DW = {main="Kali",sub="Kali"}
+	sets.midcast.SongEffect.DW = {main="Kali",sub="Kali"} --Only weapons in this set. This set is overlayed onto  SongEffect
 
 	-- For song defbuffs (duration primary, accuracy secondary)
 	sets.midcast.SongDebuff = {main="Kali",sub="Ammurapi Shield",range="Marsyas",ammo=empty,
@@ -170,7 +170,7 @@ function init_gear_sets()
 		body="Fili Hongreline +1",hands="Inyan. Dastanas +2",ring1="Metamorph Ring +1",ring2="Stikini Ring +1",
 		back=gear.magic_jse_back,waist="Acuity Belt +1",legs="Inyanga Shalwar +2",feet="Brioso Slippers +2"}
 		
-	sets.midcast.SongDebuff.DW = {main="Kali",sub="Kali"}
+	sets.midcast.SongDebuff.DW = {main="Kali",sub="Kali"} --Only weapons in this set. This set is overlayed onto  SongDebuff
 
 	-- For song defbuffs (accuracy primary, duration secondary)
 	sets.midcast.SongDebuff.Resistant = {main="Daybreak",sub="Ammurapi Shield",range="Blurred Harp +1",ammo=empty,
@@ -184,8 +184,6 @@ function init_gear_sets()
 		body="Inyanga Jubbah +2",hands="Gendewitha Gages +1",ring1="Kishar Ring",ring2="Prolix Ring",
 		back=gear.magic_jse_back,waist="Witful Belt",legs="Fili Rhingrave +1",feet="Aya. Gambieras +2"}
 		
-	sets.midcast.SongDebuff.DW = {}
-
 	-- Cast spell with normal gear, except using Daurdabla instead
     sets.midcast.Daurdabla = {range=info.ExtraSongInstrument}
 

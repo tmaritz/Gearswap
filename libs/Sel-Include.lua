@@ -138,6 +138,7 @@ function init_include()
 	state.AutoFoodMode		  = M(false, 'Auto Food Mode')
 	state.AutoSubMode 		  = M(false, 'Auto Sublimation Mode')
 	state.AutoCleanupMode  	  = M(false, 'Auto Cleanup Mode')
+	state.AutoSuperJumpMode   = M(false, 'Auto SuperJump Mode')
 	state.DisplayMode  	  	  = M(true, 'Display Mode')
 	state.UseCustomTimers 	  = M(true, 'Use Custom Timers')
 	state.CancelStoneskin	  = M(true, 'Auto Cancel Stoneskin')
@@ -151,6 +152,8 @@ function init_include()
 	state.UnlockWeapons		  = M(false, 'Unlock Weapons')
 	state.SelfWarp2Block 	  = M(true, 'Block Warp2 on Self')
 	state.MiniQueue		 	  = M(true, 'MiniQueue')
+	state.PWUnlock		 	  = M(false, 'PWUnlock')
+	
 
 	state.AutoBuffMode 		  = M{['description'] = 'Auto Buff Mode','Off','Auto'}
 	state.RuneElement 		  = M{['description'] = 'Rune Element','Ignis','Gelus','Flabra','Tellus','Sulpor','Unda','Lux','Tenebrae'}
@@ -233,6 +236,7 @@ function init_include()
 	autonuke = 'Fire'
 	autows = ''
 	autows_list = {}
+	weapons_pagelist = {}
 	smartws = nil
 	rangedautows = ''
 	autowstp = 1000
@@ -588,7 +592,7 @@ end
 -- Non item-based global settings to check on load.
 function global_on_load()
 	if world.area then
-		set_dual_wield()
+		set_dual_wield:schedule(3)
 		
 		if world.area:contains('Abyssea') or data.areas.proc:contains(world.area) then
 			state.SkipProcWeapons:set('False')
@@ -1636,8 +1640,19 @@ function get_idle_set(petStatus)
 		idleSet = set_combine(idleSet, sets.weapons[state.Weapons.value])
 	end
 	
-	if (buffactive.sleep or buffactive.Lullaby) and (player.main_job == 'SMN' and pet.isvalid) then
-		idleSet = set_combine(idleSet, sets.buff.Sleep)
+	if (buffactive.sleep or buffactive.Lullaby) and sets.IdleWakeUp then
+		if item_available("Sacrifice Torque") and player.main_job == 'SMN' and pet.isvalid then
+			idleSet = set_combine(idleSet, sets.IdleWakeUp)
+		elseif item_available("Prime Horn") and player.main_job == 'BRD' then
+			idleSet = set_combine(idleSet, sets.IdleWakeUp)    
+		elseif state.Weapons.value == 'None' or state.UnlockWeapons.value then
+				idleSet = set_combine(idleSet, sets.IdleWakeUp)
+		elseif state.PWUnlock.value then
+			send_command('@input //gs c set unlockweapons true')
+			windower.chat.input:schedule(3,'//gs c set unlockweapons false')
+			tickdelay = os.clock() + 1.25
+			idleSet = set_combine(idleSet, sets.IdleWakeUp)
+		end
 	end
 	
     if buffactive.doom then
@@ -1734,8 +1749,21 @@ function get_melee_set()
     end
 	
 	if (buffactive.sleep or buffactive.Lullaby) and sets.buff.Sleep then
-        meleeSet = set_combine(meleeSet, sets.buff.Sleep)
-    end
+		if (item_available("Vim Torque") or item_available("Vim Torque +1")) and (player.main_job == 'WAR' or player.main_job == 'PLD' or player.main_job == 'DRK' or player.main_job == 'SAM' or player.main_job == 'DRG') then
+			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
+		elseif item_available("Frenzy Sallet") and (player.main_job == 'MNK' or player.main_job == 'THF' or player.main_job == 'DRK' or player.main_job == 'BST' or player.main_job == 'SAM' or player.main_job == 'DRG' or player.main_job == 'DNC' or player.main_job == 'RUN') then
+			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
+		elseif item_available("Berserker's Torque") and (player.main_job == 'WAR' or player.main_job == 'PLD' or player.main_job == 'DRK' or player.main_job == 'SAM' or player.main_job == 'DRG') then
+			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
+		elseif state.Weapons.value == 'None' or state.UnlockWeapons.value then
+			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
+		elseif state.PWUnlock.value then
+			send_command('@input //gs c set unlockweapons true')
+			windower.chat.input:schedule(3,'//gs c set unlockweapons false')
+			tickdelay = os.clock() + 1.25
+			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
+		end
+	end
 	
 	if buffactive.doom then
         meleeSet = set_combine(meleeSet, sets.buff.Doom)
@@ -2185,7 +2213,7 @@ end
 
 -- Called when the player's subjob changes.
 function sub_job_change(newSubjob, oldSubjob)
-	set_dual_wield()
+	set_dual_wield:schedule(2)
     if user_setup then
         user_setup()
     end
@@ -2317,9 +2345,18 @@ function state_change(stateField, newValue, oldValue)
 			newValue = state.Weapons.value
 			if not state.ReEquip.value then	equip_weaponset(newValue) end
 		end
-		
+
 		if autows_list[newValue] then
-			autows = autows_list[newValue]
+			if type(autows_list[newValue]) == "table" then
+				autows 		= autows_list[newValue][1]
+				autowstp 	= autows_list[newValue][2]
+			else
+				autows 		= autows_list[newValue]
+			end
+		end
+
+		if weapons_pagelist[newValue] then
+			set_macro_page(weapons_pagelist[newValue][1], weapons_pagelist[newValue][2])
 		end
 	elseif stateField == 'Unlock Weapons' then
 		if newValue == true then
