@@ -1,5 +1,4 @@
 function user_job_setup()
-
     state.OffenseMode:options('Normal', 'Inquartata', 'Magic', 'TP')
     state.WeaponskillMode:options('Match', 'Normal', 'Inquartata', 'Magic', 'TP')
     state.CastingMode:options('SIRD', 'Normal')
@@ -17,23 +16,23 @@ function user_job_setup()
 
     gear.enmity_jse_back = {
         name = "Ogma's cape",
-        augments = {'HP+60', 'Eva.+20 /Mag. Eva.+20', 'Mag. Evasion+10', 'Enmity+10', 'Phys. dmg. taken-10%'}
+        augments = { 'HP+60', 'Eva.+20 /Mag. Eva.+20', 'Mag. Evasion+10', 'Enmity+10', 'Phys. dmg. taken-10%' }
     }
     gear.stp_jse_back = {
         name = "Ogma's cape",
-        augments = {'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Store TP"+10', 'Phys. dmg. taken-10%'}
+        augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Accuracy+10', '"Store TP"+10', 'Phys. dmg. taken-10%' }
     }
     gear.da_jse_back = {
         name = "Ogma's cape",
-        augments = {'STR+20', 'Accuracy+20 Attack+20', 'STR+7', '"Dbl.Atk."+10'}
+        augments = { 'STR+20', 'Accuracy+20 Attack+20', 'STR+7', '"Dbl.Atk."+10' }
     }
     gear.wsd_jse_back = {
         name = "Ogma's cape",
-        augments = {'DEX+20', 'Accuracy+20 Attack+20', 'DEX+10', 'Weapon skill damage +10%'}
+        augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'DEX+10', 'Weapon skill damage +10%' }
     }
     gear.fc_jse_back = {
         name = "Ogma's cape",
-        augments = {'HP+60', '"Fast Cast"+10', 'Phys. dmg. taken-10%'}
+        augments = { 'HP+60', '"Fast Cast"+10', 'Phys. dmg. taken-10%' }
     }
 
     autows = 'Dimidiation'
@@ -56,11 +55,10 @@ function user_job_setup()
     send_command('bind @f10 gs c toggle TankAutoDefense')
     send_command('bind ^@!` gs c cycle SkillchainMode')
 
-    -- select_default_macro_book()
+    select_default_macro_book()
 end
 
 function init_gear_sets()
-
     sets.Enmity = {
         ammo = "Aqreqaq Bomblet",
         head = "Rabid Visor",
@@ -752,34 +750,32 @@ function init_gear_sets()
     sets.buff.Embolden = {
         back = "Evasionist's Cape"
     }
-
 end
 
 -- Select default macro book on initial load or subjob change.
--- function select_default_macro_book()
---     -- Default macro set/book
---     set_macro_page(1, 22)
---     if player.sub_job == 'BLU' then
---         set_macro_page(3, 22)
---         -- elseif player.sub_job == 'RDM' then
---         -- 	set_macro_page(5, 2)
---         -- elseif player.sub_job == 'SCH' then
---         -- 	set_macro_page(5, 2)
---         -- elseif player.sub_job == 'DNC' then
---         -- 	set_macro_page(6, 2)
---         -- elseif player.sub_job == 'WAR' then
---         -- 	set_macro_page(7, 2)
---         -- elseif player.sub_job == 'SAM' then
---         -- 	set_macro_page(8, 2)
---         -- elseif player.sub_job == 'DRK' then
---         -- 	set_macro_page(9, 2)
---         -- elseif player.sub_job == 'NIN' then
---         -- 	set_macro_page(10, 2)
---     else
---         set_macro_page(3, 22)
-
---     end
--- end
+function select_default_macro_book()
+    -- Default macro set/book
+    -- set_macro_page(1, 22)
+    if player.sub_job == 'BLU' then
+        set_macro_page(3, 22)
+        -- elseif player.sub_job == 'RDM' then
+        -- 	set_macro_page(5, 2)
+        -- elseif player.sub_job == 'SCH' then
+        -- 	set_macro_page(5, 2)
+        -- elseif player.sub_job == 'DNC' then
+        -- 	set_macro_page(6, 2)
+        -- elseif player.sub_job == 'WAR' then
+        -- 	set_macro_page(7, 2)
+        -- elseif player.sub_job == 'SAM' then
+        -- 	set_macro_page(8, 2)
+        -- elseif player.sub_job == 'DRK' then
+        -- 	set_macro_page(9, 2)
+        -- elseif player.sub_job == 'NIN' then
+        -- 	set_macro_page(10, 2)
+    else
+        set_macro_page(1, 22)
+    end
+end
 
 -- Job Specific Trust Overwrite
 function check_trust()
