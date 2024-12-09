@@ -219,7 +219,7 @@ function init_gear_sets()
     sets.midcast.Geomancy.Indi = { set_combine(sets.midcast.Geomancy, {
         back = gear.idle_jse_back,
         legs = "Bagua Pants +1",
-        feet = "Azimuth Gaiters"
+        feet = "Azimuth Gaiters +1"
     }) }
 
     sets.midcast.Cure = {
