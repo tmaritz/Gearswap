@@ -1,5 +1,4 @@
 function user_job_setup()
-
     -- Options: Override default values
     state.OffenseMode:options('Normal')
     state.CastingMode:options('Normal', 'Resistant', 'Fodder', 'Proc')
@@ -11,11 +10,11 @@ function user_job_setup()
 
     gear.nuke_jse_back = {
         name = "Nantosuelta's Cape",
-        augments = {'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', '"Mag.Atk.Bns."+10'}
+        augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', '"Mag.Atk.Bns."+10' }
     }
     gear.idle_jse_back = {
         name = "Nantosuelta's Cape",
-        augments = {'Eva.+20 /Mag. Eva.+20', 'Pet: "Regen"+10', 'Pet: Damage taken -5%'}
+        augments = { 'Eva.+20 /Mag. Eva.+20', 'Pet: "Regen"+10', 'Pet: Damage taken -5%' }
     }
 
     gear.obi_cure_back = "Tempered Cape +1"
@@ -29,7 +28,7 @@ function user_job_setup()
 
     gear.telchine_legs_pet = {
         name = "Telchine Braconi",
-        augments = {'Mag. Evasion+23', 'Pet: "Regen"+3', 'Pet: Damage taken -3%'}
+        augments = { 'Mag. Evasion+23', 'Pet: "Regen"+3', 'Pet: Damage taken -3%' }
     }
 
     -- autoindi = "Precision"
@@ -60,7 +59,6 @@ function user_job_setup()
 end
 
 function init_gear_sets()
-
     --------------------------------------
     -- Precast sets
     --------------------------------------
@@ -200,7 +198,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Geomancy = {
-        main = "Solstice",
+        main = "Idris",
         sub = "Culminus",
         range = "Dunna",
         head = "Bagua Galero +3",
@@ -218,11 +216,11 @@ function init_gear_sets()
     }
 
     -- Extra Indi duration as long as you can keep your 900 skill cap.
-    sets.midcast.Geomancy.Indi = {set_combine(sets.midcast.Geomancy, {
+    sets.midcast.Geomancy.Indi = { set_combine(sets.midcast.Geomancy, {
         back = gear.idle_jse_back,
         legs = "Bagua Pants +1",
         feet = "Azimuth Gaiters"
-    })}
+    }) }
 
     sets.midcast.Cure = {
         main = "Chatoyant Staff",
@@ -645,25 +643,25 @@ function init_gear_sets()
 
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = {
-        main = "Solstice",
+        main = "Idris",
         sub = "Genbu's Shield",
         range = "Dunna",
         head = "Azimuth Hood +1",
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
-        legs = gear.telchine_legs_pet,
+        legs = "Agwu's Slops",
         feet = "Bagua Sandals +3",
         neck = "Bagua Charm +1",
         waist = "Isa Belt",
-        left_ear = "Rimeice Earring",
-        right_ear = "Handler's Earring +1",
+        left_ear = "Lugalbanda Earring",
+        right_ear = "Odnowa Earring +1",
         left_ring = "Defending Ring",
         right_ring = "Shadow Ring",
         back = gear.idle_jse_back
     }
 
     sets.idle.DT.Pet = {
-        main = "Solstice",
+        main = "Idris",
         sub = "Genbu's Shield",
         range = "Dunna",
         head = "Nyame Helm",
@@ -674,14 +672,14 @@ function init_gear_sets()
         neck = "Bagua Charm +1",
         waist = "Carrier's Sash",
         left_ear = "Lugalbanda Earring",
-        right_ear = "Eabani Earring",
+        right_ear = "Odnowa Earring +1",
         left_ring = "Defending Ring",
         right_ring = "Shadow Ring",
         back = gear.idle_jse_back
     }
 
     sets.idle.DTMeva.Pet = {
-        main = "Solstice",
+        main = "Idris",
         sub = "Genbu's Shield",
         range = "Dunna",
         head = "Nyame Helm",
@@ -692,7 +690,7 @@ function init_gear_sets()
         neck = "Bagua Charm +1",
         waist = "Carrier's Sash",
         left_ear = "Lugalbanda Earring",
-        right_ear = "Eabani Earring",
+        right_ear = "Odnowa Earring +1",
         left_ring = "Defending Ring",
         right_ring = "Shadow Ring",
         back = gear.idle_jse_back
@@ -876,7 +874,7 @@ end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-    set_macro_page(1, 5)
+    set_macro_page(1, 22)
 end
 
 function user_job_lockstyle()
