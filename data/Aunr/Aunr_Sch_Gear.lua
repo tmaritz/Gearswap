@@ -62,7 +62,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {
-        main = gear.grioavolr_fc_staff,
+        main = "Mpaca's Staff",
         sub = "Clerisy Strap",
         ammo = "Impatiens",
         head = "Amalric Coif +1",
@@ -314,7 +314,7 @@ function init_gear_sets()
     sets.midcast.Regen = {
         main = "Bolelabunga",
         sub = "Ammurapi Shield",
-        "Savant's Treatise",
+        ammo = "Savant's Treatise",
         head = "Arbatel Bonnet +2",
         neck = "Incanter's Torque",
         ear1 = "Andoaa Earring",
