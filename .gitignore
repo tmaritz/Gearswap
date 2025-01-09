@@ -34,3 +34,5 @@ Rename.bat
 Modes.lua
 organizer-lib.lua
 !data/Mytha/*
+!data/Aunr/*
+!data/Drakr/*
