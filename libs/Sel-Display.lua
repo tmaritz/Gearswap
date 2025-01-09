@@ -411,5 +411,5 @@ end)
 windower.raw_register_event('incoming chunk', function(id, data)
     if id == 0x00A and stateBox and state.DisplayMode.value then
         stateBox:show()
-    end
+	end
 end)

@@ -1288,7 +1288,37 @@ function default_aftercast(spell, spellMap, eventArgs)
 				unlock_TH()
 			end
 		end
-		if is_nuke(spell, spellMap) then
+		if spell.type == 'WeaponSkill' then
+			if state.SkillchainMode.value == 'Single' then
+				state.SkillchainMode:reset()
+				if state.DisplayMode.value then update_job_states()	end
+			end
+		elseif spell.action_type == 'Item' then
+			if useItem and (spell.english == useItemName or useItemSlot == 'set') then
+				useItem = false
+				if useItemSlot == 'item' then
+					windower.send_command('put '..useItemName..' satchel')
+				elseif useItemSlot == 'set' then
+					local slots = T{}
+					for slot,item in pairs(sets[useItemName]) do
+						slots:append(slot)
+					end
+					enable(slots)
+					if player.inventory[useItemName] then
+						windower.send_command('wait 1;put '..set_to_item(useItemName)..' satchel')
+					end
+				else 
+					enable(useItemSlot)
+					if player.inventory[useItemName] then
+						windower.send_command('wait 1;put '..useItemName..' satchel')
+					end
+				end
+				useItemName = ''
+				useItemSlot = ''
+			end
+		elseif spell.english:startswith('Utsusemi') then
+			lastshadow = spell.english
+		elseif is_nuke(spell, spellMap) then
 			if state.MagicBurstMode.value == 'Single' then state.MagicBurstMode:reset() end
 			if state.ElementalWheel.value and (spell.skill == 'Elemental Magic' or spellMap:contains('ElementalNinjutsu')) then
 				state.ElementalMode:cycle()
@@ -1299,32 +1329,6 @@ function default_aftercast(spell, spellMap, eventArgs)
 				end
 			end
 			if state.DisplayMode.value then update_job_states()	end
-		elseif spell.type == 'WeaponSkill' and state.SkillchainMode.value == 'Single' then
-			state.SkillchainMode:reset()
-			if state.DisplayMode.value then update_job_states()	end
-		elseif spell.english:startswith('Utsusemi') then
-			lastshadow = spell.english
-		elseif spell.action_type == 'Item' and useItem and (spell.english == useItemName or useItemSlot == 'set') then
-			useItem = false
-			if useItemSlot == 'item' then
-				windower.send_command('put '..useItemName..' satchel')
-			elseif useItemSlot == 'set' then
-				local slots = T{}
-				for slot,item in pairs(sets[useItemName]) do
-					slots:append(slot)
-				end
-				enable(slots)
-				if player.inventory[useItemName] then
-					windower.send_command('wait 1;put '..set_to_item(useItemName)..' satchel')
-				end
-			else 
-				enable(useItemSlot)
-				if player.inventory[useItemName] then
-					windower.send_command('wait 1;put '..useItemName..' satchel')
-				end
-			end
-			useItemName = ''
-			useItemSlot = ''
 		end
 	end
 
@@ -1677,7 +1681,10 @@ function get_idle_set(petStatus)
 		idleSet = set_combine(idleSet, sets.weapons[state.Weapons.value])
 	end
 	
-	if (buffactive.sleep or buffactive.Lullaby) and sets.IdleWakeUp then
+	if (buffactive.sleep or buffactive.Lullaby) then
+		if sets.buff.Sleep then
+			idleSet = set_combine(idleSet, sets.buff.Sleep)
+		end
 		if item_available("Sacrifice Torque") and player.main_job == 'SMN' and pet.isvalid then
 			idleSet = set_combine(idleSet, {neck="Sacrifice Torque"})
 		elseif sets.WakeUpWeapons then
@@ -1785,14 +1792,17 @@ function get_melee_set()
     end
 	
 	if (buffactive.sleep or buffactive.Lullaby) and sets.buff.Sleep then
-		if (item_available("Vim Torque") or item_available("Vim Torque +1")) and (player.main_job == 'WAR' or player.main_job == 'PLD' or player.main_job == 'DRK' or player.main_job == 'SAM' or player.main_job == 'DRG') then
+		if sets.buff.Sleep then
 			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
-		elseif item_available("Frenzy Sallet") and (player.main_job == 'MNK' or player.main_job == 'THF' or player.main_job == 'DRK' or player.main_job == 'BST' or player.main_job == 'SAM' or player.main_job == 'DRG' or player.main_job == 'DNC' or player.main_job == 'RUN') then
-			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
-		elseif item_available("Berserker's Torque") and (player.main_job == 'WAR' or player.main_job == 'PLD' or player.main_job == 'DRK' or player.main_job == 'SAM' or player.main_job == 'DRG') then
-			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
-		elseif state.Weapons.value == 'None' or state.UnlockWeapons.value then
-			meleeSet = set_combine(meleeSet, sets.buff.Sleep)
+		end
+		if item_equippable("Vim Torque") then
+			meleeSet = set_combine(meleeSet, {neck="Vim Torque"})
+		elseif item_equippable("Vim Torque +1") then
+			meleeSet = set_combine(meleeSet, {neck="Vim Torque +1"})
+		elseif item_equippable("Frenzy Sallet") then
+			meleeSet = set_combine(meleeSet, {head="Frenzy Sallet"})
+		elseif item_equippable("Berserker's Torque") then
+			meleeSet = set_combine(meleeSet, {neck="Berserker's Torque"})
 		elseif sets.WakeUpWeapons then
 			if state.Weapons.value == 'None' or state.UnlockWeapons.value then
 				meleeSet = set_combine(meleeSet, sets.WakeUpWeapons)

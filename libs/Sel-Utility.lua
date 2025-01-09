@@ -916,6 +916,15 @@ end
 --
 -- Variables it sets: classes.Daytime, and classes.DuskToDawn.  They are set to true
 
+function item_equippable(item)
+	local item_id = item_name_to_id(item)
+	if item_id and res.items[item_id].jobs:contains(player.main_job_id) then
+		return true	
+	else
+		return false
+	end
+end
+
 function item_available(item)
 	if player.inventory[item] or player.wardrobe[item] or player.wardrobe2[item] or player.wardrobe3[item] or player.wardrobe4[item] or player.wardrobe5[item] or player.wardrobe6[item] or player.wardrobe7[item] or player.wardrobe8[item] or player.satchel[item] then
 		return true
@@ -2372,9 +2381,7 @@ function get_current_stratagem_count()
 		maxStratagems = math.floor((player.main_job_level + 10) / 20)
 	end
 
-
-    local currentCharges = math.floor(maxStratagems - (stratsRecast / StratagemChargeTimer))
-    return currentCharges
+    return (math.floor(maxStratagems - (stratsRecast / StratagemChargeTimer)))
 end
 
 function arts_active()
