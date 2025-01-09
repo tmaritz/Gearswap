@@ -116,7 +116,7 @@ function init_gear_sets()
 	
 	sets.precast.WS['Cataclysm'] = {ammo="Ghastly Tathlum +1",
 		neck="Baetyl Pendant",ear1="Friomisi Earring",ear2="Crematio Earring",
-		hands="Malignance Gloves",ring1="Shiva Ring +1",
+		hands="Malignance Gloves",ring1="Shiva Ring",
 		back="Toro Cape",legs="Nahtirah Trousers"}
 	
 	-- Swap to these on Moonshade using WS if at 3000 TP
