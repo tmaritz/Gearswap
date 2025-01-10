@@ -70,7 +70,7 @@ function init_gear_sets()
         ear1 = "Enchntr. Earring +1",
         ear2 = "Malignance Earring",
         body = "Zendik Robe",
-        hands = "Acad. Bracers +3",
+        hands = "Acad. Bracers +2",
         ring1 = "Kishar Ring",
         ring2 = "Lebeche Ring",
         back = "Perimede Cape",
@@ -387,7 +387,7 @@ function init_gear_sets()
         main = "Daybreak",
         sub = "Ammurapi Shield",
         ammo = "Pemphredo Tathlum",
-        head = "Acad. Mortar. +3",
+        head = "Acad. Mortar. +2",
         neck = "Erra Pendant",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
@@ -405,12 +405,12 @@ function init_gear_sets()
         main = "Daybreak",
         sub = "Ammurapi Shield",
         ammo = "Pemphredo Tathlum",
-        head = "Acad. Mortar. +3",
+        head = "Acad. Mortar. +2",
         neck = "Erra Pendant",
         ear1 = "Regal Earring",
         ear2 = "Digni. Earring",
         body = "Chironic Doublet",
-        hands = "Acad. Bracers +3",
+        hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
         back = gear.nuke_jse_back,
@@ -466,7 +466,7 @@ function init_gear_sets()
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
         body = "Chironic Doublet",
-        hands = "Acad. Bracers +3",
+        hands = "Acad. Bracers +2",
         ring1 = "Stikini Ring",
         ring2 = "Stikini Ring",
         back = gear.nuke_jse_back,
@@ -551,7 +551,7 @@ function init_gear_sets()
     sets.midcast.Aspir.Resistant = sets.midcast.Drain.Resistant
 
     sets.midcast.Stun = {
-        main = gear.grioavolr_fc_staff,
+        main = "Mpaca's Staff",
         sub = "Clerisy Strap",
         ammo = "Hasty Pinion +1",
         head = "Amalric Coif +1",
@@ -559,7 +559,7 @@ function init_gear_sets()
         ear1 = "Enchntr. Earring +1",
         ear2 = "Malignance Earring",
         body = "Zendik Robe",
-        hands = "Acad. Bracers +3",
+        hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
         back = gear.nuke_jse_back,
@@ -572,12 +572,12 @@ function init_gear_sets()
         main = "Daybreak",
         sub = "Ammurapi Shield",
         ammo = "Pemphredo Tathlum",
-        head = "Acad. Mortar. +3",
+        head = "Acad. Mortar. +2",
         neck = "Erra Pendant",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
         body = "Zendik Robe",
-        hands = "Acad. Bracers +3",
+        hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
         back = gear.nuke_jse_back,
@@ -782,7 +782,7 @@ function init_gear_sets()
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
         body = "Twilight Cloak",
-        hands = "Acad. Bracers +3",
+        hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
         back = gear.nuke_jse_back,
@@ -1007,7 +1007,7 @@ function init_gear_sets()
     sets.buff['Dark Arts'] = {}  -- body="Academic's Gown +3"
 
     sets.buff.Sublimation = {
-        head = "Acad. Mortar. +3",
+        head = "Acad. Mortar. +2",
         waist = "Embla Sash"
     }
     sets.buff.DTSublimation = {
