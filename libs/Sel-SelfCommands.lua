@@ -529,33 +529,38 @@ function handle_buffup(cmdParams)
 		buffup = cmdParams[1]
 	end
 	
+	local need_delay = false
 	for i in pairs(buff_spell_lists[buffup]) do
 		if buff_spell_lists[buffup][i].Reapply then
 			windower.send_command('cancel '..buff_spell_lists[buffup][i].Buff..'')
-			tickdelay = os.clock() + 1.65
+			need_delay = true
 		end
 	end
+	if need_delay then tickdelay = os.clock() + 1.5 end
 end
 
 function handle_smartws(cmdParams)
 	local target
+	local weaponskill = smartws or autows
 	
 	if cmdParams[1] then
 		if cmdParams[1] == 'ws' then
 			if cmdParams[2] then
-				smartws = table.concat(cmdParams, ' ', 2)
+				smartws = table.concat(cmdParams, ' ')
 				add_to_chat(122,'SmartWS Set to: '..smartws..'.')
 			else
-				add_to_chat(122,'Invalid command, Syntax: //gs c smartws Weaponskill Name')
+				add_to_chat(122,'Invalid command, Syntax: //gs c smartws ws Weaponskill Name')
 			end
 			return
-		elseif tonumber(cmdParams[1]) then
-			target = windower.ffxi.get_mob_by_id(tonumber(cmdParams[1]))
+		--elseif tonumber(cmdParams[1]) then
+		--	target = windower.ffxi.get_mob_by_id(tonumber(cmdParams[1]))
 		else
 			target = table.concat(cmdParams, ' ')
 			target = get_closest_mob_by_name(target) 
-			if not target.name then target = player.target end
-			if not target.name then target = player end
+			
+			if not (target.name and target.hpp > 0) then
+				target = player.target or player
+			end
 		end
 	elseif player.target.type == 'MONSTER' then
 		target = player.target
@@ -563,15 +568,20 @@ function handle_smartws(cmdParams)
 		target = player
 	end
 
-	if math.sqrt(target.distance) < 4 or (data.weaponskills.ranged:contains(autows) and math.sqrt(target.distance) < 21) then
-		local self_vector = windower.ffxi.get_mob_by_id(player.id)
-		local angle = (math.atan2((target.y - self_vector.y), (target.x - self_vector.x))*180/math.pi)*-1
-		windower.ffxi.turn((angle):radian())
-		if smartws then
-			windower.send_command:schedule(.3,''..smartws..' '..target.id..'')
+	if target == player then
+		windower.send_command(''..weaponskill..' '..player.name..'')
+	elseif math.sqrt(target.distance) < 4 or (data.weaponskills.ranged:contains(weaponskill) and math.sqrt(target.distance) < 21) then
+		local self = windower.ffxi.get_mob_by_id(player.id)
+		local angle = (math.atan2((target.y - self.y), (target.x - self.x))*180/math.pi)*-1
+		local turn = angle:radian()
+		if math.abs(turn - self.facing) < .3 then
+			windower.send_command(''..weaponskill..' '..target.id..'')
 		else
-			windower.send_command:schedule(.3,''..autows..' '..target.id..'')
+			windower.send_command:schedule(.3,''..weaponskill..' '..target.id..'')
 		end
+		windower.ffxi.turn(turn)
+	else
+		windower.add_to_chat(122,'SmartWS Target out of range!')
 	end
 end
 
@@ -826,34 +836,31 @@ function handle_smartcure(cmdParams)
 		else
 			cureTarget = table.concat(cmdParams, ' ')
 			cureTarget = get_closest_mob_by_name(cureTarget) 
-			if not cureTarget.name then cureTarget = player.target end
-			if not cureTarget.name then cureTarget = player end
+			if not cureTarget.name then
+				if player.target then 
+					cureTarget = player.target
+				else
+					cureTarget = player
+				end
+			end
 		end
-	elseif player.target.type == "SELF" or player.target.type == 'MONSTER' or player.target.type == 'NONE' then
+	elseif player.target.type == "SELF" or player.target.type == 'NONE' then
 		cureTarget = player
+	elseif player.target.type == 'MONSTER' then
+		windower.send_command('gs c smartcure <stal>')
+		return
 	else
 		cureTarget = player.target
 	end
-
-	if cureTarget.status == 2 or cureTarget.status == 3 then
-		windower.chat.input('/ma "Raise III" '..cureTarget..'')
+	if cureTarget.status == 'Dead' or cureTarget.status == 'Engaged dead' then
+		windower.chat.input('/ma "Arise" '..cureTarget.id..'')
 		return
 	end
 	
 	local missingHP
 	local spell_recasts = windower.ffxi.get_spell_recasts()
 
-	if cureTarget.type == 'MONSTER' then
-		if silent_can_use(4) and spell_recasts[4] < spell_latency then
-			windower.chat.input('/ma "Cure IV" '..cureTarget.id..'')
-		elseif spell_recasts[3] < spell_latency then
-			windower.chat.input('/ma "Cure III" '..cureTarget.id..'')
-		elseif spell_recasts[2] < spell_latency then
-			windower.chat.input('/ma "Cure II" '..cureTarget.id..'')
-		else
-			add_to_chat(123,'Abort: Appropriate cures are on cooldown.')
-		end
-	elseif cureTarget.in_alliance then
+	if cureTarget.in_alliance then
 		cureTarget.hp = find_player_in_alliance(cureTarget.name).hp
 		local est_max_hp = cureTarget.hp / (cureTarget.hpp/100)
 		missingHP = math.floor(est_max_hp - cureTarget.hp)

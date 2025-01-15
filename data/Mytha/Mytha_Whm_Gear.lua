@@ -179,7 +179,7 @@ function init_gear_sets()
 	sets.midcast.Cure.DT = {main="Queller Rod",sub="Genmei Shield",ammo="Pemphredo Tathlum",
 		head="Ebers Cap +3",neck="Loricate Torque +1",ear1="Mendi. Earring",ear2="Glorious Earring",
 		body="Bunzi's Robe",hands=gear.chironic_nuke_hands,ring1="Defending Ring",ring2="Lebeche Ring",
-		back="Alaunus's Cape",waist="Luminary Sash",legs="Ebers Pant. +3",feet="Ebers Duckbills +2"}
+		back="Alaunus's Cape",waist="Luminary Sash",legs="Ebers Pant. +3",feet="Ebers Duckbills +3"}
 		
 	--Melee Curesets are used whenever your Weapons state is set to anything but None.
 	sets.midcast.MeleeCure = {main="Queller Rod",sub="Sors Shield",ammo="Pemphredo Tathlum",
@@ -235,9 +235,9 @@ function init_gear_sets()
 
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {neck="Nodens Gorget",waist="Siegel Sash"})
 
-	sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'], {feet="Ebers Duckbills +2"})
+	sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'], {feet="Ebers Duckbills +3"})
 
-	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {main="Vadose Rod",sub="Sors Shield",head=gear.chironic_nuke_head})
+	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {main="Vadose Rod",sub="Sors Shield",head=gear.chironic_nuke_head,waist="Emphatikos Rope"})
 
 	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {main="Bolelabunga",sub="Sors Shield",head="Inyanga Tiara +2",body="Piety Bliaut +3",hands="Ebers Mitts +2"})
 	
@@ -249,7 +249,7 @@ function init_gear_sets()
 	sets.midcast.BarElement = {main="Beneficus",sub="Sors Shield",ammo="Pemphredo Tathlum",
 		head="Ebers Cap +3",neck="Incanter's Torque",ear1="Calamitous Earring",ear2="Andoaa Earring",
 		body="Ebers Bliaut +3",hands="Ebers Mitts +2",ring1="Kishar Ring",ring2="Lebeche Ring",
-		back="Alaunus's Cape",waist="Embla Sash",legs="Piety Pantaln. +3",feet="Ebers Duckbills +2"}
+		back="Alaunus's Cape",waist="Embla Sash",legs="Piety Pantaln. +3",feet="Ebers Duckbills +3"}
 		
 	sets.midcast.BarStatus = set_combine(sets.midcast['Enhancing Magic'], {neck="Sroda Necklace"})
 
@@ -346,7 +346,7 @@ function init_gear_sets()
 	sets.idle = {main="Mpaca's Staff",sub="Oneiros Grip",ammo="Homiliary",
 		head="Befouled Crown",neck="Sibyl Scarf",ear1="Sanare Earring",ear2="Ethereal Earring",
 		body="Ebers Bliaut +3",hands=gear.chironic_refresh_hands,ring1="Defending Ring",ring2="Shneddick Ring",
-		back="Solemnity Cape",waist="Isa Belt",legs="Assid. Pants +1",feet=gear.chironic_refresh_feet}
+		back="Null Shawl",waist="Isa Belt",legs="Assid. Pants +1",feet=gear.chironic_refresh_feet}
 
 	sets.idle.PDT = {main="Daybreak",sub="Genmei Shield",ammo="Staunch Tathlum +1",
 		head="Nyame Helm",neck="Loricate Torque +1",ear1="Sanare Earring",ear2="Ethereal Earring",
@@ -356,12 +356,12 @@ function init_gear_sets()
 	sets.idle.MDT = {main="Daybreak",sub="Genmei Shield",ammo="Staunch Tathlum +1",
 		head="Bunzi's Hat",neck="Warder's Charm",ear1="Sanare Earring",ear2="Ethereal Earring",
 		body="Bunzi's Robe",hands="Bunzi's Gloves",ring1="Shadow Ring",ring2="Woltaris Ring",
-		back="Alaunus's Cape",waist="Isa Belt",legs="Ebers Pant. +3",feet="Ebers Duckbills +2"}
+		back="Null Shawl",waist="Isa Belt",legs="Ebers Pant. +3",feet="Ebers Duckbills +3"}
 		
 	sets.idle.MEVA = {main="Daybreak",sub="Genmei Shield",ammo="Staunch Tathlum +1",
 		head="Bunzi's Hat",neck="Warder's Charm",ear1="Sanare Earring",ear2="Ethereal Earring",
 		body="Bunzi's Robe",hands="Bunzi's Gloves",ring1="Shadow Ring",ring2="Woltaris Ring",
-		back="Alaunus's Cape",waist="Isa Belt",legs="Ebers Pant. +3",feet="Ebers Duckbills +2"}
+		back="Null Shawl",waist="Isa Belt",legs="Ebers Pant. +3",feet="Ebers Duckbills +3"}
 
     -- Defense sets
 
@@ -373,12 +373,12 @@ function init_gear_sets()
 	sets.defense.MDT = {main="Daybreak",sub="Genmei Shield",ammo="Staunch Tathlum +1",
 		head="Bunzi's Hat",neck="Warder's Charm",ear1="Sanare Earring",ear2="Ethereal Earring",
 		body="Bunzi's Robe",hands="Bunzi's Gloves",ring1="Shadow Ring",ring2="Woltaris Ring",
-		back="Alaunus's Cape",waist="Isa Belt",legs="Ebers Pant. +3",feet="Ebers Duckbills +2"}
+		back="Null Shawl",waist="Isa Belt",legs="Ebers Pant. +3",feet="Ebers Duckbills +3"}
 
     sets.defense.MEVA = {main="Daybreak",sub="Genmei Shield",ammo="Staunch Tathlum +1",
 		head="Bunzi's Hat",neck="Warder's Charm",ear1="Sanare Earring",ear2="Ethereal Earring",
 		body="Bunzi's Robe",hands="Bunzi's Gloves",ring1="Shadow Ring",ring2="Woltaris Ring",
-		back="Alaunus's Cape",waist="Isa Belt",legs="Ebers Pant. +3",feet="Ebers Duckbills +2"}
+		back="Null Shawl",waist="Isa Belt",legs="Ebers Pant. +3",feet="Ebers Duckbills +3"}
 		
 		-- Engaged sets
 
@@ -402,12 +402,12 @@ function init_gear_sets()
 	sets.HPDown = {main="Queller Rod",sub="Genmei Shield",ammo="Homiliary",
 		head="Wivre Hairpin",neck="Loricate Torque +1",ear1="Hirudinea Earring",ear2="Ethereal Earring",
 		body="Councilor's Garb",hands="Hieros Mittens",ring1="Defending Ring",ring2="Persis Ring",
-		back="Solemnity Cape",waist="Isa Belt",legs="",feet=""}
+		back="Null Shawl",waist="Isa Belt",legs="",feet=""}
 
 	sets.HPCure = {main="Queller Rod",sub="Sors Shield",ammo="Pemphredo Tathlum",
 		head="Ebers Cap +3",neck="Nodens Gorget",ear1="Etiolation Earring",ear2="Odnowa Earring +1",
 		body="Ebers Bliaut +3",hands="Bokwus Gloves",ring1="Sirona's Ring",ring2="Lebeche Ring",
-		back="Twilight Cape",waist="Eschan Stone",legs="Piety Pantaln. +3",feet="Ebers Duckbills +2"}
+		back="Twilight Cape",waist="Eschan Stone",legs="Piety Pantaln. +3",feet="Ebers Duckbills +3"}
 
 	sets.buff.Doom = set_combine(sets.buff.Doom, {})
 

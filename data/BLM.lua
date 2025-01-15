@@ -308,6 +308,14 @@ function job_customize_idle_set(idleSet)
     return idleSet
 end
 
+function job_customize_kiting_set(baseSet)
+	if state.Buff['Mana Wall'] and ((state.IdleMode.value:contains('DT') or state.IdleMode.value:contains('Tank')) and in_combat)then
+		baseset = set_combine(baseSet, sets.buff['Mana Wall'])
+	end
+
+	return baseSet
+end
+
 -- Modify the default melee set after it was constructed.
 function job_customize_melee_set(meleeSet)
 

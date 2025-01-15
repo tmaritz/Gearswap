@@ -325,13 +325,14 @@ function job_get_spell_map(spell, default_spell_map)
     elseif spell.skill == 'Elemental Magic' then
 		if default_spell_map == 'ElementalEnfeeble' or spell.english:contains('helix') then
 			return
+		elseif state.CastingMode.value:startswith('Occult') then
+			return
         elseif LowTierNukes:contains(spell.english) then
             return 'LowTierNuke'
         else
             return 'HighTierNuke'
         end
 	end
-
 end
 
 function job_customize_idle_set(idleSet)

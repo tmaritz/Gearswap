@@ -71,36 +71,34 @@ function job_setup()
 			if tonumber(cmdParams[2]) then
 				cureTarget = windower.ffxi.get_mob_by_id(tonumber(cmdParams[2]))
 			else
-				cureTarget = table.concat(cmdParams, ' ', 2)
+				table.remove(cmdParams, 1)
+				cureTarget = table.concat(cmdParams, ' ')
 				cureTarget = get_closest_mob_by_name(cureTarget) 
-				if not cureTarget.name then cureTarget = player.target end
-				if not cureTarget.name then cureTarget = player end
+				if not cureTarget.name then
+					if player.target then 
+						cureTarget = player.target
+					else
+						cureTarget = player
+					end
+				end
 			end
-		elseif player.target.type == "SELF" or player.target.type == 'MONSTER' or player.target.type == 'NONE' then
+		elseif player.target.type == "SELF" or player.target.type == 'NONE' then
 			cureTarget = player
+		elseif player.target.type == 'MONSTER' then
+			windower.send_command('gs c smartcure <stal>')
+			return
 		else
 			cureTarget = player.target
 		end
-
-		if cureTarget.status == 2 or cureTarget.status == 3 then
-			windower.chat.input('/ma "Arise" '..cureTarget..'')
+		if cureTarget.status == 'Dead' or cureTarget.status == 'Engaged dead' then
+			windower.chat.input('/ma "Arise" '..cureTarget.id..'')
 			return
 		end
 		
 		local missingHP
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 
-		if cureTarget.type == 'MONSTER' then
-			if silent_can_use(4) and spell_recasts[4] < spell_latency then
-				windower.chat.input('/ma "Cure IV" '..cureTarget.id..'')
-			elseif spell_recasts[3] < spell_latency then
-				windower.chat.input('/ma "Cure III" '..cureTarget.id..'')
-			elseif spell_recasts[2] < spell_latency then
-				windower.chat.input('/ma "Cure II" '..cureTarget.id..'')
-			else
-				add_to_chat(123,'Abort: Appropriate cures are on cooldown.')
-			end
-		elseif cureTarget.in_alliance then
+		if cureTarget.in_alliance then
 			cureTarget.hp = find_player_in_alliance(cureTarget.name).hp
 			local est_max_hp = cureTarget.hp / (cureTarget.hpp/100)
 			missingHP = math.floor(est_max_hp - cureTarget.hp)
