@@ -42,6 +42,7 @@ function user_job_setup()
     send_command('bind @0 gs c scholar skillchain')
 
     select_default_macro_book()
+    user_job_lockstyle()
 end
 
 -- Define sets and vars used by this job file.
@@ -1027,13 +1028,17 @@ function init_gear_sets()
     }
 end
 
+function user_job_lockstyle()
+    windower.chat.input('/lockstyleset 012')
+end
+
 -- Select default macro book on initial load or subjob change.
 -- Default macro set/book
 function select_default_macro_book()
     if player.sub_job == 'RDM' then
-        set_macro_page(5, 20)
+        set_macro_page(1, 20)
     elseif player.sub_job == 'BLM' then
-        set_macro_page(5, 20)
+        set_macro_page(1, 20)
     elseif player.sub_job == 'WHM' then
         set_macro_page(1, 20)
     else

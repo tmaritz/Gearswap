@@ -66,7 +66,7 @@ function user_job_setup()
     -- send_command('bind ^q gs c weapons Almace;gs c update')
     -- send_command('bind !q gs c weapons HybridWeapons;gs c update')
 
-    -- select_default_macro_book()
+    select_default_macro_book()
     user_job_lockstyle()
 end
 
@@ -1057,7 +1057,7 @@ function init_gear_sets()
 
     -- Gear for learning spells: +skill and AF hands.
     sets.Learning = {
-        hands = "Malignance Gloves"
+        hands = "Magus Bazubands"
     }
 
     -- Resting sets
@@ -1284,24 +1284,24 @@ function user_job_lockstyle()
 end
 
 -- Select default macro book on initial load or subjob change.
--- function select_default_macro_book()
---     -- Default macro set/book
---     if player.sub_job == 'DNC' then
---         set_macro_page(1, 16)
---     elseif player.sub_job == 'NIN' then
---         set_macro_page(1, 16)
---     elseif player.sub_job == 'WAR' then
---         set_macro_page(1, 16)
---     elseif player.sub_job == 'RUN' then
---         set_macro_page(1, 16)
---     elseif player.sub_job == 'THF' then
---         set_macro_page(1, 16)
---     elseif player.sub_job == 'RDM' then
---         set_macro_page(2, 16)
---     else
---         set_macro_page(6, 16)
---     end
--- end
+function select_default_macro_book()
+    -- Default macro set/book
+    if player.sub_job == 'DNC' then
+        set_macro_page(1, 16)
+    elseif player.sub_job == 'NIN' then
+        set_macro_page(1, 16)
+    elseif player.sub_job == 'WAR' then
+        set_macro_page(1, 16)
+    elseif player.sub_job == 'RUN' then
+        set_macro_page(1, 16)
+    elseif player.sub_job == 'THF' then
+        set_macro_page(1, 16)
+    elseif player.sub_job == 'RDM' then
+        set_macro_page(2, 16)
+    else
+        set_macro_page(6, 16)
+    end
+end
 
 -- Job Specific Trust Override
 function check_trust()
