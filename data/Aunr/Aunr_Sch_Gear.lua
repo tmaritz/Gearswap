@@ -820,6 +820,8 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
     sets.idle = {
+        main = "Mpaca's Staff",
+        sub = "Khonsu",
         ammo = "Homiliary",
         head = "Arbatel Bonnet +2",
         neck = "Warder's Charm +1",
@@ -837,7 +839,7 @@ function init_gear_sets()
 
     sets.idle.PDT = {
         main = "Mpaca's Staff",
-        sub = "Ajja Grip",
+        sub = "Khonsu",
         ammo = "Homiliary",
         head = "Arbatel Bonnet +2",
         neck = "Warder's Charm +1",
@@ -859,7 +861,7 @@ function init_gear_sets()
 
     sets.idle.Weak = {
         main = "Malignance Pole",
-        sub = "Ajja Grip",
+        sub = "Khonsu",
         ammo = "Homiliary",
         head = "Nyame Helm",
         neck = "Warder's Charm +1",
@@ -881,7 +883,7 @@ function init_gear_sets()
 
     sets.defense.MDT = {
         main = "Malignance Pole",
-        sub = "Ajja Grip",
+        sub = "Khonsu",
         ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         neck = "Warder's Charm +1",
@@ -1021,7 +1023,7 @@ function init_gear_sets()
     }
     sets.weapons.Mpaca = {
         main = "Mpaca's Staff",
-        sub = "Ajja Grip"
+        sub = "Khonsu"
     }
 end
 

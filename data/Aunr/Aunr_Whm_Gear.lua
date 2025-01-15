@@ -1127,7 +1127,7 @@ function init_gear_sets()
 
     sets.idle.PDT = {
         main = "Malignance Pole",
-        sub = "Mensch Strap +1",
+        sub = "Khonsu",
         ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         body = "Nyame Mail",

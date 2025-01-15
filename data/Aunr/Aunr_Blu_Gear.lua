@@ -199,7 +199,7 @@ function init_gear_sets()
     })
 
     sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {
-        body = "Hashishin Mintan +1"
+        body = "Hashishin Mintan +2"
     })
 
     -- Weaponskill sets
@@ -626,14 +626,12 @@ function init_gear_sets()
     -- Magical Spells --
 
     sets.midcast['Blue Magic'].Magical = {
-        main = "Kaja Rod",
-        sub = "Nibiru Cudgel",
         ammo = "Ghastly Tathlum +1",
         head = "Jhakri Coronal +2",
         neck = "Sibyl Scarf",
         ear1 = "Hecate's Earring",
         ear2 = "Friomisi Earring",
-        body = "Amalric Doublet",
+        body = "Hashishin Mintan +2",
         hands = "Amalric Gages",
         ring1 = "Shiva Ring",
         ring2 = "Shiva Ring",
@@ -644,14 +642,12 @@ function init_gear_sets()
     }
 
     sets.midcast['Blue Magic'].Magical.Proc = {
-        main = "Kaja Rod",
-        sub = "Nibiru Cudgel",
         ammo = "Ghastly Tathlum +1",
         head = "Jhakri Coronal +2",
         neck = "Sibyl Scarf",
         ear1 = "Hecate's Earring",
         ear2 = "Friomisi Earring",
-        body = "Amalric Doublet",
+        body = "Hashishin Mintan +2",
         hands = "Amalric Gages",
         ring1 = "Shiva Ring",
         ring2 = "Shiva Ring",
@@ -702,7 +698,7 @@ function init_gear_sets()
         neck = "Sibyl Scarf",
         ear1 = "Hecate's Earring",
         ear2 = "Friomisi Earring",
-        body = "Jhakri Robe +2",
+        body = "Hashishin Mintan +2",
         hands = "Amalric Gages",
         ring1 = "Shiva Ring",
         ring2 = "Shiva Ring",
@@ -1087,10 +1083,10 @@ function init_gear_sets()
     sets.idle = {
         ammo = "Staunch Tathlum +1",
         head = "Rawhide Mask",
-        neck = "Sybil Scarf",
+        neck = "Sibyl Scarf",
         ear1 = "Infused Earring",
         ear2 = "Eabani Earring",
-        body = "Amalric Doublet",
+        body = "Hashishin Mintan +2",
         hands = "Nyame Gauntlets",
         ring1 = "Defending Ring",
         ring2 = "Shadow Ring",
