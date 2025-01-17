@@ -75,7 +75,7 @@ function job_setup()
 	state.ShowDistance = M(true, 'Show Geomancy Buff/Debuff distance')
 	state.AutoEntrust = M(false, 'AutoEntrust Mode')
 	state.CombatEntrustOnly = M(true, 'Combat Entrust Only Mode')
-	state.AutoGeoAbilities = M(true, 'Use Geo Abilities Automatically')
+	state.AutoGeoAbilities = M(false, 'Use Geo Abilities Automatically')
 
     indi_timer = ''
     indi_duration = 180

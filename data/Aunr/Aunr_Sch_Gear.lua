@@ -6,11 +6,6 @@ function user_job_setup()
     state.HybridMode:options('Normal', 'PDT')
     state.Weapons:options('None', 'DayMax', 'Mpaca')
 
-    gear.nuke_jse_back = {
-        name = "Lugh's Cape",
-        augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', '"Mag.Atk.Bns."+10' }
-    }
-
     gear.obi_cure_back = "Tempered Cape +1"
     gear.obi_cure_waist = "Witful Belt"
 
@@ -148,8 +143,8 @@ function init_gear_sets()
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
         ring1 = "Mujin Band",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -166,8 +161,8 @@ function init_gear_sets()
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
         ring1 = "Mujin Band",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -396,7 +391,7 @@ function init_gear_sets()
         hands = "Regal Cuffs",
         ring1 = "Kishar Ring",
         ring2 = "Stikini Ring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Luminary Sash",
         legs = "Chironic Hose",
         feet = "Uk'uxkaj Boots"
@@ -414,7 +409,7 @@ function init_gear_sets()
         hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Luminary Sash",
         legs = "Chironic Hose",
         feet = "Medium's Sabots"
@@ -423,24 +418,24 @@ function init_gear_sets()
     sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['Enfeebling Magic'], {
         head = "Amalric Coif +1",
         ear2 = "Malignance Earring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Acuity Belt +1"
     })
     sets.midcast.ElementalEnfeeble.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
         head = "Amalric Coif +1",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Acuity Belt +1"
     })
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {
         head = "Amalric Coif +1",
         ear1 = "Malignance Earring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Acuity Belt +1"
     })
     sets.midcast.IntEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
         head = "Amalric Coif +1",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Acuity Belt +1"
     })
 
@@ -470,7 +465,7 @@ function init_gear_sets()
         hands = "Acad. Bracers +2",
         ring1 = "Stikini Ring",
         ring2 = "Stikini Ring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Acuity Belt +1",
         legs = "Chironic Hose",
         feet = gear.merlinic_aspir_feet
@@ -488,7 +483,7 @@ function init_gear_sets()
         hands = "Amalric Gages",
         ring1 = "Freke Ring",
         ring2 = "Archon Ring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Merlinic Shalwar",
         feet = gear.merlinic_nuke_feet
@@ -504,9 +499,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = gear.merlinic_nuke_body,
         hands = "Amalric Gages",
-        ring1 = "Shiva Ring",
+        ring1 = "Metamor. Ring +1",
         ring2 = "Freke Ring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
         feet = gear.merlinic_nuke_feet
@@ -563,7 +558,7 @@ function init_gear_sets()
         hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Witful Belt",
         legs = "Psycloth Lappas",
         feet = "Regal Pumps +1"
@@ -581,7 +576,7 @@ function init_gear_sets()
         hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Acuity Belt +1",
         legs = "Chironic Hose",
         feet = gear.merlinic_aspir_feet
@@ -598,9 +593,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -616,9 +611,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -634,9 +629,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -652,9 +647,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -670,9 +665,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -688,9 +683,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -730,9 +725,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -748,9 +743,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -766,9 +761,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Shiva Ring",
-        ring2 = "Shiva Ring",
-        back = "Toro Cape",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Metamor. Ring +1",
+        back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
         legs = "Agwu\'s Slops",
         feet = "Agwu\'s Pigaches"
@@ -786,7 +781,7 @@ function init_gear_sets()
         hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
-        back = gear.nuke_jse_back,
+        back = "Lugh\'s Cape",
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
         feet = gear.merlinic_nuke_feet

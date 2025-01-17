@@ -696,6 +696,24 @@ function init_gear_sets()
         back = gear.idle_jse_back
     }
 
+    sets.idle.Town = {
+        main = "Idris",
+        sub = "Ammurapi Shield",
+        ammo = "Ghastly Tathlum +1",
+        head = "Bagua Galero +3",
+        body = "Agwu's Robe",
+        hands = "Geo. Mitaines +3",
+        legs = "Nyame Flanchard",
+        feet = "Bagua Sandals +3",
+        neck = "Loricate Torque +1",
+        waist = "Slipor Sash",
+        left_ear = "Lugalbanda Earring",
+        right_ear = "Eabani Earring",
+        left_ring = "Defending Ring",
+        right_ring = "Shadow Ring",
+        back = "Shadow Mantle"
+    }
+
     -- .Indi sets are for when an Indi-spell is active.
     sets.idle.Indi = set_combine(sets.idle, {})
     sets.idle.Pet.Indi = set_combine(sets.idle.Pet, {})
