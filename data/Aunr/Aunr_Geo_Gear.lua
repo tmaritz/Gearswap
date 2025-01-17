@@ -41,16 +41,10 @@ function user_job_setup()
     autoentrustee = '<p1>'
 
     -- Additional local binds
-    send_command('bind ^` gs c cycle ElementalMode')
-    send_command('bind !` input /ja "Full Circle" <me>')
-    send_command('bind @f8 gs c toggle AutoBuffMode')
-    send_command('bind @` gs c cycle MagicBurstMode')
-    send_command('bind @f10 gs c cycle RecoverMode')
-    send_command('bind ^backspace input /ja "Entrust" <me>')
-    send_command('bind !backspace input /ja "Life Cycle" <me>')
-    send_command('bind @backspace input /ma "Sleep II" <t>')
-    send_command('bind ^delete input /ma "Aspir III" <t>')
-    send_command('bind @delete input /ma "Sleep" <t>')
+
+    send_command('bind ^\' gs c cycle MagicBurstMode')
+    send_command('bind !\' gs c cycle ElementalMode')
+    send_command('bind @\' gs c elemental weather')
 
     indi_duration = 290
 
