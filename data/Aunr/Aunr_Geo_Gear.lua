@@ -72,12 +72,14 @@ function init_gear_sets()
         legs = "Bagua Pants +1"
     }
     sets.precast.JA['Full Circle'] = {
-        head = "Azimuth Hood +1",
+        head = "Azimuth Hood +2",
         hands = "Bagua Mitaines +1"
     }
 
     -- Indi Duration in slots that would normally have skill here to make entrust more efficient.
-    sets.buff.Entrust = {}
+    sets.buff.Entrust = {
+        main = "Solstice"
+    }
 
     -- Relic hat for Blaze of Glory HP increase.
     sets.buff['Blaze of Glory'] = {
@@ -213,7 +215,7 @@ function init_gear_sets()
     sets.midcast.Geomancy.Indi = { set_combine(sets.midcast.Geomancy, {
         back = gear.idle_jse_back,
         legs = "Bagua Pants +1",
-        feet = "Azimuth Gaiters +1"
+        feet = "Azimuth Gaiters +2"
     }) }
 
     sets.midcast.Cure = {
@@ -265,55 +267,56 @@ function init_gear_sets()
 
     -- Gear for Magic Burst mode.
     sets.MagicBurst = {
-        main = "Bunzi's Rod",
-        sub = "Culminus",
+        main = "Marin Staff +1",
+        sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
-        head = "Agwu's Cap",
-        body = "Agwu's Robe Doublet",
-        hands = "Agwu's Gages",
-        legs = "Agwu's Slops",
-        feet = "Agwu's Pigaches",
+        head = "Azimuth Hood +2",
+        body = "Agwu's Robe",
+        hands = "Azimuth Gloves +2",
+        legs = "Azimuth Tights +2",
+        feet = "Azimuth Gaiters +2",
         neck = "Sanctity Necklace",
         waist = "Refoccilation Stone",
         left_ear = "Friomisi Earring",
         right_ear = "Malignance Earring",
-        left_ring = "Shiva Ring",
-        right_ring = "Shiva Ring",
+        left_ring = "Mujin Band",
+        right_ring = "Metamor. Ring +1",
         back = "Toro Cape"
     }
+
     sets.ResistantMagicBurst = {
-        main = "Bunzi's Rod",
-        sub = "Culminus",
+        main = "Marin Staff +1",
+        sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
-        head = "Agwu's Cap",
-        body = "Agwu's Robe Doublet",
-        hands = "Agwu's Gages",
-        legs = "Agwu's Slops",
-        feet = "Agwu's Pigaches",
+        head = "Azimuth Hood +2",
+        body = "Agwu's Robe",
+        hands = "Azimuth Gloves +2",
+        legs = "Azimuth Tights +2",
+        feet = "Azimuth Gaiters +2",
         neck = "Sanctity Necklace",
         waist = "Refoccilation Stone",
         left_ear = "Friomisi Earring",
         right_ear = "Malignance Earring",
-        left_ring = "Shiva Ring",
-        right_ring = "Shiva Ring",
+        left_ring = "Mujin Ring",
+        right_ring = "Metamor. Ring +1",
         back = "Toro Cape"
     }
 
     sets.midcast['Elemental Magic'] = {
-        main = "Bunzi's Rod",
-        sub = "Culminus",
+        main = "Marin Staff +1",
+        sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
-        head = "Bagua Galero +3",
-        body = "Amalric Doublet",
-        hands = "Agwu's Gages",
-        legs = "Agwu's Slops",
-        feet = "Bagua Sandals +3",
+        head = "Azimuth Hood +2",
+        body = "Agwu's Robe",
+        hands = "Azimuth Gloves +2",
+        legs = "Azimuth Tights +2",
+        feet = "Azimuth Gaiters +2",
         neck = "Sanctity Necklace",
         waist = "Refoccilation Stone",
         left_ear = "Friomisi Earring",
         right_ear = "Malignance Earring",
         left_ring = "Shiva Ring",
-        right_ring = "Shiva Ring",
+        right_ring = "Metamor. Ring +1",
         back = "Toro Cape"
     }
 
@@ -586,7 +589,7 @@ function init_gear_sets()
         sub = "Genbu's Shield",
         ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
-        body = "Agwu's Robe",
+        body = "Azimuth Coat +2",
         hands = "Nyame Gauntlets",
         legs = "Assid. Pants +1",
         feet = "Nyame Sollerets",
@@ -640,8 +643,8 @@ function init_gear_sets()
         main = "Idris",
         sub = "Genbu's Shield",
         range = "Dunna",
-        head = "Azimuth Hood +1",
-        body = "Agwu's Robe",
+        head = "Azimuth Hood +2",
+        body = "Azimuth Coat +2",
         hands = "Geo. Mitaines +3",
         legs = "Agwu's Slops",
         feet = "Bagua Sandals +3",
@@ -659,7 +662,7 @@ function init_gear_sets()
         sub = "Genbu's Shield",
         range = "Dunna",
         head = "Nyame Helm",
-        body = "Nyame Mail",
+        body = "Azimuth Coat +2",
         hands = "Geo. Mitaines +3",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets",
@@ -695,7 +698,7 @@ function init_gear_sets()
         sub = "Ammurapi Shield",
         ammo = "Ghastly Tathlum +1",
         head = "Bagua Galero +3",
-        body = "Agwu's Robe",
+        body = "Azimuth Coat +2",
         hands = "Geo. Mitaines +3",
         legs = "Nyame Flanchard",
         feet = "Bagua Sandals +3",
