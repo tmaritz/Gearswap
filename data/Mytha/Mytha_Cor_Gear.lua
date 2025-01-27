@@ -269,7 +269,6 @@ function init_gear_sets()
     
     -- Resting sets
     sets.resting = {}
-	sets.BulletPouch = {waist="Chr. Bul. Pouch"}
 
     -- Idle sets
     sets.idle = {ammo=gear.RAbullet,

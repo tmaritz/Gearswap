@@ -501,14 +501,6 @@ function handle_forceequip(cmdParams)
 	end
 end
 
-function handle_delayedcast()
-	if delayed_cast ~= '' and delayed_target ~= '' then
-		windower.send_command(''..delayed_cast..' '..delayed_target..'')
-		delayed_cast = ''
-		delayed_target = ''
-	end
-end
-
 function handle_autonuke(cmdParams)
 	if #cmdParams == 0 then
 		add_to_chat(122,'You must specify a spell to autonuke with.')
@@ -536,7 +528,88 @@ function handle_buffup(cmdParams)
 			need_delay = true
 		end
 	end
-	if need_delay then tickdelay = os.clock() + 1.5 end
+	if need_delay then add_tick_delay(.2) end
+end
+
+-- General handling of scholar commands in an Arts-agnostic way.
+-- Format: gs c scholar <stratagem>
+function handle_scholar(cmdParams)
+    -- cmdParams[1] == 'scholar'
+    -- cmdParams[2] == command to use
+	
+    if not cmdParams[1] then
+        add_to_chat(123,'Error: No scholar command given.')
+        return
+    end
+    local command = cmdParams[1]:lower()
+
+	if command == 'buff' then
+		if not state.Buff['Addendum: White'] then
+			windower.chat.input('/ja "Light Arts" <me>')
+		end
+    elseif command == 'light' then
+        if state.Buff['Light Arts'] then
+            windower.chat.input('/ja "Addendum: White" <me>')
+        elseif state.Buff['Addendum: White'] then
+            add_to_chat(122,'Error: Addendum: White is already active.')
+        else
+            windower.chat.input('/ja "Light Arts" <me>')
+        end
+    elseif command == 'dark' then
+        if state.Buff['Dark Arts'] then
+            windower.chat.input('/ja "Addendum: Black" <me>')
+        elseif state.Buff['Addendum: Black'] then
+            add_to_chat(122,'Error: Addendum: Black is already active.')
+        else
+            windower.chat.input('/ja "Dark Arts" <me>')
+        end
+    elseif state.Buff['Light Arts'] or state.Buff['Addendum: White'] then
+        if command == 'cost' then
+            windower.chat.input('/ja "Penury" <me>')
+        elseif command == 'speed' then
+            windower.chat.input('/ja "Celerity" <me>')
+        elseif command == 'aoe' then
+            windower.chat.input('/ja "Accession" <me>')
+        elseif command == 'power' then
+            windower.chat.input('/ja "Rapture" <me>')
+        elseif command == 'duration' then
+            windower.chat.input('/ja "Perpetuance" <me>')
+        elseif command == 'accuracy' then
+            windower.chat.input('/ja "Altruism" <me>')
+        elseif command == 'enmity' then
+            windower.chat.input('/ja "Tranquility" <me>')
+        elseif command == 'skillchain' then
+            add_to_chat(122,'Error: Light Arts does not have a skillchain command.')
+        elseif command == 'addendum' then
+            windower.chat.input('/ja "Addendum: White" <me>')
+        else
+            add_to_chat(123,'Error: Unknown command ['..command..']')
+        end
+    elseif state.Buff['Dark Arts']  or state.Buff['Addendum: Black'] then
+        if command == 'cost' then
+            windower.chat.input('/ja "Parsimony" <me>')
+        elseif command == 'speed' then
+            windower.chat.input('/ja "Alacrity" <me>')
+        elseif command == 'aoe' then
+            windower.chat.input('/ja "Manifestation" <me>')
+        elseif command == 'power' then
+            windower.chat.input('/ja "Ebullience" <me>')
+        elseif command == 'duration' then
+            add_to_chat(122,'Error: Dark Arts does not have a duration command.')
+        elseif command == 'accuracy' then
+            windower.chat.input('/ja "Focalization" <me>')
+        elseif command == 'enmity' then
+            windower.chat.input('/ja "Equanimity" <me>')
+        elseif command == 'skillchain' then
+            windower.chat.input('/ja "Immanence" <me>')
+        elseif command == 'addendum' then
+            windower.chat.input('/ja "Addendum: Black" <me>')
+        else
+            add_to_chat(123,'Error: Unknown command ['..command..']')
+        end
+    else
+        add_to_chat(123,'No arts has been activated yet.')
+    end
 end
 
 function handle_smartws(cmdParams)
@@ -1072,6 +1145,7 @@ end
 
 -- A function for testing lua code.  Called via "gs c test".
 function handle_test(cmdParams)
+	windower.add_to_chat(wielding())
     if user_test then
         user_test(cmdParams)
     elseif job_test then
@@ -1117,4 +1191,5 @@ selfCommandMaps = {
 	['runeelement']		= handle_runeelement,
 	['killstatue']		= handle_killstatue,
 	['smartws']			= handle_smartws,
+	['scholar']			= handle_scholar,
 	}

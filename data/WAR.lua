@@ -99,22 +99,22 @@ function job_precast(spell, spellMap, eventArgs)
 		if player.tp < 2250 and not buffactive['Blood Rage'] and abil_recasts[2] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Warcry" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
+			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
 			return
 		elseif state.Buff['SJ Restriction'] then
 			return
 		elseif player.sub_job == 'SAM' and player.tp > 1850 and abil_recasts[140] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Sekkanoki" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
+			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
 			return
 		elseif player.sub_job == 'SAM' and abil_recasts[134] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Meditate" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
+			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
 			return
 		end
 	end
@@ -200,7 +200,7 @@ end
 
 function job_tick()
 	if check_hasso() then return true end
-	if check_buff() then return true end
+	if job_check_buff() then return true end
 	return false
 end
 
@@ -255,17 +255,17 @@ function update_melee_groups()
 end
 
 function check_hasso()
-	if player.sub_job == 'SAM' and player.status == 'Engaged' and not (state.Stance.value == 'None' or state.Buff.Hasso or state.Buff.Seigan or state.Buff['SJ Restriction'] or main_weapon_is_one_handed() or silent_check_amnesia()) then
+	if player.sub_job == 'SAM' and player.status == 'Engaged' and wielding() == 'Two-Handed' and state.Stance.value ~= 'None' and not (state.Buff.Hasso or state.Buff.Seigan or state.Buff['SJ Restriction'] or silent_check_amnesia()) then
 		
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		
 		if state.Stance.value == 'Hasso' and abil_recasts[138] < latency then
 			windower.chat.input('/ja "Hasso" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		elseif state.Stance.value == 'Seigan' and abil_recasts[139] < latency then
 			windower.chat.input('/ja "Seigan" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		else
 			return false
@@ -275,30 +275,30 @@ function check_hasso()
 	return false
 end
 
-function check_buff()
+function job_check_buff()
 	if state.AutoBuffMode.value ~= 'Off' and in_combat then
 		
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 
 		if not buffactive.Retaliation and abil_recasts[8] < latency then
 			windower.chat.input('/ja "Retaliation" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true		
 		elseif not buffactive.Restraint and abil_recasts[9] < latency then
 			windower.chat.input('/ja "Restraint" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		elseif not buffactive['Blood Rage'] and abil_recasts[11] < latency then
 			windower.chat.input('/ja "Blood Rage" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		elseif not buffactive.Berserk and abil_recasts[1] < latency then
 			windower.chat.input('/ja "Berserk" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		elseif not buffactive.Aggressor and abil_recasts[4] < latency then
 			windower.chat.input('/ja "Aggressor" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		else
 			return false

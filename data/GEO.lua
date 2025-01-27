@@ -74,6 +74,7 @@ function job_setup()
 
 	state.ShowDistance = M(true, 'Show Geomancy Buff/Debuff distance')
 	state.AutoEntrust = M(false, 'AutoEntrust Mode')
+	state.UnlockGeomancy = M{'Never','500','1000','Always'}
 	state.CombatEntrustOnly = M(true, 'Combat Entrust Only Mode')
 	state.AutoGeoAbilities = M(false, 'Use Geo Abilities Automatically')
 
@@ -143,9 +144,12 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, spellMap, eventArgs)
-
 	if spell.action_type == 'Magic' then
-		if spellMap == 'Cure' or spellMap == 'Curaga' then
+		if spell.skill == 'Geomancy' then
+			if state.UnlockGeomancy.value ~= 'Never' and (state.UnlockGeomancy.value == 'Always' or tonumber(state.UnlockGeomancy.value) > player.tp) then
+				enable('main','sub','range','ammo')
+			end
+		elseif spellMap == 'Cure' or spellMap == 'Curaga' then
 			gear.default.obi_back = gear.obi_cure_back
 			gear.default.obi_waist = gear.obi_cure_waist
 		elseif spell.skill == 'Elemental Magic' then
@@ -280,6 +284,22 @@ function job_aftercast(spell, spellMap, eventArgs)
 			if state.DisplayMode.value then update_job_states()	end
 		end
     end
+	
+	if spell.action_type == 'Magic' and spell.skill == 'Geomancy' then
+		if state.UnlockGeomancy.value ~= 'Never' and not state.UnlockWeapons.value and state.Weapons.value ~= 'None' and sets.weapons[state.Weapons.Value] then
+			equip(sets.weapons[state.Weapons.Value])
+			disable('main','sub')
+
+			if sets.weapons[state.Weapons.value] then
+				if  (sets.weapons[state.Weapons.value].range or sets.weapons[state.Weapons.value].ranged) then
+					disable('range')
+				end
+				if sets.weapons[state.Weapons.value].ammo then
+					disable('ammo')
+				end
+			end
+		end
+	end
 
 	if not player.indi then
         classes.CustomIdleGroups:clear()
@@ -545,8 +565,8 @@ end
 
 function job_tick()
 	if check_geo() then return true end
-	if check_buff() then return true end
 	if check_buffup() then return true end
+	if check_buff() then return true end
 	return false
 end
 
@@ -558,17 +578,17 @@ function check_geo()
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		if autoindi ~= 'None' and ((not player.indi) or last_indi ~= autoindi) then
 			windower.chat.input('/ma "Indi-'..autoindi..'" <me>')
-			tickdelay = os.clock() + 2.1
+			add_tick_delay()
 			return true
 		elseif autoentrust ~= 'None' and abil_recasts[93] < latency and (in_combat or state.CombatEntrustOnly.value == false) then
 			send_command('@input /ja "Entrust" <me>; wait 1.1; input /ma "Indi-'..autoentrust..'" '..autoentrustee)
-			tickdelay = os.clock() + 3.5
+			add_tick_delay(1.1)
 			return true
 		elseif pet.isvalid then
 			local pet = windower.ffxi.get_mob_by_target("pet")
 			if pet.distance:sqrt() > 50 then --If pet is greater than detectable.
 				windower.chat.input('/ja "Full Circle" <me>')
-				tickdelay = os.clock() + 1.1
+				add_tick_delay()
 				return true
 			elseif state.AutoGeoAbilities.value and abil_recasts[244] < latency and not used_ecliptic and not buffactive.Bolster then
 				windower.chat.input('/ja "Ecliptic Attrition" <me>;')
@@ -580,11 +600,11 @@ function check_geo()
 		elseif autogeo ~= 'None' and (windower.ffxi.get_mob_by_target('bt') or data.spells.geo_buffs:contains(autogeo)) then
 			if in_combat and state.AutoGeoAbilities.value and abil_recasts[247] < latency and not buffactive.Bolster then
 				windower.chat.input('/ja "Blaze of Glory" <me>;')
-				tickdelay = os.clock() + 1.1
+				add_tick_delay()
 				return true
 			else
 				windower.chat.input('/ma "Geo-'..autogeo..'" <bt>')
-				tickdelay = os.clock() + 3.1
+				add_tick_delay()
 				return true
 			end
 		end
@@ -687,53 +707,6 @@ windower.raw_register_event('prerender', function()
 end)
 
 --]]
-
-function check_buff()
-	if state.AutoBuffMode.value ~= 'Off' and not data.areas.cities:contains(world.area) then
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-		for i in pairs(buff_spell_lists[state.AutoBuffMode.Value]) do
-			if not buffactive[buff_spell_lists[state.AutoBuffMode.Value][i].Buff] and (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Always' or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Combat' and in_combat) or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Engaged' and player.status == 'Engaged') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Idle' and player.status == 'Idle') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'OutOfCombat' and not in_combat)) and spell_recasts[buff_spell_lists[state.AutoBuffMode.Value][i].SpellID] < spell_latency and silent_can_use(buff_spell_lists[state.AutoBuffMode.Value][i].SpellID) then
-				windower.chat.input('/ma "'..buff_spell_lists[state.AutoBuffMode.Value][i].Name..'" <me>')
-				tickdelay = os.clock() + 2
-				return true
-			end
-		end
-	else
-		return false
-	end
-end
-
-function check_buffup()
-	if buffup ~= '' then
-		local needsbuff = false
-		for i in pairs(buff_spell_lists[buffup]) do
-			if not buffactive[buff_spell_lists[buffup][i].Buff] and silent_can_use(buff_spell_lists[buffup][i].SpellID) then
-				needsbuff = true
-				break
-			end
-		end
-
-		if not needsbuff then
-			add_to_chat(217, 'All '..buffup..' buffs are up!')
-			buffup = ''
-			return false
-		end
-
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-
-		for i in pairs(buff_spell_lists[buffup]) do
-			if not buffactive[buff_spell_lists[buffup][i].Buff] and silent_can_use(buff_spell_lists[buffup][i].SpellID) and spell_recasts[buff_spell_lists[buffup][i].SpellID] < spell_latency then
-				windower.chat.input('/ma "'..buff_spell_lists[buffup][i].Name..'" <me>')
-				tickdelay = os.clock() + 2
-				return true
-			end
-		end
-
-		return false
-	else
-		return false
-	end
-end
 
 buff_spell_lists = {
 	Auto = {

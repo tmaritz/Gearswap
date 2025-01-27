@@ -103,44 +103,43 @@ function job_setup()
         'Animated Flourish','Provoke','Dia','Dia II','Flash','Bio','Bio II','Sleep','Sleep II',
         'Drain','Aspir','Dispel','Steal','Mug'}
 
-	pet_info = {['FunguarFamiliar']="Funguar, Plantoid, Warrior",['CourierCarrie']="Crab, Aquan, Paladin",
-				['AmigoSabotender']="Cactuar, Plantoid, Warrior",['NurseryNazuna']="Sheep, Beast, Warrior",
-				['CraftyClyvonne']="Coeurl, Beast, Warrior",['FleetReinhard']="Raptor, Lizard, Warrior",
-				['PrestoJulio']="Flytrap, Plantoid, Warrior",['SwiftSieghard']="Raptor, Lizard, Warrior",
-				['MailbusterCetas']="Fly, Vermin, Warrior",['AudaciousAnna']="Lizard, Lizard, Warrior",
-				['TurbidToloi']="Pugil, Aquan, Warrior",['SlipperySilas']="Toad, Aquan, Warrior",
-				['LuckyLulush']="Rabbit, Beast, Warrior",['DipperYuly']="Ladybug, Vermin, Thief",
-				['FlowerpotMerle']="Mandragora, Plantoid, Monk",['DapperMac']="Apkallu, Bird, Monk",
-				['DiscreetLouise']="Funguar, Plantoid, Warrior",['FatsoFargann']="Leech, Amorph, Warrior",
-				['FaithfulFalcorr']="Hippogryph, Bird, Thief",['BugeyedBroncha']="Eft, Lizard, Warrior",
-				['BloodclawShasra']="Lynx, Beast, Warrior",['GorefangHobs']="Tiger, Beast, Warrior",
-				['GooeyGerard']="Slug, Amorph, Warrior",['CrudeRaphie']="Adamantoise, Lizard, Paladin",
-				['DroopyDortwin']="Rabbit, Beast, Warrior",['PonderingPeter']="HQ Rabbit, Beast, Warrior",
-				['SunburstMalfik']="Crab, Aquan, Paladin",['AgedAngus']="HQ Crab, Aquan, Paladin",
-				['WarlikePatrick']="Lizard, Lizard, Warrior",['MosquitoFamiliar']="Mosquito, Vermin, Dark Knight",
-				['Left-HandedYoko']="Mosquito, Vermin, Dark Knight",['ScissorlegXerin']="Chapuli, Vermin, Warrior",
-				['BouncingBertha']="HQ Chapuli, Vermin, Warrior",['RhymingShizuna']="Sheep, Beast, Warrior",
-				['AttentiveIbuki']="Tulfaire, Bird, Warrior",['SwoopingZhivago']="HQ Tulfaire, Bird, Warrior",
-				['BrainyWaluis']="Funguar, Plantoid, Warrior",['SuspiciousAlice']="Eft, Lizard, Warrior",			
-				['HeadbreakerKen']="Fly, Vermin, Warrior",['RedolentCandi']="Snapweed, Plantoid, Warrior",
-				['AlluringHoney']="HQ Snapweed, Plantoid, Warrior",['CaringKiyomaro']="Raaz, Beast, Monk",
-				['SurgingStorm']="Apkallu, Bird, Monk",['SubmergedIyo']="Apkallu, Bird, Monk",
-				['CursedAnnabelle']="Antlion, Vermin, Warrior",['AnklebiterJedd']="Diremite, Vermin, Dark Knight",
-				['VivaciousVickie']="HQ Raaz, Beast, Monk",['HurlerPercival']="Beetle, Vermin, Paladin",
-				['BlackbeardRandy']="Tiger, Beast, Warrior",['GenerousArthur']="Slug, Amorph, Warrior",
-				['ThreestarLynn']="Ladybug, Vermin, Thief",['BraveHeroGlenn']="Frog, Aquan, Warrior",
-				['SharpwitHermes']="Mandragora, Plantoid, Monk",['ColibriFamiliar']="Colibri, Bird, Red Mage",
-				['ChoralLeera']="HQ Colibri, Bird, Red Mage",['SpiderFamiliar']="Spider, Vermin, Warrior",
-				['GussyHachirobe']="HQ Spider, Vermin, Warrior",['AcuexFamiliar']="Acuex, Amorph, Black Mage",
-				['ChoralLeera']="HQ Colibri, Bird, Red Mage",['SpiderFamiliar']="Spider, Vermin, Warrior",
-				['AmiableRoche']="Pugil, Aquan, Warrior",['HeraldHenry']="Crab, Aquan, Paladin",
-				['FluffyBredo']="HQ Acuex, Amorph, Black Mage",['WeevilFamiliar']="Weevil, Vermin, Thief",
-				['StalwartAngelina']="HQ Weevil, Vermin, Thief",['SweetCaroline']="Mandragora, Plantoid, Monk",
-				['P.CrabFamiliar']="Crab, Aquan, Paladin",['JovialEdwin']="HQ Crab, Aquan, Paladin",
-				['Y.BeetleFamiliar']="Beetle, Vermin, Warrior",['EnergizedSefina']="Beetle, Vermin, Warrior",
-				['LynxFamiliar']="Coeurl, Beast, Warrior",['VivaciousGaston']="HQ Coeurl, Beast, Warrior",
-				['Hip.Familiar']="Hippogryph, Bird, Thief/Black Mage",['DaringRoland']="HQ Hippogryph, Bird, Thief/Black Mage",
-				['SlimeFamiliar']="Slime, Amorph, Warrior",['SultryPatrice']="Slime, Amorph, Warrior",
+	pet_info = {['FunguarFamiliar']="Funguar, Plantoid, Warrior",		['CourierCarrie']="Crab, Aquan, Paladin",
+				['AmigoSabotender']="Cactuar, Plantoid, Warrior",		['NurseryNazuna']="Sheep, Beast, Warrior",
+				['CraftyClyvonne']="Coeurl, Beast, Warrior",			['FleetReinhard']="Raptor, Lizard, Warrior",
+				['PrestoJulio']="Flytrap, Plantoid, Warrior",			['SwiftSieghard']="Raptor, Lizard, Warrior",
+				['MailbusterCetas']="Fly, Vermin, Warrior",				['AudaciousAnna']="Lizard, Lizard, Warrior",
+				['TurbidToloi']="Pugil, Aquan, Warrior",				['SlipperySilas']="Toad, Aquan, Warrior",
+				['LuckyLulush']="Rabbit, Beast, Warrior",				['DipperYuly']="Ladybug, Vermin, Thief",
+				['FlowerpotMerle']="Mandragora, Plantoid, Monk",		['DapperMac']="Apkallu, Bird, Monk",
+				['DiscreetLouise']="Funguar, Plantoid, Warrior",		['FatsoFargann']="Leech, Amorph, Warrior",
+				['FaithfulFalcorr']="Hippogryph, Bird, Thief",			['BugeyedBroncha']="Eft, Lizard, Warrior",
+				['BloodclawShasra']="Lynx, Beast, Warrior",				['GorefangHobs']="Tiger, Beast, Warrior",
+				['GooeyGerard']="Slug, Amorph, Warrior",				['CrudeRaphie']="Adamantoise, Lizard, Paladin",
+				['DroopyDortwin']="Rabbit, Beast, Warrior",				['PonderingPeter']="HQ Rabbit, Beast, Warrior",
+				['SunburstMalfik']="Crab, Aquan, Paladin",				['AgedAngus']="HQ Crab, Aquan, Paladin",
+				['WarlikePatrick']="Lizard, Lizard, Warrior",			['MosquitoFamiliar']="Mosquito, Vermin, Dark Knight",
+				['Left-HandedYoko']="Mosquito, Vermin, Dark Knight",	['ScissorlegXerin']="Chapuli, Vermin, Warrior",
+				['BouncingBertha']="HQ Chapuli, Vermin, Warrior",		['RhymingShizuna']="Sheep, Beast, Warrior",
+				['AttentiveIbuki']="Tulfaire, Bird, Warrior",			['SwoopingZhivago']="HQ Tulfaire, Bird, Warrior",
+				['BrainyWaluis']="Funguar, Plantoid, Warrior",			['SuspiciousAlice']="Eft, Lizard, Warrior",			
+				['HeadbreakerKen']="Fly, Vermin, Warrior",				['RedolentCandi']="Snapweed, Plantoid, Warrior",
+				['AlluringHoney']="HQ Snapweed, Plantoid, Warrior",		['CaringKiyomaro']="Raaz, Beast, Monk",
+				['SurgingStorm']="Apkallu, Bird, Monk",					['SubmergedIyo']="Apkallu, Bird, Monk",
+				['CursedAnnabelle']="Antlion, Vermin, Warrior",			['AnklebiterJedd']="Diremite, Vermin, Dark Knight",
+				['VivaciousVickie']="HQ Raaz, Beast, Monk",				['HurlerPercival']="Beetle, Vermin, Paladin",
+				['BlackbeardRandy']="Tiger, Beast, Warrior",			['GenerousArthur']="Slug, Amorph, Warrior",
+				['ThreestarLynn']="Ladybug, Vermin, Thief",				['BraveHeroGlenn']="Frog, Aquan, Warrior",
+				['SharpwitHermes']="Mandragora, Plantoid, Monk",		['ColibriFamiliar']="Colibri, Bird, Red Mage",
+				['ChoralLeera']="HQ Colibri, Bird, Red Mage",			['SpiderFamiliar']="Spider, Vermin, Warrior",
+				['GussyHachirobe']="HQ Spider, Vermin, Warrior",		['AcuexFamiliar']="Acuex, Amorph, Black Mage",
+				['AmiableRoche']="Pugil, Aquan, Warrior",				['HeraldHenry']="Crab, Aquan, Paladin",
+				['FluffyBredo']="HQ Acuex, Amorph, Black Mage",			['WeevilFamiliar']="Weevil, Vermin, Thief",
+				['StalwartAngelina']="HQ Weevil, Vermin, Thief",		['SweetCaroline']="Mandragora, Plantoid, Monk",
+				['P.CrabFamiliar']="Crab, Aquan, Paladin",				['JovialEdwin']="HQ Crab, Aquan, Paladin",
+				['Y.BeetleFamiliar']="Beetle, Vermin, Warrior",			['EnergizedSefina']="Beetle, Vermin, Warrior",
+				['LynxFamiliar']="Coeurl, Beast, Warrior",				['VivaciousGaston']="HQ Coeurl, Beast, Warrior",
+				['Hip.Familiar']="Hippogryph, Bird, Thief/Black Mage",	['DaringRoland']="HQ Hippogryph, Bird, Thief/Black Mage",
+				['SlimeFamiliar']="Slime, Amorph, Warrior",				['SultryPatrice']="Slime, Amorph, Warrior",
 				}
 
 	ready_moves = {}
@@ -266,7 +265,7 @@ function job_filter_precast(spell, spellMap, eventArgs)
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 
 		if abil_recasts[94] ~= 0 then
-				send_command('@input /ja "Call Beast" <me>')
+				windower.chat.input('/ja "Call Beast" <me>')
                 eventArgs.cancel = true
 				return
 		end
@@ -622,6 +621,13 @@ end
 function job_tick()
 	if check_pet() then return true end
 	if check_ready() then return true end
+	if check_buffup() then return true end
+	if check_buff() then return true end
+	if job_check_buff() then return true end
+	return false
+end
+
+function job_check_buff()
 	return false
 end
 
@@ -634,7 +640,7 @@ function check_pet()
 			if abil_recasts[103] < latency and not (buffactive.amnesia or buffactive.impairment) then
 				if item_available('Pet Food '..state.RewardMode.value..'') then
 					windower.chat.input('/ja "Reward" <me>')
-					tickdelay = os.clock() + 1.1
+					add_tick_delay()
 					return true
 				else
 					return false
@@ -644,12 +650,12 @@ function check_pet()
 	elseif state.AutoCallPet.value and not data.areas.cities:contains(world.area) then
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		if abil_recasts[94] < latency then
-			send_command('@input /ja "Bestial Loyalty" <me>')
-			tickdelay = os.clock() + .7
+			windower.chat.input('/ja "Bestial Loyalty" <me>')
+			add_tick_delay()
 			return true
 		elseif abil_recasts[104] < latency then
-			send_command('@input /ja "Call Beast" <me>')
-			tickdelay = os.clock() + 1.1
+			windower.chat.input('/ja "Call Beast" <me>')
+			add_tick_delay()
 			return true
 		else
 			return false
@@ -665,11 +671,11 @@ function check_ready()
 		if pet.isvalid then
 			if pet.status == "Engaged" and get_current_ready_count() > 0 then
 				windower.send_command('gs c ready')
-				tickdelay = os.clock() + 2
+				add_tick_delay()
 				return true
 			elseif pet.status == "Idle" and player.target.type == "MONSTER" then
 				windower.chat.input('/pet Fight <t>')
-				tickdelay = os.clock() + 2
+				add_tick_delay()
 				return true
 			else
 				return false
@@ -706,19 +712,13 @@ function handle_ready(commandArgs)
     if data.areas.cities:contains(world.area) then
         add_to_chat(123, 'Abort:You cannot use ready in town.')
         return
-    end
-
-    if not pet.isvalid then
+    elseif not pet.isvalid then
         add_to_chat(123,'Abort: You do not have a pet.')
         return
-    end
-
-	if get_current_ready_count() == 0 then
+	elseif get_current_ready_count() == 0 then
 		add_to_chat(123,'Abort: No pet charges!')
 		return
-	end
-
-    if not commandArgs[2] then
+    elseif not commandArgs[2] then
 		if ready_moves.default[pet.name] then
 			windower.chat.input('/pet "'..ready_moves.default[pet.name]..'" <me>')
 		else
@@ -731,10 +731,7 @@ function handle_ready(commandArgs)
 
     if not ready_moves[ready] then
         add_to_chat(123,'Abort: Unknown ready type: '..tostring(ready))
-        return
-    end
-
-    if ready_moves[ready][pet.name] then
+    elseif ready_moves[ready][pet.name] then
 		windower.chat.input('/pet "'..ready_moves[ready][pet.name]..'" <me>')
 	elseif ready == 'default' then
 		windower.chat.input('/pet "Sic" <me>')
@@ -767,3 +764,16 @@ function get_ready_charge_timer()
 		return charge_timer
 	end
 end
+
+buff_spell_lists = {
+	Auto = {--Options for When are: Always, Engaged, Idle, OutOfCombat, Combat
+		{Name='Haste',			Buff='Haste',		SpellID=57,		When='Always'},
+		{Name='Refresh',		Buff='Refresh',		SpellID=109,	When='Always'},
+		{Name='Phalanx',		Buff='Phalanx',		SpellID=106,	When='Always'},
+	},
+	Self = {
+		{Name='Haste',			Buff='Haste',		SpellID=57,		Reapply=false},
+		{Name='Refresh',		Buff='Refresh',		SpellID=109,	Reapply=false},
+		{Name='Phalanx',		Buff='Phalanx',		SpellID=106,	Reapply=false},
+	},
+}

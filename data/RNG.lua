@@ -75,6 +75,7 @@ function job_setup()
                    ['Armageddon'] = "Gun",
                    ['Fomalhaut'] = "Gun",
 				   ['Ataktos'] = "Gun",
+				   ['Armageddon'] = "Gun",
                    ['Gastraphetes'] = "Crossbow",
                    }
 	
@@ -136,8 +137,19 @@ end
 
 function job_post_precast(spell, spellMap, eventArgs)
 	if spell.type == 'WeaponSkill' then
-		if not (spell.skill == 'Marksmanship' or spell.skill == 'Archery') and WeaponType[player.equipment.range] == 'Bow' and item_available('Hauksbok Arrow') then
-			equip({ammo="Hauksbok Arrow"})
+		if not (spell.skill == 'Marksmanship' or spell.skill == 'Archery') then
+			if sets.weapons[state.Weapons.value] then
+				local standardized_set = standardize_set(sets.weapons[state.Weapons.value])
+				local WeaponType = WeaponType[standardized_set.range]
+
+				if WeaponType == 'Bow' and item_available('Hauksbok Arrow') then
+					equip({ammo="Hauksbok Arrow"})
+				elseif WeaponType == 'Crossbow' and item_available('Hauksbok Bolt') then
+					equip({ammo="Hauksbok Bolt"})
+				elseif WeaponType == 'Gun' and item_available('Hauksbok Bullet') then
+					equip({ammo="Hauksbok Bullet"})
+				end
+			end
 		end
 	
 		local WSset = standardize_set(get_precast_set(spell, spellMap))

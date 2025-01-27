@@ -226,7 +226,7 @@ function job_self_command(commandArgs, eventArgs)
 				windower.chat.input('/ma "Jettatura" <t>')
 			elseif spell_recasts[592] < spell_latency then
 				windower.chat.input('/ma "Blank Gaze" <t>')
-			elseif not check_auto_tank_ws() then
+			elseif not check_ws() then
 				if not state.AutoTankMode.value then add_to_chat(123,'All Enmity Blue Magic on cooldown.') end
 			end
 
@@ -250,7 +250,7 @@ function job_self_command(commandArgs, eventArgs)
 				windower.chat.input('/ja "Last Resort" <me>')
 			elseif abil_recasts[86] < latency then
 				windower.chat.input('/ja "Arcane Circle" <me>')
-			elseif not check_auto_tank_ws() then
+			elseif not check_ws() then
 				if not state.AutoTankMode.value then add_to_chat(123,'All Enmity Dark Knight abillities on cooldown.') end
 			end
 
@@ -273,7 +273,7 @@ function job_self_command(commandArgs, eventArgs)
 				send_command('input /ja "Aggressor" <me>')
 			elseif abil_recasts[1] < latency then
 				send_command('input /ja "Berserk" <me>')
-			elseif not check_auto_tank_ws() then
+			elseif not check_ws() then
 				if not state.AutoTankMode.value then add_to_chat(123,'All Enmity Warrior Job Abilities on cooldown.') end
 			end
 			
@@ -292,11 +292,11 @@ function job_self_command(commandArgs, eventArgs)
 			elseif abil_recasts[220] < latency and not buffactive['Finishing Move 5'] then
 				send_command('@input /ja "'..state.CurrentStep.value..'" <t>')
 				return
-			elseif not check_auto_tank_ws() then
+			elseif not check_ws() then
 				if not state.AutoTankMode.value then add_to_chat(123,'Dancer job abilities not needed.') end
 			end
 		else
-			check_auto_tank_ws()
+			check_ws()
 		end
 
 	end
@@ -442,13 +442,14 @@ end
 function job_tick()
 	if check_majesty() then return true end
 	if check_hasso() then return true end
-	if check_buff() then return true end
 	if check_buffup() then return true end
+	if check_buff() then return true end
+	if job_check_buff() then return true end
 	if state.AutoTankMode.value and in_combat and player.target.type == "MONSTER" and not moving then
 		if check_flash() then return true
 		else 
 			windower.send_command('gs c SubJobEnmity')
-			tickdelay = os.clock() + 1
+			add_tick_delay()
 			return true
 		end
 	end
@@ -460,7 +461,7 @@ function check_flash()
 
 	if spell_recasts[112] < spell_latency then
 		send_command('input /ma "Flash" <t>')
-		tickdelay = os.clock() + 2
+		add_tick_delay()
 		return true
 	else
 		return false
@@ -483,7 +484,7 @@ function check_majesty()
 		
 		if abil_recasts[150] < latency then
 			windower.chat.input('/ja "Majesty" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		else
 			return false
@@ -499,17 +500,17 @@ function check_cover(Protectee)
 end 
 
 function check_hasso()
-if player.sub_job == 'SAM' and player.status == 'Engaged' and not (state.Stance.value == 'None' or state.Buff.Hasso or state.Buff.Seigan or state.Buff['SJ Restriction'] or main_weapon_is_one_handed() or silent_check_amnesia()) then
+	if player.sub_job == 'SAM' and player.status == 'Engaged' and wielding() == 'Two-Handed' and state.Stance.value ~= 'None' and not (state.Buff.Hasso or state.Buff.Seigan or state.Buff['SJ Restriction'] or silent_check_amnesia()) then
 		
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		
 		if state.Stance.value == 'Hasso' and abil_recasts[138] < latency then
 			windower.chat.input('/ja "Hasso" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		elseif state.Stance.value == 'Seigan' and abil_recasts[139] < latency then
 			windower.chat.input('/ja "Seigan" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		else
 			return false
@@ -519,61 +520,19 @@ if player.sub_job == 'SAM' and player.status == 'Engaged' and not (state.Stance.
 	return false
 end
 
-function check_buff()
+function job_check_buff()
 	if state.AutoBuffMode.value ~= 'Off' and not data.areas.cities:contains(world.area) then
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-		for i in pairs(buff_spell_lists[state.AutoBuffMode.Value]) do
-			if not buffactive[buff_spell_lists[state.AutoBuffMode.Value][i].Buff] and (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Always' or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Combat' and in_combat) or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Engaged' and player.status == 'Engaged') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Idle' and player.status == 'Idle') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'OutOfCombat' and not in_combat)) and spell_recasts[buff_spell_lists[state.AutoBuffMode.Value][i].SpellID] < latency and silent_can_use(buff_spell_lists[state.AutoBuffMode.Value][i].SpellID) then
-				windower.chat.input('/ma "'..buff_spell_lists[state.AutoBuffMode.Value][i].Name..'" <me>')
-				tickdelay = os.clock() + 2
-				return true
-			end
-		end
-		
 		if in_combat then
 			local abil_recasts = windower.ffxi.get_ability_recasts()
 
 			if not buffactive['Majesty'] and abil_recasts[150] < latency then
 				windower.chat.input('/ja "Majesty" <me>')
-				tickdelay = os.clock() + 1.1
+				add_tick_delay()
 				return true
 			else
 				return false
 			end
 		end
-		
-	else
-		return false
-	end
-end
-
-function check_buffup()
-	if buffup ~= '' then
-		local needsbuff = false
-		for i in pairs(buff_spell_lists[buffup]) do
-			if not buffactive[buff_spell_lists[buffup][i].Buff] and silent_can_use(buff_spell_lists[buffup][i].SpellID) then
-				needsbuff = true
-				break
-			end
-		end
-	
-		if not needsbuff then
-			add_to_chat(217, 'All '..buffup..' buffs are up!')
-			buffup = ''
-			return false
-		end
-		
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-		
-		for i in pairs(buff_spell_lists[buffup]) do
-			if not buffactive[buff_spell_lists[buffup][i].Buff] and silent_can_use(buff_spell_lists[buffup][i].SpellID) and spell_recasts[buff_spell_lists[buffup][i].SpellID] < spell_latency then
-				windower.chat.input('/ma "'..buff_spell_lists[buffup][i].Name..'" <me>')
-				tickdelay = os.clock() + 2
-				return true
-			end
-		end
-		
-		return false
 	else
 		return false
 	end

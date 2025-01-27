@@ -330,10 +330,7 @@ end
 
 -- Called for direct player commands.
 function job_self_command(commandArgs, eventArgs)
-    if commandArgs[1]:lower() == 'scholar' then
-        handle_stratagems(commandArgs)
-        eventArgs.handled = true
-    elseif commandArgs[1]:lower() == 'elemental' then
+    if commandArgs[1]:lower() == 'elemental' then
         handle_elemental(commandArgs)
         eventArgs.handled = true
 	elseif commandArgs[1]:lower() == 'showcharge' then
@@ -884,89 +881,12 @@ function handle_elemental(cmdParams)
     end
 end
 
--- General handling of stratagems in an Arts-agnostic way.
--- Format: gs c scholar <stratagem>
-function handle_stratagems(cmdParams)
-    -- cmdParams[1] == 'scholar'
-    -- cmdParams[2] == stratagem to use
-
-    if not cmdParams[2] then
-        add_to_chat(123,'Error: No stratagem command given.')
-        return
-    end
-    local stratagem = cmdParams[2]:lower()
-
-    if stratagem == 'light' then
-        if state.Buff['Light Arts'] then
-            windower.chat.input('/ja "Addendum: White" <me>')
-        elseif state.Buff['Addendum: White'] then
-            add_to_chat(122,'Error: Addendum: White is already active.')
-        else
-            windower.chat.input('/ja "Light Arts" <me>')
-        end
-    elseif stratagem == 'dark' then
-        if state.Buff['Dark Arts'] then
-            windower.chat.input('/ja "Addendum: Black" <me>')
-        elseif state.Buff['Addendum: Black'] then
-            add_to_chat(122,'Error: Addendum: Black is already active.')
-        else
-            windower.chat.input('/ja "Dark Arts" <me>')
-        end
-    elseif state.Buff['Light Arts'] or state.Buff['Addendum: White'] then
-        if stratagem == 'cost' then
-            windower.chat.input('/ja "Penury" <me>')
-        elseif stratagem == 'speed' then
-            windower.chat.input('/ja "Celerity" <me>')
-        elseif stratagem == 'aoe' then
-            windower.chat.input('/ja "Accession" <me>')
-        elseif stratagem == 'power' then
-            windower.chat.input('/ja "Rapture" <me>')
-        elseif stratagem == 'duration' then
-            windower.chat.input('/ja "Perpetuance" <me>')
-        elseif stratagem == 'accuracy' then
-            windower.chat.input('/ja "Altruism" <me>')
-        elseif stratagem == 'enmity' then
-            windower.chat.input('/ja "Tranquility" <me>')
-        elseif stratagem == 'skillchain' then
-            add_to_chat(122,'Error: Light Arts does not have a skillchain stratagem.')
-        elseif stratagem == 'addendum' then
-            windower.chat.input('/ja "Addendum: White" <me>')
-        else
-            add_to_chat(123,'Error: Unknown stratagem ['..stratagem..']')
-        end
-    elseif state.Buff['Dark Arts']  or state.Buff['Addendum: Black'] then
-        if stratagem == 'cost' then
-            windower.chat.input('/ja "Parsimony" <me>')
-        elseif stratagem == 'speed' then
-            windower.chat.input('/ja "Alacrity" <me>')
-        elseif stratagem == 'aoe' then
-            windower.chat.input('/ja "Manifestation" <me>')
-        elseif stratagem == 'power' then
-            windower.chat.input('/ja "Ebullience" <me>')
-        elseif stratagem == 'duration' then
-            add_to_chat(122,'Error: Dark Arts does not have a duration stratagem.')
-        elseif stratagem == 'accuracy' then
-            windower.chat.input('/ja "Focalization" <me>')
-        elseif stratagem == 'enmity' then
-            windower.chat.input('/ja "Equanimity" <me>')
-        elseif stratagem == 'skillchain' then
-            windower.chat.input('/ja "Immanence" <me>')
-        elseif stratagem == 'addendum' then
-            windower.chat.input('/ja "Addendum: Black" <me>')
-        else
-            add_to_chat(123,'Error: Unknown stratagem ['..stratagem..']')
-        end
-    else
-        add_to_chat(123,'No arts has been activated yet.')
-    end
-end
-
 -- Gets the current number of available stratagems based on the recast remaining
 -- and the level of the sch.
 function job_tick()
 	if check_arts() then return true end
-	if check_buff() then return true end
 	if check_buffup() then return true end
+	if check_buff() then return true end
 	return false
 end
 
@@ -977,60 +897,13 @@ function check_arts()
 
 		if abil_recasts[232] < latency then
 			windower.chat.input('/ja "Dark Arts" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		end
 
 	end
 	
 	return false
-end
-
-function check_buff()
-	if state.AutoBuffMode.value ~= 'Off' and not data.areas.cities:contains(world.area) then
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-		for i in pairs(buff_spell_lists[state.AutoBuffMode.Value]) do
-			if not buffactive[buff_spell_lists[state.AutoBuffMode.Value][i].Buff] and (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Always' or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Combat' and in_combat) or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Engaged' and player.status == 'Engaged') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Idle' and player.status == 'Idle') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'OutOfCombat' and not in_combat)) and spell_recasts[buff_spell_lists[state.AutoBuffMode.Value][i].SpellID] < spell_latency and silent_can_use(buff_spell_lists[state.AutoBuffMode.Value][i].SpellID) then
-				windower.chat.input('/ma "'..buff_spell_lists[state.AutoBuffMode.Value][i].Name..'" <me>')
-				tickdelay = os.clock() + 2
-				return true
-			end
-		end
-	else
-		return false
-	end
-end
-
-function check_buffup()
-	if buffup ~= '' then
-		local needsbuff = false
-		for i in pairs(buff_spell_lists[buffup]) do
-			if not buffactive[buff_spell_lists[buffup][i].Buff] and silent_can_use(buff_spell_lists[buffup][i].SpellID) then
-				needsbuff = true
-				break
-			end
-		end
-	
-		if not needsbuff then
-			add_to_chat(217, 'All '..buffup..' buffs are up!')
-			buffup = ''
-			return false
-		end
-		
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-		
-		for i in pairs(buff_spell_lists[buffup]) do
-			if not buffactive[buff_spell_lists[buffup][i].Buff] and silent_can_use(buff_spell_lists[buffup][i].SpellID) and spell_recasts[buff_spell_lists[buffup][i].SpellID] < spell_latency then
-				windower.chat.input('/ma "'..buff_spell_lists[buffup][i].Name..'" <me>')
-				tickdelay = os.clock() + 2
-				return true
-			end
-		end
-		
-		return false
-	else
-		return false
-	end
 end
 
 buff_spell_lists = {

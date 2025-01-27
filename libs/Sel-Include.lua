@@ -236,12 +236,13 @@ function init_include()
 	autonuke = 'Fire'
 	autows = ''
 	autows_list = {}
+	prepared_action = ''
 	weapons_pagelist = {}
 	smartws = nil
 	rangedautows = ''
 	autowstp = 1000
 	rangedautowstp = 1000
-	latency = .7
+	latency = .5
 	spell_latency = nil
 	buffup = ''
 	curecheat = false
@@ -249,6 +250,7 @@ function init_include()
 	delayed_cast = ''
 	delayed_target = ''
 	equipped = 0
+	consumable_bag = 'satchel'
 	
 	time_test = false
 	selindrile_warned = false
@@ -316,6 +318,7 @@ function init_include()
     optional_include(player.name..'-Items.lua')
 	optional_include(player.name..'_Crafting.lua')
 	include(player.name..'_'..player.main_job..'_gear.lua') -- Required Gear file.
+	optional_include('User-'..player.main_job..'.lua')
 
 	-- New Display functions, needs to come after globals for user settings.
 	include('Sel-Display.lua')
@@ -407,8 +410,8 @@ function init_include()
 		
 		gearswap.refresh_globals(false)
 		
-		if (player ~= nil) and (player.status == 'Idle' or player.status == 'Engaged') and not (delayed_cast ~= '' or check_midaction() or moving or silent_check_disable()) then
-
+		if (player ~= nil) and (player.status == 'Idle' or player.status == 'Engaged') and not (just_acted() or moving or silent_check_disable()) then
+			prepared_action = ''
 			if pre_tick then
 				if pre_tick() then return end
 			end
@@ -514,7 +517,7 @@ function zone_change(new_id,old_id)
 end
 	
 function default_zone_change(new_id,old_id)
-	tickdelay = os.clock() + 10
+	add_tick_delay(10)
 	state.AutoBuffMode:reset()
 	state.AutoSubMode:reset()
 	state.AutoTrustMode:reset()
@@ -559,10 +562,17 @@ function time_change(new_time, old_time)
     end
     
     if was_daytime ~= classes.Daytime or was_dusktime ~= classes.DuskToDawn then
+		if user_time_change then
+            user_time_change(new_time, old_time)
+        end
+	
         if job_time_change then
             job_time_change(new_time, old_time)
         end
-
+		
+        if user_job_time_change then
+            user_job_time_change(new_time, old_time)
+        end
         handle_update({'auto'})
     end
 end
@@ -602,7 +612,7 @@ function global_on_load()
 		if state.Weapons.value == 'None' then
 			enable('main','sub','range','ammo')
 		else
-			send_command('@wait 3;gs c weapons Default')
+			send_command('@wait 4;gs c weapons Default')
 		end
 	end
 end
@@ -902,7 +912,11 @@ end
 --------------------------------------
 
 function default_filtered_action(spell, eventArgs)
-	if spell.english == 'Warp' then
+	if spell.english == 'Dispelga' then
+		if state.Weapons.value ~= 'None' and not state.UnlockWeapons.value and player.equipment.main ~= 'Daybreak' then
+			windower.add_to_chat(123,"You can't cast Dispelga, your weapons are locked without Daybreak equipped.")
+		end
+	elseif spell.english == 'Warp' then
 		useItem = true
 		useItemName = 'Warp Ring'
 		useItemSlot = 'ring2'
@@ -997,57 +1011,38 @@ function default_pretarget(spell, spellMap, eventArgs)
 end
 
 function default_precast(spell, spellMap, eventArgs)
-	if eventArgs.cancel then
+	if eventArgs.cancel or spell.english == prepared_action then
 		cancel_spell()
 		return
 	else
-		equip(get_precast_set(spell, spellMap))
+		prepared_action = spell.english
 	end
-	
-	if spell.action_type == 'Magic' and can_dual_wield then
-		if sets.precast.FC[spell.english] and sets.precast.FC[spell.english][state.CastingMode.current] and sets.precast.FC[spell.english][state.CastingMode.current].DW then
-			equip(sets.precast.FC[spell.english][state.CastingMode.current].DW)
-		elseif sets.precast.FC[spell.english] and sets.precast.FC[spell.english].DW then
-			equip(sets.precast.FC[spell.english].DW)
-		elseif sets.precast.FC[spellMap] and sets.precast.FC[spellMap][state.CastingMode.current] and sets.precast.FC[spellMap][state.CastingMode.current].DW then
-			equip(sets.precast.FC[spellMap][state.CastingMode.current].DW)
-		elseif sets.precast.FC[spellMap] and sets.precast.FC[spellMap].DW then
-			equip(sets.precast.FC[spellMap].DW)
-		elseif sets.precast.FC[spell.skill] and sets.precast.FC[spell.skill][state.CastingMode.current] and sets.precast.FC[spell.skill][state.CastingMode.current].DW then
-			equip(sets.precast.FC[spell.skill][state.CastingMode.current].DW)
-		elseif sets.precast.FC[spell.skill] and sets.precast.FC[spell.skill].DW then
-			equip(sets.precast.FC[spell.skill].DW)
-		end
+	if just_acted(spell, spellMap, eventArgs) then
+		return	
+	else
+		equip(get_precast_set(spell, spellMap))
 	end
 	
     cancel_conflicting_buffs(spell, spellMap, eventArgs)
 	
 	if spell.action_type == 'Magic' then
-		next_cast = os.clock() + (spell.cast_time/4) + 3.5 - latency
+		next_cast = os.clock() + (spell.cast_time/4) + 3 - latency
 	elseif spell.type == 'WeaponSkill' then
-		next_cast = os.clock() + 2.5 - latency
+		next_cast = os.clock() + 3 - latency
 	elseif spell.action_type == 'Ability' then
 		next_cast = os.clock() + 1.1 - latency
 	elseif spell.action_type == 'Item' then
-		next_cast = os.clock() + 1.35 - latency
+		next_cast = os.clock() +  1.8 - latency
 	elseif spell.action_type == 'Ranged Attack' then
-		next_cast = os.clock() + 1.05 - latency
+		next_cast = os.clock() + 1.15 - latency
 	end
-	
-	if tickdelay < next_cast then tickdelay = next_cast end
+
+	if tickdelay < next_cast then tickdelay = next_cast +.1 end
 end
 
 function default_post_precast(spell, spellMap, eventArgs)
 	if not eventArgs.handled then
-		if spell.action_type == 'Magic' then
-			if spell.english:startswith('Utsusemi') then
-				if sets.precast.FC.Shadows and ((spell.english == 'Utsusemi: Ni' and player.main_job == 'NIN' and lastshadow == 'Utsusemi: San') or (spell.english == 'Utsusemi: Ichi' and lastshadow ~= 'Utsusemi: Ichi')) then
-					equip(sets.precast.FC.Shadows)
-				end
-			end
-			
-		elseif spell.type == 'WeaponSkill' then
-
+		if spell.type == 'WeaponSkill' then
 			if state.WeaponskillMode.value ~= 'Proc' and data.weaponskills.elemental:contains(spell.english) then
 				local distance = spell.target.distance - spell.target.model_size
 				local single_obi_intensity = 0
@@ -1150,27 +1145,24 @@ function default_post_precast(spell, spellMap, eventArgs)
 				handle_equipping_gear(player.status)
 			end
 		end
+		
+		if spell.action_type == 'Magic' then
+			if spell.english == 'Dispelga' then
+				equip({main="Daybreak"})
+			elseif spell.english == 'Impact' then
+				if item_equippable("Crepuscular Cloak") then
+					equip({head=empty,body="Crepuscular Cloak"})
+				else
+					equip({head=empty,body="Twilight Cloak"})
+				end
+			end
+		end
+		
 	end
 end
 
 function default_midcast(spell, spellMap, eventArgs)
     equip(get_midcast_set(spell, spellMap))
-	
-	if can_dual_wield then
-		if sets.midcast[spell.english] and sets.midcast[spell.english][state.CastingMode.current] and sets.midcast[spell.english][state.CastingMode.current].DW then
-			equip(sets.midcast[spell.english][state.CastingMode.current].DW)
-		elseif sets.midcast[spell.english] and sets.midcast[spell.english].DW then
-			equip(sets.midcast[spell.english].DW)
-		elseif sets.midcast[spellMap] and sets.midcast[spellMap][state.CastingMode.current] and sets.midcast[spellMap][state.CastingMode.current].DW then
-			equip(sets.midcast[spellMap][state.CastingMode.current].DW)
-		elseif sets.midcast[spellMap] and sets.midcast[spellMap].DW then
-			equip(sets.midcast[spellMap].DW)
-		elseif sets.midcast[spell.skill] and sets.midcast[spell.skill][state.CastingMode.current] and sets.midcast[spell.skill][state.CastingMode.current].DW then
-			equip(sets.midcast[spell.skill][state.CastingMode.current].DW)
-		elseif sets.midcast[spell.skill] and sets.midcast[spell.skill].DW then
-			equip(sets.midcast[spell.skill].DW)
-		end
-	end
 end
 
 function default_post_midcast(spell, spellMap, eventArgs)
@@ -1239,6 +1231,18 @@ function default_post_midcast(spell, spellMap, eventArgs)
 			eventArgs.handled = true
 		end
 	
+		if spell.action_type == 'Magic' then
+			if spell.english == 'Dispelga' then
+				equip({main="Daybreak"})
+			elseif spell.english == 'Impact' then
+				if item_equippable("Crepuscular Cloak") then
+					equip({head=empty,body="Crepuscular Cloak"})
+				else
+					equip({head=empty,body="Twilight Cloak"})
+				end
+			end
+		end
+	
 	end
 	
 	if buffactive.doom then
@@ -1257,6 +1261,7 @@ function default_post_pet_midcast(spell, spellMap, eventArgs)
 end
 
 function default_aftercast(spell, spellMap, eventArgs)
+	prepared_action = ''
 	if spell.interrupted then
 		if spell.type:contains('Magic') or spell.type == 'Ninjutsu' or spell.type == 'BardSong' then
 			next_cast = os.clock() + 3.35 - latency
@@ -1264,18 +1269,20 @@ function default_aftercast(spell, spellMap, eventArgs)
 			next_cast = os.clock() + 1.75 - latency
 		end
 	elseif spell.action_type == 'Magic' then
-		next_cast = os.clock() + 3.35 - latency
+		next_cast = os.clock() + 2.9 - latency
 	elseif spell.type == 'WeaponSkill' then
-		next_cast = os.clock() + 1.5 - latency
+		next_cast = os.clock() + 2.7 - latency
 	elseif spell.action_type == 'Ability' then
 		next_cast = os.clock() + .8 - latency
-	elseif 	spell.action_type == 'Item' then
-		next_cast = os.clock() + .85 - latency
+	elseif spell.action_type == 'Item' then
+		next_cast = os.clock() + 1.5 - latency
 	elseif spell.action_type == 'Ranged Attack' then
 		next_cast = os.clock() + .85 - latency
 	end
 	
-	if tickdelay < next_cast then tickdelay = next_cast end
+	if tickdelay < next_cast then tickdelay = next_cast +.1 end
+	
+	if tickdelay < next_cast then tickdelay = next_cast +.1 end
 	
 	if not spell.interrupted then
 		if spell.target.type == 'MONSTER' and spell.target.hpp > 0 then
@@ -1358,7 +1365,7 @@ end
 
 function filter_precast(spell, spellMap, eventArgs)
 	if check_rnghelper(spell, spellMap, eventArgs) then return end
-	if check_midaction(spell, spellMap, eventArgs) then return end
+	if just_acted(spell, spellMap, eventArgs) then return end
 	if check_disable(spell, spellMap, eventArgs) then return end
 	if check_doom(spell, spellMap, eventArgs) then return end
 	
@@ -1450,6 +1457,7 @@ end
 
 function pre_tick()
 	if check_doomed() then return true end
+	if check_delayed_cast() then return true end
 	if check_use_item() then return true end
 	if (buffactive['Sneak'] or buffactive['Invisible']) then return false end
 	if check_rune() then return true end
@@ -1908,13 +1916,31 @@ function get_precast_set(spell, spellMap)
     -- Once we have a named base set, do checks for specialized modes (casting mode, weaponskill mode, etc).
     
     if spell.action_type == 'Magic' then
-		if state.CastingMode.current:contains('DT') and not in_combat then
-		elseif state.CastingMode.current:contains('SIRD') and not in_combat then
-		elseif state.CastingMode.current:contains('Resistant') and not (buffactive.Stymie or buffactive['Elemental Seal']) then
+		if (state.CastingMode.current:contains('DT') or state.CastingMode.current:contains('SIRD')) and not in_combat then
+		elseif state.CastingMode.current:contains('Resistant') and (buffactive.Stymie or buffactive['Elemental Seal']) then
         elseif equipSet[state.CastingMode.current] then
             equipSet = equipSet[state.CastingMode.current]
             mote_vars.set_breadcrumbs:append(state.CastingMode.current)
         end
+
+		if can_dual_wield then
+			if sets.precast.FC[spell.english] and sets.precast.FC[spell.english][state.CastingMode.current] and sets.precast.FC[spell.english][state.CastingMode.current].DW then
+				equipSet = set_combine(equipSet, sets.precast.FC[spell.english][state.CastingMode.current].DW)
+			elseif sets.precast.FC[spell.english] and sets.precast.FC[spell.english].DW then
+				equipSet = set_combine(equipSet, sets.precast.FC[spell.english].DW)
+			elseif sets.precast.FC[spellMap] and sets.precast.FC[spellMap][state.CastingMode.current] and sets.precast.FC[spellMap][state.CastingMode.current].DW then
+				equipSet = set_combine(equipSet, sets.precast.FC[spellMap][state.CastingMode.current].DW)
+			elseif sets.precast.FC[spellMap] and sets.precast.FC[spellMap].DW then
+				equipSet = set_combine(equipSet, sets.precast.FC[spellMap].DW)
+			elseif sets.precast.FC[spell.skill] and sets.precast.FC[spell.skill][state.CastingMode.current] and sets.precast.FC[spell.skill][state.CastingMode.current].DW then
+				equipSet = set_combine(equipSet, sets.precast.FC[spell.skill][state.CastingMode.current].DW)
+			elseif sets.precast.FC[spell.skill] and sets.precast.FC[spell.skill].DW then
+				equipSet = set_combine(equipSet, sets.precast.FC[spell.skill].DW)
+			elseif sets.precast.FC.DW then
+				equipSet = set_combine(equipSet, sets.precast.FC.DW)
+			end
+		end
+		
     elseif spell.type == 'WeaponSkill' then
         equipSet = get_weaponskill_set(equipSet, spell, spellMap)
     elseif spell.action_type == 'Ability' then
@@ -1975,10 +2001,27 @@ function get_midcast_set(spell, spellMap)
 
     if spell.action_type == 'Magic' then
 		if state.CastingMode.current:contains('SIRD') and not in_combat then
+		elseif state.CastingMode.value:contains('Resistant') and (state.Buff.Stymie or state.buff['Elemental Seal']) then
         elseif equipSet[state.CastingMode.current] then
             equipSet = equipSet[state.CastingMode.current]
             mote_vars.set_breadcrumbs:append(state.CastingMode.current)
         end
+		
+		if can_dual_wield then
+			if sets.midcast[spell.english] and sets.midcast[spell.english][state.CastingMode.current] and sets.midcast[spell.english][state.CastingMode.current].DW then
+				equipSet = set_combine(equipSet, sets.midcast[spell.english][state.CastingMode.current].DW)
+			elseif sets.midcast[spell.english] and sets.midcast[spell.english].DW then
+				equipSet = set_combine(equipSet, sets.midcast[spell.english].DW)
+			elseif sets.midcast[spellMap] and sets.midcast[spellMap][state.CastingMode.current] and sets.midcast[spellMap][state.CastingMode.current].DW then
+				equipSet = set_combine(equipSet, sets.midcast[spellMap][state.CastingMode.current].DW)
+			elseif sets.midcast[spellMap] and sets.midcast[spellMap].DW then
+				equipSet = set_combine(equipSet, sets.midcast[spellMap].DW)
+			elseif sets.midcast[spell.skill] and sets.midcast[spell.skill][state.CastingMode.current] and sets.midcast[spell.skill][state.CastingMode.current].DW then
+				equipSet = set_combine(equipSet, sets.midcast[spell.skill][state.CastingMode.current].DW)
+			elseif sets.midcast[spell.skill] and sets.midcast[spell.skill].DW then
+				equipSet = set_combine(equipSet, sets.midcast[spell.skill].DW)
+			end
+		end
     elseif spell.action_type == 'Ranged Attack' then
         equipSet = get_ranged_set(equipSet, spell, spellMap)
     end

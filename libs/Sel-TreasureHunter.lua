@@ -152,7 +152,7 @@ end
 
 -- For any active TH mode, if we haven't already tagged this target, equip TH gear and lock slots until we manage to hit it.
 function TH_for_first_hit()
-    if player.status == 'Engaged' and state.TreasureMode.value ~= 'None' and state.DefenseMode.value == 'None' then
+    if player.status == 'Engaged' and state.TreasureMode.value ~= 'None' and state.DefenseMode.value == 'None' and not silent_check_disable() then
         if not info.tagged_mobs[player.target.id] then
             if _settings.debug_mode then add_to_chat(123,'Prepping for first hit on '..tostring(player.target.id)..'.') end
             equip(sets.TreasureHunter)

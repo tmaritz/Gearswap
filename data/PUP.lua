@@ -310,6 +310,9 @@ function job_tick()
 	if check_repair() then return true end
 	if check_auto_pet() then return true end
 	if check_maneuver() then return true end
+	if check_buffup then return true end
+	if check_buff() then return true end
+	if job_check_buff() then return true end
 
 	if state.PetWSGear.value and pet.isvalid and pet.tp and pet.tp ~= lastpettp then
 		if (pet.tp > 999 and lastpettp < 1000) or (pet.tp < 1000 and lastpettp > 999) then
@@ -409,26 +412,30 @@ function check_auto_pet()
 
 		if abil_recasts[205] < latency then
 			windower.chat.input('/ja "Activate" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		elseif abil_recasts[115] < latency then
 			windower.chat.input('/ja "Deus Ex Automata" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		end
 
 	elseif pet.status == "Idle" then
 		if pet.max_mp > 50 and pet.mpp < 10 and pet.hpp >= deactivatehpp and abil_recasts[208] < latency then
 			windower.chat.input('/pet "Deactivate" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		elseif player.target.type == "MONSTER" and abil_recasts[207] < latency then
 			windower.chat.input('/pet "Deploy" <t>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		end
 	end
 
+	return false
+end
+
+function job_check_buff()
 	return false
 end
 
@@ -439,7 +446,7 @@ function check_repair()
 
 		if abil_recasts[206] < latency and item_available('Automat. Oil +3') then
 			windower.chat.input('/ja "Repair" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		end
 	end
@@ -464,7 +471,7 @@ function check_maneuver()
                 local maneuversActive = buffactive[maneuver.Name] or 0
                 if maneuversActive < maneuver.Amount then
                     windower.chat.input('/pet "'..maneuver.Name..'" <me>')
-                    tickdelay = os.clock() + 1.1
+                    add_tick_delay()
                     return true
                 end
 			else
@@ -481,3 +488,17 @@ function job_aftercast(spell, spellMap, eventArgs)
 		eventArgs.handled = true
 	end
 end
+
+
+buff_spell_lists = {
+	Auto = {--Options for When are: Always, Engaged, Idle, OutOfCombat, Combat
+		{Name='Haste',			Buff='Haste',		SpellID=57,		When='Always'},
+		{Name='Refresh',		Buff='Refresh',		SpellID=109,	When='Always'},
+		{Name='Phalanx',		Buff='Phalanx',		SpellID=106,	When='Always'},
+	},
+	Self = {
+		{Name='Haste',			Buff='Haste',		SpellID=57,		Reapply=false},
+		{Name='Refresh',		Buff='Refresh',		SpellID=109,	Reapply=false},
+		{Name='Phalanx',		Buff='Phalanx',		SpellID=106,	Reapply=false},
+	},
+}

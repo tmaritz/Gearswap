@@ -707,18 +707,6 @@ data.areas.assault = S{
 data.areas.proc = S{
 
 }
--- Laggy zones where latency will be increased.
-data.areas.laggy = S{
-	"Dynamis - San d'Oria [D]",
-	"Dynamis - Bastok [D]",
-	"Dynamis - Windurst [D]",
-	"Dynamis - Jeuno [D]",
-	"Reisenjima Henge",
-	"Reisenjima",
-	"Escha - Zi'Tah",
-	"Escha - Ru'Aun",
-	"Outer Ra'Kaznar [U]",
-}
 
 -------------------------------------------------------------------------------------------------------------------
 -- NPC Lists
@@ -730,7 +718,7 @@ data.npcs.trusts = S{'ArkEV','ArkGK','ArkHM','ArkMR','ArkTT','Abenzio','Abquhbah
 	'Babban','Balamor','Brygid','Chacharoon','Cherukiki','Cid','Curilla','D.Shantotto','Darrcuiln','Elivira','Excenmille','Fablinix',
 	'FerreousCoffin','Flaviria','Gadalar','Gessho','Gilgamesh','Halver','I.Shield','Ingrid','Ingrid','Iroha','IronEater','Jakoh','Joachim','Karaha-Baruha',
 	'Kayeel-Payeel','KingOfHearts','Klara','Koru-Moru','Kukki-Chebukki','Kupipi','Kupofried','KuyinHathdenna','LehkoHabhoka','Leonoyne','LheLhangavo',
-	'LhuMhakaracca','Lilisette','Lion','Luzaf','Maat','Makki-Chebukki','Margret','Maximilian','Mayakov','MihliAliapoh','Mildaurion','Mnejing','Moogle','Morimar','Mumor','NajaSalaheem',
+	'LhuMhakaracca','Lilisette','Lion','Luzaf','Maat','Makki-Chebukki','Margret','Maximilian','Mayakov','MihliAliapoh','Mildaurion','Mnejing','Monberaux','Moogle','Morimar','Mumor','NajaSalaheem',
 	'Naja','Najelith','Naji','NanaaMihgo','Nashmeira','Noillurie','Ovjang','Pieuje','Prishe','Qultada','Rahal','Rainemard','Robel-Akbel','RomaaMihgo',
 	'Rongelouts','Rosulatia','Rughadjeen','Sakura',"Selh'teus",'SemihLafihna','Shantotto','ShikareeZ','StarSibyl','Sylvie','Teodor','Tenzen','Trion',
 	'UkaTotlihn','Ullegore','Ulmia','Valaineral','Volker','Yoran-Oran','Zazarg','Zeid'}
@@ -740,7 +728,7 @@ data.npcs.trusts = S{'ArkEV','ArkGK','ArkHM','ArkMR','ArkTT','Abenzio','Abquhbah
 -------------------------------------------------------------------------------------------------------------------
 data.skills = {}
 data.skills.one_handed_combat = S{2,3,5,9,11} --Combat skills for one-handed-weapons.
---data.skills.two_handed_combat = S{4,6,7,8,10,12} --Combat skills for two-handed-weapons.
+data.skills.two_handed_combat = S{4,6,7,8,10,12} --Combat skills for two-handed-weapons.
 
 -------------------------------------------------------------------------------------------------------------------
 -- Stepdown Tables.
@@ -777,3 +765,23 @@ item_stepdown = {
 	['Reraise Earring'] = {'Reraise Hairpin','head'},
 	['Reraise Hairpin'] = {'Wh. Rarab Cap +1','head'},
 }
+
+--[[Future uncertain!
+spell_to_buff = {
+	['Barfire'] = {'Barfire',100,'BarElement'},
+	['Barfira'] = {'Barfire',100,'BarElement'},
+}
+for _, rline in pairs(gearswap.res.spells) do
+    if rline.status and not spell_to_buff[rline.english] then
+      spell_to_buff[rline.english] = {gearswap.res.buffs[rline.status].english, gearswap.res.buffs[rline.status].id}
+    end
+end
+
+buff_group_IDs = {
+	['BarElement'] = {100,101,102,103,104,105},
+}
+
+if spell_to_buff[SpellName][3] then
+	--do stuff with buff_group_IDs[SpellName]
+end
+]]

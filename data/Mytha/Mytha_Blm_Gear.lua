@@ -7,7 +7,6 @@ function user_job_setup()
 	state.Weapons:options('None','BurstWeapons','Khatvanga','Lathi')
 
 	gear.nuke_jse_back = {name="Taranus's Cape",augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}}
-	gear.stp_jse_back = {name="Taranus's Cape",augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10',}}
 
 		-- Additional local binds
 	send_command('bind ^` gs c cycle ElementalMode') 
@@ -55,7 +54,7 @@ function init_gear_sets()
     ---- Precast Sets ----
     
     -- Precast sets to enhance JAs
-    sets.precast.JA['Mana Wall'] = {back=gear.nuke_jse_back,feet="Wicce Sabots +1"}
+    sets.precast.JA['Mana Wall'] = {back=gear.nuke_jse_back,feet="Wicce Sabots +2"}
 
     sets.precast.JA.Manafont = {} --body="Sorcerer's Coat +2"
     
@@ -329,7 +328,7 @@ function init_gear_sets()
 		body="Nyame Mail",hands="Nyame Gauntlets",ring1="Defending Ring",ring2="Shadow Ring",
 		back="Moonlight Cape",waist="Carrier's Sash",legs="Nyame Flanchard",feet="Nyame Sollerets"}
 
-	sets.Kiting = {ring2="Shneddick Ring"}
+	sets.Kiting = {ring2="Shneddick Ring",feet="Nyame Sollerets"}
     sets.latent_refresh = {waist="Fucho-no-obi"}
 	sets.latent_refresh_grip = {sub="Oneiros Grip"}
 	sets.TPEat = {neck="Chrys. Torque"}
@@ -348,7 +347,7 @@ function init_gear_sets()
 		back="Tempered Cape +1",waist="Witful Belt",legs="Psycloth Lappas",feet="Vanya Clogs"}
 	
 	sets.buff.Doom = set_combine(sets.buff.Doom, {})
-    sets.buff['Mana Wall'] = {back=gear.nuke_jse_back,feet="Wicce Sabots +1"}
+    sets.buff['Mana Wall'] = {back=gear.nuke_jse_back,feet="Wicce Sabots +2"}
 	
     -- Engaged sets
 

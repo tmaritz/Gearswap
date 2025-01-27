@@ -5,7 +5,7 @@ function user_job_setup()
 	state.RangedMode:options('Normal','Acc','Fodder')
 	state.WeaponskillMode:options('Match','Normal', 'Acc')
 	state.IdleMode:options('Normal', 'PDT')
-	state.Weapons:options('Default','DualWeapons','DualSavageWeapons','DualEviscerationWeapons','DualMagicWeapons','DualMalevolence')
+	state.Weapons:options('Default','DualWeapons','DualSavageWeapons','DualEviscerationWeapons','DualMagicWeapons','DualMalevolence','Armageddon')
 	
 	--Ikenga_vest_bonus = 190  -- It is 190 at R20. Uncomment if you need to manually adjust because you are using below R20
 	
@@ -221,6 +221,7 @@ function init_gear_sets()
 	
 	-- Weapons sets
 	sets.weapons.Default = {main="Kustawi +1",sub="Nusku Shield",range="Fomalhaut"}
+	sets.weapons.Armageddon = {main="Kustawi +1",sub="Nusku Shield",range="Armageddon"}
 	sets.weapons.DualWeapons = {main="Kustawi +1",sub="Kustawi",range="Fomalhaut"}
 	sets.weapons.DualSavageWeapons = {main="Naegling",sub="Blurred Knife +1",range="Fomalhaut"}
 	sets.weapons.DualEviscerationWeapons = {main="Tauret",sub="Blurred Knife +1",range="Fomalhaut"}

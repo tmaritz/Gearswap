@@ -134,32 +134,32 @@ function job_precast(spell, spellMap, eventArgs)
 		if under3FMs() and abil_recasts[220] < latency and (abil_recasts[236] < latency or state.Buff['Presto']) and player.status == 'Engaged' then
 			eventArgs.cancel = true
 			windower.send_command('gs c step')
-			windower.chat.input:schedule(2.3,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 4.3
+			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
 			return
 		elseif not under3FMs() and not state.Buff['Building Flourish'] and abil_recasts[226] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Climactic Flourish" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
+			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
 			return
 		elseif not under3FMs() and not state.Buff['Climactic Flourish'] and abil_recasts[222] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Building Flourish" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
+			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
 			return
 		elseif player.sub_job == 'SAM' and not state.Buff['SJ Restriction'] and player.tp > 1850 and abil_recasts[140] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Sekkanoki" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
+			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
 			return
 		elseif player.sub_job == 'SAM' and not state.Buff['SJ Restriction'] and abil_recasts[134] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Meditate" <me>')
-			windower.chat.input:schedule(1,'/ws "'..spell.english..'" '..spell.target.raw..'')
-			tickdelay = os.clock() + 1.25
+			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
 			return
 		end
     elseif spell.type == 'Step' and player.main_job_level >= 77 and state.AutoPrestoMode.value and player.tp > 99 and player.status == 'Engaged' and under3FMs() then
@@ -169,6 +169,8 @@ function job_precast(spell, spellMap, eventArgs)
             eventArgs.cancel = true
 			windower.chat.input('/ja "Presto" <me>')
 			windower.chat.input:schedule(1.1,'/ja "'..spell.english..'" '..spell.target.raw..'')
+			add_tick_delay(1.1)
+			return
         end
     end
 end
@@ -317,7 +319,7 @@ end
 
 function job_tick()
 	if check_dance() then return true end
-	if check_buff() then return true end
+	if job_check_buff() then return true end
 	return false
 end
 
@@ -345,25 +347,25 @@ function under3FMs()
 	end
 end
 
-function check_buff()
+function job_check_buff()
 
 	if state.AutoBuffMode.value ~= 'Off' then
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 	
 		if not buffactive['Finishing Move 1'] and not buffactive['Finishing Move 2'] and not buffactive['Finishing Move 3'] and not buffactive['Finishing Move 4'] and not buffactive['Finishing Move 5'] and not buffactive['Finishing Move (6+)'] and abil_recasts[223] < latency then
 			windower.chat.input('/ja "No Foot Rise" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		end
 		
 		if in_combat and not state.Buff['SJ Restriction'] then
 			if player.sub_job == 'WAR' and not buffactive.Berserk and abil_recasts[1] < latency then
 				windower.chat.input('/ja "Berserk" <me>')
-				tickdelay = os.clock() + 1.1
+				add_tick_delay()
 				return true
 			elseif player.sub_job == 'WAR' and not buffactive.Aggressor and abil_recasts[4] < latency then
 				windower.chat.input('/ja "Aggressor" <me>')
-				tickdelay = os.clock() + 1.1
+				add_tick_delay()
 				return true
 			else
 				return false
@@ -381,11 +383,11 @@ function check_dance()
 		
 		if state.DanceStance.value == 'Saber Dance' and abil_recasts[219] < latency then
 			windower.chat.input('/ja "Saber Dance" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		elseif state.DanceStance.value == 'Fan Dance' and abil_recasts[224] < latency then
 			windower.chat.input('/ja "Fan Dance" <me>')
-			tickdelay = os.clock() + 1.1
+			add_tick_delay()
 			return true
 		else
 			return false

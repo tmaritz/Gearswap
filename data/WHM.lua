@@ -329,8 +329,8 @@ function job_customize_idle_set(idleSet)
 				if  main_table and main_table.skill == 12 and sets.latent_refresh_grip then
 					idleSet = set_combine(idleSet, sets.latent_refresh_grip)
 				end
-				
-				if player.tp > 10 and sets.TPEat then
+
+				if player.tp > 0 and sets.TPEat then
 					idleSet = set_combine(idleSet, sets.TPEat)
 				end
 			end
@@ -365,8 +365,8 @@ end
 
 function job_tick()
 	if check_arts() then return true end
-	if check_buff() then return true end
 	if check_buffup() then return true end
+	if check_buff() then return true end
 	return false
 end
 
@@ -376,12 +376,12 @@ function check_arts()
 
 		if abil_recasts[29] < latency and not state.Buff['Afflatus Solace'] and not state.Buff['Afflatus Misery'] then
 			send_command('@input /ja "Afflatus Solace" <me>')
-			tickdelay = os.clock() + 1
+			add_tick_delay()
 			return true
 
 		elseif player.sub_job == 'SCH' and not (state.Buff['SJ Restriction'] or arts_active()) and abil_recasts[228] < latency then
 			send_command('@input /ja "Light Arts" <me>')
-			tickdelay = os.clock() + 1
+			add_tick_delay()
 			return true
 		end
 		
@@ -479,60 +479,15 @@ function handle_elemental(cmdParams)
     end
 end
 
-function check_buff()
-	if state.AutoBuffMode.value ~= 'Off' and not data.areas.cities:contains(world.area) then
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-		for i in pairs(buff_spell_lists[state.AutoBuffMode.Value]) do
-			if not buffactive[buff_spell_lists[state.AutoBuffMode.Value][i].Buff] and (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Always' or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Combat' and in_combat) or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Engaged' and player.status == 'Engaged') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'Idle' and player.status == 'Idle') or (buff_spell_lists[state.AutoBuffMode.Value][i].When == 'OutOfCombat' and not in_combat)) and spell_recasts[buff_spell_lists[state.AutoBuffMode.Value][i].SpellID] < spell_latency and silent_can_use(buff_spell_lists[state.AutoBuffMode.Value][i].SpellID) then
-				windower.chat.input('/ma "'..buff_spell_lists[state.AutoBuffMode.Value][i].Name..'" <me>')
-				tickdelay = os.clock() + 2
-				return true
-			end
-		end
-	else
-		return false
-	end
-end
-
-function check_buffup()
-	if buffup ~= '' then
-		local needsbuff = false
-		for i in pairs(buff_spell_lists[buffup]) do
-			if not buffactive[buff_spell_lists[buffup][i].Buff] and silent_can_use(buff_spell_lists[buffup][i].SpellID) then
-				needsbuff = true
-				break
-			end
-		end
-	
-		if not needsbuff then
-			add_to_chat(217, 'All '..buffup..' buffs are up!')
-			buffup = ''
-			return false
-		end
-		
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-		
-		for i in pairs(buff_spell_lists[buffup]) do
-			if not buffactive[buff_spell_lists[buffup][i].Buff] and silent_can_use(buff_spell_lists[buffup][i].SpellID) and spell_recasts[buff_spell_lists[buffup][i].SpellID] < spell_latency then
-				windower.chat.input('/ma "'..buff_spell_lists[buffup][i].Name..'" <me>')
-				tickdelay = os.clock() + 2
-				return true
-			end
-		end
-		
-		return false
-	else
-		return false
-	end
-end
-
 buff_spell_lists = {
 	Auto = {--Options for When are: Always, Engaged, Idle, OutOfCombat, Combat
 		{Name='Reraise IV',		Buff='Reraise',		SpellID=848,	When='Always'},
 		{Name='Haste',			Buff='Haste',		SpellID=57,		When='Always'},
 		{Name='Aurorastorm',	Buff='Aurorastorm',	SpellID=119,	When='Always'},
 		{Name='Refresh',		Buff='Refresh',		SpellID=109,	When='Always'},
+		{Name='Aquaveil',		Buff='Aquaveil',	SpellID=55,		When='Always'},
 		{Name='Stoneskin',		Buff='Stoneskin',	SpellID=54,		When='Always'},
+		{Name='Phalanx',		Buff='Phalanx',		SpellID=106,	When='Always'},
 	},
 	Default = {
 		{Name='Reraise IV',		Buff='Reraise',		SpellID=848,	Reapply=false},
@@ -546,11 +501,17 @@ buff_spell_lists = {
 		{Name='Blink',			Buff='Blink',		SpellID=53,		Reapply=false},
 		{Name='Phalanx',		Buff='Phalanx',		SpellID=106,	Reapply=false},
 	},
+	Self = {
+		{Name='Reraise IV',		Buff='Reraise',		SpellID=848,	Reapply=false},
+		{Name='Aquaveil',		Buff='Aquaveil',	SpellID=55,		Reapply=false},
+		{Name='Aurorastorm',	Buff='Aurorastorm',	SpellID=119,	Reapply=false},
+		{Name='Stoneskin',		Buff='Stoneskin',	SpellID=54,		Reapply=false},
+		{Name='Blink',			Buff='Blink',		SpellID=53,		Reapply=false},
+		{Name='Phalanx',		Buff='Phalanx',		SpellID=106,	Reapply=false},
+	},
 	Melee = {
 		{Name='Reraise IV',		Buff='Reraise',		SpellID=848,	Reapply=false},
-		{Name='Boost-STR',		Buff='STR Boost',	SpellID=479,	Reapply=false},
-		{Name='Auspice',		Buff='Auspice',		SpellID=96,		Reapply=false},
-		{Name='Shellra V',		Buff='Shell',		SpellID=134,	Reapply=false},
-		{Name='Protectra V',	Buff='Protect',		SpellID=129,	Reapply=false},
+		{Name='Boost-STR',		Buff='STR Boost',	SpellID=479,	Reapply=true},
+		{Name='Auspice',		Buff='Auspice',		SpellID=96,		Reapply=true},
 	},
 }
