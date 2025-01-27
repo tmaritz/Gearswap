@@ -61,7 +61,7 @@ function init_gear_sets()
         main = "Mpaca's Staff",
         sub = "Clerisy Strap",
         ammo = "Impatiens",
-        head = "Amalric Coif +1",
+        head = "Peda. M.Board +1",
         neck = "Voltsurge Torque",
         ear1 = "Enchntr. Earring +1",
         ear2 = "Malignance Earring",
@@ -137,7 +137,7 @@ function init_gear_sets()
         sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
         head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
+        neck = "Mizu. Kubikazari",
         ear1 = "Bakarole Earring",
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
@@ -155,7 +155,7 @@ function init_gear_sets()
         sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
         head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
+        neck = "Mizu. Kubikazari",
         ear1 = "Bakarole Earring",
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
@@ -1007,6 +1007,7 @@ function init_gear_sets()
     sets.buff.Sublimation = {
         head = "Acad. Mortar. +2",
         waist = "Embla Sash"
+        ear1 = "Savant's Earring"
     }
     sets.buff.DTSublimation = {
         waist = "Embla Sash"

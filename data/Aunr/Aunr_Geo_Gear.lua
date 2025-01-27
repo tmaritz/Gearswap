@@ -281,7 +281,7 @@ function init_gear_sets()
         right_ear = "Malignance Earring",
         left_ring = "Mujin Band",
         right_ring = "Metamor. Ring +1",
-        back = "Toro Cape"
+        back = "Aurist's Cape +1"
     }
 
     sets.ResistantMagicBurst = {
@@ -299,7 +299,7 @@ function init_gear_sets()
         right_ear = "Malignance Earring",
         left_ring = "Mujin Ring",
         right_ring = "Metamor. Ring +1",
-        back = "Toro Cape"
+        back = "Aurist's Cape +1"
     }
 
     sets.midcast['Elemental Magic'] = {
@@ -317,7 +317,7 @@ function init_gear_sets()
         right_ear = "Malignance Earring",
         left_ring = "Shiva Ring",
         right_ring = "Metamor. Ring +1",
-        back = "Toro Cape"
+        back = "Aurist's Cape +1"
     }
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {})

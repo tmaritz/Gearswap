@@ -1065,7 +1065,7 @@ function init_gear_sets()
         main = "Bolelabunga",
         sub = "Genbu\'s Shield",
         ammo = "Coiste Bodhar",
-        head = "Rawhide Mask",
+        head={ name="Herculean Helm", augments={'Rng.Acc.+6 Rng.Atk.+6','Accuracy+13 Attack+13','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
         neck = "Loricate Torque +1",
         ear1 = "Etiolation Earring",
         ear2 = "Ethereal Earring",
@@ -1082,7 +1082,7 @@ function init_gear_sets()
     -- Idle sets
     sets.idle = {
         ammo = "Staunch Tathlum +1",
-        head = "Rawhide Mask",
+        head={ name="Herculean Helm", augments={'Rng.Acc.+6 Rng.Atk.+6','Accuracy+13 Attack+13','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
         neck = "Sibyl Scarf",
         ear1 = "Infused Earring",
         ear2 = "Eabani Earring",
@@ -1181,6 +1181,7 @@ function init_gear_sets()
         legs = "Carmine Cuisses +1"
     }
     sets.TreasureHunter = {
+        body = "Herculean Vest",
         feet = gear.herculean_th_feet,
         waist = "Chaac Belt",
         ammo = "Per. Lucky Egg"
