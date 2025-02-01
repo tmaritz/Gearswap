@@ -1,7 +1,7 @@
 -- Setup vars that are user-dependent.  Can override this in a sidecar file.
 function user_job_setup()
     state.OffenseMode:options('Normal','Acc')
-    state.CastingMode:options('Normal','Resistant','SIRD','DT')
+    state.CastingMode:options('Normal','Resistant')
     state.IdleMode:options('Normal','PDT','MDT','MEVA')
 	state.PhysicalDefenseMode:options('PDT')
 	state.MagicalDefenseMode:options('MDT')
@@ -110,13 +110,6 @@ function init_gear_sets()
 	sets.TreasureHunter = set_combine(sets.TreasureHunter, {feet=gear.chironic_treasure_feet})
 
 	-- Conserve Mp set for spells that don't need anything else, for set_combine.
-	
-	sets.ConserveMP = {main=gear.grioavolr_nuke_staff,sub="Clemency Grip",ammo="Pemphredo Tathlum",
-		head="Telchine Cap",neck="Incanter's Torque",ear1="Calamitous Earring",ear2="Gifted Earring",
-		body="Witching Robe",hands="Fanatic Gloves",ring1="Kishar Ring",ring2="Lebeche Ring",
-		back="Solemnity Cape",waist="Luminary Sash",legs="Aya. Cosciales +2",feet="Medium's Sabots"}
-		
-	sets.midcast.Teleport = sets.ConserveMP
 	
 	-- Gear for Magic Burst mode.
     sets.MagicBurst = {neck="Mizu. Kubikazari",body="Bunzi's Robe",hands="Bunzi's Gloves",ring2="Mujin Band",legs="Bunzi's Pants",feet="Bunzi's Sabots"}
@@ -227,7 +220,7 @@ function init_gear_sets()
 	sets.midcast.Erase = set_combine(sets.midcast.StatusRemoval, {neck="Clr. Torque +1"})
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
-	sets.midcast['Enhancing Magic'] = {main=gear.gada_enhancing_club,sub="Sors Shield",ammo="Pemphredo Tathlum",
+	sets.midcast['Enhancing Magic'] = {main="Gada",sub="Sors Shield",ammo="Pemphredo Tathlum",
 		head="Telchine Cap",neck="Incanter's Torque",ear1="Mimir Earring",ear2="Andoaa Earring",
 		body="Telchine Chas.",hands="Telchine Gloves",ring1="Stikini Ring +1",ring2="Stikini Ring +1",
 		back="Mending Cape",waist="Embla Sash",legs="Telchine Braconi",feet="Telchine Pigaches"}

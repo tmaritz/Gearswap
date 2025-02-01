@@ -1112,6 +1112,8 @@ function default_post_precast(spell, spellMap, eventArgs)
 			elseif state.TreasureMode.value ~= 'None' and spell.target.type == 'MONSTER' and not info.tagged_mobs[spell.target.id] then
 				equip(sets.TreasureHunter)
 			end
+		elseif spell.action_type == 'Magic' then
+			check_item_dependant_spells(spell, spellMap)
 		end
 		
 		if state.DefenseMode.value ~= 'None' and in_combat then
@@ -1145,19 +1147,6 @@ function default_post_precast(spell, spellMap, eventArgs)
 				handle_equipping_gear(player.status)
 			end
 		end
-		
-		if spell.action_type == 'Magic' then
-			if spell.english == 'Dispelga' then
-				equip({main="Daybreak"})
-			elseif spell.english == 'Impact' then
-				if item_equippable("Crepuscular Cloak") then
-					equip({head=empty,body="Crepuscular Cloak"})
-				else
-					equip({head=empty,body="Twilight Cloak"})
-				end
-			end
-		end
-		
 	end
 end
 
@@ -1167,8 +1156,16 @@ end
 
 function default_post_midcast(spell, spellMap, eventArgs)
 	if not eventArgs.handled then
-		if not job_post_midcast and is_nuke(spell, spellMap) and state.MagicBurstMode.value ~= 'Off' and sets.MagicBurst then
-			equip(sets.MagicBurst)
+		
+		if spell.action_type == 'Magic' then
+			if is_nuke(spell, spellMap) then
+				if not job_post_midcast and state.MagicBurstMode.value ~= 'Off' and sets.MagicBurst then
+					equip(sets.MagicBurst)
+				end
+				
+				set_elemental_obi_cape_ring(spell, spellMap)
+			end
+			check_item_dependant_spells(spell, spellMap)
 		end
 
 		if spell.target.type == 'SELF' and spellMap then
@@ -1189,8 +1186,6 @@ function default_post_midcast(spell, spellMap, eventArgs)
 				equip(sets.Self_Refresh)
 			end
 		end
-		
-		set_elemental_obi_cape_ring(spell, spellMap)
 		
 		if state.Capacity.value == true then
 			if set.contains(spell.targets, 'Enemy') then
@@ -1230,19 +1225,6 @@ function default_post_midcast(spell, spellMap, eventArgs)
 			
 			eventArgs.handled = true
 		end
-	
-		if spell.action_type == 'Magic' then
-			if spell.english == 'Dispelga' then
-				equip({main="Daybreak"})
-			elseif spell.english == 'Impact' then
-				if item_equippable("Crepuscular Cloak") then
-					equip({head=empty,body="Crepuscular Cloak"})
-				else
-					equip({head=empty,body="Twilight Cloak"})
-				end
-			end
-		end
-	
 	end
 	
 	if buffactive.doom then
@@ -2001,7 +1983,7 @@ function get_midcast_set(spell, spellMap)
 
     if spell.action_type == 'Magic' then
 		if state.CastingMode.current:contains('SIRD') and not in_combat then
-		elseif state.CastingMode.value:contains('Resistant') and (state.Buff.Stymie or state.buff['Elemental Seal']) then
+		elseif state.CastingMode.value:contains('Resistant') and (state.Buff.Stymie or state.Buff['Elemental Seal']) then
         elseif equipSet[state.CastingMode.current] then
             equipSet = equipSet[state.CastingMode.current]
             mote_vars.set_breadcrumbs:append(state.CastingMode.current)
