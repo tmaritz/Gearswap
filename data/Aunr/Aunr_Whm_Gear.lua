@@ -59,7 +59,7 @@ function user_job_setup()
 
     autows = 'Black Halo'
 
-    -- select_default_macro_book()
+    select_default_macro_book()
     user_job_lockstyle()
 
 end
@@ -77,8 +77,8 @@ function init_gear_sets()
     }
 
     sets.weapons.DualWield = {
-        main = "C. Palug Hammer",
-        sub = "Maxentius"
+        sub = "C. Palug Hammer",
+        main = "Maxentius"
     }
 
     sets.weapons.Trial = {
@@ -105,7 +105,7 @@ function init_gear_sets()
         main = "C. Palug Hammer",
         sub = "Chanter's Shield",
         ammo = "Impatiens",
-        head = gear.vanya_fc_head,
+        head = "Ebers Cap +2",
         body = "Inyanga Jubbah +2",
         hands = "Inyan. Dastanas +2",
         legs = "Aya. Cosciales +2",
@@ -127,7 +127,7 @@ function init_gear_sets()
     sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {})
 
     sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         ring2 = "Lebeche Ring"
     })
 
@@ -324,10 +324,10 @@ function init_gear_sets()
         main = "Chatoyant Staff",
         sub = "Enki Strap",
         ammo = "Clarus Stone",
-        head = "Ebers Cap +1",
+        head = "Ebers Cap +2",
         body = "Theo. Bliaut +3",
         hands = "Theophany Mitts +3",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet,
         neck = "Cleric's Torque",
         waist = "Austerity Belt",
@@ -346,13 +346,13 @@ function init_gear_sets()
         neck = "Incanter's Torque",
         ear1 = "Regal Earring",
         ear2 = "Glorious Earring",
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         hands = "Theophany Mitts +3",
         ring1 = "Janniston Ring",
         ring2 = "Lebeche Ring",
         back = "Alaunus's Cape",
         waist = "Luminary Sash",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -370,7 +370,7 @@ function init_gear_sets()
         ring2 = "Lebeche Ring",
         back = "Twilight Cape",
         waist = "Korin Obi",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -382,13 +382,13 @@ function init_gear_sets()
         neck = "Incanter's Torque",
         ear1 = "Regal Earring",
         ear2 = "Glorious Earring",
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         hands = "Theophany Mitts +3",
         ring1 = "Janniston Ring",
         ring2 = "Lebeche Ring",
         back = "Alaunus's Cape",
         waist = "Korin Obi",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -400,13 +400,13 @@ function init_gear_sets()
         neck = "Incanter's Torque",
         ear1 = "Regal Earring",
         ear2 = "Glorious Earring",
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         hands = "Theophany Mitts +3",
         ring1 = "Janniston Ring",
         ring2 = "Lebeche Ring",
         back = "Alaunus's Cape",
         waist = "Korin Obi",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -424,7 +424,7 @@ function init_gear_sets()
         ring2 = "Lebeche Ring",
         back = "Twilight Cape",
         waist = "Korin Obi",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -442,7 +442,7 @@ function init_gear_sets()
         ring2 = "Lebeche Ring",
         back = "Alaunus's Cape",
         waist = "Luminary Sash",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -460,7 +460,7 @@ function init_gear_sets()
         ring2 = "Lebeche Ring",
         back = "Twilight Cape",
         waist = "Korin Obi",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -478,7 +478,7 @@ function init_gear_sets()
         ring2 = "Lebeche Ring",
         back = "Twilight Cape",
         waist = "Korin Obi",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -496,7 +496,7 @@ function init_gear_sets()
         ring2 = "Dark Ring",
         back = "Alaunus's Cape",
         waist = "Luminary Sash",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = "Gende. Galosh. +1"
     }
 
@@ -513,22 +513,22 @@ function init_gear_sets()
         ring2 = "Lebeche Ring",
         back = "Alaunus's Cape",
         waist = "Luminary Sash",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
     sets.midcast.MeleeCureSolace = set_combine(sets.midcast.MeleeCure, {
-        body = "Ebers Bliaut +1"
+        body = "Ebers Bliaut +2"
     })
     sets.midcast.MeleeLightWeatherCure = set_combine(sets.midcast.MeleeCure, {
         waist = "Korin Obi"
     })
     sets.midcast.MeleeLightWeatherCureSolace = set_combine(sets.midcast.MeleeCure, {
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         waist = "Korin Obi"
     })
     sets.midcast.MeleeLightDayCureSolace = set_combine(sets.midcast.MeleeCure, {
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         waist = "Korin Obi"
     })
     sets.midcast.MeleeLightDayCure = set_combine(sets.midcast.MeleeCure, {
@@ -543,17 +543,17 @@ function init_gear_sets()
     })
 
     sets.midcast.CureSolace.DT = set_combine(sets.midcast.Cure.DT, {
-        body = "Ebers Bliaut +1"
+        body = "Ebers Bliaut +2"
     })
     sets.midcast.LightWeatherCure.DT = set_combine(sets.midcast.Cure.DT, {
         waist = "Korin Obi"
     })
     sets.midcast.LightWeatherCureSolace.DT = set_combine(sets.midcast.Cure.DT, {
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         waist = "Korin Obi"
     })
     sets.midcast.LightDayCureSolace.DT = set_combine(sets.midcast.Cure.DT, {
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         waist = "Korin Obi"
     })
     sets.midcast.LightDayCure.DT = set_combine(sets.midcast.Cure.DT, {
@@ -569,17 +569,17 @@ function init_gear_sets()
     sets.midcast.MeleeCure.DT = set_combine(sets.midcast.Cure.DT, {})
 
     sets.midcast.MeleeCureSolace.DT = set_combine(sets.midcast.Cure.DT, {
-        body = "Ebers Bliaut +1"
+        body = "Ebers Bliaut +2"
     })
     sets.midcast.MeleeLightWeatherCure.DT = set_combine(sets.midcast.Cure.DT, {
         waist = "Korin Obi"
     })
     sets.midcast.MeleeLightWeatherCureSolace.DT = set_combine(sets.midcast.Cure.DT, {
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         waist = "Korin Obi"
     })
     sets.midcast.MeleeLightDayCureSolace.DT = set_combine(sets.midcast.Cure.DT, {
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         waist = "Korin Obi"
     })
     sets.midcast.MeleeLightDayCure.DT = set_combine(sets.midcast.Cure.DT, {
@@ -601,7 +601,7 @@ function init_gear_sets()
         neck = "Debilis Medallion",
         ear1 = "Meili Earring",
         ear2 = "Beatific Earring",
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         hands = "Fanatic Gloves",
         ring1 = "Haoma's Ring",
         ring2 = "Ephedra Ring",
@@ -625,7 +625,7 @@ function init_gear_sets()
         ring2 = "Prolix Ring",
         back = "Swith Cape +1",
         waist = "Witful Belt",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = "Regal Pumps +1"
     }
 
@@ -708,7 +708,7 @@ function init_gear_sets()
         main = "Bolelabunga",
         sub = "Ammurapi Shield",
         head = "Inyanga Tiara +2",
-        hands = "Ebers Mitts +1",
+        hands = "Ebers Mitts +2",
         feet = "Theo. Duckbills +2",
         waist = "Embla Sash",
         body = {
@@ -803,12 +803,12 @@ function init_gear_sets()
         main = "Beneficus",
         sub = "Ammurapi Shield",
         ammo = "Staunch Tathlum +1",
-        head = "Ebers Cap +1",
+        head = "Ebers Cap +2",
         neck = "Incanter's Torque",
         ear1 = "Mimir Earring",
         ear2 = "Andoaa Earring",
-        body = "Ebers Bliaut +1",
-        hands = "Ebers Mitts +1",
+        body = "Ebers Bliaut +2",
+        hands = "Ebers Mitts +2",
         ring1 = "Stikini Ring",
         ring2 = "Stikini Ring",
         back = "Alaunus's Cape",
@@ -1096,7 +1096,7 @@ function init_gear_sets()
         neck = "Chrys. Torque",
         ear1 = "Etiolation Earring",
         ear2 = "Ethereal Earring",
-        body = "Ebers Bliaut +1",
+        body = "Ebers Bliaut +2",
         hands = gear.chironic_refresh_hands,
         ring1 = "Defending Ring",
         ring2 = "Dark Ring",
@@ -1109,50 +1109,14 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle = {
         main = "Malignance Pole",
-        sub = "Oneiros Grip",
+        sub = "Mensch Strap +1",
         ammo = "Homiliary",
-        head = "Inyanga Tiara +2",
-        body = "Theo. Bliaut +3",
+        head = "Nyame Helm",
+        body = "Ebers Bliaut +2",
         hands = "Inyan. Dastanas +2",
         legs = "Assid. Pants +1",
-        feet = "Inyan. Crackows +2",
-        neck = "Loricate Torque +1",
-        waist = "Slipor Sash",
-        left_ear = "Eabani Earring",
-        right_ear = "Hearty Earring",
-        right_ring = "Inyanga Ring",
-        left_ring = "Defending Ring",
-        back = "Alaunus's Cape"
-    }
-
-    sets.idle.PDT = {
-        main = "Malignance Pole",
-        sub = "Khonsu",
-        ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm",
-        body = "Nyame Mail",
-        hands = "Nyame Gauntlets",
-        legs = "Nyame Flanchard",
         feet = "Nyame Sollerets",
         neck = "Loricate Torque +1",
-        waist = "Slipor Sash",
-        left_ear = "Eabani Earring",
-        right_ear = "Hearty Earring",
-        right_ring = "Gelatinous Ring +1",
-        left_ring = "Defending Ring",
-        back = "Alaunus's Cape"
-    }
-
-    sets.idle.Meva = {
-        main = "Daybreak",
-        sub = "Genbu's Shield",
-        ammo = "Staunch Tathlum +1",
-        head = "Bunzi's Hat",
-        body = "Bunzi's Robe",
-        hands = "Bunzi's Gloves",
-        legs = "Assid. Pants +1",
-        feet = "Inyan. Crackows +2",
-        neck = "Warder's Charm +1",
         waist = "Carrier's Sash",
         left_ear = "Eabani Earring",
         right_ear = "Hearty Earring",
@@ -1161,23 +1125,14 @@ function init_gear_sets()
         back = "Alaunus's Cape"
     }
 
-    sets.idle.Town = {
+    sets.idle.PDT = sets.idle
+
+    sets.idle.Meva = sets.idle
+
+    sets.idle.Town = set_combine(sets.idle, {
         main = "Yagrush",
-        sub = "Ammurapi Shield",
-        ammo = "Staunch Tathlum +1",
-        head = "Bunzi's Hat",
-        body = "Bunzi's Robe",
-        hands = "Bunzi's Gloves",
-        legs = "Assid. Pants +1",
-        feet = "Inyan. Crackows +2",
-        neck = "Warder's Charm +1",
-        waist = "Carrier's Sash",
-        left_ear = "Eabani Earring",
-        right_ear = "Hearty Earring",
-        right_ring = "Inyanga Ring",
-        left_ring = "Defending Ring",
-        back = "Alaunus's Cape"
-    }
+        sub = "Ammurapi Shield"
+    })
 
     sets.idle.Weak = {
         main = "Daybreak",
@@ -1327,7 +1282,7 @@ function init_gear_sets()
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
     sets.buff['Divine Caress'] = {
-        hands = "Ebers Mitts +1",
+        hands = "Ebers Mitts +2",
         back = "Mending Cape"
     }
 
@@ -1359,7 +1314,7 @@ function init_gear_sets()
         ring2 = "Meridian Ring",
         back = "Alaunus's Cape",
         waist = "Eschan Stone",
-        legs = "Ebers Pant. +1",
+        legs = "Ebers Pant. +2",
         feet = gear.vanya_cure_feet
     }
 
@@ -1368,9 +1323,9 @@ function init_gear_sets()
 end
 
 -- Select default macro book on initial load or subjob change.
--- function select_default_macro_book()
---     set_macro_page(1, 6)
--- end
+function select_default_macro_book()
+    set_macro_page(1, 3)
+end
 
 function user_job_lockstyle()
     windower.chat.input('/lockstyleset 009')

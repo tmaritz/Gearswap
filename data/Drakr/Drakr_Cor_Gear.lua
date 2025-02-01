@@ -17,10 +17,9 @@ function user_job_setup()
     state.CompensatorMode:options('Always', '300', '1000', 'Never')
 
     gear.RAbullet = "Orichalc. Bullet"
-    gear.WSbullet = "Bronze Bullet"
+    gear.WSbullet = "Eminent Bullet"
     -- gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Orichalc. Bullet" -- For MAB WS, do not put single-use bullets here.
-    gear.MAbullet = "Bronze Bullet"
     gear.QDbullet = "Animikii Bullet"
     options.ammo_warning_limit = 15
 

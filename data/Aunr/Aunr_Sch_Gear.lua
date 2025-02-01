@@ -72,7 +72,7 @@ function init_gear_sets()
         back = "Perimede Cape",
         waist = "Witful Belt",
         legs = "Psycloth Lappas",
-        feet = "Regal Pumps +1"
+        feet = "Acad. Loafers +3"
     }
 
     sets.precast.FC.Arts = {}
@@ -310,16 +310,16 @@ function init_gear_sets()
     sets.midcast.Regen = {
         main = "Bolelabunga",
         sub = "Ammurapi Shield",
-        ammo = "Savant's Treatise",
+        ammo = "Clarus Stone",
         head = "Arbatel Bonnet +2",
         neck = "Incanter's Torque",
-        ear1 = "Andoaa Earring",
+        ear1 = "Calamitous Earring",
         ear2 = "Gifted Earring",
         body = "Telchine Chas.",
         hands = "Telchine Gloves",
         ring1 = "Stikini Ring",
         ring2 = "Stikini Ring",
-        back = "Fi Follet Cape",
+        back = "Lugh's Cape",
         waist = "Embla Sash",
         legs = "Telchine Braconi",
         feet = "Telchine Pigaches"
@@ -394,7 +394,7 @@ function init_gear_sets()
         back = "Lugh\'s Cape",
         waist = "Luminary Sash",
         legs = "Chironic Hose",
-        feet = "Uk'uxkaj Boots"
+        feet = "Acad. Loafers +3"
     }
 
     sets.midcast['Enfeebling Magic'].Resistant = {
@@ -412,7 +412,7 @@ function init_gear_sets()
         back = "Lugh\'s Cape",
         waist = "Luminary Sash",
         legs = "Chironic Hose",
-        feet = "Medium's Sabots"
+        feet = "Acad. Loafers +3"
     }
 
     sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['Enfeebling Magic'], {
@@ -463,7 +463,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Chironic Doublet",
         hands = "Acad. Bracers +2",
-        ring1 = "Stikini Ring",
+        ring1 = "Medada's Ring",
         ring2 = "Stikini Ring",
         back = "Lugh\'s Cape",
         waist = "Acuity Belt +1",
@@ -481,7 +481,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = gear.merlinic_nuke_body,
         hands = "Amalric Gages",
-        ring1 = "Freke Ring",
+        ring1 = "Medada's Ring",
         ring2 = "Archon Ring",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -500,7 +500,7 @@ function init_gear_sets()
         body = gear.merlinic_nuke_body,
         hands = "Amalric Gages",
         ring1 = "Metamor. Ring +1",
-        ring2 = "Freke Ring",
+        ring2 = "Medada's Ring",
         back = "Lugh\'s Cape",
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
@@ -517,7 +517,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Stikini Ring",
+        ring1 = "Medada's Ring",
         ring2 = "Stikini Ring",
         back = "Merciful Cape",
         waist = "Fucho-no-obi",
@@ -535,7 +535,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Stikini Ring",
+        ring1 = "Medada's Ring",
         ring2 = "Stikini Ring",
         back = "Merciful Cape",
         waist = "Fucho-no-obi",
@@ -557,11 +557,11 @@ function init_gear_sets()
         body = "Zendik Robe",
         hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = "Lugh\'s Cape",
         waist = "Witful Belt",
         legs = "Psycloth Lappas",
-        feet = "Regal Pumps +1"
+        feet = "Acad. Loafers +3"
     }
 
     sets.midcast.Stun.Resistant = {
@@ -575,7 +575,7 @@ function init_gear_sets()
         body = "Zendik Robe",
         hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = "Lugh\'s Cape",
         waist = "Acuity Belt +1",
         legs = "Chironic Hose",
@@ -593,7 +593,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -611,7 +611,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -629,7 +629,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -647,7 +647,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -665,7 +665,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -683,7 +683,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -697,7 +697,6 @@ function init_gear_sets()
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
         hands = "Amalric Gages",
-        ring1 = "Metamor. Ring +1"
     })
     sets.midcast['Elemental Magic'].HighTierNuke.Resistant =
         set_combine(sets.midcast['Elemental Magic'].Resistant, {
@@ -705,14 +704,12 @@ function init_gear_sets()
             ear1 = "Regal Earring",
             ear2 = "Malignance Earring",
             hands = "Amalric Gages",
-            ring1 = "Metamor. Ring +1"
         })
     sets.midcast['Elemental Magic'].HighTierNuke.Fodder = set_combine(sets.midcast['Elemental Magic'].Fodder, {
         ammo = "Pemphredo Tathlum",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
         hands = "Amalric Gages",
-        ring1 = "Metamor. Ring +1"
     })
 
     sets.midcast.Helix = {
@@ -725,7 +722,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -743,7 +740,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -761,7 +758,7 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
         hands = "Agwu\'s Gages",
-        ring1 = "Metamor. Ring +1",
+        ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
@@ -780,7 +777,7 @@ function init_gear_sets()
         body = "Twilight Cloak",
         hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = "Lugh\'s Cape",
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
@@ -1006,7 +1003,7 @@ function init_gear_sets()
 
     sets.buff.Sublimation = {
         head = "Acad. Mortar. +2",
-        waist = "Embla Sash"
+        waist = "Embla Sash",
         ear1 = "Savant's Earring"
     }
     sets.buff.DTSublimation = {
