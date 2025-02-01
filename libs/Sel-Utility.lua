@@ -391,72 +391,76 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 -- Function to get an appropriate obi/cape/ring for the current action.
-function set_elemental_obi_cape_ring(spell, spellMap)
-    if spell.element == 'None' then
-        return
-    end
+function set_elemental_obi_cape_ring(spell, spellMap) -- Thank you Lili <3
+    if spell.element == 'None' then return end
 
-	--[[
 	if spell.element == world.weather_element or spell.element == world.day_element and item_available("Twilight Cape") then
 		gear.ElementalCape.name = "Twilight Cape"
 	else
 		gear.ElementalCape.name = gear.default.obi_back
 	end
-	]]
+	
+	if spell.element == world.day_element and spell.english ~= 'Impact' and not spell.skill == 'Divine Magic' and item_available("Zodiac Ring") then
+		gear.ElementalRing.name = "Zodiac Ring"
+	else
+		gear.ElementalRing.name = gear.default.obi_ring
+	end
+
+	local distance = spell.target.distance - spell.target.model_size
+	local orpheus_intensity = 0
+	local day_potency = (spell.element == world.day_element and 10) or (spell.element == data.elements.weak_to[world.day_element] and -10) or 0
+	local weather_potency = (spell.element == world.weather_element and data.weather_bonus_potency[world.weather_intensity]) or (data.elements.weak_to[world.weather_element] and (data.weather_bonus_potency[world.weather_intensity] * -1)) or 0
+
+	if item_available("Orpheus's Sash") then
+		orpheus_intensity = (16 - math.min(math.max(distance,1),15))
+		orpheus_intensity = orpheus_intensity * (1 + ( day_potency * 1/5 + weather_potency * 1/3 ) /100)
+	end
+
 	if spell.english:endswith('helix') or spell.english:endswith('helix II') then
-		if item_available("Orpheus's Sash") then
-			local distance = spell.target.distance - spell.target.model_size
-			local orpheus_intensity = (16 - (distance <= 1 and 1 or distance >= 15 and 15 or distance))
-				if orpheus_intensity > 5 then
-					equip({waist="Orpheus's Sash"})
-				end
-			end
-	elseif is_nuke(spell, spellMap) then
-		local distance = spell.target.distance - spell.target.model_size
-		local single_obi_intensity = 0
-		local orpheus_intensity = 0
-		local hachirin_intensity = 0
-
-		if item_available("Orpheus's Sash") then
-			orpheus_intensity = (16 - (distance <= 1 and 1 or distance >= 15 and 15 or distance))
-		end
-		
-		if item_available(data.elements.obi_of[spell.element]) then
-			if spell.element == world.weather_element then
-				single_obi_intensity = single_obi_intensity + data.weather_bonus_potency[world.weather_intensity]
-			end
-			if spell.element == world.day_element then
-				single_obi_intensity = single_obi_intensity + 10
-			end
-		end
-
-		if item_available('Hachirin-no-Obi') then
-			if spell.element == world.weather_element then
-				hachirin_intensity = hachirin_intensity + data.weather_bonus_potency[world.weather_intensity]
-			elseif spell.element == data.elements.weak_to[world.weather_element] then
-				hachirin_intensity = hachirin_intensity - data.weather_bonus_potency[world.weather_intensity]
-			end
-			if spell.element == world.day_element then
-				hachirin_intensity = hachirin_intensity + 10
-			elseif spell.element == data.elements.weak_to[world.day_element] then
-				hachirin_intensity = hachirin_intensity - 10
-			end
-		end
-
-		if hachirin_intensity >= single_obi_intensity and hachirin_intensity >= orpheus_intensity and hachirin_intensity >= 5 then
-			equip({waist="Hachirin-no-Obi"})
-		elseif single_obi_intensity >= orpheus_intensity and single_obi_intensity >= 5 then
-			equip({waist=data.elements.obi_of[spell.element]})
-		elseif orpheus_intensity >= 5 then
+		if orpheus_intensity > 2 then
 			equip({waist="Orpheus's Sash"})
 		end
+		return
+	end
 	
-		if spell.element == world.day_element and spell.english ~= 'Impact' and not spell.skill == 'Divine Magic' and item_available("Zodiac Ring") then
-			gear.ElementalRing.name = "Zodiac Ring"
-		else
-			gear.ElementalRing.name = gear.default.obi_ring
+	local single_obi_intensity = 0
+	local hachirin_intensity = 0
+	
+	if item_available(data.elements.obi_of[spell.element]) then
+		if spell.element == world.day_element then
+			single_obi_intensity = 10
 		end
-		
+		if spell.element == world.weather_element then
+			single_obi_intensity = single_obi_intensity + data.weather_bonus_potency[world.weather_intensity]
+		end
+	end
+
+	if item_available('Hachirin-no-Obi') then
+		hachirin_intensity = day_potency + weather_potency
+	end
+	
+	if hachirin_intensity >= single_obi_intensity and hachirin_intensity >= orpheus_intensity and hachirin_intensity >= 5 then
+		equip({waist="Hachirin-no-Obi"})
+	elseif single_obi_intensity >= orpheus_intensity and single_obi_intensity >= 5 then
+		equip({waist=data.elements.obi_of[spell.element]})
+	elseif orpheus_intensity >= 2 then
+		equip({waist="Orpheus's Sash"})
+	end
+end
+
+function check_item_dependant_spells(spell, spellMap)
+	if spell.english == 'Dispelga' then
+		equip({main="Daybreak"})
+	elseif spell.english == 'Honor March' then
+		equip({range="Marsyas"})
+	elseif spell.english == 'Aria of Passion' then
+		equip({range="Loughnashade"})
+	elseif spell.english == 'Impact' then
+		if item_equippable("Crepuscular Cloak") then
+			equip({head=empty,body="Crepuscular Cloak"})
+		else
+			equip({head=empty,body="Twilight Cloak"})
+		end
 	end
 end
 
@@ -1985,8 +1989,8 @@ function is_nuke(spell, spellMap)
 		(spell.skill == 'Elemental Magic' and spellMap ~= 'ElementalEnfeeble' and spell.english ~= 'Impact') or
 	    (player.main_job == 'BLU' and spell.skill == 'Blue Magic' and spellMap and spellMap:contains('Magical')) or
 		(player.main_job == 'NIN' and spell.skill == 'Ninjutsu' and spellMap and spellMap:contains('ElementalNinjutsu')) or
-		spell.english == 'Comet' or spell.english == 'Meteor' or spell.english == 'Death' or spell.english:startswith('Banish')
-		or spell.english:startswith('Drain') or spell.english:startswith('Aspir') or spell.english:startswith('Holy') or spell.english == 'Kaustra'
+		spell.english == 'Comet' or spell.english == 'Meteor' or spell.english == 'Death' or spell.english:startswith('Banish') or
+		spell.english:startswith('Drain') or spell.english:startswith('Aspir') or spell.english:startswith('Holy') or spell.english == 'Kaustra'
 		) then
 		
 		return true

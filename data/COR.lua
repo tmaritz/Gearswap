@@ -247,45 +247,7 @@ function job_post_precast(spell, spellMap, eventArgs)
 		elseif state.CastingMode.value == 'Fodder' and sets.precast.CorsairShot.Damage then
 			equip(sets.precast.CorsairShot.Damage)
 			
-			local distance = spell.target.distance - spell.target.model_size
-			local single_obi_intensity = 0
-			local orpheus_intensity = 0
-			local hachirin_intensity = 0
-
-			if item_available("Orpheus's Sash") then
-				orpheus_intensity = (16 - (distance <= 1 and 1 or distance >= 15 and 15 or distance))
-			end
-			
-			if item_available(data.elements.obi_of[spell.element]) then
-				if spell.element == world.weather_element then
-					single_obi_intensity = single_obi_intensity + data.weather_bonus_potency[world.weather_intensity]
-				end
-				if spell.element == world.day_element then
-					single_obi_intensity = single_obi_intensity + 10
-				end
-			end
-			
-			if item_available('Hachirin-no-Obi') then
-				if spell.element == world.weather_element then
-					hachirin_intensity = hachirin_intensity + data.weather_bonus_potency[world.weather_intensity]
-				elseif spell.element == data.elements.weak_to[world.weather_element] then
-					hachirin_intensity = hachirin_intensity - data.weather_bonus_potency[world.weather_intensity]
-				end
-				if spell.element == world.day_element then
-					hachirin_intensity = hachirin_intensity + 10
-				elseif spell.element == data.elements.weak_to[world.day_element] then
-					hachirin_intensity = hachirin_intensity - 10
-				end
-			end
-			
-			if single_obi_intensity >= hachirin_intensity and single_obi_intensity >= orpheus_intensity and single_obi_intensity >= 5 then
-				equip({waist=data.elements.obi_of[spell.element]})
-			elseif hachirin_intensity >= orpheus_intensity and hachirin_intensity >= 5 then
-				equip({waist="Hachirin-no-Obi"})
-			elseif orpheus_intensity >= 5 then
-				equip({waist="Orpheus's Sash"})
-			end
-			
+			set_elemental_obi_cape_ring(spell, spellMap)
 		end
 		
 	elseif spell.action_type == 'Ranged Attack' then

@@ -766,22 +766,28 @@ item_stepdown = {
 	['Reraise Hairpin'] = {'Wh. Rarab Cap +1','head'},
 }
 
---[[Future uncertain!
-spell_to_buff = {
-	['Barfire'] = {'Barfire',100,'BarElement'},
-	['Barfira'] = {'Barfire',100,'BarElement'},
+buff_group_IDs = { --Buffs that overwrite each other or are blocked by each other and do not share a buffID.
+    ['BarElement'] = S{100,101,102,103,104,105},
+    ['BarStatus'] = S{106,107,108,109,110,111,112},
+    ['Enspell'] = S{94,95,96,97,98,99,274,275,277,278,279,280,281,282,288},
+    ['Boost-Stat'] = S{86,119,120,121,122,123,124,125},
+    ['Spikes'] = S{34,35,38,173},
+    ['Invis'] = S{69,77}, --Includes camoflauge
+    ['Haste'] = S{13,33,581}, --Includes slow
+    ['Defense'] = S{93,149}, --Includes defense down
+	['SpecialReactorCool'] = S{34,35,38,93,149,173}, --Is decidedly uncool for breaking my system.
 }
+
+spell_to_buff = {['Reactor Cool']='SpecialReactorCool',}
 for _, rline in pairs(gearswap.res.spells) do
-    if rline.status and not spell_to_buff[rline.english] then
-      spell_to_buff[rline.english] = {gearswap.res.buffs[rline.status].english, gearswap.res.buffs[rline.status].id}
+    if rline.status then
+        for key in pairs(buff_group_IDs) do
+			if not key:startswith('Special') and buff_group_IDs[key]:contains(rline.status) and not rline.targets:contains('Enemy') then
+				if not spell_to_buff[rline.english] then
+					spell_to_buff[rline.english] = key
+				end
+                break
+            end
+        end
     end
 end
-
-buff_group_IDs = {
-	['BarElement'] = {100,101,102,103,104,105},
-}
-
-if spell_to_buff[SpellName][3] then
-	--do stuff with buff_group_IDs[SpellName]
-end
-]]
