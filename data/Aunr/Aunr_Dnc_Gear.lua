@@ -511,11 +511,11 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = {
         ammo = "Yamarang",
-        head = "Dampening Tam",
+        head = "Malignance Chapeau",
         neck = "Anu Torque",
         ear1 = "Brutal Earring",
         ear2 = "Sherida Earring",
-        body = "Maligance Tabard",
+        body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Gere Ring",
         ring2 = "Epona's Ring",
