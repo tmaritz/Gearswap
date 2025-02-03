@@ -18,11 +18,11 @@ function user_job_setup()
 
     gear.stp_jse_back = {
         name = "Senuna's Mantle",
-        augments = {'DEX+20', 'Accuracy+20 Attack+20', '"Store TP"+10'}
+        augments = { 'DEX+20', 'Accuracy+20 Attack+20', '"Store TP"+10' }
     }
     gear.wsd_jse_back = {
         name = "Senuna's Mantle",
-        augments = {'DEX+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%'}
+        augments = { 'DEX+20', 'Accuracy+20 Attack+20', 'Weapon skill damage +10%' }
     }
 
     -- Additional local binds
@@ -82,7 +82,7 @@ function init_gear_sets()
 
     sets.precast.JA['No Foot Rise'] = {} -- body="Horos Casaque +1"
 
-    sets.precast.JA['Trance'] = {} -- head="Horos Tiara +1"
+    sets.precast.JA['Trance'] = {}       -- head="Horos Tiara +1"
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {
@@ -112,7 +112,7 @@ function init_gear_sets()
 
     sets.precast.Samba = {
         back = gear.stp_jse_back
-    } -- head="Maxixi Tiara"
+    }                     -- head="Maxixi Tiara"
 
     sets.precast.Jig = {} -- legs="Horos Tights", feet="Maxixi Toe Shoes"
 
@@ -429,18 +429,18 @@ function init_gear_sets()
 
     sets.idle = {
         ammo = "Staunch Tathlum",
-        head = "Dampening Tam",
-        neck = "Loricate Torque +1",
-        ear1 = "Etiolation Earring",
+        head = "Gleti's Mask",
+        neck = "Warder's Charm +1",
+        ear1 = "Eabani Earring",
         ear2 = "Sanare Earring",
-        body = "Meg. Cuirie +2",
-        hands = "Malignance Gloves",
+        body = "Gleti's Cuirass",
+        hands = "Gleti's Gauntlets",
         ring1 = "Defending Ring",
         ring2 = "Sheltered Ring",
         back = "Solemnity Cape",
-        waist = "Flume Belt +1",
-        legs = gear.herculean_dt_legs,
-        feet = "Malignance Boots"
+        waist = "Carrier's Sash",
+        legs = "Gleti's Breeches",
+        feet = "Gleti's Boots"
     }
 
     sets.idle.Sphere = set_combine(sets.idle, {
@@ -515,14 +515,14 @@ function init_gear_sets()
         neck = "Anu Torque",
         ear1 = "Brutal Earring",
         ear2 = "Sherida Earring",
-        body = "Adhemar Jacket +1",
-        hands = "Adhemar Wrist. +1",
+        body = "Maligance Tabard",
+        hands = "Malignance Gloves",
         ring1 = "Gere Ring",
         ring2 = "Epona's Ring",
         back = gear.stp_jse_back,
         waist = "Windbuffet Belt +1",
         legs = "Samnuha Tights",
-        feet = gear.herculean_ta_feet
+        feet = "Malignance Boots"
     }
 
     sets.engaged.DTLite = {
