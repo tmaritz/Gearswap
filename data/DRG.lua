@@ -207,7 +207,7 @@ end
 function job_tick()
 	if check_hasso() then return true end
 	if check_jump() then return true end
-	if check_buffup then return true end
+	if check_buffup() then return true end
 	if check_buff() then return true end
 	if job_check_buff() then return true end
 	return false

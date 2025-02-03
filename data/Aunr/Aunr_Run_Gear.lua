@@ -490,7 +490,9 @@ function init_gear_sets()
         head = "Rune. Bandeau +2",
         neck = "Sacro Gorget",
         feet = gear.taeon_regensird_feet,
-        hands = "Regal Gauntlets"
+        hands = "Regal Gauntlets",
+        waist = "Sroda Belt",
+        left_ear = "Mendi. Earring",
     })
     sets.midcast['Refresh'] = set_combine(sets.midcast['Enhancing Magic'], {
         head = "Erilaz Galea +1"
@@ -522,7 +524,7 @@ function init_gear_sets()
         ring1 = "Lebeche Ring",
         ring2 = "Janniston Ring",
         back = "Tempered Cape +1",
-        waist = "Luminary Sash",
+        waist = "Sroda Belt",
         legs = "Carmine Cuisses +1",
         feet = "Skaoi Boots"
     }

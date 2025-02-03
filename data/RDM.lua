@@ -246,7 +246,6 @@ function job_post_midcast(spell, spellMap, eventArgs)
 		elseif sets.midcast[spellMap] then
 			equip(sets.midcast[spellMap])
 
-			windower.add_to_chat(tostring(can_dual_wield))			
 			if can_dual_wield and sets.midcast[spellMap].DW then
 				equip(sets.midcast[spellMap].DW)
 			end
@@ -346,44 +345,19 @@ function job_customize_melee_set(meleeSet)
 			meleeSet = set_combine(meleeSet, sets.element.enspell[enspell_element])
 		end
 
-		local single_obi_intensity = 0
-		local orpheus_intensity = 0
-		local hachirin_intensity = 0
-
 		if item_available("Orpheus's Sash") then
-			orpheus_intensity = 15
-		end
-
-		if item_available(data.elements.obi_of[enspell_element]) then
-			if enspell_element == world.weather_element then
-				single_obi_intensity = single_obi_intensity + data.weather_bonus_potency[world.weather_intensity]
-			end
-			if enspell_element == world.day_element then
-				single_obi_intensity = single_obi_intensity + 10
-			end
-		end
-		
-		if item_available('Hachirin-no-Obi') then
-			if enspell_element == world.weather_element then
-				hachirin_intensity = hachirin_intensity + data.weather_bonus_potency[world.weather_intensity]
-			elseif enspell_element == data.elements.weak_to[world.weather_element] then
-				hachirin_intensity = hachirin_intensity - data.weather_bonus_potency[world.weather_intensity]
-			end
-			if enspell_element == world.day_element then
-				hachirin_intensity = hachirin_intensity + 10
-			elseif enspell_element == data.elements.weak_to[world.day_element] then
-				hachirin_intensity = hachirin_intensity - 10
-			end
-		end
-	
-		if single_obi_intensity >= hachirin_intensity and single_obi_intensity >= orpheus_intensity and single_obi_intensity >= 5 then
-			meleeSet = set_combine(meleeSet, {waist=data.elements.obi_of[enspell_element]})
-		elseif hachirin_intensity >= orpheus_intensity and hachirin_intensity >= 5 then
-			meleeSet = set_combine(meleeSet, {waist="Hachirin-no-Obi"})
-		elseif orpheus_intensity >= 5 then
 			meleeSet = set_combine(meleeSet, {waist="Orpheus's Sash"})
+		elseif enspell_element == world.weather_element or enspell_element == world.day_element then
+			if item_available(data.elements.obi_of[enspell_element]) then
+				meleeSet = set_combine(meleeSet, {waist=data.elements.obi_of[enspell_element]})
+			elseif item_available('Hachirin-no-Obi') then
+				local day_potency = (spell.element == world.day_element and 10) or (spell.element == data.elements.weak_to[world.day_element] and -10) or 0
+				local weather_potency = (spell.element == world.weather_element and data.weather_bonus_potency[world.weather_intensity]) or (data.elements.weak_to[world.weather_element] and (data.weather_bonus_potency[world.weather_intensity] * -1)) or 0
+				if (day_potency + weather_potency) >= 5 then
+					meleeSet = set_combine(meleeSet, {waist="Hachirin-no-Obi"})
+				end
+			end
 		end
-
 	end
 
     return meleeSet

@@ -147,6 +147,7 @@ function update_job_states()
     local labels = {
 		AutoBuffMode = "Auto Buff",
 		AutoDefenseMode = "Auto Defense",
+		AutoEngageMode = "Auto Engage",
 		AutoFoodMode = "Auto Food: "..autofood.."",
 		AutoJumpMode = "Auto Jump",
 		AutoManawell = "Auto Manawell",

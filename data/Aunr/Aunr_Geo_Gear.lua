@@ -271,36 +271,20 @@ function init_gear_sets()
         sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
         head = "Azimuth Hood +2",
-        body = "Agwu's Robe",
+        body = "Azimuth Coat +2",
         hands = "Azimuth Gloves +2",
         legs = "Azimuth Tights +2",
         feet = "Azimuth Gaiters +2",
-        neck = "Sanctity Necklace",
+        neck = "Mizu. Kubikazari",
         waist = "Refoccilation Stone",
         left_ear = "Friomisi Earring",
         right_ear = "Malignance Earring",
-        left_ring = "Mujin Band",
-        right_ring = "Metamor. Ring +1",
-        back = "Toro Cape"
+        left_ring = "Medada's Ring",
+        right_ring = "Mujin Band",
+        back = "Aurist's Cape +1"
     }
 
-    sets.ResistantMagicBurst = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Azimuth Hood +2",
-        body = "Agwu's Robe",
-        hands = "Azimuth Gloves +2",
-        legs = "Azimuth Tights +2",
-        feet = "Azimuth Gaiters +2",
-        neck = "Sanctity Necklace",
-        waist = "Refoccilation Stone",
-        left_ear = "Friomisi Earring",
-        right_ear = "Malignance Earring",
-        left_ring = "Mujin Ring",
-        right_ring = "Metamor. Ring +1",
-        back = "Toro Cape"
-    }
+    sets.ResistantMagicBurst = sets.MagicBurst
 
     sets.midcast['Elemental Magic'] = {
         main = "Marin Staff +1",
@@ -311,13 +295,13 @@ function init_gear_sets()
         hands = "Azimuth Gloves +2",
         legs = "Azimuth Tights +2",
         feet = "Azimuth Gaiters +2",
-        neck = "Sanctity Necklace",
+        neck = "Mizu. Kubikazari",
         waist = "Refoccilation Stone",
         left_ear = "Friomisi Earring",
         right_ear = "Malignance Earring",
-        left_ring = "Shiva Ring",
+        left_ring = "Medada's Ring",
         right_ring = "Metamor. Ring +1",
-        back = "Toro Cape"
+        back = "Aurist's Cape +1"
     }
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {})
@@ -351,7 +335,7 @@ function init_gear_sets()
         body = "Zendik Robe",
         hands = "Volte Gloves",
         ring1 = "Metamor. Ring +1",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = "Lifestream Cape",
         waist = "Witful Belt",
         legs = "Psycloth Lappas",
@@ -369,7 +353,7 @@ function init_gear_sets()
         body = "Zendik Robe",
         hands = "Amalric Gages",
         ring1 = "Metamor. Ring +1",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = gear.nuke_jse_back,
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
@@ -387,7 +371,7 @@ function init_gear_sets()
         body = "Twilight Cloak",
         hands = "Regal Cuffs",
         ring1 = "Metamor. Ring +1",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = gear.nuke_jse_back,
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
@@ -405,7 +389,7 @@ function init_gear_sets()
         body = "Zendik Robe",
         hands = "Amalric Gages",
         ring1 = "Metamor. Ring +1",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = gear.nuke_jse_back,
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
@@ -428,7 +412,7 @@ function init_gear_sets()
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
         ring1 = "Stikini Ring",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = gear.nuke_jse_back,
         waist = "Luminary Sash",
         legs = "Agwu's Slops",
@@ -446,7 +430,7 @@ function init_gear_sets()
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
         ring1 = "Stikini Ring",
-        ring2 = "Stikini Ring",
+        ring2 = "Medada's Ring",
         back = gear.nuke_jse_back,
         waist = "Luminary Sash",
         legs = "Agwu's Slops",
@@ -476,12 +460,10 @@ function init_gear_sets()
     })
 
     sets.midcast.MndEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {
-        range = empty,
-        ring1 = "Stikini Ring"
+
     })
+
     sets.midcast.MndEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
-        range = empty,
-        ring1 = "Stikini Ring"
     })
 
     sets.midcast.Dia = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
@@ -491,7 +473,6 @@ function init_gear_sets()
     sets.midcast['Bio II'] = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
 
     sets.midcast['Divine Magic'] = set_combine(sets.midcast['Enfeebling Magic'], {
-        ring1 = "Stikini Ring"
     })
 
     sets.midcast['Enhancing Magic'] = {
@@ -834,28 +815,6 @@ function init_gear_sets()
     -- Gear that converts elemental damage done to recover MP.	
     sets.RecoverMP = {
         body = "Seidr Cotehardie"
-    }
-
-    -- Gear for Magic Burst mode.
-    sets.MagicBurst = {
-        main = gear.grioavolr_nuke_staff,
-        sub = "Alber Strap",
-        head = "Ea Hat",
-        neck = "Mizu. Kubikazari",
-        body = "Ea Houppelande",
-        ring1 = "Mujin Band",
-        legs = "Ea Slops",
-        feet = "Jhakri Pigaches +1"
-    }
-    sets.ResistantMagicBurst = {
-        main = gear.grioavolr_nuke_staff,
-        sub = "Enki Strap",
-        head = "Ea Hat",
-        neck = "Mizu. Kubikazari",
-        body = "Ea Houppelande",
-        ring1 = "Mujin Band",
-        legs = "Ea Slops",
-        feet = "Jhakri Pigaches +1"
     }
 
     sets.buff.Sublimation = {

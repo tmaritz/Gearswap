@@ -310,10 +310,10 @@ function job_tick()
 	if check_repair() then return true end
 	if check_auto_pet() then return true end
 	if check_maneuver() then return true end
-	if check_buffup then return true end
+	if check_buffup() then return true end
 	if check_buff() then return true end
 	if job_check_buff() then return true end
-
+ 
 	if state.PetWSGear.value and pet.isvalid and pet.tp and pet.tp ~= lastpettp then
 		if (pet.tp > 999 and lastpettp < 1000) or (pet.tp < 1000 and lastpettp > 999) then
 			windower.send_command('gs c update')

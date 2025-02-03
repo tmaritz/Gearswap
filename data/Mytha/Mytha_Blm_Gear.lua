@@ -2,16 +2,15 @@ function user_job_setup()
 	-- Options: Override default values
 	state.CastingMode:options('Normal','Resistant','Proc','OccultAcumen')
 	state.OffenseMode:options('Normal')
-	state.HybridMode:options('Normal','DT')
-	state.IdleMode:options('Normal','PDT','DTHippo')
-	state.Weapons:options('None','BurstWeapons','Khatvanga','Lathi')
+	state.HybridMode:options('Normal')
+	state.IdleMode:options('Normal','PDT','MDT','MEVA')
+	state.Weapons:options('None','Bunzi','Lathi')
 
 	gear.nuke_jse_back = {name="Taranus's Cape",augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}}
 
 		-- Additional local binds
 	send_command('bind ^` gs c cycle ElementalMode') 
 	send_command('bind ~^` gs c cycleback ElementalMode') --Robbiewobbie's idea
-	send_command('bind ^q gs c weapons Khatvanga;gs c set CastingMode OccultAcumen')
 	send_command('bind !q gs c weapons Default;gs c reset CastingMode;gs c reset DeathMode;gs c reset MagicBurstMode')
 	send_command('bind !r gs c set DeathMode Single;gs c set MagicBurstMode Single')
 	send_command('bind !\\\\ input /ja "Manawell" <me>')
@@ -40,16 +39,15 @@ function init_gear_sets()
     --------------------------------------
 	
 	-- Weapons sets
-	sets.weapons.BurstWeapons = {main=gear.grioavolr_nuke_staff,sub="Enki Strap"}
 	sets.weapons.Lathi = {main="Lathi",sub="Enki Strap"}
-	sets.weapons.Khatvanga = {main="Khatvanga",sub="Bloodrain Strap"}
+	sets.weapons.Bunzi = {main="Bunzi's Rod",sub="Sors Shield"}
 	
     sets.buff.Sublimation = {waist="Embla Sash"}
     sets.buff.DTSublimation = {waist="Embla Sash"}	
 	
 	-- Treasure Hunter
 	
-	sets.TreasureHunter = set_combine(sets.TreasureHunter, {feet=gear.merlinic_treasure_feet})
+	sets.TreasureHunter = set_combine(sets.TreasureHunter, {legs=gear.merlinic_treasure_legs})
     
     ---- Precast Sets ----
     

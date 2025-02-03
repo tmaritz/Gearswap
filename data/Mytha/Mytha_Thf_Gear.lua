@@ -37,7 +37,7 @@ function init_gear_sets()
     -- Special sets (required by rules)
     --------------------------------------
 
-	sets.TreasureHunter = {head="Volte Cap",hands="Plunderer's Armlets +1",feet="Skulk. Poulaines"}
+	sets.TreasureHunter = {hands="Plunderer's Armlets +1",feet="Skulk. Poulaines"}
     sets.Kiting = {ring2="Shneddick Ring"} --feet="Skd. Jambeaux +1"
 
 	sets.buff.Doom = set_combine(sets.buff.Doom, {})
@@ -87,8 +87,8 @@ function init_gear_sets()
     sets.precast.JA['Flee'] = {} 
     sets.precast.JA['Hide'] = {}
     sets.precast.JA['Conspirator'] = {} 
-    sets.precast.JA['Steal'] = {} 
-	sets.precast.JA['Mug'] = {}
+    sets.precast.JA['Steal'] = {ammo="Barathrum"}
+	sets.precast.JA['Mug'] = {ammo="Barathrum"}
     sets.precast.JA['Despoil'] = {}
     sets.precast.JA['Perfect Dodge'] = {}
     sets.precast.JA['Feint'] = {} 
