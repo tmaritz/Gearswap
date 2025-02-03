@@ -215,21 +215,7 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {
-        ammo = "Voluspa Tathlum",
-        head = "Dampening Tam",
-        neck = "Asperity Necklace",
-        ear1 = "Brutal Earring",
-        ear2 = "Sherida Earring",
-        body = "Adhemar Jacket +1",
-        hands = "Meg. Gloves +2",
-        ring1 = "Ilabrat Ring",
-        ring2 = "Regal Ring",
-        back = gear.wsd_jse_back,
-        waist = "Grunfeld Rope",
-        legs = "Samnuha Tights",
-        feet = gear.herculean_wsd_feet
-    }
+    sets.precast.WS = {}
 
     sets.precast.WS.SomeAcc = set_combine(sets.precast.WS, {
         neck = "Combatant's Torque"
@@ -271,12 +257,17 @@ function init_gear_sets()
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {
         ammo = "C. Palug Stone",
-        head = "Lilitu Headpiece",
-        neck = "Caro Necklace",
+        head = "Nyame Helm",
+        neck = "Rep. Plat. Medal",
         ear1 = "Moonshade Earring",
         ear2 = "Ishvara Earring",
-        body = gear.herculean_wsd_body,
-        legs = gear.herculean_wsd_legs
+        body = "Nyame Mail",
+        hands = "Nyame Gaunlets",
+        ring1 = "Ilabrat Ring",
+        ring2 = "Karieyh Ring",
+        waist = "Grunfeld Rope",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     })
     sets.precast.WS["Rudra's Storm"].SomeAcc = set_combine(sets.precast.WS.SomeAcc, {
         ammo = "C. Palug Stone",
@@ -519,7 +510,7 @@ function init_gear_sets()
         hands = "Malignance Gloves",
         ring1 = "Gere Ring",
         ring2 = "Epona's Ring",
-        back = gear.stp_jse_back,
+        back = "Aesir Mantle",
         waist = "Windbuffet Belt +1",
         legs = "Samnuha Tights",
         feet = "Malignance Boots"
