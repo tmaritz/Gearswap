@@ -262,7 +262,7 @@ function init_gear_sets()
         ear1 = "Moonshade Earring",
         ear2 = "Ishvara Earring",
         body = "Nyame Mail",
-        hands = "Nyame Gaunlets",
+        hands = "Nyame Gauntlets",
         ring1 = "Ilabrat Ring",
         ring2 = "Karieyh Ring",
         waist = "Grunfeld Rope",
