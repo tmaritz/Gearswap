@@ -303,7 +303,7 @@ function init_gear_sets()
         ring2 = "Stikini Ring",
         back = "Fi Follet Cape",
         waist = "Embla Sash",
-        legs = "Telchine Braconi",
+        legs = gear.telchine_enh_feet,
         feet = "Telchine Pigaches"
     }
 
@@ -321,7 +321,7 @@ function init_gear_sets()
         ring2 = "Stikini Ring",
         back = "Lugh's Cape",
         waist = "Embla Sash",
-        legs = "Telchine Braconi",
+        legs = gear.telchine_enh_feet,
         feet = "Telchine Pigaches"
     }
 

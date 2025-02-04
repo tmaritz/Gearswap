@@ -262,7 +262,7 @@ function init_gear_sets()
         ear1 = "Moonshade Earring",
         ear2 = "Ishvara Earring",
         body = "Nyame Mail",
-        hands = "Nyame Gaunlets",
+        hands = "Nyame Gauntlets",
         ring1 = "Ilabrat Ring",
         ring2 = "Karieyh Ring",
         waist = "Grunfeld Rope",
@@ -502,11 +502,11 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = {
         ammo = "Yamarang",
-        head = "Dampening Tam",
+        head = "Malignance Chapeau",
         neck = "Anu Torque",
         ear1 = "Brutal Earring",
         ear2 = "Sherida Earring",
-        body = "Maligance Tabard",
+        body = "Malignance Tabard",
         hands = "Malignance Gloves",
         ring1 = "Gere Ring",
         ring2 = "Epona's Ring",
