@@ -65,7 +65,7 @@ function init_gear_sets()
         neck = "Voltsurge Torque",
         ear1 = "Enchntr. Earring +1",
         ear2 = "Malignance Earring",
-        body = "Zendik Robe",
+        body = "Arbatel Gown +2",
         hands = "Acad. Bracers +2",
         ring1 = "Kishar Ring",
         ring2 = "Lebeche Ring",
@@ -158,7 +158,7 @@ function init_gear_sets()
         neck = "Mizu. Kubikazari",
         ear1 = "Bakarole Earring",
         ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
+        body = "Arbatel Gown +2",
         hands = "Agwu\'s Gages",
         ring1 = "Mujin Band",
         ring2 = "Metamor. Ring +1",
@@ -200,7 +200,7 @@ function init_gear_sets()
         neck = "Incanter's Torque",
         ear1 = "Meili Earring",
         ear2 = "Malignance Earring",
-        body = "Kaykaus Bliaut",
+        body = "Arbatel Gown +2",
         hands = "Kaykaus Cuffs",
         ring1 = "Janniston Ring",
         ring2 = "Lebeche Ring",
@@ -218,7 +218,7 @@ function init_gear_sets()
         neck = "Incanter's Torque",
         ear1 = "Meili Earring",
         ear2 = "Malignance Earring",
-        body = "Kaykaus Bliaut",
+        body = "Arbatel Gown +2",
         hands = "Kaykaus Cuffs",
         ring1 = "Janniston Ring",
         ring2 = "Lebeche Ring",
@@ -236,7 +236,7 @@ function init_gear_sets()
         neck = "Incanter's Torque",
         ear1 = "Meili Earring",
         ear2 = "Malignance Earring",
-        body = "Kaykaus Bliaut",
+        body = "Arbatel Gown +2",
         hands = "Kaykaus Cuffs",
         ring1 = "Janniston Ring",
         ring2 = "Lebeche Ring",
@@ -348,7 +348,7 @@ function init_gear_sets()
     sets.midcast.BarElement = {
         main = "Bolelabunga",
         sub = "Ammurapi Shield",
-        "Savant's Treatise",
+        ammo = "Savant's Treatise",
         head = "Arbatel Bonnet +2",
         neck = "Incanter's Torque",
         ear1 = "Andoaa Earring",
@@ -387,7 +387,7 @@ function init_gear_sets()
         neck = "Erra Pendant",
         ear1 = "Regal Earring",
         ear2 = "Malignance Earring",
-        body = "Chironic Doublet",
+        body = "Arbatel Gown +2",
         hands = "Regal Cuffs",
         ring1 = "Kishar Ring",
         ring2 = "Stikini Ring",
@@ -405,7 +405,7 @@ function init_gear_sets()
         neck = "Erra Pendant",
         ear1 = "Regal Earring",
         ear2 = "Digni. Earring",
-        body = "Chironic Doublet",
+        body = "Arbatel Gown +2",
         hands = "Acad. Bracers +2",
         ring1 = "Metamor. Ring +1",
         ring2 = "Stikini Ring",
@@ -591,14 +591,14 @@ function init_gear_sets()
         neck = "Sybil Scarf",
         ear1 = "Bakarole Earring",
         ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
+        body = "Arbatel Gown +2",
+        hands = "Arbatel Bracers +2",
         ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
+        legs = "Arbatel Pants +2",
+        feet = "Arbatel Loafers +2"
     }
 
     sets.midcast['Elemental Magic'].Resistant = {
@@ -609,14 +609,14 @@ function init_gear_sets()
         neck = "Sybil Scarf",
         ear1 = "Bakarole Earring",
         ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
+        body = "Arbatel Gown +2",
+        hands = "Arbatel Bracers +2",
         ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
+        legs = "Arbatel Pants +2",
+        feet = "Arbatel Loafers +2"
     }
 
     sets.midcast['Elemental Magic'].Fodder = {
@@ -627,14 +627,14 @@ function init_gear_sets()
         neck = "Sybil Scarf",
         ear1 = "Bakarole Earring",
         ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
+        body = "Arbatel Gown +2",
+        hands = "Arbatel Bracers +2",
         ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = "Lugh\'s Cape",
         waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
+        legs = "Arbatel Pants +2",
+        feet = "Arbatel Loafers +2"
     }
 
     sets.midcast['Elemental Magic']['9k'] = {
@@ -692,25 +692,9 @@ function init_gear_sets()
     }
 
     -- Custom refinements for certain nuke tiers
-    sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {
-        ammo = "Pemphredo Tathlum",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
-        hands = "Amalric Gages",
-    })
-    sets.midcast['Elemental Magic'].HighTierNuke.Resistant =
-        set_combine(sets.midcast['Elemental Magic'].Resistant, {
-            ammo = "Pemphredo Tathlum",
-            ear1 = "Regal Earring",
-            ear2 = "Malignance Earring",
-            hands = "Amalric Gages",
-        })
-    sets.midcast['Elemental Magic'].HighTierNuke.Fodder = set_combine(sets.midcast['Elemental Magic'].Fodder, {
-        ammo = "Pemphredo Tathlum",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
-        hands = "Amalric Gages",
-    })
+    sets.midcast['Elemental Magic'].HighTierNuke = sets.midcast['Elemental Magic']
+    sets.midcast['Elemental Magic'].HighTierNuke.Resistant = sets.midcast['Elemental Magic'].Resistant
+    sets.midcast['Elemental Magic'].HighTierNuke.Fodder = sets.midcast['Elemental Magic'].Fodder
 
     sets.midcast.Helix = {
         main = "Marin Staff +1",
@@ -816,11 +800,11 @@ function init_gear_sets()
         main = "Mpaca's Staff",
         sub = "Khonsu",
         ammo = "Homiliary",
-        head = "Arbatel Bonnet +2",
+        head = "Nyame Helm",
         neck = "Warder's Charm +1",
-        ear1 = "Eabani Earring",
-        ear2 = "Hearty Earring",
-        body = "Agwu\'s Robe",
+        ear1 = "Hearty Earring",
+        ear2 = "Eabani Earring",
+        body = "Arbatel Gown +1",
         hands = "Nyame Gauntlets",
         ring1 = "Defending Ring",
         ring2 = "Shadow Ring",
@@ -830,23 +814,7 @@ function init_gear_sets()
         feet = "Nyame Sollerets"
     }
 
-    sets.idle.PDT = {
-        main = "Mpaca's Staff",
-        sub = "Khonsu",
-        ammo = "Homiliary",
-        head = "Arbatel Bonnet +2",
-        neck = "Warder's Charm +1",
-        ear1 = "Eabani Earring",
-        ear2 = "Hearty Earring",
-        body = "Agwu\'s Robe",
-        hands = "Nyame Gauntlets",
-        ring1 = "Defending Ring",
-        ring2 = "Shadow Ring",
-        back = "Moonbeam Cape",
-        waist = "Carrier's Sash",
-        legs = "Nyame Flanchard",
-        feet = "Nyame Sollerets"
-    }
+    sets.idle.PDT = sets.idle
 
     sets.idle.Hippo = set_combine(sets.idle.PDT, {
         feet = "Hippo. Socks +1"
@@ -943,10 +911,10 @@ function init_gear_sets()
         head = "Arbatel Bonnet +2"
     }
     sets.buff['Perpetuance'] = {
-        hands = "Arbatel Bracers +1"
+        hands = "Arbatel Bracers +2"
     }
     sets.buff['Immanence'] = {
-        hands = "Arbatel Bracers +1"
+        hands = "Arbatel Bracers +2"
     }
     sets.buff['Penury'] = {
         legs = "Arbatel Pants +1"
