@@ -39,6 +39,7 @@ function user_job_setup()
     send_command('bind %~` gs c cycle SkillchainMode')
 
     select_default_macro_book()
+    user_job_lockstyle()
 end
 
 -- Define sets and vars used by this job file.
@@ -68,12 +69,12 @@ function init_gear_sets()
 
     -- Weapons sets
     sets.weapons.Aeneas = {
-        main = "Aeneas",
-        sub = "Taming Sari"
+        main = "Gleti's Knife",
+        sub = "Kaja Knife"
     }
     sets.weapons.LowBuff = {
-        main = "Aeneas",
-        sub = "Blurred Knife +1"
+        main = "Gleti's Knife",
+        sub = "Taming Sari"
     }
 
     -- Precast Sets
@@ -511,8 +512,8 @@ function init_gear_sets()
         ring1 = "Gere Ring",
         ring2 = "Epona's Ring",
         back = "Aesir Mantle",
-        waist = "Windbuffet Belt +1",
-        legs = "Samnuha Tights",
+        waist = "Sailfi Belt +1",
+        legs = "Gleti's Breeches",
         feet = "Malignance Boots"
     }
 
@@ -527,8 +528,8 @@ function init_gear_sets()
         ring1 = "Defending Ring",
         ring2 = "Epona's Ring",
         back = gear.stp_jse_back,
-        waist = "Windbuffet Belt +1",
-        legs = "Samnuha Tights",
+        waist = "Sailfi Belt +1",
+        legs = "Gleti's Breeches",
         feet = gear.herculean_ta_feet
     }
 
@@ -544,7 +545,7 @@ function init_gear_sets()
         ring2 = "Epona's Ring",
         back = gear.stp_jse_back,
         waist = "Windbuffet Belt +1",
-        legs = "Samnuha Tights",
+        legs = "Gleti's Breeches",
         feet = gear.herculean_ta_feet
     }
 
@@ -592,7 +593,7 @@ function init_gear_sets()
         ring2 = "Epona's Ring",
         back = gear.stp_jse_back,
         waist = "Windbuffet Belt +1",
-        legs = "Samnuha Tights",
+        legs = "Gleti's Breeches",
         feet = gear.herculean_ta_feet
     }
 
@@ -693,14 +694,18 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     if player.sub_job == 'WAR' then
-        set_macro_page(10, 9)
+        set_macro_page(2, 19)
     elseif player.sub_job == 'NIN' then
-        set_macro_page(1, 9)
+        set_macro_page(2, 19)
     elseif player.sub_job == 'SAM' then
-        set_macro_page(9, 9)
+        set_macro_page(2, 19)
     elseif player.sub_job == 'THF' then
-        set_macro_page(8, 9)
+        set_macro_page(2, 19)
     else
-        set_macro_page(10, 9)
+        set_macro_page(2, 19)
     end
+end
+
+function user_job_lockstyle()
+    windower.chat.input('/lockstyleset 010')
 end

@@ -91,7 +91,7 @@ function init_gear_sets()
     sets.buff.Enchainment = {}
     sets.buff.Efflux = {
         back = gear.dw_jse_back,
-        legs = "Hashishin Tayt +1"
+        legs = "Hashishin Tayt +2"
     }
     sets.buff.Doom = set_combine(sets.buff.Doom, {})
 
@@ -375,7 +375,7 @@ function init_gear_sets()
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
         ammo = "Oshasha's Treatise",
-        head = "Nyame Helm",
+        head = "Hashishin Kavuk +2",
         neck = "Mirage Stole +1",
         ear1 = "Moonshade Earring",
         ear2 = "Ishvara Earring",
@@ -415,20 +415,7 @@ function init_gear_sets()
     sets.precast.WS['Vorpal Blade'].DT = sets.precast.WS['Chant du Cygne'].DT
     sets.precast.WS['Vorpal Blade'].Fodder = sets.precast.WS['Chant du Cygne'].Fodder
 
-    sets.precast.WS['Expiacion'] = set_combine(sets.precast.WS, {
-        head = "Lilitu Headpiece",
-        neck = "Caro Necklace",
-        ear1 = "Moonshade Earring",
-        ear2 = "Ishvara Earring",
-        body = "Assim. Jubbah +2",
-        hands = "Jhakri Cuffs +2",
-        ring2 = "Ifrit Ring",
-        ring1 = "Epona's Ring",
-        back = gear.wsd_jse_back,
-        waist = "Sailfi Belt +1",
-        legs = "Gleti's Breeches",
-        feet = gear.herculean_wsd_feet
-    })
+    sets.precast.WS['Expiacion'] = sets.precast.WS['Savage Blade']
     sets.precast.WS['Expiacion'].Acc = set_combine(sets.precast.WS.Acc, {
         ear1 = "Moonshade Earring",
         body = "Assim. Jubbah +2",
@@ -525,7 +512,7 @@ function init_gear_sets()
         ear1 = "Suppanomimi",
         ear2 = "Telos Earring",
         body = "Jhakri Robe +2",
-        hands = "Jhakri Cuffs +2",
+        hands = "Hashi. Bazu. +2",
         ring1 = "Ifrit Ring",
         ring2 = "Ilabrat Ring",
         back = gear.wsd_jse_back,
@@ -566,7 +553,7 @@ function init_gear_sets()
         ring2 = "Ilabrat Ring",
         back = "Cornflower Cape",
         waist = "Grunfeld Rope",
-        legs = "Hashishin Tayt +1",
+        legs = "Hashishin Tayt +2",
         feet = "Luhlaza Charuqs +1"
     }
 
@@ -627,18 +614,18 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].Magical = {
         ammo = "Ghastly Tathlum +1",
-        head = "Jhakri Coronal +2",
+        head = "Hashishin Kavuk +2",
         neck = "Sibyl Scarf",
         ear1 = "Hecate's Earring",
         ear2 = "Friomisi Earring",
         body = "Hashishin Mintan +2",
-        hands = "Amalric Gages",
+        hands = "Hashi. Bazu. +2",
         ring1 = "Medada's Ring",
         ring2 = "Metamor.Ring +1",
         back = gear.nuke_jse_back,
         waist = "Eschan Stone",
         legs = "Luhlaza Shalwar +3",
-        feet = "Amalric Nails"
+        feet = "Hashi. Basmak +2"
     }
 
     sets.midcast['Blue Magic'].Magical.Proc = {
@@ -907,7 +894,7 @@ function init_gear_sets()
         ring1 = "Kunaji Ring",
         ring2 = "Meridian Ring",
         back = "Cornflower Cape",
-        legs = "Hashishin Tayt +1",
+        legs = "Hashishin Tayt +2",
         feet = "Luhlaza Charuqs +1"
     }
 
@@ -1009,7 +996,7 @@ function init_gear_sets()
         ring2 = "Stikini Ring",
         back = "Cornflower Cape",
         waist = "Witful Belt",
-        legs = "Hashishin Tayt +1",
+        legs = "Hashishin Tayt +2",
         feet = "Luhlaza Charuqs +1"
     }
 
@@ -1022,7 +1009,7 @@ function init_gear_sets()
         ear1 = "Gifted Earring",
         ear2 = "Loquac. Earring",
         body = "Assim. Jubbah +2",
-        hands = "Hashi. Bazu. +1",
+        hands = "Hashi. Bazu. +2",
         ring1 = "Kishar Ring",
         ring2 = "Dark Ring",
         back = "Aurist's Cape +1",

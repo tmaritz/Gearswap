@@ -645,7 +645,7 @@ function init_gear_sets()
         },
         hands = "Inyan. Dastanas +2",
         legs = "Piety Pantaln. +3",
-        feet = "Ebers Duckbills +1",
+        feet = "Ebers Duckbills +2",
         neck = "Incanter's Torque",
         waist = "Olympus Sash",
         left_ear = "Mimir Earring",
@@ -676,7 +676,7 @@ function init_gear_sets()
     })
 
     sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'], {
-        feet = "Ebers Duckbills +1",
+        feet = "Ebers Duckbills +2",
         head = {
             name = "Telchine Cap",
             augments = {'Enh. Mag. eff. dur. +9'}
@@ -814,7 +814,7 @@ function init_gear_sets()
         back = "Alaunus's Cape",
         waist = "Embla Sash",
         legs = "Piety Pantaln. +3",
-        feet = "Ebers Duckbills +1"
+        feet = "Ebers Duckbills +2"
     }
 
     sets.midcast.Impact = {

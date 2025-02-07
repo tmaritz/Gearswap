@@ -174,6 +174,16 @@ function init_gear_sets()
         ring2 = "Archon Ring"
     }
 
+    sets.element.Wind = {
+        main = "Marin Staff +1",
+        ring2 = "Enki Strap"
+    }
+
+    sets.element.Light = {
+        main = "Daybreak",
+        ring2 = "Ammurapi Shield"
+    }
+
     sets.midcast.FastRecast = {
         main = gear.grioavolr_fc_staff,
         sub = "Clerisy Strap",
@@ -584,21 +594,21 @@ function init_gear_sets()
 
     -- Elemental Magic sets are default for handling low-tier nukes.
     sets.midcast['Elemental Magic'] = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
-        ear1 = "Bakarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
-        ring1 = "Medada's Ring",
-        ring2 = "Metamor. Ring +1",
-        back = "Lugh\'s Cape",
-        waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
+        main="Marin Staff +1",
+        sub="Enki Strap",
+        ammo="Ghastly Tathlum +1",
+        head="Arbatel Bonnet +2",
+        body="Arbatel Gown +2",
+        hands="Arbatel Bracers +2",
+        legs="Arbatel Pants +2",
+        feet="Agwu's Pigaches",
+        neck="Argute Stole +1",
+        waist="Refoccilation Stone",
+        left_ear="Malignance Earring",
+        right_ear="Barkaro. Earring",
+        left_ring="Medada's Ring",
+        right_ring="Metamor. Ring +1",
+        back="Lugh's Cape",
     }
 
     sets.midcast['Elemental Magic'].Resistant = {
@@ -692,79 +702,31 @@ function init_gear_sets()
     }
 
     -- Custom refinements for certain nuke tiers
-    sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {
-        ammo = "Pemphredo Tathlum",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
-        hands = "Amalric Gages",
-    })
-    sets.midcast['Elemental Magic'].HighTierNuke.Resistant =
-        set_combine(sets.midcast['Elemental Magic'].Resistant, {
-            ammo = "Pemphredo Tathlum",
-            ear1 = "Regal Earring",
-            ear2 = "Malignance Earring",
-            hands = "Amalric Gages",
-        })
-    sets.midcast['Elemental Magic'].HighTierNuke.Fodder = set_combine(sets.midcast['Elemental Magic'].Fodder, {
-        ammo = "Pemphredo Tathlum",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
-        hands = "Amalric Gages",
-    })
+    sets.midcast['Elemental Magic'].HighTierNuke = sets.midcast['Elemental Magic']
+    sets.midcast['Elemental Magic'].HighTierNuke.Resistant = sets.midcast['Elemental Magic'].Resistant
+    sets.midcast['Elemental Magic'].HighTierNuke.Fodder = sets.midcast['Elemental Magic'].Fodder
 
     sets.midcast.Helix = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
-        ear1 = "Bakarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
-        ring1 = "Medada's Ring",
-        ring2 = "Metamor. Ring +1",
-        back = "Lugh\'s Cape",
-        waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
+        main="Marin Staff +1",
+        sub="Enki Strap",
+        ammo="Ghastly Tathlum +1",
+        head="Arbatel Bonnet +2",
+        body="Arbatel Gown +2",
+        hands="Arbatel Bracers +2",
+        legs="Arbatel Pants +2",
+        feet="Agwu's Pigaches",
+        neck="Argute Stole +1",
+        waist="Refoccilation Stone",
+        left_ear="Malignance Earring",
+        right_ear="Barkaro. Earring",
+        left_ring="Medada's Ring",
+        right_ring="Metamor. Ring +1",
+        back="Lugh's Cape",
     }
 
-    sets.midcast.Helix.Resistant = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
-        ear1 = "Bakarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
-        ring1 = "Medada's Ring",
-        ring2 = "Metamor. Ring +1",
-        back = "Lugh\'s Cape",
-        waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
-    }
+    sets.midcast.Helix.Resistant = sets.midcast.Helix
 
-    sets.midcast.Helix.Proc = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
-        ear1 = "Bakarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
-        ring1 = "Medada's Ring",
-        ring2 = "Metamor. Ring +1",
-        back = "Lugh\'s Cape",
-        waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
-    }
+    sets.midcast.Helix.Proc = sets.midcast.Helix
 
     sets.midcast.Impact = {
         main = "Daybreak",

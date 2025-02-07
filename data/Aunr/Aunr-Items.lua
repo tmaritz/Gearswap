@@ -241,6 +241,11 @@ gear.taeon_pet_feet = {
     augments = {'Pet: Accuracy+23 Pet: Rng. Acc.+23', 'Pet: "Dbl. Atk."+5', 'Pet: Damage taken -4%'}
 }
 
+gear.telchine_enh_feet = {
+    name = "Telchine Braconi",
+    augments = {'Enh. Mag. eff. dur. +10',}
+}
+
 gear.taeon_regensird_feet = {
     name = "Taeon Boots",
     augments = {'Spell interruption rate down -9%', '"Regen" potency+3'}
