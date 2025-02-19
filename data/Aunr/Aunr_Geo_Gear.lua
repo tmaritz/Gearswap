@@ -1,12 +1,12 @@
 function user_job_setup()
     -- Options: Override default values
     state.OffenseMode:options('Normal')
-    state.CastingMode:options('Normal', 'Resistant', 'Fodder', 'Proc')
+    state.CastingMode:options('Normal', 'OccultAcumen')
     state.IdleMode:options('Normal', 'DT', 'DTMeva')
     state.PhysicalDefenseMode:options('PDT', 'NukeLock', 'GeoLock', 'PetPDT')
     state.MagicalDefenseMode:options('MDT', 'NukeLock')
     state.ResistDefenseMode:options('MEVA')
-    state.Weapons:options('None', 'Hammertime', 'Malignance')
+    state.Weapons:options('None', 'Idris', 'Hammertime', 'Max')
 
     gear.nuke_jse_back = {
         name = "Nantosuelta's Cape",
@@ -295,7 +295,7 @@ function init_gear_sets()
         hands = "Azimuth Gloves +2",
         legs = "Azimuth Tights +2",
         feet = "Azimuth Gaiters +2",
-        neck = "Mizu. Kubikazari",
+        neck = "Sibyl Scarf",
         waist = "Refoccilation Stone",
         left_ear = "Friomisi Earring",
         right_ear = "Malignance Earring",
@@ -304,11 +304,22 @@ function init_gear_sets()
         back = "Aurist's Cape +1"
     }
 
-    sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {})
+    sets.midcast['Elemental Magic'].OccultAcumen = {
+        ammo="Seraphic Ampulla",
+        head="Mall. Chapeau +2",
+        body="Azimuth Coat +2", -- Shango Robe
+        hands=gear.merlinic_occult_hands,
+        legs="Perdition Slops",
+        feet=gear.merlinic_occult_feet,
+        neck="Asperity Necklace", -- Lissome/Combatants better
+        waist="Oneiros Rope",
+        left_ear="Dedition Earring",
+        right_ear="Telos Earring",
+        left_ring="Chirich Ring +1",
+        right_ring="Crepuscular Ring",
+        back="Aurist's Cape +1",
+    }
 
-    sets.midcast['Elemental Magic'].Proc = set_combine(sets.midcast['Elemental Magic'], {})
-
-    sets.midcast['Elemental Magic'].Fodder = set_combine(sets.midcast['Elemental Magic'], {})
 
     sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {})
 
@@ -318,9 +329,23 @@ function init_gear_sets()
 
     sets.midcast['Dark Magic'] = set_combine(sets.midcast['Elemental Magic'], {})
 
-    sets.midcast.Drain = set_combine(sets.midcast['Elemental Magic'], {
-        head = 'Pixie Hairpin +1'
-    })
+    sets.midcast.Drain = {
+        main="Daybreak",
+        sub="Ammurapi Shield",
+        ammo="Plumose Sachet",
+        head="Bagua Galero +3",
+        body="Azimuth Coat +2",
+        hands=gear.merlinic_aspir_hands,
+        legs=gear.merlinic_aspir_legs,
+        feet=gear.merlinic_aspir_feet,
+        neck="Erra Pendant",
+        waist="Fucho-no-Obi",
+        left_ear="Hirudinea Earring",
+        right_ear="Malignance Earring",
+        left_ring="Medada's Ring",
+        right_ring="Evanescence Ring",
+        back="Aurist's Cape +1",
+    }
 
     sets.midcast.Aspir = sets.midcast.Drain
 
@@ -831,18 +856,13 @@ function init_gear_sets()
         sub = 'Genbu\'s Shield'
     }
 
-    sets.weapons.Malignance = {
-        main = "Malignance Pole",
-        sub = "Irenic Strap"
-    }
-
-    sets.weapons.Nehushtan = {
-        main = 'Nehushtan',
+    sets.weapons.Max = {
+        main = 'Maxentius',
         sub = 'Genbu\'s Shield'
     }
-    sets.weapons.DualWeapons = {
-        main = 'Nehushtan',
-        sub = 'Nehushtan'
+    sets.weapons.Idris = {
+        main = 'Idris',
+        sub = 'Genbu\'s Shield'
     }
 end
 

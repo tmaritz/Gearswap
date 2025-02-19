@@ -622,10 +622,12 @@ function init_gear_sets()
         body = "Erilaz Surcoat +2",
         waist = "Flume Belt +1"
     }
-    sets.TreasureHunter = set_combine(sets.TreasureHunter, {
+    sets.TreasureHunter = {
+        body = "Herculean Vest",
+        feet = gear.herculean_th_feet,
         waist = "Chaac Belt",
         ammo = "Per. Lucky Egg"
-    })
+    }
 
     -- Weapons sets
     sets.weapons.Epeolatry = {

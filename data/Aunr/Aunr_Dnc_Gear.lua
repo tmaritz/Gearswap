@@ -48,7 +48,12 @@ function init_gear_sets()
     -- Start defining the sets
     --------------------------------------
 
-    sets.TreasureHunter = set_combine(sets.TreasureHunter, {})
+    sets.TreasureHunter = {
+        body = "Herculean Vest",
+        feet = gear.herculean_th_feet,
+        waist = "Chaac Belt",
+        ammo = "Per. Lucky Egg"
+    }
 
     -- Extra Melee sets.  Apply these on top of melee sets.
     sets.Suppa = {
@@ -502,9 +507,9 @@ function init_gear_sets()
 
     -- Normal melee group
     sets.engaged = {
-        ammo = "Yamarang",
+        ammo = "Coiste Bodhar",
         head = "Malignance Chapeau",
-        neck = "Anu Torque",
+        neck = "Charis Necklace",
         ear1 = "Brutal Earring",
         ear2 = "Sherida Earring",
         body = "Malignance Tabard",

@@ -183,29 +183,25 @@ gear.merlinic_occult_body = {
     name = "Merlinic Jubbah",
     augments = {'Mag. Acc.+14', '"Occult Acumen"+11', 'MND+6'}
 }
-gear.merlinic_refresh_hands = {
-    name = "Merlinic Dastanas",
-    augments = {'Attack+17', 'Pet: INT+5', '"Refresh"+2', 'Accuracy+11 Attack+11'}
-}
-gear.merlinic_magpact_hands = {
-    name = "Merlinic Dastanas",
-    augments = {'Pet: Mag. Acc.+27', 'Blood Pact Dmg.+10', 'Pet: DEX+8', 'Pet: "Mag.Atk.Bns."+13'}
-}
-gear.merlinic_physpact_hands = {
-    name = "Merlinic Dastanas",
-    augments = {'Pet: Accuracy+28 Pet: Rng. Acc.+28', 'Blood Pact Dmg.+10', 'Pet: STR+7', 'Pet: Mag. Acc.+6'}
+gear.merlinic_aspir_hands = {
+    name="Merlinic Dastanas", 
+    augments={'"Drain" and "Aspir" potency +11','INT+3',}
 }
 gear.merlinic_occult_hands = {
-    name = "Merlinic Dastanas",
-    augments = {'"Mag.Atk.Bns."+25', '"Occult Acumen"+11', 'CHR+9'}
+    name="Merlinic Dastanas", 
+    augments={'Mag. Acc.+14 "Mag.Atk.Bns."+14','"Occult Acumen"+11','Mag. Acc.+7',}
+}
+gear.merlinic_aspir_legs = {
+    name="Merlinic Shalwar", 
+    augments={'"Drain" and "Aspir" potency +11','CHR+7','Mag. Acc.+7',}
 }
 gear.merlinic_nuke_feet = {
     name = "Merlinic Crackows",
     augments = {'Mag. Acc.+19 "Mag.Atk.Bns."+19', '"Conserve MP"+1', 'INT+11', 'Mag. Acc.+3', '"Mag.Atk.Bns."+15'}
 }
 gear.merlinic_aspir_feet = {
-    name = "Merlinic Crackows",
-    augments = {'Mag. Acc.+22 "Mag.Atk.Bns."+22', '"Drain" and "Aspir" potency +10', 'Mag. Acc.+15'}
+    name="Merlinic Crackows", 
+    augments={'"Drain" and "Aspir" potency +10','Mag. Acc.+14',}
 }
 gear.merlinic_treasure_feet = {
     name = "Merlinic Crackows",
@@ -216,8 +212,8 @@ gear.merlinic_refresh_feet = {
     augments = {'Pet: DEX+7', 'Pet: Mag. Acc.+7', '"Refresh"+2', 'Accuracy+20 Attack+20'}
 }
 gear.merlinic_occult_feet = {
-    name = "Merlinic Crackows",
-    augments = {'"Occult Acumen"+11', 'INT+8', 'Mag. Acc.+4'}
+    name="Merlinic Crackows", 
+    augments={'Mag. Acc.+5','"Occult Acumen"+11','INT+4','"Mag.Atk.Bns."+12',}
 }
 
 gear.taeon_pet_head = {

@@ -621,7 +621,7 @@ function init_gear_sets()
         body = "Hashishin Mintan +2",
         hands = "Hashi. Bazu. +2",
         ring1 = "Medada's Ring",
-        ring2 = "Metamor.Ring +1",
+        ring2 = "Metamor. Ring +1",
         back = gear.nuke_jse_back,
         waist = "Eschan Stone",
         legs = "Luhlaza Shalwar +3",
@@ -637,7 +637,7 @@ function init_gear_sets()
         body = "Hashishin Mintan +2",
         hands = "Amalric Gages",
         ring1 = "Medada's Ring",
-        ring2 = "Metamor.Ring +1",
+        ring2 = "Metamor. Ring +1",
         back = gear.nuke_jse_back,
         waist = "Eschan Stone",
         legs = "Luhlaza Shalwar +3",
@@ -663,7 +663,7 @@ function init_gear_sets()
         body = "Jhakri Robe +2",
         hands = "Amalric Gages",
         ring1 = "Medada's Ring",
-        ring2 = "Metamor.Ring +1",
+        ring2 = "Metamor. Ring +1",
         back = gear.nuke_jse_back,
         waist = "Eschan Stone",
         legs = "Luhlaza Shalwar +3",
@@ -678,20 +678,18 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].MagicalDex = set_combine(sets.midcast['Blue Magic'].Magical, {})
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
-        main = "Kaja Rod",
-        sub = "Nibiru Cudgel",
         ammo = "Ghastly Tathlum +1",
-        head = "Jhakri Coronal +2",
-        neck = "Sibyl Scarf",
-        ear1 = "Hecate's Earring",
-        ear2 = "Friomisi Earring",
+        head = "Hashishin Kavuk +2",
+        neck = "Mirage Stole +1",
+        ear1 = "Gwati Earring",
+        ear2 = "Calamitous Earring",
         body = "Hashishin Mintan +2",
-        hands = "Amalric Gages",
+        hands = "Hashi. Bazu. +2",
         ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = gear.nuke_jse_back,
         waist = "Eschan Stone",
-        legs = "Luhlaza Shalwar +3",
+        legs = "Hashishin Tayt +2",
         feet = "Hashi. Basmak +2"
     }
 
