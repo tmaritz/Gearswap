@@ -14,7 +14,7 @@ function user_job_setup()
     }
     gear.idle_jse_back = {
         name = "Nantosuelta's Cape",
-        augments = { 'Eva.+20 /Mag. Eva.+20', 'Pet: "Regen"+10', 'Pet: Damage taken -5%' }
+        augments = {'Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: "Regen"+5',}
     }
 
     gear.obi_cure_back = "Tempered Cape +1"
@@ -24,7 +24,7 @@ function user_job_setup()
     gear.obi_low_nuke_waist = "Sekhmet Corset"
 
     gear.obi_high_nuke_back = gear.nuke_jse_back
-    gear.obi_high_nuke_waist = "Refoccilation Stone"
+    gear.obi_high_nuke_waist = "Acuity Belt +1"
 
     gear.telchine_legs_pet = {
         name = "Telchine Braconi",
@@ -130,6 +130,7 @@ function init_gear_sets()
     }
     sets.Cure_Received = {
         neck = "Phalaina Locket",
+        hands = "Agwu's Gages",
         ring1 = "Kunaji Ring",
         ring2 = "Asklepian Ring",
         waist = "Gishdubar Sash"
@@ -175,20 +176,38 @@ function init_gear_sets()
     -- Midcast sets
     --------------------------------------
 
+    -- sets.midcast.FastRecast = {
+    --     main = "Solstice",
+    --     sub = "Culminus",
+    --     ammo = "Impatiens",
+    --     head = gear.vanya_fc_head,
+    --     body = "Agwu's Robe",
+    --     hands = "Geo. Mitaines +3",
+    --     legs = "Geo. Pants +1",
+    --     feet = "Amalric Nails",
+    --     neck = "Loricate Torque +1",
+    --     waist = "Witful Belt",
+    --     left_ear = "Loquac. Earring",
+    --     right_ear = "Malignance Earring",
+    --     left_ring = "Defending Ring",
+    --     right_ring = "Prolix Ring",
+    --     back = gear.idle_jse_back
+    -- }
+
     sets.midcast.FastRecast = {
-        main = "Solstice",
+        main = "Idris",
         sub = "Culminus",
-        ammo = "Impatiens",
-        head = gear.vanya_fc_head,
+        range = "Dunna",
+        head = "Bagua Galero +3",
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
         legs = "Geo. Pants +1",
-        feet = "Amalric Nails",
-        neck = "Loricate Torque +1",
-        waist = "Witful Belt",
-        left_ear = "Loquac. Earring",
-        right_ear = "Malignance Earring",
-        left_ring = "Defending Ring",
+        feet = "Regal Pumps +1",
+        neck = "Bagua Charm +1",
+        waist = "Austerity Belt",
+        left_ear = "Mendi. Earring",
+        right_ear = "Gna Earring",
+        left_ring = "Stikini Ring",
         right_ring = "Prolix Ring",
         back = gear.idle_jse_back
     }
@@ -225,15 +244,15 @@ function init_gear_sets()
         head = gear.vanya_healskill_head,
         body = "Vanya Robe",
         hands = "Geo. Mitaines +3",
-        legs = "Geo. Pants +1",
+        legs = "Agwu's Slops",
         feet = gear.vanya_cure_feet,
-        neck = "Loricate Torque +1",
+        neck = "Incanter's Torque",
         waist = "Witful Belt",
         left_ear = "Loquac. Earring",
         right_ear = "Mendi. Earring",
         left_ring = "Lebeche Ring",
         right_ring = "Prolix Ring",
-        back = "Fi Follet Cape"
+        back = "Fi Follet Cape +1"
     }
 
     sets.midcast.LightWeatherCure = set_combine(sets.midcast.Cure, {
@@ -276,7 +295,7 @@ function init_gear_sets()
         legs = "Azimuth Tights +2",
         feet = "Azimuth Gaiters +2",
         neck = "Mizu. Kubikazari",
-        waist = "Refoccilation Stone",
+        waist = "Acuity Belt +1",
         left_ear = "Friomisi Earring",
         right_ear = "Malignance Earring",
         left_ring = "Medada's Ring",
@@ -291,12 +310,12 @@ function init_gear_sets()
         sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
         head = "Azimuth Hood +2",
-        body = "Agwu's Robe",
+        body = "Azimuth Coat +3",
         hands = "Azimuth Gloves +2",
         legs = "Azimuth Tights +2",
         feet = "Azimuth Gaiters +2",
         neck = "Sibyl Scarf",
-        waist = "Refoccilation Stone",
+        waist = "Acuity Belt +1",
         left_ear = "Friomisi Earring",
         right_ear = "Malignance Earring",
         left_ring = "Medada's Ring",
@@ -591,8 +610,8 @@ function init_gear_sets()
     -- Idle sets
 
     sets.idle = {
-        main = "Daybreak",
-        sub = "Genbu's Shield",
+        main = "Mpaca's Staff",
+        sub = "Oneiros Grip",
         ammo = "Staunch Tathlum +1",
         head = "Nyame Helm",
         body = "Azimuth Coat +3",
@@ -652,7 +671,7 @@ function init_gear_sets()
         head = "Azimuth Hood +2",
         body = "Azimuth Coat +3",
         hands = "Geo. Mitaines +3",
-        legs = "Agwu's Slops",
+        legs = "Nyame Flanchard",
         feet = "Bagua Sandals +3",
         neck = "Bagua Charm +1",
         waist = "Isa Belt",
@@ -709,7 +728,7 @@ function init_gear_sets()
         legs = "Nyame Flanchard",
         feet = "Bagua Sandals +3",
         neck = "Loricate Torque +1",
-        waist = "Slipor Sash",
+        waist = "Acuity Belt +1",
         left_ear = "Lugalbanda Earring",
         right_ear = "Eabani Earring",
         left_ring = "Defending Ring",
@@ -760,6 +779,9 @@ function init_gear_sets()
     -- sets.Kiting = {feet="Geo. Sandals +1"}
     sets.Kiting = {
         feet = "Geo. Sandals +1"
+    }
+    sets.Kiting.Pet = {
+        feet = "Bagua Sandals +3"
     }
     sets.latent_refresh = {
         waist = "Fucho-no-obi"
