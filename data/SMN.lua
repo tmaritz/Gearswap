@@ -185,7 +185,7 @@ function job_filter_precast(spell, spellMap, eventArgs)
 		windower.chat.input:schedule(2,'/ma "'..spell.english..'" <me>')
 	end
 
-	if state.Buff['Astral Conduit'] and spell.type:startswith('BloodPact') and player.mp < (actual_cost(spell) + actual_cost(spell)) then
+	if state.Buff['Astral Conduit'] and spell.type:startswith('BloodPact') and player.mp < (actual_cost(spell) * 2) then
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		local available_ws = S(windower.ffxi.get_abilities().weapon_skills)
 
@@ -279,7 +279,7 @@ function job_aftercast(spell, spellMap, eventArgs)
 				end
 			end
 
-			if state.CastingMode.value == 'Resistant' then
+			if state.CastingMode.value:contains('Resistant') then
 				if sets.midcast.Pet[spell.english] and sets.midcast.Pet[spell.english].Acc then
 					equip(sets.midcast.Pet[spell.english].Acc)
 				elseif spellMap == 'PhysicalBloodPactRage' and sets.midcast.Pet.PhysicalBloodPactRage.Acc then
@@ -309,7 +309,7 @@ function job_aftercast(spell, spellMap, eventArgs)
 				add_to_chat(217, "Astral Conduit on, locking your "..spell.english.." set.")
 			end
 			eventArgs.handled = true
-		elseif pet_midaction() or avatars:contains(spell.english) then
+		elseif pet_midaction() or ((petWillAct + 2) > os.clock()) then
 			eventArgs.handled = true
         end
     end
@@ -837,18 +837,26 @@ function handle_elemental(cmdParams)
 		end
 	end
 
-	if command == 'nuke' or command == 'smallnuke' then
+	if command:endswith('nuke') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
-	
 		local tiers = {' II',''}
-		for k in ipairs(tiers) do
-			if spell_recasts[get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'')) < player.mp then
-				windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
-				windower.add_to_chat(7,'/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
-				return
+
+			for k in ipairs(tiers) do
+				local spell_name = data.elements.nuke_of[state.ElementalMode.value]..tiers[k]
+				local spell_id = get_spell_id_by_name(spell_name)
+
+				if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+					windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
+					return
+				end
 			end
-		end
-		add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
+			add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
+
+	elseif command == 'ninjutsu' then
+		windower.chat.input('/ma "'..data.elements.ninjutsu_nuke_of[state.ElementalMode.value]..': Ni" '..target..'')
+
+	elseif command == 'ancientmagic' then
+		windower.chat.input('/ma "'..data.elements.ancient_nuke_of[state.ElementalMode.value]..'" '..target..'')
 		
 	elseif command:contains('tier') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
@@ -860,8 +868,15 @@ function handle_elemental(cmdParams)
 		windower.chat.input('/ma "'..data.elements.nukera_of[state.ElementalMode.value]..'ra" '..target..'')
 		
 	elseif command == 'aga' then
-		windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga" '..target..'')
-		
+		local spell_recasts = windower.ffxi.get_spell_recasts()
+		local lower_spell = string.lower(data.elements.nukega_of[state.ElementalMode.value]..'ga II')
+		local spell_id = gearswap.validabils.english['/ma'][lower_spell]
+		if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga II'..'" '..target..'')
+		else
+			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga" '..target..'')
+		end
+
 	elseif command == 'helix' then
 		windower.chat.input('/ma "'..data.elements.helix_of[state.ElementalMode.value]..'helix" '..target..'')
 	

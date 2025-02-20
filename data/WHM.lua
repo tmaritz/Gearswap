@@ -54,8 +54,10 @@ function job_setup()
     state.Buff['Afflatus Solace'] = buffactive['Afflatus Solace'] or false
     state.Buff['Afflatus Misery'] = buffactive['Afflatus Misery'] or false
 	state.Buff['Divine Caress'] = buffactive['Divine Caress'] or false
+	state.Buff['Celerity'] = buffactive['Celerity'] or false
 	
 	state.AutoCaress = M(true, 'Auto Caress Mode')
+	state.AutoCelerity = M(true, 'Auto Celerity Mode')
 	state.Gambanteinn = M(false, 'Gambanteinn Cursna Mode')
 	state.BlockLowDevotion = M(true, 'Block Low Devotion')
 	
@@ -178,9 +180,14 @@ function job_pretarget(spell, spellMap, eventArgs)
 end
 
 function job_precast(spell, spellMap, eventArgs)
-
 	if spell.action_type == 'Magic' then
-		if spellMap == 'StatusRemoval' and not (spell.english == "Erase" or spell.english == "Esuna" or spell.english == "Sacrifice") then
+		if (spell.english == 'Arise' or spell.english == 'Raise III') then
+			if state.AutoCelerity.value and not state.Buff['Celerity'] and (state.Buff['Light Arts'] or state.Buff['Addendum: White']) and get_current_stratagem_count() > 0 then
+				eventArgs.cancel = true
+				windower.chat.input('/ja "Celerity" <me>')
+				windower.chat.input:schedule(1,'/ma "'..spell.english..'" '..spell.target.raw..'')
+			end
+		elseif spellMap == 'StatusRemoval' and not (spell.english == "Erase" or spell.english == "Esuna" or spell.english == "Sacrifice") then
 			local abil_recasts = windower.ffxi.get_ability_recasts()
 			if abil_recasts[32] < latency and not silent_check_amnesia() and state.AutoCaress.value then
 				eventArgs.cancel = true
@@ -274,7 +281,7 @@ function job_get_spell_map(spell, default_spell_map)
 				return 'LightDayCuraga'	
 			end
 		elseif default_spell_map == 'Cure' then
-			if state.Weapons.value ~= 'None' then
+			if state.Weapons.value ~= 'None' and not state.UnlockWeapons.value then
 				if state.Buff['Afflatus Solace'] then
 					if world.weather_element == 'Light' then
 						return '"MeleeLightWeatherCureSolace'
@@ -431,29 +438,47 @@ function handle_elemental(cmdParams)
 		end
 	end
 
-	if command == 'nuke' or command == 'smallnuke' then
+	if command:endswith('nuke') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
-	
-		if command == 'nuke' and state.ElementalMode.value == 'Light' then
-			local tiers = {'Holy II','Holy','Banish III','Banish II','Banish'}
-			for k in ipairs(tiers) do
-				if spell_recasts[get_spell_table_by_name(tiers[k]).id] < spell_latency and actual_cost(get_spell_table_by_name(tiers[k])) < player.mp then
-					windower.chat.input('/ma "'..tiers[k]..'" '..target..'')
+		
+		if state.ElementalMode.value == 'Light' then
+			local spells = {'Holy II','Holy','Banish III','Banish II','Banish'}
+			
+			if command == 'smallnuke' then
+				spells = {'Banish II','Banish'}
+			end
+			
+			for k in ipairs(spells) do
+				local spell_name = spells[k]
+				local spell_id = get_spell_id_by_name(spell_name)
+				
+				if spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+					windower.chat.input('/ma "'..spell_name..'" '..target..'')
 					return
 				end
 			end
 		else
-			local tiers = {' II',''}
+			tiers = {' II',''}
+
 			for k in ipairs(tiers) do
-				if spell_recasts[get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'')) < player.mp then
+				local spell_name = data.elements.nuke_of[state.ElementalMode.value]..tiers[k]
+				local spell_id = get_spell_id_by_name(spell_name)
+
+				if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
 					windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
 					return
 				end
 			end
+			add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
 		end
-		add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
-		
-	elseif command:contains('tier') then
+
+	elseif command == 'ninjutsu' then
+		windower.chat.input('/ma "'..data.elements.ninjutsu_nuke_of[state.ElementalMode.value]..': Ni" '..target..'')
+
+	elseif command == 'ancientmagic' then
+		windower.chat.input('/ma "'..data.elements.ancient_nuke_of[state.ElementalMode.value]..'" '..target..'')
+
+	elseif command:startswith('tier') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		local tierlist = {['tier1']='',['tier2']=' II',['tier3']=' III',['tier4']=' IV',['tier5']=' V',['tier6']=' VI'}
 		
@@ -461,10 +486,16 @@ function handle_elemental(cmdParams)
 		
 	elseif command == 'ara' then
 		windower.chat.input('/ma "'..data.elements.nukera_of[state.ElementalMode.value]..'ra" '..target..'')
-		
+
 	elseif command == 'aga' then
-		windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga" '..target..'')
-		
+		local spell_recasts = windower.ffxi.get_spell_recasts()
+		local lower_spell = string.lower(data.elements.nukega_of[state.ElementalMode.value]..'ga II')
+		local spell_id = gearswap.validabils.english['/ma'][lower_spell]
+		if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga II'..'" '..target..'')
+		else
+			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga" '..target..'')
+		end
 	elseif command == 'helix' then
 		windower.chat.input('/ma "'..data.elements.helix_of[state.ElementalMode.value]..'helix" '..target..'')
 	
@@ -473,7 +504,7 @@ function handle_elemental(cmdParams)
 	
 	elseif command == 'bardsong' then
 		windower.chat.input('/ma "'..data.elements.threnody_of[state.ElementalMode.value]..' Threnody" '..target..'')
-
+		
     else
         add_to_chat(123,'Unrecognized elemental command.')
     end

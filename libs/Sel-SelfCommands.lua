@@ -371,8 +371,9 @@ function handle_weapons(cmdParams)
 	if type(cmdParams) == 'string' then
 		weaponSet = cmdParams
 	elseif type(cmdParams) == 'table' then
-		weaponSet = cmdParams[1]
+		weaponSet = table.concat(cmdParams, ' ')
 	end
+	
 	if weaponSet == nil then
 		if sets.weapons[state.Weapons.value] then
 			equip_weaponset(state.Weapons.value)
@@ -380,29 +381,33 @@ function handle_weapons(cmdParams)
 			enable('main','sub','range','ammo')
 		end
 	elseif weaponSet:lower() == 'default' then
-		if (player.sub_job == 'DNC' or player.sub_job == 'NIN') and state.Weapons:contains('DualWeapons') and sets.weapons.DualWeapons then
-			if state.Weapons.value ~= 'DualWeapons' then
-				state.Weapons:set('DualWeapons')
-			end
-			equip_weaponset('DualWeapons')
+		if not data.jobs.dual_wield_jobs:contains(player.main_job) and (player.sub_job == 'DNC' or player.sub_job == 'NIN') and state.Weapons:contains(default_dual_weapons) and sets.weapons[default_dual_weapons] then
+			state.Weapons:set(default_dual_weapons)
+		elseif default_weapons and state.Weapons:contains(default_weapons) and sets.weapons[default_weapons] then
+			state.Weapons:set(default_weapons)
 		else
 			state.Weapons:reset()
-			if sets.weapons[state.Weapons.value] then
-				equip_weaponset(state.Weapons.value)
-			elseif state.Weapons.value == 'None' then
-				enable('main','sub','range','ammo')
-			end
+		end
+		equip_weaponset(state.Weapons.value)
+	elseif weaponSet:lower() == 'initialize' then
+		if not data.jobs.dual_wield_jobs:contains(player.main_job) and (player.sub_job == 'DNC' or player.sub_job == 'NIN') and state.Weapons:contains(default_dual_weapons) and sets.weapons[default_dual_weapons] then
+			state.Weapons:set(default_dual_weapons)
+		elseif data.jobs.mage_jobs:contains(player.main_job) and not data.jobs.mage_jobs:contains(player.sub_job) and default_weapons and state.Weapons:contains(default_weapons) and sets.weapons[default_weapons] then
+			state.Weapons:set(default_weapons)
+		else
+			state.Weapons:reset()
+		end
+		equip_weaponset(state.Weapons.value)
+	elseif weaponSet:lower() == 'none' then
+		if state.Weapons:contains('None') then
+			enable('main','sub','range','ammo')
+			state.Weapons:set('None')
 		end
 	elseif sets.weapons[weaponSet] then
 		if state.Weapons:contains(weaponSet) and state.Weapons.value ~= weaponSet then
 			state.Weapons:set(weaponSet)
 		end
 		equip_weaponset(weaponSet)
-	elseif weaponSet:lower() == 'none' then
-		if state.Weapons:contains('None') then
-			enable('main','sub','range','ammo')
-			state.Weapons:set('None')
-		end
 	else
 		if sets.weapons[state.Weapons.value] then
 			equip_weaponset(state.Weapons.value)
@@ -618,9 +623,10 @@ function handle_smartws(cmdParams)
 	
 	if cmdParams[1] then
 		if cmdParams[1] == 'ws' then
-			if cmdParams[2] then
-				smartws = table.concat(cmdParams, ' ')
-				add_to_chat(122,'SmartWS Set to: '..smartws..'.')
+			table.remove(cmdParams, 1)
+			if cmdParams[1] then
+				smartws = table.concat(cmdParams, ' '):ucfirst()
+				add_to_chat(122,'SmartWS set to: '..smartws..'.')
 			else
 				add_to_chat(122,'Invalid command, Syntax: //gs c smartws ws Weaponskill Name')
 			end
@@ -874,6 +880,12 @@ function handle_displayshot()
 		add_to_chat(8,'Shot Effect: Dispel.')
 	end
 
+end
+
+function handle_macropage()
+	if page_cache then
+		send_command('@input /macro set '..page_cache)
+	end
 end
 
 function handle_curecheat(cmdParams)
@@ -1142,12 +1154,9 @@ function handle_help(cmdParams)
     end
 end
 
-
 -- A function for testing lua code.  Called via "gs c test".
 function handle_test(cmdParams)
-	table.vprint(spell_to_buff)
-	--table.vprint(gearswap.res.spells[56].targets)
-	--windower.add_to_chat(tostring(gearswap.res.spells[56].targets))
+	table.print(rolled_eleven)
     if user_test then
         user_test(cmdParams)
     elseif job_test then
@@ -1194,4 +1203,5 @@ selfCommandMaps = {
 	['killstatue']		= handle_killstatue,
 	['smartws']			= handle_smartws,
 	['scholar']			= handle_scholar,
+	['macropage']		= handle_macropage,
 	}

@@ -99,95 +99,84 @@ function init_include()
     -- General melee offense/defense modes, allowing for hybrid set builds, as well as idle/resting/weaponskill.
     -- This just defines the vars and sets the descriptions.  List modes with no values automatically
     -- get assigned a 'Normal' default value.
-	state.CraftingMode		  = M{['description'] = 'Crafting Mode','None','Alchemy','Bonecraft','Clothcraft','Cooking','Fishing','Goldsmithing','Leathercraft','Smithing','Woodworking'}
-	state.CraftQuality  	  = M{['description'] = 'Crafting Quality','Normal','HQ','NQ'}
-	state.OffenseMode         = M{['description'] = 'Offense Mode'}
-	state.HybridMode          = M{['description'] = 'Hybrid Mode'}
-	state.RangedMode          = M{['description'] = 'Ranged Mode'}
-	state.WeaponskillMode     = M{['description'] = 'Weaponskill Mode','Match'}
+	state.AutoBuffMode 		  = M{['description'] = 'Auto Buff Mode','Off','Auto'}
+	state.AutoSambaMode 	  = M{['description'] = 'Auto Samba Mode', 'Off', 'Haste Samba', 'Aspir Samba', 'Drain Samba II'}
 	state.CastingMode         = M{['description'] = 'Casting Mode'}
-	state.IdleMode            = M{['description'] = 'Idle Mode'}
-	state.RestingMode         = M{['description'] = 'Resting Mode'}
-
+	state.CombatForm          = M{['description'] = 'Combat Form', ['string']=''}
+	state.CombatWeapon        = M{['description'] = 'Combat Weapon', ['string']=''}
+	state.CraftQuality  	  = M{['description'] = 'Crafting Quality','Normal','HQ','NQ'}
+	state.CraftingMode		  = M{['description'] = 'Crafting Mode','None','Alchemy','Bonecraft','Clothcraft','Cooking','Fishing','Goldsmithing','Leathercraft','Smithing','Woodworking'}
 	state.DefenseMode         = M{['description'] = 'Defense Mode', 'None', 'Physical', 'Magical', 'Resist'}
-	state.PhysicalDefenseMode = M{['description'] = 'Physical Defense Mode', 'PDT'}
+	state.ElementalMode 	  = M{['description'] = 'Elemental Mode', 'Fire','Ice','Wind','Earth','Lightning','Water','Light','Dark'}
+	state.EquipStop           = M{['description'] = 'Stop Equipping Gear', 'off', 'precast', 'midcast', 'pet_midcast'}
+	state.HybridMode          = M{['description'] = 'Hybrid Mode'}
+	state.IdleMode            = M{['description'] = 'Idle Mode'}
+	state.MagicBurstMode 	  = M{['description'] = 'Magic Burst Mode', 'Off', 'Single', 'Lock'}
 	state.MagicalDefenseMode  = M{['description'] = 'Magical Defense Mode', 'MDT'}
-	state.ResistDefenseMode   = M{['description'] = 'Resistance Defense Mode', 'MEVA'}
-	
+	state.OffenseMode         = M{['description'] = 'Offense Mode'}
+	state.PCTargetMode        = M{['description'] = 'PC Target Mode', 'default', 'stpt', 'stal', 'stpc'}
 	state.Passive   		  = M{['description'] = 'Passive Mode','None'}
-	state.Kiting              = M(false, 'Kiting')
-	state.SelectNPCTargets    = M(false, 'Select NPC Targets')
-	state.Capacity 			  = M(false, 'Capacity Mode')
-	state.ReEquip 			  = M(false, 'ReEquip Mode')
-	state.AutoArts	 		  = M(false, 'AutoArts Mode')
-	state.AutoLockstyle	 	  = M(false, 'AutoLockstyle Mode')
-	state.AutoTrustMode 	  = M(false, 'Auto Trust Mode')
-	state.RngHelper		 	  = M(false, 'RngHelper')
-	state.HoverShot		 	  = M(true, 'HoverShot')
-	state.RngHelperQuickDraw  = M(false, 'RngHelperQuickDraw')
-	state.AutoTankMode 		  = M(false, 'Auto Tank Mode')
+	state.PhysicalDefenseMode = M{['description'] = 'Physical Defense Mode', 'PDT'}
+	state.RangedMode          = M{['description'] = 'Ranged Mode'}
+	state.ResistDefenseMode   = M{['description'] = 'Resistance Defense Mode', 'MEVA'}
+	state.RestingMode         = M{['description'] = 'Resting Mode'}
+	state.RuneElement 		  = M{['description'] = 'Rune Element','Ignis','Gelus','Flabra','Tellus','Sulpor','Unda','Lux','Tenebrae'}
+	state.SkillchainMode 	  = M{['description'] = 'Skillchain Mode', 'Off', 'Single', 'Lock'}
+	state.Weapons		  	  = M{['description'] = 'Weapons','None','Weapons'}
+	state.WeaponskillMode     = M{['description'] = 'Weaponskill Mode','Match'}
+	
+	state.AdjustTargets	  	  = M(true, 'Automatically Adjust Targets')
 	state.AutoAcceptRaiseMode = M(false, 'Auto Accept Raise Mode')
+	state.AutoArts	 		  = M(false, 'AutoArts Mode')
+	state.AutoCleanupMode  	  = M(false, 'Auto Cleanup Mode')
+	state.AutoContradanceMode = M(true, 'Auto Contradance Mode')
+	state.AutoFoodMode		  = M(false, 'Auto Food Mode')
+	state.AutoHolyWaterMode   = M(true, 'Auto Holy Water Mode')
+	state.AutoLockstyle	 	  = M(false, 'AutoLockstyle Mode')
 	state.AutoNukeMode 		  = M(false, 'Auto Nuke Mode')
+	state.AutoRemoveDoomMode  = M(true, 'Auto Remove Doom Mode')
 	state.AutoRuneMode 		  = M(false, 'Auto Rune Mode')
 	state.AutoShadowMode 	  = M(false, 'Auto Shadow Mode')
-	state.AutoContradanceMode = M(true, 'Auto Contradance Mode')
-	state.AutoHolyWaterMode   = M(true, 'Auto Holy Water Mode')
-	state.AutoRemoveDoomMode  = M(true, 'Auto Remove Doom Mode')
+	state.AutoSubMode 		  = M(false, 'Auto Sublimation Mode')
+	state.AutoSuperJumpMode   = M(false, 'Auto SuperJump Mode')
+	state.AutoTankMode 		  = M(false, 'Auto Tank Mode')
+	state.AutoTrustMode 	  = M(false, 'Auto Trust Mode')
 	state.AutoWSMode		  = M(false, 'Auto Weaponskill Mode')
 	state.AutoWSRestore		  = M(true, 'Auto Weaponskill Restore Mode')
-	state.AutoFoodMode		  = M(false, 'Auto Food Mode')
-	state.AutoSubMode 		  = M(false, 'Auto Sublimation Mode')
-	state.AutoCleanupMode  	  = M(false, 'Auto Cleanup Mode')
-	state.AutoSuperJumpMode   = M(false, 'Auto SuperJump Mode')
-	state.DisplayMode  	  	  = M(true, 'Display Mode')
-	state.UseCustomTimers 	  = M(true, 'Use Custom Timers')
 	state.CancelStoneskin	  = M(true, 'Auto Cancel Stoneskin')
-	state.BlockMidaction	  = M(true, 'Block Midaction')
-	state.MaintainAftermath	  = M(true, 'Maintain Aftermath')
-	state.RefineWaltz		  = M(true, 'RefineWaltz')
+	state.Capacity 			  = M(false, 'Capacity Mode')
+	state.DisplayMode  	  	  = M(true, 'Display Mode')
 	state.ElementalWheel 	  = M(false, 'Elemental Wheel')
-	state.MaintainDefense 	  = M(false, 'Maintain Defense')
-	state.SkipProcWeapons 	  = M(false, 'Skip Proc Weapons')
-	state.NotifyBuffs		  = M(false, 'Notify Buffs')
-	state.UnlockWeapons		  = M(false, 'Unlock Weapons')
-	state.SelfWarp2Block 	  = M(true, 'Block Warp2 on Self')
+	state.HoverShot		 	  = M(true, 'HoverShot')
+	state.Kiting              = M(false, 'Kiting')
+	state.MaintainAftermath	  = M(true, 'Maintain Aftermath')
 	state.MiniQueue		 	  = M(true, 'MiniQueue')
-	state.WakeUpWeapons	 	  = M(false, 'Swap Weapons To Wake Up')
-	
+	state.NotifyBuffs		  = M(false, 'Notify Buffs')
+	state.ReEquip 			  = M(false, 'ReEquip Mode')
+	state.RefineWaltz		  = M(true, 'RefineWaltz')
+	state.RngHelper		 	  = M(false, 'RngHelper')
+	state.RngHelperQuickDraw  = M(false, 'RngHelperQuickDraw')
+	state.SelectNPCTargets    = M(false, 'Select NPC Targets')
+	state.SelfWarp2Block 	  = M(true, 'Block Warp2 on Self')
+	state.SkipProcWeapons 	  = M(false, 'Skip Proc Weapons')
+	state.UnlockWeapons		  = M(false, 'Unlock Weapons')
+	state.UseCustomTimers 	  = M(true, 'Use Custom Timers')
+	state.WakeUpWeapons 	  =	M(false, 'Swap Weapons To Wake Up')
 
-	state.AutoBuffMode 		  = M{['description'] = 'Auto Buff Mode','Off','Auto'}
-	state.RuneElement 		  = M{['description'] = 'Rune Element','Ignis','Gelus','Flabra','Tellus','Sulpor','Unda','Lux','Tenebrae'}
-	state.ElementalMode 	  = M{['description'] = 'Elemental Mode', 'Fire','Ice','Wind','Earth','Lightning','Water','Light','Dark'}
-	state.AutoSambaMode 	  = M{['description']= 'Auto Samba Mode', 'Off', 'Haste Samba', 'Aspir Samba', 'Drain Samba II'}
-
-	state.MagicBurstMode 	  = M{['description'] = 'Magic Burst Mode', 'Off', 'Single', 'Lock'}
-	state.SkillchainMode 	  = M{['description'] = 'Skillchain Mode', 'Off', 'Single', 'Lock'}
-	state.PCTargetMode        = M{['description'] = 'PC Target Mode', 'default', 'stpt', 'stal', 'stpc'}
-	state.EquipStop           = M{['description'] = 'Stop Equipping Gear', 'off', 'precast', 'midcast', 'pet_midcast'}
-	state.CombatWeapon        = M{['description']='Combat Weapon', ['string']=''}
-	state.CombatForm          = M{['description']='Combat Form', ['string']=''}
-	
+    state.Buff = {}
 	NotifyBuffs = S{}
 	
-	if data.jobs.mage_jobs:contains(player.main_job) then
-		state.Weapons		  = M{['description'] = 'Weapons','None','Weapons'}
-	else
-		state.Weapons		  = M{['description'] = 'Weapons','Weapons','None'}
-	end
-	
-    -- Non-mode vars that are used for state tracking.
-    state.MaxWeaponskillDistance = 0
-    state.Buff = {}
-	
-	--Tracking these here because required quick actions on multiple jobs.
-	state.Buff['Light Arts'] = buffactive['Light Arts'] or false
-	state.Buff['Addendum: White'] = buffactive['Addendum: White'] or false
-	state.Buff['Dark Arts'] = buffactive['Dark Arts'] or false
-	state.Buff['Addendum: Black'] = buffactive['Addendum: Black'] or false
-	state.Buff['Accession'] = buffactive['Accession'] or false
-	state.Buff['Manifestation'] = buffactive['Manifestation'] or false
-	state.Buff['Warcry'] = buffactive['Warcry'] or false
-	state.Buff['SJ Restriction'] = buffactive['SJ Restriction'] or false
+	--Tracking these here because they require quick tracking on many jobs.
+	state.Buff['Light Arts'] 		= buffactive['Light Arts'] 		or false
+	state.Buff['Addendum: White'] 	= buffactive['Addendum: White'] or false
+	state.Buff['Dark Arts'] 		= buffactive['Dark Arts'] 		or false
+	state.Buff['Addendum: Black'] 	= buffactive['Addendum: Black'] or false
+	state.Buff['Accession'] 		= buffactive['Accession'] 		or false
+	state.Buff['Manifestation'] 	= buffactive['Manifestation'] 	or false
+	state.Buff['Warcry'] 			= buffactive['Warcry'] 			or false
+	state.Buff['SJ Restriction'] 	= buffactive['SJ Restriction'] 	or false
+	state.Buff['Invisible'] 		= buffactive['Invisible'] 		or false
+	state.Buff['Sneak'] 			= buffactive['Sneak'] 			or false
 	
     -- Classes describe a 'type' of action.  They are similar to state, but
     -- may have any free-form value, or describe an entire table of mapped values.
@@ -229,34 +218,40 @@ function init_include()
     end
 	
 	-- Define and default variables for global functions that can be overwritten.
-	useItem = false
-	useItemName = ''
-	useItemSlot = ''
-	petWillAct = 0
 	autonuke = 'Fire'
 	autows = ''
 	autows_list = {}
-	prepared_action = ''
-	weapons_pagelist = {}
-	smartws = nil
-	rangedautows = ''
 	autowstp = 1000
-	rangedautowstp = 1000
-	latency = .5
-	spell_latency = nil
 	buffup = ''
+	conserveshadows = true
+	consumable_bag = 'satchel'
 	curecheat = false
-	next_cast = 0
+	currency_bag = 'sack'
+	default_dual_weapons = 'DualWeapons'
+	default_weapons = nil
 	delayed_cast = ''
 	delayed_target = ''
 	equipped = 0
-	consumable_bag = 'satchel'
-	
-	time_test = false
-	selindrile_warned = false
-	utsusemi_cancel_delay = .5
-	conserveshadows = true
 	filtered_st_command = false
+	last_weapons = nil
+	latency = .5
+	next_cast = 0
+	page_cache = nil
+	petWillAct = 0
+	prepared_action = ''
+	rangedautows = ''
+	rangedautowstp = 1000
+	rolled_eleven = T{}
+	selindrile_warned = false
+	smartws = nil
+	spell_latency = nil
+	time_test = false
+	trust_list = {}
+	useItem = false
+	useItemName = ''
+	useItemSlot = ''
+	utsusemi_cancel_delay = .5
+	weapons_pagelist = {}
 	
 	-- Buff tracking that buffactive can't detect
 	lastshadow = "Utsusemi: San"
@@ -415,7 +410,7 @@ function init_include()
 			if pre_tick then
 				if pre_tick() then return end
 			end
-			if not (buffactive['Sneak'] or buffactive['Invisible'] ) then
+			if not state.Buff['Invisible'] then
 				if user_job_tick then
 					if user_job_tick() then return end
 				end
@@ -439,8 +434,11 @@ function init_include()
 				if extra_user_tick then
 					if extra_user_tick() then return end
 				end
-			end			
+			end
+			
+			if check_cleanup() then return true end
 		end
+		
 		tickdelay = os.clock() + .5
 		if in_combat and (not ((last_in_combat + 6) > os.clock())) then
 			local bt = windower.ffxi.get_mob_by_target('bt') or nil
@@ -526,6 +524,7 @@ function default_zone_change(new_id,old_id)
 	state.AutoFoodMode:reset()
 	state.AutoWSMode:reset()
 	state.AutoNukeMode:reset()
+	rolled_eleven = T{}
 	if state.CraftingMode.value ~= 'None' then
 		enable('main','sub','range','ammo','head','neck','lear','rear','body','hands','lring','rring','back','waist','legs','feet')
 		state.CraftingMode:reset()
@@ -608,78 +607,10 @@ function global_on_load()
 		else
 			state.SkipProcWeapons:reset()
 		end
-		
-		if state.Weapons.value == 'None' then
-			enable('main','sub','range','ammo')
-		else
-			send_command('@wait 4;gs c weapons Default')
-		end
 	end
 end
 
--- Function to revert binds when unloading.
 function global_unload()
-	send_command('unbind ^f8')
-	send_command('unbind !f8')
-	send_command('unbind @f8')
-	send_command('unbind f9')
-	send_command('unbind ^f9')
-	send_command('unbind !f9')
-	send_command('unbind @f9')
-	send_command('unbind f10')
-	send_command('unbind ^f10')
-	send_command('unbind !f10')
-	send_command('unbind @f10')
-	send_command('unbind f11')
-	send_command('unbind ^f11')
-	send_command('unbind !f11')
-	send_command('unbind @f11')
-	send_command('unbind f12')
-	send_command('unbind ^f12')
-	send_command('unbind !f12')
-	send_command('unbind @f12')
-	send_command('unbind ^@!pause')
-	send_command('unbind ^pause')
-	send_command('unbind !pause')
-	send_command('unbind @pause')
-	send_command('unbind ^@!pause')
-
-	send_command('unbind ^\\\\')
-	send_command('unbind @\\\\')
-	send_command('unbind !\\\\')
-
-	send_command('unbind ^`')
-	send_command('unbind !`')
-	send_command('unbind @`')
-
-	send_command('unbind ^backspace')
-	send_command('unbind !backspace')
-	send_command('unbind @backspace')
-
-	send_command('unbind ^r')
-	send_command('unbind !r')
-	send_command('unbind @r')
-
-	send_command('unbind ^y')
-	send_command('unbind !y')
-	send_command('unbind @y')
-
-	send_command('unbind ^q')
-	send_command('unbind !q')
-	send_command('unbind @q')
-	
-	send_command('unbind ^-')
-	send_command('unbind !-')
-	send_command('unbind @-')
-
-	send_command('unbind ^=')
-	send_command('unbind !=')
-	send_command('unbind @=')
-
-	send_command('unbind ^delete')
-	send_command('unbind !delete')
-	send_command('unbind @delete')
-	
 	if clear_job_states then
 		clear_job_states()
 	end		
@@ -709,6 +640,7 @@ end
 -- action - string defining the function mapping to use (precast, midcast, etc)
 function handle_actions(spell, action)
     -- Init an eventArgs that allows cancelling.
+	if state.CraftingMode.value ~= 'None' then return end
     local eventArgs = {handled = false, cancel = false}
 
     mote_vars.set_breadcrumbs:clear()
@@ -996,7 +928,6 @@ function extra_default_filtered_action(spell, eventArgs)
 	elseif spell.action_type == 'Magic' and not silent_can_use(spell.recast_id) and stepdown(spell, eventArgs) then
 	elseif not can_use(spell) then
 	end
-	
 	cancel_spell()
 	eventArgs.cancel = true
 end
@@ -1011,33 +942,24 @@ function default_pretarget(spell, spellMap, eventArgs)
 end
 
 function default_precast(spell, spellMap, eventArgs)
-	if eventArgs.cancel or spell.english == prepared_action then
-		cancel_spell()
-		return
-	else
-		prepared_action = spell.english
-	end
-	if just_acted(spell, spellMap, eventArgs) then
-		return	
-	else
-		equip(get_precast_set(spell, spellMap))
-	end
-	
+	prepared_action = spell.english
     cancel_conflicting_buffs(spell, spellMap, eventArgs)
+	equip(get_precast_set(spell, spellMap))
 	
+	local delay = 0
 	if spell.action_type == 'Magic' then
-		next_cast = os.clock() + (spell.cast_time/4) + 3 - latency
+		delay = (spell.cast_time/4) + 2.75
 	elseif spell.type == 'WeaponSkill' then
-		next_cast = os.clock() + 3 - latency
+		delay = 2.75
 	elseif spell.action_type == 'Ability' then
-		next_cast = os.clock() + 1.1 - latency
+		delay = .85
 	elseif spell.action_type == 'Item' then
-		next_cast = os.clock() +  1.8 - latency
+		delay = 1.55
 	elseif spell.action_type == 'Ranged Attack' then
-		next_cast = os.clock() + 1.15 - latency
+		delay = .9
 	end
 
-	if tickdelay < next_cast then tickdelay = next_cast +.1 end
+	add_next_cast_delay(delay)
 end
 
 function default_post_precast(spell, spellMap, eventArgs)
@@ -1244,27 +1166,26 @@ end
 
 function default_aftercast(spell, spellMap, eventArgs)
 	prepared_action = ''
+	local delay = 0
 	if spell.interrupted then
-		if spell.type:contains('Magic') or spell.type == 'Ninjutsu' or spell.type == 'BardSong' then
-			next_cast = os.clock() + 3.35 - latency
+		if spell.action_type == 'Magic' then
+			delay = 3.35 - latency
 		else
-			next_cast = os.clock() + 1.75 - latency
+			delay = 1.75 - latency
 		end
 	elseif spell.action_type == 'Magic' then
-		next_cast = os.clock() + 2.9 - latency
+		delay = 2.9 - latency
 	elseif spell.type == 'WeaponSkill' then
-		next_cast = os.clock() + 2.7 - latency
+		delay = 2.7 - latency
 	elseif spell.action_type == 'Ability' then
-		next_cast = os.clock() + .8 - latency
+		delay = .8 - latency
 	elseif spell.action_type == 'Item' then
-		next_cast = os.clock() + 1.5 - latency
+		delay = 1.5 - latency
 	elseif spell.action_type == 'Ranged Attack' then
-		next_cast = os.clock() + .85 - latency
+		delay = .85 - latency
 	end
 	
-	if tickdelay < next_cast then tickdelay = next_cast +.1 end
-	
-	if tickdelay < next_cast then tickdelay = next_cast +.1 end
+	add_next_cast_delay(delay)
 	
 	if not spell.interrupted then
 		if spell.target.type == 'MONSTER' and spell.target.hpp > 0 then
@@ -1441,7 +1362,7 @@ function pre_tick()
 	if check_doomed() then return true end
 	if check_delayed_cast() then return true end
 	if check_use_item() then return true end
-	if (buffactive['Sneak'] or buffactive['Invisible']) then return false end
+	if state.Buff['Invisible'] then return false end
 	if check_rune() then return true end
 	if check_shadows() then return true end
 	if check_trust() then return true end
@@ -1453,10 +1374,10 @@ function default_tick()
 	if check_sub() then return true end
 	if check_food() then return true end
 	if check_samba() then return true end
-	if check_ws() then return true end
 	if check_cpring_buff() then return true end
+	if state.Buff['Sneak'] then return false end
+	if check_ws() then return true end
 	if check_nuke() then return true end
-	if check_cleanup() then return true end
 	return false
 end
 
@@ -1489,7 +1410,6 @@ function handle_equipping_gear(playerStatus, petStatus)
     if job_handle_equipping_gear then
         job_handle_equipping_gear(playerStatus, eventArgs)
     end
-
 
 	if sets.weapons[state.Weapons.value] and state.ReEquip.value and state.Weapons.value ~= 'None' and not state.UnlockWeapons.value then
 		for i in pairs(data.slots.weapon_slots) do
@@ -1585,10 +1505,6 @@ function get_idle_set(petStatus)
         end
     end
 
-	if buffactive['Elvorseal'] and sets.buff.Elvorseal then
-		idleSet = set_combine(idleSet, sets.buff.Elvorseal)
-	end
-
 	--Apply time based gear.
     if (state.IdleMode.value == 'Normal' or state.IdleMode.value:contains('Sphere')) and not pet.isvalid then
 	    if player.hpp < 80 then
@@ -1606,12 +1522,14 @@ function get_idle_set(petStatus)
 		end
 	end
 
-    if data.areas.assault:contains(world.area) and sets.Assault then
-        idleSet = set_combine(idleSet, sets.Assault)
-    end
-	
-    if sets.Reive and buffactive['Reive Mark'] then
-        idleSet = set_combine(idleSet, sets.Reive)
+	if buffactive['Elvorseal'] then
+		if sets.buff.Elvorseal then
+			idleSet = set_combine(idleSet, sets.buff.Elvorseal)
+		end
+    elseif buffactive['Reive Mark'] then
+		if sets.Reive then
+			idleSet = set_combine(idleSet, sets.Reive)
+		end
     end
 
     if user_customize_idle_set then
@@ -1635,16 +1553,26 @@ function get_idle_set(petStatus)
 			idleSet = set_combine(idleSet, sets.Kiting)
 		end
 
-		if (world.area:contains('Adoulin') or world.area == "Celennia Memorial Library") and item_available("Councilor's Garb") then
-			idleSet = set_combine(idleSet, {body="Councilor's Garb"})
-		elseif (world.area:contains('Bastok') or world.area == "Metalworks") and item_available("Republic Aketon") then
-			idleSet = set_combine(idleSet, {body="Republic Aketon"})
-		elseif (world.area:contains('Windurst') or world.area == "Heavens Tower") and item_available("Federation Aketon") then
-			idleSet = set_combine(idleSet, {body="Federation Aketon"})
-		elseif (world.area:contains("San d'Oria") or world.area == "Chateau d'Oraguille") and item_available("Kingdom Aketon") then
-			idleSet = set_combine(idleSet, {body="Kingdom Aketon"})
-		elseif world.area == "Mog Garden" and item_available("Jubilee Shirt") then
-			idleSet = set_combine(idleSet, {body="Jubilee Shirt"})
+		if (world.area:contains('Adoulin') or world.area == "Celennia Memorial Library") then
+			if item_available("Councilor's Garb") then idleSet = set_combine(idleSet, {body="Councilor's Garb"}) end
+		elseif (world.area:contains('Bastok') or world.area == "Metalworks") then
+			if item_available("Republic Aketon") then idleSet = set_combine(idleSet, {body="Republic Aketon"}) end
+		elseif (world.area:contains('Windurst') or world.area == "Heavens Tower") then
+			if item_available("Federation Aketon") then idleSet = set_combine(idleSet, {body="Federation Aketon"}) end
+		elseif (world.area:contains("San d'Oria") or world.area == "Chateau d'Oraguille") then
+			if item_available("Kingdom Aketon") then idleSet = set_combine(idleSet, {body="Kingdom Aketon"}) end
+		elseif world.area == "Mog Garden" then
+			if item_available("Jubilee Shirt") then idleSet = set_combine(idleSet, {body="Jubilee Shirt"}) end
+		end
+    elseif data.areas.assault:contains(world.area) then
+		if sets.Assault then
+			idleSet = set_combine(idleSet, sets.Assault)
+		end
+	end
+
+	if rolled_eleven[1] then
+		if sets.buff.RolledEleven then
+			idleSet = set_combine(idleSet, sets.buff.RolledEleven)
 		end
 	end
 
@@ -1672,19 +1600,12 @@ function get_idle_set(petStatus)
 	end
 	
 	if (buffactive.sleep or buffactive.Lullaby) then
-		if sets.buff.Sleep then
-			idleSet = set_combine(idleSet, sets.buff.Sleep)
-		end
 		if item_available("Sacrifice Torque") and player.main_job == 'SMN' and pet.isvalid then
 			idleSet = set_combine(idleSet, {neck="Sacrifice Torque"})
+		elseif sets.buff.Sleep then
+			idleSet = set_combine(idleSet, sets.buff.Sleep)
 		elseif sets.WakeUpWeapons then
-			if state.Weapons.value == 'None' or state.UnlockWeapons.value then
-				idleSet = set_combine(idleSet, sets.WakeUpWeapons)
-			elseif state.UnlockWakeUpWeapons.value then
-				state.UnlockWeapons:set('True')
-				state.UnlockWeapons.set:schedule(3, state.UnlockWeapons, false)
-				idleSet = set_combine(idleSet, sets.WakeUpWeapons)
-			end
+			idleSet = set_combine(idleSet, sets.WakeUpWeapons)
 		end
 	end
 	
@@ -1796,7 +1717,7 @@ function get_melee_set()
 		elseif sets.WakeUpWeapons then
 			if state.Weapons.value == 'None' or state.UnlockWeapons.value then
 				meleeSet = set_combine(meleeSet, sets.WakeUpWeapons)
-			elseif state.UnlockWakeUpWeapons.value then
+			elseif state.WakeUpWeapons.value then
 				state.UnlockWeapons:set('True')
 				state.UnlockWeapons.set:schedule(3, state.UnlockWeapons, false)
 				meleeSet = set_combine(meleeSet, sets.WakeUpWeapons)
@@ -1899,7 +1820,6 @@ function get_precast_set(spell, spellMap)
     
     if spell.action_type == 'Magic' then
 		if (state.CastingMode.current:contains('DT') or state.CastingMode.current:contains('SIRD')) and not in_combat then
-		elseif state.CastingMode.current:contains('Resistant') and (buffactive.Stymie or buffactive['Elemental Seal']) then
         elseif equipSet[state.CastingMode.current] then
             equipSet = equipSet[state.CastingMode.current]
             mote_vars.set_breadcrumbs:append(state.CastingMode.current)
@@ -1922,7 +1842,6 @@ function get_precast_set(spell, spellMap)
 				equipSet = set_combine(equipSet, sets.precast.FC.DW)
 			end
 		end
-		
     elseif spell.type == 'WeaponSkill' then
         equipSet = get_weaponskill_set(equipSet, spell, spellMap)
     elseif spell.action_type == 'Ability' then
@@ -2327,9 +2246,16 @@ function status_change(newStatus, oldStatus)
     local eventArgs = {handled = false}
     mote_vars.set_breadcrumbs:clear()
 
-	if not (newStatus == 'Idle' or newStatus == 'Engaged') then
+    if newStatus == 'Engaged' then
+		update_combat_form()
+	elseif newStatus == 'Idle' then
+	else
 		if state.RngHelper.value then
 			send_command('gs rh clear')
+		end
+		
+		if newStatus == "Dead" or newStatus == "Engaged dead" then
+			rolled_eleven = T{}
 		end
 		
 		if useItem then
@@ -2355,10 +2281,6 @@ function status_change(newStatus, oldStatus)
 			useItemName = ''
 			useItemSlot = ''
 		end
-	end
-	
-    if newStatus == 'Engaged' then
-		update_combat_form()
 	end
 	
     -- Allow a global function to be called on status change.
@@ -2524,18 +2446,29 @@ function buff_change(buff, gain)
 
 	if buff == 'Voidwatcher' then
 		state.SkipProcWeapons:set('False')
-	elseif (buff == 'sleep' or buff == 'Lullaby') and state.CancelStoneskin.value then
-		send_command('cancel stoneskin')
-	elseif (buff == 'Blink' or buff == 'Third Eye' or buff:startswith('Copy Image')) and not gain then
-		lastshadow = "None"
+	elseif (buff == 'sleep' or buff == 'Lullaby') then
+		if state.CancelStoneskin.value and gain then send_command('cancel stoneskin') end
+		if state.UnlockWeapons.value or state.WakeUpWeapons.value and state.Weapons.value ~= 'None' and state.Weapons:contains('None') then
+			if gain then
+				last_weapons = state.Weapons.value
+				state.Weapons:set('None')
+			elseif last_weapons then
+				state.Weapons:set(last_weapons)
+				last_weapons = nil
+			end
+		end
+	elseif (buff == 'Blink' or buff == 'Third Eye' or buff:startswith('Copy Image')) then
+		if not gain then lastshadow = "None" end
     elseif (buff == 'Commitment' or buff == 'Dedication') then
         if gain and (data.equipment.cprings:contains(player.equipment.left_ring) or data.equipment.xprings:contains(player.equipment.left_ring)) then
             enable("ring1")			
 		elseif gain and (player.equipment.head == "Guide Beret" or player.equipment.head == "Sprout Beret") then
 			enable("head")
         end
-	elseif buff == "Emporox's Gift" and gain then
-		if player.equipment.left_ring == "Emporox's Ring" then
+	elseif rolled_eleven:contains(buff) then
+		if not gain then remove_table_value(rolled_eleven, buff) end
+	elseif buff == "Emporox's Gift" then
+		if player.equipment.left_ring == "Emporox's Ring" and gain then
 			enable("ring1")
 		end
 	elseif buff:endswith('Imagery') then

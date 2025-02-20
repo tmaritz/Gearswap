@@ -3,6 +3,8 @@ sets.BehemothSuit = {body="Behemoth Suit +1",hands=empty,legs=empty,feet=empty}
 sets.Sheltered = {ring2="Sheltered Ring"}
 sets.Capacity = {back="Mecisto. Mantle"}
 
+
+sets.buff.RolledEleven = {} --ring2="Roller's Ring"
 sets.buff.Doom = {waist="Gishdubar Sash"} --neck="Nicander's Necklace",ring1="Eshmun's Ring",ring2="Eshmun's Ring"
 sets.TreasureHunter = {head="Volte Cap",hands="Volte Bracers"}
 
@@ -27,3 +29,5 @@ gear.chironic_refresh_feet = {name="Chironic Slippers",augments={'INT+9','"Dbl.A
 gear.merlinic_refresh_feet = {name="Merlinic Crackows",augments={'STR+8','Rng.Atk.+1','"Refresh"+2','Accuracy+6 Attack+6','Mag. Acc.+10 "Mag.Atk.Bns."+10',}}
 gear.merlinic_treasure_legs = {name="Merlinic Shalwar",augments={'Accuracy+25 Attack+25','Magic dmg. taken -1%','"Treasure Hunter"+2',}}
 gear.merlinic_refresh_legs = {name="Merlinic Shalwar",augments={'Rng.Acc.+19','Pet: INT+4','"Refresh"+1',}}
+gear.merlinic_fc_head = {name="Merlinic Hood",augments={'"Fast Cast"+7','INT+7','Mag. Acc.+13',}}
+gear.merlinic_fc_feet = {name="Merlinic Crackows",augments={'Mag. Acc.+7 "Mag.Atk.Bns."+7','"Fast Cast"+7','Mag. Acc.+3','"Mag.Atk.Bns."+10',}}

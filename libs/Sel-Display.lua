@@ -82,7 +82,7 @@ function init_job_states(job_bools,job_modes)
 	if settings["ui_x_res"] == 1920 and settings["ui_y_res"] == 1080 then
 		x,y = settings["ui_x_res"]-1917, settings["ui_y_res"]-18 -- -285, -18
 	else
-		x,y = 0, settings["ui_y_res"]-17 -- -285, -18
+		x,y = 2, settings["ui_y_res"]-20 -- -285, -18
 	end
 	
 	if displayx then x = displayx end

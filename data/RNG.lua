@@ -65,14 +65,13 @@ function job_setup()
 	rangedautows = "Last Stand"
 	autofood = 'Soy Ramen'
 	statusammo = nil
-	ammostock = 198
+	ammostock = 98
 	
 	WeaponType =  {['Yoichinoyumi'] = "Bow",
 				   ['Gandiva'] = "Bow",
                    ['Fail-Not'] = "Bow",
                    ['Accipiter'] = "Bow",
                    ['Annihilator'] = "Gun",
-                   ['Armageddon'] = "Gun",
                    ['Fomalhaut'] = "Gun",
 				   ['Ataktos'] = "Gun",
 				   ['Armageddon'] = "Gun",

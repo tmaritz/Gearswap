@@ -78,17 +78,19 @@ EnhancingAbility = S{"Haste","Haste II","Flurry","Flurry II","Adloquium","Errati
 				 }
 
 function check_reaction(act)
-
+	if state.CraftingMode.value ~= 'None' then return end
 	--Gather Info
     local curact = T(act)
     local actor = T{}
 	local otherTarget = T{}
+	local act_info
 
     actor.id = curact.actor_id
 	-- Make sure it's something we actually care about reacting to.
 	--if curact.category == 1 and not ((state.AutoEngageMode.value and player.status == 'Idle')) and in_combat then return end
-
-	if not ((curact.category == 1 or curact.category == 3 or curact.category == 4 or curact.category == 7 or curact.category == 8 or curact.category == 11 or curact.category == 13)) then return end
+	--curact.category = 6 is job ability?
+	if not ((curact.category == 1 or curact.category == 3 or curact.category == 4 or curact.category == 6 or curact.category == 7 or curact.category == 8 or curact.category == 11 or curact.category == 13)) then return end
+	
 	-- Make sure it's a mob that's doing something.
     if windower.ffxi.get_mob_by_id(actor.id) then
         actor = windower.ffxi.get_mob_by_id(actor.id)
@@ -194,6 +196,37 @@ function check_reaction(act)
 				end
 			end
 		end
+	elseif curact.category == 6 then
+		if actor.in_party then
+			local actionName = res.job_abilities[curact.param].en
+			if actionName:endswith(' Roll') then
+				local rollValue = curact.targets[1].actions[1].param
+				targetsMe = false
+				for i in pairs(curact.targets) do
+					if curact.targets[i].id == player.id then
+						targetsMe = true
+					end
+				end
+				if  targetsMe then
+					if rollValue == 11 then
+						if not rolled_eleven[1] then
+							send_command('gs c forceequip')
+						end
+						table.insert(rolled_eleven, actionName)
+					else
+						if rolled_eleven:contains(actionName) then
+							remove_table_value(rolled_eleven, actionName)
+						end
+						for i = #rolled_eleven, 1, -1 do
+							if not buffactive[rolled_eleven[i]] then
+								remove_table_value(rolled_eleven, rolled_eleven[i])
+							end
+						end
+					end
+				end
+			end
+		end
+		return
 	elseif curact.category == 13 then
 		act_info = res.job_abilities[curact.param]
 		if act_info.name == 'Hastega II' then

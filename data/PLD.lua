@@ -460,7 +460,7 @@ function check_flash()
 	local spell_recasts = windower.ffxi.get_spell_recasts()
 
 	if spell_recasts[112] < spell_latency then
-		send_command('input /ma "Flash" <t>')
+		windower.chat.input('/ma "Flash" <t>')
 		add_tick_delay()
 		return true
 	else

@@ -387,24 +387,24 @@ end
 function user_job_lockstyle()
 	if player.equipment.main == nil or player.equipment.main == 'empty' then
 		windower.chat.input('/lockstyleset 001')
-	elseif res.items[item_name_to_id(player.equipment.main)].skill == 3 then --Sword in main hand.
+	elseif res.items[get_item_id_by_name(player.equipment.main)].skill == 3 then --Sword in main hand.
 		if player.equipment.sub == nil or player.equipment.sub == 'empty' then --Sword/Nothing.
 				windower.chat.input('/lockstyleset 001')
-		elseif res.items[item_name_to_id(player.equipment.sub)].shield_size then --Sword/Shield
+		elseif res.items[get_item_id_by_name(player.equipment.sub)].shield_size then --Sword/Shield
 				windower.chat.input('/lockstyleset 002')
-		elseif res.items[item_name_to_id(player.equipment.sub)].skill == 3 then --Sword/Sword.
+		elseif res.items[get_item_id_by_name(player.equipment.sub)].skill == 3 then --Sword/Sword.
 			windower.chat.input('/lockstyleset 003')
-		elseif res.items[item_name_to_id(player.equipment.sub)].skill == 2 then --Sword/Dagger.
+		elseif res.items[get_item_id_by_name(player.equipment.sub)].skill == 2 then --Sword/Dagger.
 			windower.chat.input('/lockstyleset 001')
 		else
 			windower.chat.input('/lockstyleset 001') --Catchall just in case something's weird.
 		end
-	elseif res.items[item_name_to_id(player.equipment.main)].skill == 2 then --Dagger in main hand.
+	elseif res.items[get_item_id_by_name(player.equipment.main)].skill == 2 then --Dagger in main hand.
 		if player.equipment.sub == nil or player.equipment.sub == 'empty' then --Dagger/Nothing.
 			windower.chat.input('/lockstyleset 001')
-		elseif res.items[item_name_to_id(player.equipment.sub)].shield_size then --Dagger/Shield
+		elseif res.items[get_item_id_by_name(player.equipment.sub)].shield_size then --Dagger/Shield
 				windower.chat.input('/lockstyleset 002')
-		elseif res.items[item_name_to_id(player.equipment.sub)].skill == 2 then --Dagger/Dagger.
+		elseif res.items[get_item_id_by_name(player.equipment.sub)].skill == 2 then --Dagger/Dagger.
 			windower.chat.input('/lockstyleset 004')
 		else
 			windower.chat.input('/lockstyleset 001') --Catchall just in case something's weird.
