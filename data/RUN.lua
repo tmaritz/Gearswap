@@ -58,6 +58,7 @@ function job_setup()
 	state.Buff['Valiance'] = buffactive['Valiance'] or false
 	state.Buff['Vallation'] = buffactive['Vallation'] or false
 	state.Buff['Embolden'] = buffactive['Embolden'] or false
+	state.Buff['Third Eye'] = buffactive['Third Eye'] or false
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
 	state.Stance = M{['description']='Stance','Hasso','Seigan','None'}

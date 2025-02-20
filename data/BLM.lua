@@ -252,23 +252,27 @@ end
 
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
-
-	if  default_spell_map == 'Cure' or default_spell_map == 'Curaga'  then
-		if world.weather_element == 'Light' then
-                return 'LightWeatherCure'
+	if default_spell_map == 'Cure' or default_spell_map == 'Curaga'  then
+		if state.Weapons.value ~= 'None' and not state.UnlockWeapons.value then
+			if world.weather_element == 'Light' then
+				return 'MeleeLightWeatherCure'
+			elseif world.day_element == 'Light' then
+				return 'MeleeLightDayCure'
+			else
+				return 'MeleeCure'
+			end
+		elseif world.weather_element == 'Light' then
+			return 'LightWeatherCure'
 		elseif world.day_element == 'Light' then
-                return 'LightDayCure'
-        end
-
-    elseif spell.skill == 'Elemental Magic' then
-		if default_spell_map == 'ElementalEnfeeble' or spell.english:contains('helix') then
-			return
-        elseif LowTierNukes:contains(spell.english) then
-            return 'LowTierNuke'
-        else
-            return 'HighTierNuke'
-        end
-	end
+			return 'LightDayCure'
+		end
+	elseif spell.skill == 'Elemental Magic' and default_spell_map ~= 'ElementalEnfeeble' and not spell.english:contains('helix') then
+		if LowTierNukes:contains(spell.english) then
+			return 'LowTierNuke'
+		else
+			return 'HighTierNuke'
+		end
+    end
 end
 
 -- Modify the default idle set after it was constructed.
@@ -392,7 +396,6 @@ function handle_elemental(cmdParams)
 	elseif command == 'enspell' then
 		windower.chat.input('/ma "En'..data.elements.enspell_of[state.ElementalMode.value]..'" <me>')
 		return
-	--Leave out target, let shortcuts auto-determine it.
 	elseif command == 'weather' then
 		if player.sub_job == 'RDM' then
 			windower.chat.input('/ma "Phalanx" <me>')
@@ -417,88 +420,76 @@ function handle_elemental(cmdParams)
 		end
 	end
 
-    if command == 'nuke' then
+    if command:endswith('nuke') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		
 		if state.ElementalMode.value == 'Light' then
-			if spell_recasts[29] < spell_latency and actual_cost(get_spell_table_by_name('Banish II')) < player.mp then
+			if spell_recasts[29] < spell_latency and actual_cost('Banish II') < player.mp then
 				windower.chat.input('/ma "Banish II" '..target..'')
-			elseif spell_recasts[28] < spell_latency and actual_cost(get_spell_table_by_name('Banish')) < player.mp then
+			elseif spell_recasts[28] < spell_latency and actual_cost('Banish') < player.mp then
 				windower.chat.input('/ma "Banish" '..target..'')
 			else
 				add_to_chat(123,'Abort: Banishes on cooldown or not enough MP.')
 			end
-
-		elseif state.ElementalMode.value == 'Dark' then
-			if spell_recasts[219] < spell_latency and actual_cost(get_spell_table_by_name('Comet')) < player.mp then
-				windower.chat.input('/ma "Comet" '..target..'')
-			else
-				add_to_chat(123,'Abort: Comet on cooldown or not enough MP.')
-			end
-
 		else
-			if player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 99 and spell_recasts[get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..' VI').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..' VI')) < player.mp then
-				windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..' VI" '..target..'')
-			else
-				local tiers = {' V',' IV',' III',' II',''}
-				for k in ipairs(tiers) do
-					if spell_recasts[get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'')) < player.mp then
-						windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
-						return
-					end
-				end
-				add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
+			local spell_recasts = windower.ffxi.get_spell_recasts()
+			local tiers = {' VI',' V',' IV',' III',' II',''}
+			
+			if command == 'smallnuke' then
+				tiers = {' II',''}
 			end
+
+			for k in ipairs(tiers) do
+				local spell_name = data.elements.nuke_of[state.ElementalMode.value]..tiers[k]
+				local spell_id = get_spell_id_by_name(spell_name)
+
+				if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+					windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
+					return
+				end
+			end
+			add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
 		end
 			
 	elseif command == 'ninjutsu' then
 		windower.chat.input('/ma "'..data.elements.ninjutsu_nuke_of[state.ElementalMode.value]..': Ni" '..target..'')
-			
-	elseif command == 'smallnuke' then
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-	
-		local tiers = {' II',''}
-		for k in ipairs(tiers) do
-			if spell_recasts[get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'')) < player.mp then
-				windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
-				return
-			end
-		end
-		add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
 		
-	elseif command:contains('tier') then
+	elseif command:startswith('ancient') then
+		if command == 'ancientmagic2' then
+			windower.chat.input('/ma "'..data.elements.ancient_nuke_of[state.ElementalMode.value]..' II" '..target..'')
+		else
+			windower.chat.input('/ma "'..data.elements.ancient_nuke_of[state.ElementalMode.value]..'" '..target..'')
+		end
+
+	elseif command:startswith('tier') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		local tierlist = {['tier1']='',['tier2']=' II',['tier3']=' III',['tier4']=' IV',['tier5']=' V',['tier6']=' VI'}
 		
 		windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..tierlist[command]..'" '..target..'')
-		
-	elseif command:contains('aga') or command == 'aja' then
+
+	elseif command == 'ara' then
+		windower.chat.input('/ma "'..data.elements.nukera_of[state.ElementalMode.value]..'ra" '..target..'')		
+
+	elseif command:contains('aga') or command:contains('aja') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
-		local tierkey = {'aja','aga3','aga2','aga1'}
-		local tierlist = {['aja']='ja',['aga3']='ga III',['aga2']='ga II',['aga1']='ga',}
 		if command == 'aga' then
-			for i in ipairs(tierkey) do
-				if spell_recasts[get_spell_table_by_name(data.elements.nukega_of[state.ElementalMode.value]..''..tierlist[tierkey[i]]..'').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nukega_of[state.ElementalMode.value]..''..tierlist[tierkey[i]]..'')) < player.mp then
-					windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..''..tierlist[tierkey[i]]..'" '..target..'')
+			local tiers = {'ja','ga III','ga II','ga'}
+			for k in ipairs(tiers) do
+				local spell_name = data.elements.nukega_of[state.ElementalMode.value]..tiers[k]
+				local spell_id = get_spell_id_by_name(spell_name)
+				if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+					windower.chat.input('/ma "'..spell_name..'" '..target..'')
 					return
 				end
 			end
 		else
-			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..tierlist[command]..'" '..target..'')
+			local tierkey = {['aja']='ja',['aga3']='ga III',['aga2']='ga II',['aga1']='ga'}
+			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..tierkey[command]..'" '..target..'')
 		end
 
-	elseif command == 'ara' then
-		windower.chat.input('/ma "'..data.elements.nukera_of[state.ElementalMode.value]..'ra" '..target..'')
-		
 	elseif command == 'helix' then
 		windower.chat.input('/ma "'..data.elements.helix_of[state.ElementalMode.value]..'helix" '..target..'')
 	
-	elseif command == 'ancientmagic' then
-		windower.chat.input('/ma "'..data.elements.ancient_nuke_of[state.ElementalMode.value]..'" '..target..'')
-		
-	elseif command == 'ancientmagic2' then
-		windower.chat.input('/ma "'..data.elements.ancient_nuke_of[state.ElementalMode.value]..' II" '..target..'')
-		
 	elseif command == 'enfeeble' then
 		windower.chat.input('/ma "'..data.elements.elemental_enfeeble_of[state.ElementalMode.value]..'" '..target..'')
 	

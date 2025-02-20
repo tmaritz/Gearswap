@@ -150,7 +150,6 @@ function job_precast(spell, spellMap, eventArgs)
 end
 
 function job_post_precast(spell, spellMap, eventArgs)
-
 	if spell.action_type == 'Magic' then
 		if state.Buff.Chainspell or state.Buff.Spontaneity then
 			equip(get_midcast_set(spell, spellMap))
@@ -161,12 +160,21 @@ function job_post_precast(spell, spellMap, eventArgs)
 		
 		if (WSset.ear1 == "Moonshade Earring" or WSset.ear2 == "Moonshade Earring") then
 			-- Replace Moonshade Earring if we're at cap TP
-			if get_effective_player_tp(spell, WSset) > 3200 then
-				if wsacc:contains('Acc') and not buffactive['Sneak Attack'] and sets.AccMaxTP then
-					equip(sets.AccMaxTP[spell.english] or sets.AccMaxTP)
-				elseif sets.MaxTP then
-					equip(sets.MaxTP[spell.english] or sets.MaxTP)
+			if get_effective_player_tp(spell, WSset) >= 3000 then
+				if data.weaponskills.elemental:contains(spell.english) then
+					if wsacc:contains('Acc') and sets.MagicalAccMaxTP then
+						equip(sets.MagicalAccMaxTP[spell.english] or sets.MagicalAccMaxTP)
+					elseif sets.MagicalMaxTP then
+						equip(sets.MagicalMaxTP[spell.english] or sets.MagicalMaxTP)
+					elseif sets.MaxTP then
+						equip(sets.MaxTP[spell.english] or sets.MaxTP)
+					end
 				else
+					if wsacc:contains('Acc') and not buffactive['Sneak Attack'] and sets.AccMaxTP then
+						equip(sets.AccMaxTP[spell.english] or sets.AccMaxTP)
+					elseif sets.MaxTP then
+						equip(sets.MaxTP[spell.english] or sets.MaxTP)
+					end
 				end
 			end
 		end
@@ -176,89 +184,92 @@ end
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, spellMap, eventArgs)
-	if spell.skill == 'Elemental Magic' and spellMap ~= 'ElementalEnfeeble' and spell.english ~= 'Impact' then
-		if state.MagicBurstMode.value ~= 'Off' then
-			if state.CastingMode.value:contains('Resistant') and sets.ResistantMagicBurst then
-				equip(sets.ResistantMagicBurst)
-			else
-				equip(sets.MagicBurst)
-			end
+	local currentSet
+	local currentWeapons
+	if spell.action_type == 'Magic' then
+		if not state.UnlockWeapons.value and state.Weapons.value ~= 'None' and sets.weapons[state.Weapons.value] then
+			currentSet = standardize_set(get_midcast_set(spell, spellMap))
+			currentWeapons = standardize_set(sets.weapons[state.Weapons.value])
 		end
-		if spell.element == world.weather_element or spell.element == world.day_element then
-			if state.CastingMode.value == 'Fodder' then
-				-- if item_available('Twilight Cape') and not LowTierNukes:contains(spell.english) and not state.Capacity.value then
-					-- sets.TwilightCape = {back="Twilight Cape"}
-					-- equip(sets.TwilightCape)
-				-- end
-				if spell.element == world.day_element then
-					if item_available('Zodiac Ring') then
-						sets.ZodiacRing = {ring2="Zodiac Ring"}
-						equip(sets.ZodiacRing)
+		if spell.skill == 'Elemental Magic' and spellMap ~= 'ElementalEnfeeble' and spell.english ~= 'Impact' then
+			if state.MagicBurstMode.value ~= 'Off' then
+				if state.CastingMode.value:contains('Resistant') and sets.ResistantMagicBurst then
+					equip(sets.ResistantMagicBurst)
+				else
+					equip(sets.MagicBurst)
+				end
+			end
+			if currentSet and currentSet.range and currentSet.range == "Ullr" and currentWeapons.range and currentWeapons.range == 'empty' and not currentWeapons.ammo and item_available("Regal Gem") then
+				equip({ammo="Regal Gem"})
+			end
+			if spell.element == world.weather_element or spell.element == world.day_element then
+				if state.CastingMode.value == 'Fodder' then
+					-- if item_available('Twilight Cape') and not LowTierNukes:contains(spell.english) and not state.Capacity.value then
+						-- sets.TwilightCape = {back="Twilight Cape"}
+						-- equip(sets.TwilightCape)
+					-- end
+					if spell.element == world.day_element then
+						if item_available('Zodiac Ring') then
+							sets.ZodiacRing = {ring2="Zodiac Ring"}
+							equip(sets.ZodiacRing)
+						end
 					end
 				end
 			end
-		end
-		
-		if spell.element and sets.element[spell.element] then
-			equip(sets.element[spell.element])
-		end
-		
-		if state.RecoverMode.value ~= 'Never' and (state.RecoverMode.value == 'Always' or tonumber(state.RecoverMode.value:sub(1, -2)) > player.mpp) then
-			if state.MagicBurstMode.value ~= 'Off' then
-				if state.CastingMode.value:contains('Resistant') and sets.ResistantRecoverBurst then
-					equip(sets.ResistantRecoverBurst)
-				elseif sets.RecoverBurst then
-					equip(sets.RecoverBurst)
+			
+			if spell.element and sets.element[spell.element] then
+				equip(sets.element[spell.element])
+			end
+			if state.RecoverMode.value ~= 'Never' and (state.RecoverMode.value == 'Always' or tonumber(state.RecoverMode.value:sub(1, -2)) > player.mpp) then
+				if state.MagicBurstMode.value ~= 'Off' then
+					if state.CastingMode.value:contains('Resistant') and sets.ResistantRecoverBurst then
+						equip(sets.ResistantRecoverBurst)
+					elseif sets.RecoverBurst then
+						equip(sets.RecoverBurst)
+					elseif sets.RecoverMP then
+						equip(sets.RecoverMP)
+					end
 				elseif sets.RecoverMP then
 					equip(sets.RecoverMP)
 				end
-			elseif sets.RecoverMP then
-				equip(sets.RecoverMP)
 			end
-		end
-		
-    elseif spell.skill == 'Enfeebling Magic' or spell.skill == 'Dark Magic' then
-		if not state.UnlockWeapons.value and state.Weapons.value ~= 'None' and sets.weapons[state.Weapons.value] then
-			local currentSet = standardize_set(get_midcast_set(spell, spellMap))
-			local currentWeapons = standardize_set(sets.weapons[state.Weapons.value])
-			
-			if currentSet.range and currentSet.range == "Ullr" and currentWeapons.range and currentWeapons.range == 'empty' and not currentWeapons.ammo and item_available("Regal Gem") then
+		elseif spell.skill == 'Enfeebling Magic' or spell.skill == 'Dark Magic' then
+			if currentSet and currentSet.range == "Ullr" and currentWeapons.range and currentWeapons.range == 'empty' and not currentWeapons.ammo and item_available("Regal Gem") then
 				equip({ammo="Regal Gem"})
 			end
-		end
-	
-		if spell.skill == 'Enfeebling Magic' and state.Buff.Saboteur then
-			equip(sets.buff.Saboteur)
-		end
-	elseif spell.skill == 'Enhancing Magic' then
-		equip(sets.midcast['Enhancing Magic'])
-	
-		if buffactive.Composure and spell.target.type == 'PLAYER' then
-			equip(sets.buff.ComposureOther)
-		end
+			if spell.skill == 'Enfeebling Magic' and state.Buff.Saboteur then
+				equip(sets.buff.Saboteur)
+			end
+		elseif spell.skill == 'Enhancing Magic' then
+			equip(sets.midcast['Enhancing Magic'])
 		
-		if sets.midcast[spell.english] then
-			equip(sets.midcast[spell.english])
+			if buffactive.Composure and spell.target.type == 'PLAYER' then
+				equip(sets.buff.ComposureOther)
+			end
 			
-			if can_dual_wield and sets.midcast[spell.english].DW then
-				equip(sets.midcast[spell.english].DW)
-			end
-		elseif sets.midcast[spellMap] then
-			equip(sets.midcast[spellMap])
+			if sets.midcast[spell.english] then
+				equip(sets.midcast[spell.english])
+				
+				if can_dual_wield and sets.midcast[spell.english].DW then
+					equip(sets.midcast[spell.english].DW)
+				end
+			elseif sets.midcast[spellMap] then
+				equip(sets.midcast[spellMap])
 
-			if can_dual_wield and sets.midcast[spellMap].DW then
-				equip(sets.midcast[spellMap].DW)
+				if can_dual_wield and sets.midcast[spellMap].DW then
+					equip(sets.midcast[spellMap].DW)
+				end
+			end
+
+			if spell.english:startswith('Phalanx') and spell.target.type =='SELF' and sets.Self_Phalanx then
+				equip(sets.Self_Phalanx)
+
+				if can_dual_wield and sets.Self_Phalanx.DW then
+					equip(sets.Self_Phalanx.DW)
+				end
 			end
 		end
-
-		if spell.english:startswith('Phalanx') and spell.target.type =='SELF' and sets.Self_Phalanx then
-			equip(sets.Self_Phalanx)
-
-			if can_dual_wield and sets.Self_Phalanx.DW then
-				equip(sets.Self_Phalanx.DW)
-			end
-		end
-    end
+	end
 end
 
 function job_aftercast(spell, spellMap, eventArgs)
@@ -371,21 +382,27 @@ end
 
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
-	if  default_spell_map == 'Cure' or default_spell_map == 'Curaga'  then
-		if world.weather_element == 'Light' then
-                return 'LightWeatherCure'
+	if default_spell_map == 'Cure' or default_spell_map == 'Curaga'  then
+		if state.Weapons.value ~= 'None' and not state.UnlockWeapons.value then
+			if world.weather_element == 'Light' then
+				return 'MeleeLightWeatherCure'
+			elseif world.day_element == 'Light' then
+				return 'MeleeLightDayCure'
+			else
+				return 'MeleeCure'
+			end
+		elseif world.weather_element == 'Light' then
+			return 'LightWeatherCure'
 		elseif world.day_element == 'Light' then
-                return 'LightDayCure'
-        end
-	end	
-	
-	if spell.skill == 'Elemental Magic' and default_spell_map ~= 'ElementalEnfeeble' then
-        if LowTierNukes:contains(spell.english) then
-            return 'LowTierNuke'
-        else
-            return 'HighTierNuke'
-        end
-    end	
+			return 'LightDayCure'
+		end
+	elseif spell.skill == 'Elemental Magic' and default_spell_map ~= 'ElementalEnfeeble' and not spell.english:contains('helix') then
+		if LowTierNukes:contains(spell.english) then
+			return 'LowTierNuke'
+		else
+			return 'HighTierNuke'
+		end
+    end
 end
 
 -- Handling Elemental spells within Gearswap.
@@ -412,7 +429,7 @@ function handle_elemental(cmdParams)
 		return
 	elseif command == 'weather' then
 		if player.sub_job ~= 'SCH' then
-			windower.chat.input('/ma "Phalanx" <me>')
+			windower.chat.input('/ma "Phalanx II" <me>')
 		else
 			local spell_recasts = windower.ffxi.get_spell_recasts()
 			if (player.target.type == 'SELF' or not player.target.in_party) and buffactive[data.elements.storm_of[state.ElementalMode.value]] and not buffactive['Klimaform'] and spell_recasts[287] < spell_latency then
@@ -434,56 +451,44 @@ function handle_elemental(cmdParams)
 		end
 	end
 
-    if command == 'nuke' then
+    if command:endswith('nuke') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		
 		if state.ElementalMode.value == 'Light' then
-			if spell_recasts[29] < spell_latency and actual_cost(get_spell_table_by_name('Banish II')) < player.mp then
+			if spell_recasts[29] < spell_latency and actual_cost('Banish II') < player.mp then
 				windower.chat.input('/ma "Banish II" '..target..'')
-			elseif spell_recasts[28] < spell_latency and actual_cost(get_spell_table_by_name('Banish')) < player.mp then
+			elseif spell_recasts[28] < spell_latency and actual_cost('Banish') < player.mp then
 				windower.chat.input('/ma "Banish" '..target..'')
 			else
 				add_to_chat(123,'Abort: Banishes on cooldown or not enough MP.')
 			end
-
-		elseif state.ElementalMode.value == 'Dark' then
-			if spell_recasts[219] < spell_latency and actual_cost(get_spell_table_by_name('Comet')) < player.mp then
-				windower.chat.input('/ma "Comet" '..target..'')
-			else
-				add_to_chat(123,'Abort: Comet on cooldown or not enough MP.')
-			end
-
 		else
-			if player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 99 and spell_recasts[get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..' V').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..' V')) < player.mp then
-				windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..' V" '..target..'')
-			else
-				local tiers = {' IV',' III',' II',''}
-				for k in ipairs(tiers) do
-					if spell_recasts[get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'')) < player.mp then
-						windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
-						return
-					end
-				end
-				add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
+			local spell_recasts = windower.ffxi.get_spell_recasts()
+			local tiers = {' V',' IV',' III',' II',''}
+			
+			if command == 'smallnuke' then
+				tiers = {' II',''}
 			end
+
+			for k in ipairs(tiers) do
+				local spell_name = data.elements.nuke_of[state.ElementalMode.value]..tiers[k]
+				local spell_id = get_spell_id_by_name(spell_name)
+
+				if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+					windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
+					return
+				end
+			end
+			add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
 		end
 
 	elseif command == 'ninjutsu' then
 		windower.chat.input('/ma "'..data.elements.ninjutsu_nuke_of[state.ElementalMode.value]..': Ni" '..target..'')
-		
-	elseif command == 'smallnuke' then
-		local spell_recasts = windower.ffxi.get_spell_recasts()
-	
-		local tiers = {' II',''}
-		for k in ipairs(tiers) do
-			if spell_recasts[get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'').id] < spell_latency and actual_cost(get_spell_table_by_name(data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'')) < player.mp then
-				windower.chat.input('/ma "'..data.elements.nuke_of[state.ElementalMode.value]..''..tiers[k]..'" '..target..'')
-				return
-			end
-		end
-		add_to_chat(123,'Abort: All '..data.elements.nuke_of[state.ElementalMode.value]..' nukes on cooldown or or not enough MP.')
-		
-	elseif command:contains('tier') then
+
+	elseif command == 'ancientmagic' then
+		windower.chat.input('/ma "'..data.elements.ancient_nuke_of[state.ElementalMode.value]..'" '..target..'')
+
+	elseif command:startswith('tier') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		local tierlist = {['tier1']='',['tier2']=' II',['tier3']=' III',['tier4']=' IV',['tier5']=' V',['tier6']=' VI'}
 		
@@ -494,24 +499,23 @@ function handle_elemental(cmdParams)
 		
 	elseif command == 'aga' then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
-		if state.ElementalMode.value == 'Wind' and spell_recasts[185] < spell_latency and actual_cost(get_spell_table_by_name('Aero II')) < player.mp then
-			windower.chat.input('/ma "Aeroga II" '..target..'')
-		elseif state.ElementalMode.value == 'Earth' and spell_recasts[190] < spell_latency and actual_cost(get_spell_table_by_name('Stonega II')) < player.mp then
-			windower.chat.input('/ma "Stonega II" '..target..'')
-		elseif state.ElementalMode.value == 'Water' and spell_recasts[200] < spell_latency and actual_cost(get_spell_table_by_name('Waterga II')) < player.mp then
-			windower.chat.input('/ma "Waterga II" '..target..'')
+		local lower_spell = string.lower(data.elements.nukega_of[state.ElementalMode.value]..'ga II')
+		local spell_id = gearswap.validabils.english['/ma'][lower_spell]
+		if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga II'..'" '..target..'')
 		else
 			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga" '..target..'')
 		end
-		
+
 	elseif command == 'helix' then
 		windower.chat.input('/ma "'..data.elements.helix_of[state.ElementalMode.value]..'helix" '..target..'')
 		
 	elseif command == 'enfeeble' then
 		windower.chat.input('/ma "'..data.elements.elemental_enfeeble_of[state.ElementalMode.value]..'" '..target..'')
-	
+		
 	elseif command == 'bardsong' then
 		windower.chat.input('/ma "'..data.elements.threnody_of[state.ElementalMode.value]..' Threnody" '..target..'')
+		
     else
         add_to_chat(123,'Unrecognized elemental command.')
     end
