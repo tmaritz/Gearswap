@@ -789,6 +789,8 @@ item_stepdown = {
 	['Reraise Hairpin'] = {'Wh. Rarab Cap +1','head'},
 }
 
+
+-- Buff Handling
 buff_group_IDs = { --Buffs that overwrite each other or are blocked by each other and do not share a buffID.
     ['BarElement'] = S{100,101,102,103,104,105},
     ['BarStatus'] = S{106,107,108,109,110,111,112},
@@ -814,3 +816,18 @@ for _, rline in pairs(gearswap.res.spells) do
         end
     end
 end
+
+data.status_map = {
+	[1] = {buff='doom',spell='Cursna'},
+	[2] = {buff='petrification',spell='Stona'},
+	[3] = {buff='sleep',spell='Cure'},
+	[4] = {buff='curse',spell='Cursna'},
+	[5] = {buff='paralysis',spell='Paralyna'},
+	[6] = {buff='silence',spell='Silena'},
+	[7] = {buff='poison',spell='Poisona'},
+	[8] = {buff='blindness',spell='Blindna'},
+	[9] = {buff='plague',spell='Viruna'},
+	[10] = {buff='diseased',spell='Viruna'},
+}
+
+data.erasable_statuses = S{"burn","frost","choke","rasp","shock","drown","dia","bio"}

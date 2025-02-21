@@ -529,7 +529,7 @@ function handle_buffup(cmdParams)
 	local need_delay = false
 	for i in pairs(buff_spell_lists[buffup]) do
 		if buff_spell_lists[buffup][i].Reapply then
-			windower.send_command('cancel '..buff_spell_lists[buffup][i].Buff..'')
+			send_command('cancel '..buff_spell_lists[buffup][i].Buff..'')
 			need_delay = true
 		end
 	end
@@ -648,15 +648,15 @@ function handle_smartws(cmdParams)
 	end
 
 	if target == player then
-		windower.send_command(''..weaponskill..' '..player.name..'')
+		send_command(''..weaponskill..' '..player.name..'')
 	elseif math.sqrt(target.distance) < 4 or (data.weaponskills.ranged:contains(weaponskill) and math.sqrt(target.distance) < 21) then
 		local self = windower.ffxi.get_mob_by_id(player.id)
 		local angle = (math.atan2((target.y - self.y), (target.x - self.x))*180/math.pi)*-1
 		local turn = angle:radian()
 		if math.abs(turn - self.facing) < .3 then
-			windower.send_command(''..weaponskill..' '..target.id..'')
+			send_command(''..weaponskill..' '..target.id..'')
 		else
-			windower.send_command:schedule(.3,''..weaponskill..' '..target.id..'')
+			send_command:schedule(.3,''..weaponskill..' '..target.id..'')
 		end
 		windower.ffxi.turn(turn)
 	else
@@ -708,10 +708,10 @@ function handle_killstatue()
 					local self_vector = windower.ffxi.get_mob_by_id(player.id)
 					local angle = (math.atan2((mob.y - self_vector.y), (mob.x - self_vector.x))*180/math.pi)*-1
 					windower.ffxi.turn((angle):radian())
-					windower.send_command:schedule(.3,''..data.weaponskills.statue_ws[player.main_job]..' '..mob.id..'')
+					send_command:schedule(.3,''..data.weaponskills.statue_ws[player.main_job]..' '..mob.id..'')
 					return
 				elseif data.jobs.nuke_jobs:contains(player.main_job) then
-					windower.send_command('gs c elemental nuke '..mob.id..'')
+					send_command('gs c elemental nuke '..mob.id..'')
 					return
 				end
 			end
@@ -893,11 +893,11 @@ function handle_curecheat(cmdParams)
         curecheat = true
 		equip(sets.HPDown)
 		if player.main_job == 'BLU' then
-			send_command('@wait 1;input /ma "Magic Fruit" <me>')
+			windower.chat.input('/ma "Magic Fruit" <me>')
 		elseif player.main_job == 'WHM' or not silent_can_use(4) then
-			send_command('@wait 1;input /ma "Cure III" <me>')
+			windower.chat.input('/ma "Cure III" <me>')
 		else
-			send_command('@wait 1;input /ma "Cure IV" <me>')
+			windower.chat.input('/ma "Cure IV" <me>')
 		end
 	--If we only have an HighHP set, we assume that this is sufficient.
 	elseif sets.HPCure then
@@ -914,7 +914,67 @@ function handle_curecheat(cmdParams)
     end
 end
 
+function handle_stna(cmdParams)
+	local removalTarget
+	local targetBuffs
+
+	if cmdParams[1] then
+		if tonumber(cmdParams[1]) then
+			removalTarget = windower.ffxi.get_mob_by_id(tonumber(cmdParams[1]))
+		else
+			removalTarget = table.concat(cmdParams, ' ')
+			removalTarget = get_closest_mob_by_name(removalTarget) 
+			if not removalTarget.name then
+				if player.target then 
+					removalTarget = player.target
+				else
+					removalTarget = player
+				end
+			end
+		end
+	elseif player.target.type == "SELF" or player.target.type == 'NONE' then
+		removalTarget = player
+	elseif player.target.type == 'MONSTER' then
+		send_command('gs c stna <stpt>')
+		return
+	else
+		removalTarget = player.target
+	end
+	if removalTarget.status == 'Dead' or removalTarget.status == 'Engaged dead' then
+		windower.chat.input('/ma "Arise" '..removalTarget.id..'')
+		return
+	end
+	
+	for i in ipairs(party) do
+		if removalTarget.name == party[i].name then
+			targetBuffs = party[i].buffactive
+			break
+		end
+	end
+	
+	if not targetBuffs then
+		add_to_chat(123, 'STNA Target not found.')
+		return
+	end
+	for i in ipairs(data.status_map) do
+		if targetBuffs[data.status_map[i].buff] and silent_can_use(data.status_map[i].spell) then
+			windower.chat.input('/ma "'..data.status_map[i].spell..'" '..removalTarget.name)
+			return
+		end
+	end
+	if silent_can_use('Erase') then
+		for key in pairs(targetBuffs) do
+			if data.erasable_statuses:contains(key) or (type(key) == "string" and key:endswith(' down')) then
+				windower.chat.input('/ma "Erase" '..removalTarget.name)
+				return
+			end
+		end
+	end
+	add_to_chat(123,'No statuses found that are removable by STNA.')
+end
+
 function handle_smartcure(cmdParams)
+	local cureTarget
 	if cmdParams[1] then
 		if tonumber(cmdParams[1]) then
 			cureTarget = windower.ffxi.get_mob_by_id(tonumber(cmdParams[1]))
@@ -932,7 +992,7 @@ function handle_smartcure(cmdParams)
 	elseif player.target.type == "SELF" or player.target.type == 'NONE' then
 		cureTarget = player
 	elseif player.target.type == 'MONSTER' then
-		windower.send_command('gs c smartcure <stal>')
+		send_command('gs c smartcure <stal>')
 		return
 	else
 		cureTarget = player.target
@@ -1156,7 +1216,7 @@ end
 
 -- A function for testing lua code.  Called via "gs c test".
 function handle_test(cmdParams)
-	table.print(rolled_eleven)
+	table.vprint(party)
     if user_test then
         user_test(cmdParams)
     elseif job_test then
@@ -1204,4 +1264,5 @@ selfCommandMaps = {
 	['smartws']			= handle_smartws,
 	['scholar']			= handle_scholar,
 	['macropage']		= handle_macropage,
-	}
+	['stna']			= handle_stna,
+}

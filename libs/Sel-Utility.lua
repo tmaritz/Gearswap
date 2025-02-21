@@ -573,7 +573,16 @@ function get_ability_id_by_name(spell_name)
 	return gearswap.validabils.english['/ja'][spell_name:lower()] or false
 end
 
-function silent_can_use(spell_id)
+function silent_can_use(spell)
+	local spell_id
+	if type(spell) == 'number' then
+		spell_id = spell
+	elseif type(spell) == 'string' then
+		spell_id = get_spell_id_by_name(spell)
+	elseif type(spell) == 'table' then
+		spell_id = spell.id
+	end
+	
 	local available_spells = windower.ffxi.get_spells()
 	local spell_jobs = copy_entry(res.spells[spell_id].levels)
         
@@ -662,23 +671,23 @@ function can_use(spell)
                 return false
             elseif not player.inventory[data.tools.tool_map[spell.english][language]] and not (player.main_job_id == 13 and player.inventory[data.tools.universal_tool_map[spell.english][language]]) then
 				if player.main_job == 'NIN' and player[consumable_bag][data.tools.universal_tool_map[spell.english][language]] then --Universal tool in consumable bag
-					windower.send_command('get "'..data.tools.universal_tool_map[spell.english][language]..'" '..consumable_bag..' 99')
+					send_command('get "'..data.tools.universal_tool_map[spell.english][language]..'" '..consumable_bag..' 99')
 					windower.chat.input:schedule(1.5,'/ma "'..spell.english..'" '..spell.target.raw..'')
 				elseif player[consumable_bag][data.tools.tool_map[spell.english][language]] then --Specific tool in consumable bag
-					windower.send_command('get "'..data.tools.tool_map[spell.english][language]..'" '..consumable_bag..' 99')
+					send_command('get "'..data.tools.tool_map[spell.english][language]..'" '..consumable_bag..' 99')
 					windower.chat.input:schedule(1.5,'/ma "'..spell.english..'" '..spell.target.raw..'')
 				elseif player.main_job == 'NIN' and player.inventory[data.tools.universal_toolbag_map[spell.english][language]] then --Universal toolbag in inventory
 					windower.chat.input('/item "'..data.tools.universal_toolbag_map[spell.english][language]..'" <me>')
 					windower.chat.input:schedule(4,'/ma "'..spell.english..'" '..spell.target.raw..'')
 				elseif player.main_job == 'NIN' and player[consumable_bag][data.tools.universal_toolbag_map[spell.english][language]] then --Universal toolbag in consumable bag
-					windower.send_command('get "'..data.tools.universal_toolbag_map[spell.english][language]..'" '..consumable_bag..' 1')
+					send_command('get "'..data.tools.universal_toolbag_map[spell.english][language]..'" '..consumable_bag..' 1')
 					windower.chat.input:schedule(1.5,'/item "'..data.tools.universal_toolbag_map[spell.english][language]..'" <me>')
 					windower.chat.input:schedule(5.5,'/ma "'..spell.english..'" '..spell.target.raw..'')
 				elseif player.inventory[data.tools.toolbag_map[spell.english][language]] then --Specific toolbag in Inventory
 					windower.chat.input('/item "'..data.tools.toolbag_map[spell.english][language]..'" <me>')
 					windower.chat.input:schedule(4,'/ma "'..spell.english..'" '..spell.target.raw..'')
 				elseif player[consumable_bag][data.tools.toolbag_map[spell.english][language]] then --Specific toolbag in bag
-					windower.send_command('get "'..data.tools.toolbag_map[spell.english][language]..'" '..consumable_bag..' 1')
+					send_command('get "'..data.tools.toolbag_map[spell.english][language]..'" '..consumable_bag..' 1')
 					windower.chat.input:schedule(1.5,'/item "'..data.tools.universal_toolbag_map[spell.english][language]..'" <me>')
 					windower.chat.input:schedule(5.5,'/ma "'..spell.english..'" '..spell.target.raw..'')
 				else
@@ -803,7 +812,7 @@ function can_use(spell)
 				if player.inventory['Trump Card Case'] then
 					windower.chat.input('/item "Trump Card Case" <me>')
 				elseif player.satchel['Trump Card Case'] then
-					windower.send_command('get "Trump Card Case" '..consumable_bag)
+					send_command('get "Trump Card Case" '..consumable_bag)
 					windower.chat.input:schedule(1.5,'/item "Trump Card Case" <me>')
 				end
 				return false
@@ -1113,7 +1122,7 @@ function check_recast(spell, spellMap, eventArgs)
             elseif abil_recasts[spell.recast_id] > latency then
 				if spell.english == "Lunge" and abil_recasts[241] < latency then
 					eventArgs.cancel = true
-					windower.send_command('@input /ja "Swipe" <t>')
+					send_command('@input /ja "Swipe" <t>')
 					return true
 				else
 					add_to_chat(123,'Abort: ['..spell.english..'] waiting on recast. ('..seconds_to_clock(abil_recasts[spell.recast_id])..')')
@@ -1177,9 +1186,6 @@ function check_warps(spell, spellMap, eventArgs)
 end
 
 function check_spell_targets(spell, spellMap, eventArgs)
-	--windower.add_to_chat('spell.targets:  '.. tostring(spell.targets))
-	--windower.add_to_chat('spell.target.type:  '.. tostring(spell.target.type))
-	--table.vprint(spell.targets)
 	if spellMap == 'Cure' or spellMap == 'Curaga' then
 		if spell.target.distance > 21 and spell.target.type == 'PLAYER' then
 			cancel_spell()
@@ -1523,11 +1529,11 @@ function check_use_item()
 				add_tick_delay(2)
 				return true
 			elseif item_available(set_to_item(useItemName)) and ((get_usable_item(set_to_item(useItemName)).next_use_time) + Offset) < 10 then
-				windower.send_command('gs c forceequip '..useItemSlot..' '..useItemName..'')
+				send_command('gs c forceequip '..useItemSlot..' '..useItemName..'')
 				add_tick_delay(2)
 				return true
 			elseif player.satchel[set_to_item(useItemName)] then
-				windower.send_command('get "'..set_to_item(useItemName)..'" '..consumable_bag)
+				send_command('get "'..set_to_item(useItemName)..'" '..consumable_bag)
 				add_tick_delay(2)
 				return true
 			else
@@ -1540,11 +1546,11 @@ function check_use_item()
 			add_tick_delay(2)
 			return true
 		elseif player.satchel[useItemName] then
-			windower.send_command('get "'..useItemName..'" '..consumable_bag)
+			send_command('get "'..useItemName..'" '..consumable_bag)
 			add_tick_delay(2)
 			return true
 		elseif item_available(useItemName) and ((get_usable_item(useItemName).next_use_time) + Offset) < 10 then
-			windower.send_command('gs c forceequip '..useItemSlot..' '..useItemName..'')
+			send_command('gs c forceequip '..useItemSlot..' '..useItemName..'')
 			add_tick_delay(2)
 			return true
 		elseif item_stepdown[useItemName] then
@@ -1584,7 +1590,7 @@ function check_food()
 			add_tick_delay(2)
 			return true
 		elseif player.satchel[''..autofood..''] then
-			windower.send_command('get "'..autofood..'" '..consumable_bag)
+			send_command('get "'..autofood..'" '..consumable_bag)
 			add_tick_delay(2)
 			return true
 		else
@@ -1634,7 +1640,7 @@ end
 
 function check_delayed_cast()
 	if delayed_cast ~= '' then
-		windower.send_command(''..delayed_cast..' '..delayed_target..'')
+		send_command(''..delayed_cast..' '..delayed_target..'')
 		add_tick_delay()
 		delayed_cast = ''
 		delayed_target = ''
@@ -2662,7 +2668,7 @@ function set_dual_wield()
     local traits = T(windower.ffxi.get_abilities().job_traits)
     can_dual_wield = traits:any(function(v) return gearswap.res.job_traits[v].english == 'Dual Wield' end)
 	
-	windower.send_command('gs c weapons initialize')
+	send_command('gs c weapons initialize')
 end
 
 function get_closest_mob_id_by_name(name)
