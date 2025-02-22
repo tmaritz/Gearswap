@@ -277,15 +277,15 @@ end
 
 -- Modify the default idle set after it was constructed.
 function job_customize_idle_set(idleSet)
-    if buffactive['Sublimation: Activated'] then
-        if (state.IdleMode.value == 'Normal' or state.IdleMode.value:contains('Sphere')) and sets.buff.Sublimation then
-            idleSet = set_combine(idleSet, sets.buff.Sublimation)
-        elseif state.IdleMode.value:contains('DT') and sets.buff.DTSublimation then
-            idleSet = set_combine(idleSet, sets.buff.DTSublimation)
-        end
-    end
+	if buffactive['Sublimation: Activated'] then
+		if (state.IdleMode.value == 'Normal' or state.IdleMode.value:contains('Sphere')) and sets.buff.Sublimation then
+			idleSet = set_combine(idleSet, sets.buff.Sublimation)
+		elseif state.IdleMode.value:contains('DT') and sets.buff.DTSublimation then
+			idleSet = set_combine(idleSet, sets.buff.DTSublimation)
+		end
+	end
 
-    if state.IdleMode.value == 'Normal' or state.IdleMode.value:contains('Sphere') then
+	if state.IdleMode.value == 'Normal' or state.IdleMode.value:contains('Sphere') then
 		if player.mpp < 51 then
 			if sets.latent_refresh then
 				idleSet = set_combine(idleSet, sets.latent_refresh)
@@ -299,17 +299,13 @@ function job_customize_idle_set(idleSet)
 				end
 			end
 		end
-   end
-	
-	if state.DeathMode.value ~= 'Off' then
-        idleSet = set_combine(idleSet, sets.idle.Death)
-    end
+	end
 
-    if state.Buff['Mana Wall'] then
+	if state.Buff['Mana Wall'] then
 		idleSet = set_combine(idleSet, sets.buff['Mana Wall'])
-    end
-    
-    return idleSet
+	end
+
+	return idleSet
 end
 
 function job_customize_kiting_set(baseSet)

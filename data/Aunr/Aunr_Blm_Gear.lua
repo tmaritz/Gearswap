@@ -23,26 +23,18 @@ function user_job_setup()
     }
 
     -- Additional local binds
-    send_command('bind ^` gs c cycle ElementalMode')
-    send_command('bind ~^` gs c cycleback ElementalMode') -- Robbiewobbie's idea
-    send_command('bind ^q gs c weapons Mpaca;gs c set CastingMode OccultAcumen')
-    send_command('bind !q gs c weapons Default;gs c reset CastingMode;gs c reset DeathMode;gs c reset MagicBurstMode')
-    send_command('bind !b gs c set DeathMode Single;gs c set MagicBurstMode Single')
-    send_command('bind !\\\\ input /ja "Manawell" <me>')
-    send_command('bind !` input /ma "Aspir III" <t>')
-    send_command('bind @` gs c cycle MagicBurstMode')
-    send_command('bind @f10 gs c cycle RecoverMode')
-    send_command('bind @f9 gs c cycle DeathMode')
-    send_command('bind @^` input /ja "Parsimony" <me>')
-    send_command('bind !pause gs c toggle AutoSubMode') -- Automatically uses sublimation and Myrkr.
-    send_command('bind ^backspace input /ma "Stun" <t>')
-    send_command('bind !backspace input /ja "Enmity Douse" <t>')
-    send_command('bind @backspace input /ja "Alacrity" <me>')
-    send_command('bind != input /ja "Light Arts" <me>')
-    send_command('bind @= input /ja "Addendum: White" <me>')
-    send_command('bind ^delete input /ja "Dark Arts" <me>')
-    send_command('bind !delete input /ja "Addendum: Black" <me>')
-    send_command('bind @delete input /ja "Manifestation" <me>')
+	send_command('bind @` gs c cycle ElementalMode')
+	send_command('bind ^` gs c scholar dark')
+	send_command('bind !` gs c scholar light')
+	send_command('bind ^backspace input /ma "Aspir III" <t>')
+	send_command('bind !backspace input /ja "Manawell" <me>')
+	send_command('bind @backspace gs c scholar cost')
+	send_command('bind ^\\\\ gs c scholar speed')
+	send_command('bind @\\\\ input /ja "Mana Wall" <me>')
+	send_command('bind !\\\\ input /ma "Reraise III" <me>')	
+	send_command('bind @f9 gs c cycle DeathMode')
+	send_command('bind @f10 gs c cycle RecoverMode')
+	send_command('bind !pause gs c toggle AutoSubMode') --Automatically uses sublimation and Myrkr.
 
     select_default_macro_book()
 end
@@ -89,7 +81,7 @@ function init_gear_sets()
 
     sets.precast.FC = {
         ammo="Impatiens",
-        head=gear.vanya_fc_head,
+        head=gear.merlinic_fc_head,
         body="Agwu's Robe",
         hands="Agwu's Gages",
         legs="Agwu's Slops",
@@ -379,7 +371,7 @@ function init_gear_sets()
     sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['Enfeebling Magic'], {
         head = "Amalric Coif +1",
         waist = "Acuity Belt +1",
-        legs = "Arch. Tonban +3"
+        legs = "Arch. Tonban +3",
         feet = "Arch. Sabots +3"
     })
     sets.midcast.ElementalEnfeeble.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {

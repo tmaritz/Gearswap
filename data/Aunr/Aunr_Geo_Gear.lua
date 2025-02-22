@@ -72,7 +72,7 @@ function init_gear_sets()
         legs = "Bagua Pants +1"
     }
     sets.precast.JA['Full Circle'] = {
-        head = "Azimuth Hood +2",
+        head = "Azimuth Hood +3",
         hands = "Bagua Mitaines +1"
     }
 
@@ -92,17 +92,17 @@ function init_gear_sets()
         main = "C. Palug Hammer",
         sub = "Culminus",
         ammo = "Impatiens",
-        head = gear.vanya_fc_head,
+        head = gear.merlinic_fc_head,
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
         legs = "Geo. Pants +1",
         feet = "Amalric Nails",
-        neck = "Loricate Torque +1",
+        neck = "Voltsurge Torque",
         waist = "Witful Belt",
         left_ear = "Loquac. Earring",
         right_ear = "Malignance Earring",
-        left_ring = "Defending Ring",
-        right_ring = "Prolix Ring",
+        ring1 = "Medada's Ring",
+        ring2 = "Lebeche Ring",
         back = gear.idle_jse_back
     }
 
@@ -170,44 +170,56 @@ function init_gear_sets()
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {}
+    sets.precast.WS = {
+        ammo = "Oshasha's Treatise",
+        head = "Nyame Helm",
+        neck = "Rep. Plat. Medal",
+        ear1 = "Moonshade Earring",
+        ear2 = "Telos Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Karieyh Ring +1",
+        back = "Aurist's Cape +1",
+        waist = "Grunfeld Rope",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
+
+    sets.precast.WS['Judgement'] = {
+        ammo = "Oshasha's Treatise",
+        head = "Nyame Helm",
+        neck = "Rep. Plat. Medal",
+        ear1 = "Moonshade Earring",
+        ear2 = "Telos Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Metamor. Ring +1",
+        ring2 = "Karieyh Ring +1",
+        back = "Aurist's Cape +1",
+        waist = "Grunfeld Rope",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
+    }
 
     --------------------------------------
     -- Midcast sets
     --------------------------------------
 
-    -- sets.midcast.FastRecast = {
-    --     main = "Solstice",
-    --     sub = "Culminus",
-    --     ammo = "Impatiens",
-    --     head = gear.vanya_fc_head,
-    --     body = "Agwu's Robe",
-    --     hands = "Geo. Mitaines +3",
-    --     legs = "Geo. Pants +1",
-    --     feet = "Amalric Nails",
-    --     neck = "Loricate Torque +1",
-    --     waist = "Witful Belt",
-    --     left_ear = "Loquac. Earring",
-    --     right_ear = "Malignance Earring",
-    --     left_ring = "Defending Ring",
-    --     right_ring = "Prolix Ring",
-    --     back = gear.idle_jse_back
-    -- }
-
     sets.midcast.FastRecast = {
-        main = "Idris",
+        main = "Solstice",
         sub = "Culminus",
-        range = "Dunna",
-        head = "Bagua Galero +3",
+        ammo = "Impatiens",
+        head = gear.merlinic_fc_head,
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
         legs = "Geo. Pants +1",
-        feet = "Regal Pumps +1",
-        neck = "Bagua Charm +1",
-        waist = "Austerity Belt",
-        left_ear = "Mendi. Earring",
-        right_ear = "Gna Earring",
-        left_ring = "Stikini Ring",
+        feet = "Amalric Nails",
+        neck = "Voltsurge Torque",
+        waist = "Witful Belt",
+        left_ear = "Loquac. Earring",
+        right_ear = "Malignance Earring",
+        left_ring = "Defending Ring",
         right_ring = "Prolix Ring",
         back = gear.idle_jse_back
     }
@@ -216,6 +228,7 @@ function init_gear_sets()
         main = "Idris",
         sub = "Culminus",
         range = "Dunna",
+        ammo = empty,
         head = "Bagua Galero +3",
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
@@ -231,11 +244,11 @@ function init_gear_sets()
     }
 
     -- Extra Indi duration as long as you can keep your 900 skill cap.
-    sets.midcast.Geomancy.Indi = { set_combine(sets.midcast.Geomancy, {
-        back = gear.idle_jse_back,
+    sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         legs = "Bagua Pants +1",
-        feet = "Azimuth Gaiters +2"
-    }) }
+        feet = "Azimuth Gaiters +2",
+        back = "Lifestream Cape"
+    })
 
     sets.midcast.Cure = {
         main = "Chatoyant Staff",
@@ -289,7 +302,7 @@ function init_gear_sets()
         main = "Marin Staff +1",
         sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
-        head = "Azimuth Hood +2",
+        head = "Azimuth Hood +3",
         body = "Azimuth Coat +3",
         hands = "Azimuth Gloves +2",
         legs = "Azimuth Tights +2",
@@ -309,7 +322,7 @@ function init_gear_sets()
         main = "Marin Staff +1",
         sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
-        head = "Azimuth Hood +2",
+        head = "Azimuth Hood +3",
         body = "Azimuth Coat +3",
         hands = "Azimuth Gloves +2",
         legs = "Azimuth Tights +2",
@@ -378,31 +391,15 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Zendik Robe",
         hands = "Volte Gloves",
-        ring1 = "Metamor. Ring +1",
-        ring2 = "Medada's Ring",
+        ring1 = "Medada's Ring",
+        ring2 = "Metamor. Ring +1",
         back = "Lifestream Cape",
         waist = "Witful Belt",
         legs = "Psycloth Lappas",
         feet = "Regal Pumps +1"
     }
 
-    sets.midcast.Stun.Resistant = {
-        main = "Daybreak",
-        sub = "Ammurapi Shield",
-        ammo = "Floestone",
-        head = "Amalric Coif +1",
-        neck = "Erra Pendant",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
-        body = "Zendik Robe",
-        hands = "Amalric Gages",
-        ring1 = "Metamor. Ring +1",
-        ring2 = "Medada's Ring",
-        back = gear.nuke_jse_back,
-        waist = "Acuity Belt +1",
-        legs = "Merlinic Shalwar",
-        feet = gear.merlinic_aspir_feet
-    }
+    sets.midcast.Stun.Resistant = sets.midcast.Stun
 
     sets.midcast.Impact = {
         main = "Daybreak",
@@ -414,8 +411,8 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Twilight Cloak",
         hands = "Regal Cuffs",
-        ring1 = "Metamor. Ring +1",
-        ring2 = "Medada's Ring",
+        ring1 = "Medada's Ring",
+        ring2 = "Metamor. Ring +1",
         back = gear.nuke_jse_back,
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
@@ -432,8 +429,8 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Zendik Robe",
         hands = "Amalric Gages",
-        ring1 = "Metamor. Ring +1",
-        ring2 = "Medada's Ring",
+        ring1 = "Medada's Ring",
+        ring2 = "Metamor. Ring +1",
         back = gear.nuke_jse_back,
         waist = "Acuity Belt +1",
         legs = "Merlinic Shalwar",
@@ -455,8 +452,8 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
-        ring1 = "Stikini Ring",
-        ring2 = "Medada's Ring",
+        ring1 = "Medada's Ring",
+        ring2 = "Stikini Ring",
         back = gear.nuke_jse_back,
         waist = "Luminary Sash",
         legs = "Agwu's Slops",
@@ -473,8 +470,8 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         body = "Agwu's Robe",
         hands = "Geo. Mitaines +3",
-        ring1 = "Stikini Ring",
-        ring2 = "Medada's Ring",
+        ring1 = "Medada's Ring",
+        ring2 = "Stikini Ring",
         back = gear.nuke_jse_back,
         waist = "Luminary Sash",
         legs = "Agwu's Slops",
@@ -668,7 +665,7 @@ function init_gear_sets()
         main = "Idris",
         sub = "Genbu's Shield",
         range = "Dunna",
-        head = "Azimuth Hood +2",
+        head = "Azimuth Hood +3",
         body = "Azimuth Coat +3",
         hands = "Geo. Mitaines +3",
         legs = "Nyame Flanchard",
@@ -826,33 +823,33 @@ function init_gear_sets()
     sets.engaged = {
         ammo = "Vanir Battery",
         head = "Nyame Helm",
-        neck = "Sanctity Necklace",
+        neck = "Asperity Necklace",
         ear1 = "Cessance Earring",
         ear2 = "Telos Earring",
         body = "Nyame Mail",
         hands = "Nyame Gauntlets",
-        ring1 = "Chirich Ring",
+        ring1 = "Chirich Ring +1",
         ring2 = "Petrov Ring",
-        back = "Kayapa Cape",
-        waist = "Witful Belt",
+        back = gear.idle_jse_back,
+        waist = "Cornelia's Belt",
         legs = "Nyame Flanchard",
         feet = "Nyame Sollerets"
     }
 
     sets.engaged.DW = {
-        ammo = "Hasty Pinion +1",
-        head = "Befouled Crown",
+        ammo = "Vanir Battery",
+        head = "Nyame Helm",
         neck = "Asperity Necklace",
-        ear1 = "Dudgeon Earring",
-        ear2 = "Heartseeker Earring",
-        body = "Agwu's Robe",
-        hands = "Regal Cuffs",
-        ring1 = "Ramuh Ring +1",
-        ring2 = "Ramuh Ring +1",
-        back = "Kayapa Cape",
-        waist = "Witful Belt",
-        legs = "Assid. Pants +1",
-        feet = "Battlecast Gaiters"
+        ear1 = "Cessance Earring",
+        ear2 = "Telos Earring",
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Chirich Ring +1",
+        ring2 = "Petrov Ring",
+        back = gear.idle_jse_back,
+        waist = "Cornelia's Belt",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
     --------------------------------------

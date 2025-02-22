@@ -171,6 +171,10 @@ gear.herculean_th_feet = {
     }
 }
 
+gear.merlinic_fc_head = {
+    name = "Merlinic Hood",
+    augments = {'"Mag.Atk.Bns."+13','"Fast Cast"+6',}
+}
 gear.merlinic_nuke_head = {
     name = "Merlinic Hood",
     augments = {'Mag. Acc.+21 "Mag.Atk.Bns."+21', 'INT+15', 'Mag. Acc.+3', '"Mag.Atk.Bns."+13'}

@@ -546,10 +546,9 @@ end
 buff_spell_lists = {
 	Auto = {--Options for When are: Always, Engaged, Idle, OutOfCombat, Combat
 		{Name='Erratic Flutter',	Buff='Haste',			SpellID=710,	When='Always'},
-		{Name='Battery Charge',		Buff='Refresh',			SpellID=662,	When='Idle'},
-		{Name='Refresh',			Buff='Refresh',			SpellID=109,	When='Idle'},
-		{Name='Nat. Meditation',	Buff='Attack Boost',	SpellID=700,	When='Engaged'},
-		{Name='Mighty Guard',		Buff='Mighty Guard',	SpellID=750,	When='Combat'},
+		{Name='Battery Charge',		Buff='Refresh',			SpellID=662,	When='Always'},
+		{Name='Refresh',			Buff='Refresh',			SpellID=109,	When='Always'},
+		{Name='Nat. Meditation',	Buff='Attack Boost',	SpellID=700,	When='Always'},
 	},
 	
 	Default = {

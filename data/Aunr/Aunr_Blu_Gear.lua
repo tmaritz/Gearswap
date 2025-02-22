@@ -1283,9 +1283,9 @@ function select_default_macro_book()
     elseif player.sub_job == 'THF' then
         set_macro_page(1, 16)
     elseif player.sub_job == 'RDM' then
-        set_macro_page(2, 16)
+        set_macro_page(1, 16)
     else
-        set_macro_page(6, 16)
+        set_macro_page(1, 16)
     end
 end
 
@@ -1299,7 +1299,7 @@ function check_trust()
                 local spell_recasts = windower.ffxi.get_spell_recasts()
 
                 if spell_recasts[980] < spell_latency and not have_trust("Yoran-Oran") then
-                    windower.chat.input('/ma "Yoran-Oran (UC)" <me>')
+                    windower.chat.input('/ma "Sylvie (UC)" <me>')
                     tickdelay = os.clock() + 3
                     return true
                 elseif spell_recasts[952] < spell_latency and not have_trust("Koru-Moru") then
@@ -1311,11 +1311,11 @@ function check_trust()
                     tickdelay = os.clock() + 3
                     return true
                 elseif spell_recasts[914] < spell_latency and not have_trust("Ulmia") then
-                    windower.chat.input('/ma "Ulmia" <me>')
+                    windower.chat.input('/ma "Joachim" <me>')
                     tickdelay = os.clock() + 3
                     return true
                 elseif spell_recasts[979] < spell_latency and not have_trust("Selh'teus") then
-                    windower.chat.input('/ma "Selh\'teus" <me>')
+                    windower.chat.input('/ma "Monberaux" <me>')
                     tickdelay = os.clock() + 3
                     return true
                 else
