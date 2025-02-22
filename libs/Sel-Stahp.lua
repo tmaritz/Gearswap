@@ -157,7 +157,7 @@ function check_reaction(act)
 				}))
 				
 			elseif player.status == 'Idle' and not (midaction() or pet_midaction() or (petWillAct + 2) > os.clock()) then
-				windower.send_command('gs c forceequip')
+				send_command('gs c forceequip')
 			end
 		elseif otherTarget.in_party then
 			if isTarget and check_cover then
@@ -172,7 +172,7 @@ function check_reaction(act)
 		return
 	end
 
-	-- Track buffs locally
+	-- Track buff values locally.
 	if curact.category == 4 then
 		act_info = res.spells[curact.param]
 		if curact.targets[1].actions[1].message == 230 and targetsMe then

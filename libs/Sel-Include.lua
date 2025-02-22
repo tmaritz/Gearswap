@@ -389,9 +389,9 @@ function init_include()
 			local p = packets.parse('outgoing',data)
 			if p['Emote'] == 31 and p['Type'] == 2 then
 				if p['Target ID'] == 0 then
-					windower.send_command('gs c '..st_command..' '..player.id..'')
+					send_command('gs c '..st_command..' '..player.id..'')
 				else
-					windower.send_command('gs c '..st_command..' '..p['Target ID']..'')
+					send_command('gs c '..st_command..' '..p['Target ID']..'')
 				end
 				st_command = false
 				return true
@@ -1207,7 +1207,7 @@ function default_aftercast(spell, spellMap, eventArgs)
 			if useItem and (spell.english == useItemName or useItemSlot == 'set') then
 				useItem = false
 				if useItemSlot == 'item' then
-					windower.send_command('put '..useItemName..' satchel')
+					send_command('put '..useItemName..' satchel')
 				elseif useItemSlot == 'set' then
 					local slots = T{}
 					for slot,item in pairs(sets[useItemName]) do
@@ -1215,12 +1215,12 @@ function default_aftercast(spell, spellMap, eventArgs)
 					end
 					enable(slots)
 					if player.inventory[useItemName] then
-						windower.send_command('wait 1;put '..set_to_item(useItemName)..' satchel')
+						send_command('wait 1;put '..set_to_item(useItemName)..' satchel')
 					end
 				else 
 					enable(useItemSlot)
 					if player.inventory[useItemName] then
-						windower.send_command('wait 1;put '..useItemName..' satchel')
+						send_command('wait 1;put '..useItemName..' satchel')
 					end
 				end
 				useItemName = ''
@@ -2261,7 +2261,7 @@ function status_change(newStatus, oldStatus)
 		if useItem then
 			useItem = false
 			if useItemSlot == 'item' then
-				windower.send_command('put '..useItemName..' satchel')
+				send_command('put '..useItemName..' satchel')
 			elseif useItemSlot == 'set' then
 				local slots = T{}
 				for slot,item in pairs(sets[useItemName]) do
@@ -2269,12 +2269,12 @@ function status_change(newStatus, oldStatus)
 				end
 				enable(slots)
 				if player.inventory[useItemName] then
-					windower.send_command('wait 1;put '..set_to_item(useItemName)..' satchel')
+					send_command('wait 1;put '..set_to_item(useItemName)..' satchel')
 				end
 			else 
 				enable(useItemSlot)
 				if player.inventory[useItemName] then
-					windower.send_command('wait 1;put '..useItemName..' satchel')
+					send_command('wait 1;put '..useItemName..' satchel')
 				end
 			end
 			add_to_chat(217,"Cancelling using "..useItemName..".")
