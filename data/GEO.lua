@@ -95,13 +95,11 @@ function job_filtered_action(spell, eventArgs)
 end
 
 function job_filter_precast(spell, spellMap, eventArgs)
-
-	-- if spell.english:startswith('Geo-') and pet.isvalid then
-	-- 	eventArgs.cancel = true
-	-- 	windower.chat.input('/ja "Full Circle" <me>')
-	-- 	windower.chat.input:schedule(1.3,'/ma "'..spell.english..'" '..spell.target.raw..'')
-	-- end
-
+	if spell.english:startswith('Geo-') and pet.isvalid then
+		eventArgs.cancel = true
+		windower.chat.input('/ja "Full Circle" <me>')
+		windower.chat.input:schedule(1.3,'/ma "'..spell.english..'" '..spell.target.raw..'')
+	end
 end
 
 function job_pretarget(spell, spellMap, eventArgs)

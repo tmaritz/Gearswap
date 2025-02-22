@@ -1,7 +1,7 @@
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_job_setup()
     state.OffenseMode:options('Normal')
-    state.CastingMode:options('Normal', 'Resistant', 'Proc', 'OccultAcumen', '9k')
+    state.CastingMode:options('Normal', 'OccultAcumen')
     state.IdleMode:options('Normal', 'PDT')
     state.HybridMode:options('Normal', 'PDT')
     state.Weapons:options('None', 'DayMax', 'Mpaca')
@@ -407,32 +407,9 @@ function init_gear_sets()
         feet = "Acad. Loafers +3"
     }
 
-    sets.midcast['Enfeebling Magic'].Resistant = {
-        main = "Daybreak",
-        sub = "Ammurapi Shield",
-        ammo = "Pemphredo Tathlum",
-        head = "Acad. Mortar. +2",
-        neck = "Erra Pendant",
-        ear1 = "Regal Earring",
-        ear2 = "Digni. Earring",
-        body = "Arbatel Gown +2",
-        hands = "Acad. Bracers +2",
-        ring1 = "Metamor. Ring +1",
-        ring2 = "Stikini Ring",
-        back = "Lugh\'s Cape",
-        waist = "Luminary Sash",
-        legs = "Chironic Hose",
-        feet = "Acad. Loafers +3"
-    }
-
     sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['Enfeebling Magic'], {
         head = "Amalric Coif +1",
         ear2 = "Malignance Earring",
-        back = "Lugh\'s Cape",
-        waist = "Acuity Belt +1"
-    })
-    sets.midcast.ElementalEnfeeble.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
-        head = "Amalric Coif +1",
         back = "Lugh\'s Cape",
         waist = "Acuity Belt +1"
     })
@@ -443,14 +420,8 @@ function init_gear_sets()
         back = "Lugh\'s Cape",
         waist = "Acuity Belt +1"
     })
-    sets.midcast.IntEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
-        head = "Amalric Coif +1",
-        back = "Lugh\'s Cape",
-        waist = "Acuity Belt +1"
-    })
 
     sets.midcast.MndEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {})
-    sets.midcast.MndEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {})
 
     sets.midcast.Dia = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
     sets.midcast.Diaga = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
@@ -499,62 +470,25 @@ function init_gear_sets()
         feet = gear.merlinic_nuke_feet
     }
 
-    sets.midcast.Kaustra.Resistant = {
-        main = gear.grioavolr_nuke_staff,
-        sub = "Enki Strap",
-        ammo = "Pemphredo Tathlum",
-        head = gear.merlinic_nuke_head,
-        neck = "Erra Pendant",
-        ear1 = "Crematio Earring",
-        ear2 = "Malignance Earring",
-        body = gear.merlinic_nuke_body,
-        hands = "Amalric Gages",
-        ring1 = "Metamor. Ring +1",
-        ring2 = "Medada's Ring",
-        back = "Lugh\'s Cape",
-        waist = "Acuity Belt +1",
-        legs = "Merlinic Shalwar",
-        feet = gear.merlinic_nuke_feet
-    }
-
     sets.midcast.Drain = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Staunch Tathlum +1",
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        ammo = "Plumose Sachet",
         head = "Pixie Hairpin +1",
-        neck = "Erra Pendant",
-        ear1 = "Hirudinea Earring",
-        ear2 = "Malignance Earring",
         body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
-        ring1 = "Medada's Ring",
-        ring2 = "Stikini Ring",
-        back = "Merciful Cape",
-        waist = "Fucho-no-obi",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
-    }
-
-    sets.midcast.Drain.Resistant = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Staunch Tathlum +1",
-        head = "Pixie Hairpin +1",
+        hands = gear.merlinic_aspir_hands,
+        legs = "Peda. Pants +2",
+        feet = "Agwu\'s Pigaches",
         neck = "Erra Pendant",
-        ear1 = "Hirudinea Earring",
-        ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
-        ring1 = "Medada's Ring",
-        ring2 = "Stikini Ring",
-        back = "Merciful Cape",
-        waist = "Fucho-no-obi",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
+        waist = "Fucho-no-Obi",
+        left_ear = "Hirudinea Earring",
+        right_ear = "Malignance Earring",
+        left_ring = "Medada's Ring",
+        right_ring = "Evanescence Ring",
+        back = "Aurist's Cape +1",
     }
 
     sets.midcast.Aspir = sets.midcast.Drain
-    sets.midcast.Aspir.Resistant = sets.midcast.Drain.Resistant
 
     sets.midcast.Stun = {
         main = "Mpaca's Staff",
@@ -574,24 +508,6 @@ function init_gear_sets()
         feet = "Acad. Loafers +3"
     }
 
-    sets.midcast.Stun.Resistant = {
-        main = "Daybreak",
-        sub = "Ammurapi Shield",
-        ammo = "Pemphredo Tathlum",
-        head = "Acad. Mortar. +2",
-        neck = "Erra Pendant",
-        ear1 = "Regal Earring",
-        ear2 = "Malignance Earring",
-        body = "Zendik Robe",
-        hands = "Acad. Bracers +2",
-        ring1 = "Metamor. Ring +1",
-        ring2 = "Medada's Ring",
-        back = "Lugh\'s Cape",
-        waist = "Acuity Belt +1",
-        legs = "Chironic Hose",
-        feet = gear.merlinic_aspir_feet
-    }
-
     -- Elemental Magic sets are default for handling low-tier nukes.
     sets.midcast['Elemental Magic'] = {
         main = "Marin Staff +1",
@@ -609,78 +525,6 @@ function init_gear_sets()
         waist = "Refoccilation Stone",
         legs = "Arbatel Pants +2",
         feet = "Arbatel Loafers +2"
-    }
-
-    sets.midcast['Elemental Magic'].Resistant = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
-        ear1 = "Bakarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Arbatel Gown +2",
-        hands = "Arbatel Bracers +2",
-        ring1 = "Medada's Ring",
-        ring2 = "Metamor. Ring +1",
-        back = "Lugh\'s Cape",
-        waist = "Refoccilation Stone",
-        legs = "Arbatel Pants +2",
-        feet = "Arbatel Loafers +2"
-    }
-
-    sets.midcast['Elemental Magic'].Fodder = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
-        ear1 = "Bakarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Arbatel Gown +2",
-        hands = "Arbatel Bracers +2",
-        ring1 = "Medada's Ring",
-        ring2 = "Metamor. Ring +1",
-        back = "Lugh\'s Cape",
-        waist = "Refoccilation Stone",
-        legs = "Arbatel Pants +2",
-        feet = "Arbatel Loafers +2"
-    }
-
-    sets.midcast['Elemental Magic']['9k'] = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
-        ear1 = "Bakarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
-        ring1 = "Medada's Ring",
-        ring2 = "Metamor. Ring +1",
-        back = "Lugh\'s Cape",
-        waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
-    }
-
-    sets.midcast['Elemental Magic'].Proc = {
-        main = "Marin Staff +1",
-        sub = "Enki Strap",
-        ammo = "Ghastly Tathlum +1",
-        head = "Agwu\'s Cap",
-        neck = "Sybil Scarf",
-        ear1 = "Bakarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Agwu\'s Robe",
-        hands = "Agwu\'s Gages",
-        ring1 = "Medada's Ring",
-        ring2 = "Metamor. Ring +1",
-        back = "Lugh\'s Cape",
-        waist = "Refoccilation Stone",
-        legs = "Agwu\'s Slops",
-        feet = "Agwu\'s Pigaches"
     }
 
     sets.midcast['Elemental Magic'].OccultAcumen = {
@@ -703,25 +547,23 @@ function init_gear_sets()
 
     -- Custom refinements for certain nuke tiers
     sets.midcast['Elemental Magic'].HighTierNuke = sets.midcast['Elemental Magic']
-    sets.midcast['Elemental Magic'].HighTierNuke.Resistant = sets.midcast['Elemental Magic'].Resistant
-    sets.midcast['Elemental Magic'].HighTierNuke.Fodder = sets.midcast['Elemental Magic'].Fodder
 
     sets.midcast.Helix = {
-        main="Marin Staff +1",
-        sub="Enki Strap",
-        ammo="Ghastly Tathlum +1",
-        head="Arbatel Bonnet +2",
-        body="Arbatel Gown +2",
-        hands="Arbatel Bracers +2",
-        legs="Arbatel Pants +2",
-        feet="Agwu's Pigaches",
-        neck="Argute Stole +1",
-        waist="Refoccilation Stone",
-        left_ear="Malignance Earring",
-        right_ear="Barkaro. Earring",
-        left_ring="Medada's Ring",
-        right_ring="Metamor. Ring +1",
-        back="Lugh's Cape",
+        main = "Marin Staff +1",
+        sub = "Enki Strap",
+        ammo = "Ghastly Tathlum +1",
+        head = "Arbatel Bonnet +2",
+        body = "Arbatel Gown +2",
+        hands = "Arbatel Bracers +2",
+        legs = "Arbatel Pants +2",
+        feet = "Agwu's Pigaches",
+        neck = "Argute Stole +1",
+        waist = "Refoccilation Stone",
+        left_ear = "Malignance Earring",
+        right_ear = "Barkaro. Earring",
+        left_ring = "Medada's Ring",
+        right_ring = "Metamor. Ring +1",
+        back = "Lugh's Cape",
     }
 
     sets.midcast.Helix.Resistant = sets.midcast.Helix
@@ -895,10 +737,10 @@ function init_gear_sets()
         hands = "Arbatel Bracers +2"
     }
     sets.buff['Penury'] = {
-        legs = "Arbatel Pants +1"
+        legs = "Arbatel Pants +2"
     }
     sets.buff['Parsimony'] = {
-        legs = "Arbatel Pants +1"
+        legs = "Arbatel Pants +2"
     }
     sets.buff['Celerity'] = {
         feet = "Peda. Loafers +1"
@@ -907,7 +749,7 @@ function init_gear_sets()
         feet = "Peda. Loafers +1"
     }
     sets.buff['Klimaform'] = {
-        feet = "Arbatel Loafers +1"
+        feet = "Arbatel Loafers +2"
     }
 
     sets.HPDown = {
@@ -944,8 +786,12 @@ function init_gear_sets()
     }
 
     sets.buff.Doom = set_combine(sets.buff.Doom, {})
-    sets.buff['Light Arts'] = {} -- legs="Academic's Pants +3"
-    sets.buff['Dark Arts'] = {}  -- body="Academic's Gown +3"
+    sets.buff['Light Arts'] = {
+        legs = "Academic's Pants +2"
+    }
+    sets.buff['Dark Arts'] = {
+        body = "Academic's Gown +2"
+    }
 
     sets.buff.Sublimation = {
         head = "Acad. Mortar. +2",

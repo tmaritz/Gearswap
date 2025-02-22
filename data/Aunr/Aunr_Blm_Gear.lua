@@ -2,7 +2,7 @@ function user_job_setup()
     -- Options: Override default values
     state.CastingMode:options('Normal', 'OccultAcumen')
     state.OffenseMode:options('Normal')
-    state.IdleMode:options('Normal', 'PDT', 'DTHippo')
+    state.IdleMode:options('Normal', 'DT')
     state.Weapons:options('None', 'Mpaca')
 
     gear.obi_cure_waist = "Witful Belt"
@@ -11,36 +11,35 @@ function user_job_setup()
 
     gear.idlefc_jse_back = {
         name = "Taranus's Cape",
-        augments = {'MP+60','Mag. Acc+20 /Mag. Dmg.+20','MP+20','"Fast Cast"+10','Damage taken-5%',}
+        augments = { 'MP+60', 'Mag. Acc+20 /Mag. Dmg.+20', 'MP+20', '"Fast Cast"+10', 'Damage taken-5%', }
     }
     gear.nuke_jse_back = {
         name = "Taranus's Cape",
-        augments = {'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'INT+10', '"Mag.Atk.Bns."+10'}
+        augments = { 'INT+20', 'Mag. Acc+20 /Mag. Dmg.+20', 'INT+10', '"Mag.Atk.Bns."+10' }
     }
     gear.stp_jse_back = {
         name = "Taranus's Cape",
-        augments = {'DEX+20', 'Accuracy+20 Attack+20', '"Store TP"+10'}
+        augments = { 'DEX+20', 'Accuracy+20 Attack+20', '"Store TP"+10' }
     }
 
     -- Additional local binds
-	send_command('bind @` gs c cycle ElementalMode')
-	send_command('bind ^` gs c scholar dark')
-	send_command('bind !` gs c scholar light')
-	send_command('bind ^backspace input /ma "Aspir III" <t>')
-	send_command('bind !backspace input /ja "Manawell" <me>')
-	send_command('bind @backspace gs c scholar cost')
-	send_command('bind ^\\\\ gs c scholar speed')
-	send_command('bind @\\\\ input /ja "Mana Wall" <me>')
-	send_command('bind !\\\\ input /ma "Reraise III" <me>')	
-	send_command('bind @f9 gs c cycle DeathMode')
-	send_command('bind @f10 gs c cycle RecoverMode')
-	send_command('bind !pause gs c toggle AutoSubMode') --Automatically uses sublimation and Myrkr.
+    send_command('bind @` gs c cycle ElementalMode')
+    send_command('bind ^` gs c scholar dark')
+    send_command('bind !` gs c scholar light')
+    send_command('bind ^backspace input /ma "Aspir III" <t>')
+    send_command('bind !backspace input /ja "Manawell" <me>')
+    send_command('bind @backspace gs c scholar cost')
+    send_command('bind ^\\\\ gs c scholar speed')
+    send_command('bind @\\\\ input /ja "Mana Wall" <me>')
+    send_command('bind !\\\\ input /ma "Reraise III" <me>')
+    send_command('bind @f9 gs c cycle DeathMode')
+    send_command('bind @f10 gs c cycle RecoverMode')
+    send_command('bind !pause gs c toggle AutoSubMode') --Automatically uses sublimation and Myrkr.
 
     select_default_macro_book()
 end
 
 function init_gear_sets()
-
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
@@ -72,7 +71,9 @@ function init_gear_sets()
         feet = "Wicce Sabots +2"
     }
 
-    sets.precast.JA.Manafont = {} -- body="Sorcerer's Coat +2"
+    sets.precast.JA.Manafont = {
+        body = "Sorcerer's Coat"
+    }
 
     -- equip to maximize HP (for Tarus) and minimize MP loss before using convert
     sets.precast.JA.Convert = {}
@@ -80,19 +81,19 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {
-        ammo="Impatiens",
-        head=gear.merlinic_fc_head,
-        body="Agwu's Robe",
-        hands="Agwu's Gages",
-        legs="Agwu's Slops",
-        feet="Regal Pumps +1",
-        neck="Voltsurge Torque",
-        waist="Witful Belt",
-        left_ear="Malignance Earring",
-        right_ear="Loquac. Earring",
-        left_ring="Medada's Ring",
-        right_ring="Lebeche Ring",
-        back=gear.idlefc_jse_back,
+        ammo = "Impatiens",
+        head = gear.merlinic_fc_head,
+        body = "Agwu's Robe",
+        hands = "Agwu's Gages",
+        legs = "Agwu's Slops",
+        feet = "Regal Pumps +1",
+        neck = "Voltsurge Torque",
+        waist = "Witful Belt",
+        left_ear = "Malignance Earring",
+        right_ear = "Loquac. Earring",
+        left_ring = "Medada's Ring",
+        right_ring = "Lebeche Ring",
+        back = gear.idlefc_jse_back,
     }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -350,33 +351,11 @@ function init_gear_sets()
         feet = "Wicce Sabots +2"
     }
 
-    sets.midcast['Enfeebling Magic'].Resistant = {
-        main = "Daybreak",
-        sub = "Ammurapi Shield",
-        ammo = "Pemphredo Tathlum",
-        head = "Befouled Crown",
-        neck = "Erra Pendant",
-        ear1 = "Digni. Earring",
-        ear2 = "Regal Earring",
-        body = "Vanya Robe",
-        hands = "Regal Cuffs",
-        ring1 = "Stikini Ring",
-        ring2 = "Metamor. Ring +1",
-        back = gear.nuke_jse_back,
-        waist = "Acuity Belt +1",
-        legs = "Psycloth Lappas",
-        feet = "Skaoi Boots"
-    }
-
     sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['Enfeebling Magic'], {
         head = "Amalric Coif +1",
         waist = "Acuity Belt +1",
         legs = "Arch. Tonban +3",
         feet = "Arch. Sabots +3"
-    })
-    sets.midcast.ElementalEnfeeble.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
-        head = "Amalric Coif +1",
-        waist = "Acuity Belt +1"
     })
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {
@@ -384,14 +363,8 @@ function init_gear_sets()
         ear1 = "Malignance Earring",
         waist = "Acuity Belt +1"
     })
-    sets.midcast.IntEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
-        head = "Amalric Coif +1",
-        ear1 = "Malignance Earring",
-        waist = "Acuity Belt +1"
-    })
 
     sets.midcast.MndEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {})
-    sets.midcast.MndEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {})
 
     sets.midcast.Dia = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
     sets.midcast['Dia II'] = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
@@ -420,21 +393,21 @@ function init_gear_sets()
     }
 
     sets.midcast.Drain = {
-        main="Daybreak",
-        sub="Ammurapi Shield",
-        ammo="Plumose Sachet",
-        head="Pixie Hairpin +1",
-        body="Wicce Coat +2",
-        hands=gear.merlinic_aspir_hands,
-        legs=gear.merlinic_aspir_legs,
-        feet=gear.merlinic_aspir_feet,
-        neck="Erra Pendant",
-        waist="Fucho-no-Obi",
-        left_ear="Hirudinea Earring",
-        right_ear="Malignance Earring",
-        left_ring="Medada's Ring",
-        right_ring="Evanescence Ring",
-        back="Aurist's Cape +1",
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        ammo = "Plumose Sachet",
+        head = "Pixie Hairpin +1",
+        body = "Wicce Coat +2",
+        hands = gear.merlinic_aspir_hands,
+        legs = gear.merlinic_aspir_legs,
+        feet = "Agwu\'s Pigaches",
+        neck = "Erra Pendant",
+        waist = "Fucho-no-Obi",
+        left_ear = "Hirudinea Earring",
+        right_ear = "Malignance Earring",
+        left_ring = "Medada's Ring",
+        right_ring = "Evanescence Ring",
+        back = "Aurist's Cape +1",
     }
 
     sets.midcast.Aspir = sets.midcast.Drain
@@ -493,24 +466,6 @@ function init_gear_sets()
         feet = "Regal Pumps +1"
     }
 
-    sets.midcast.Stun.Resistant = {
-        main = "Daybreak",
-        sub = "Ammurapi Shield",
-        ammo = "Pemphredo Tathlum",
-        head = "Amalric Coif +1",
-        neck = "Erra Pendant",
-        ear1 = "Malignance Earring",
-        ear2 = "Regal Earring",
-        body = "Zendik Robe",
-        hands = "Volte Gloves",
-        ring1 = "Stikini Ring",
-        ring2 = "Metamor. Ring +1",
-        back = gear.nuke_jse_back,
-        waist = "Witful Belt",
-        legs = "Merlinic Shalwar",
-        feet = gear.merlinic_aspir_feet
-    }
-
     sets.midcast.BardSong = {
         main = "Daybreak",
         sub = "Ammurapi Shield",
@@ -567,49 +522,24 @@ function init_gear_sets()
         feet = "Wicce Sabots +2"
     }
 
-    sets.midcast['Elemental Magic'].Resistant = sets.midcast['Elemental Magic']
-    sets.midcast['Elemental Magic'].Fodder = sets.midcast['Elemental Magic']
-
     sets.midcast['Elemental Magic'].HighTierNuke = sets.midcast['Elemental Magic']
-    sets.midcast['Elemental Magic'].HighTierNuke.Resistant = sets.midcast['Elemental Magic'].Resistant
-    sets.midcast['Elemental Magic'].HighTierNuke.Fodder = sets.midcast['Elemental Magic'].Fodder
 
     sets.midcast.Helix = sets.midcast['Elemental Magic']
-    sets.midcast.Helix.Resistant = sets.midcast['Elemental Magic'].Resistant
-
-    -- Minimal damage gear, maximum recast gear for procs.
-    sets.midcast['Elemental Magic'].Proc = {
-        main = empty,
-        sub = empty,
-        ammo = "Impatiens",
-        head = "Nahtirah Hat",
-        neck = "Loricate Torque +1",
-        ear1 = "Gifted Earring",
-        ear2 = "Loquac. Earring",
-        body = "Spaekona's Coat +3",
-        hands = "Hagondes Cuffs +1",
-        ring1 = "Kishar Ring",
-        ring2 = "Prolix Ring",
-        back = "Swith Cape +1",
-        waist = "Witful Belt",
-        legs = "Assid. Pants +1",
-        feet = "Regal Pumps +1"
-    }
 
     sets.midcast['Elemental Magic'].OccultAcumen = {
-        ammo="Seraphic Ampulla",
-        head="Mall. Chapeau +2",
-        body="Wicce Coat +2", -- Shango Robe
-        hands=gear.merlinic_occult_hands,
-        legs="Perdition Slops",
-        feet=gear.merlinic_occult_feet,
-        neck="Asperity Necklace", -- Lissome/Combatants better
-        waist="Oneiros Rope",
-        left_ear="Dedition Earring",
-        right_ear="Telos Earring",
-        left_ring="Chirich Ring +1",
-        right_ring="Crepuscular Ring",
-        back="Aurist's Cape +1",
+        ammo = "Seraphic Ampulla",
+        head = "Mall. Chapeau +2",
+        body = "Wicce Coat +2", -- Shango Robe
+        hands = gear.merlinic_occult_hands,
+        legs = "Perdition Slops",
+        feet = gear.merlinic_occult_feet,
+        neck = "Asperity Necklace", -- Lissome/Combatants better
+        waist = "Oneiros Rope",
+        left_ear = "Dedition Earring",
+        right_ear = "Telos Earring",
+        left_ring = "Chirich Ring +1",
+        right_ring = "Crepuscular Ring",
+        back = "Aurist's Cape +1",
     }
 
     sets.midcast.Impact.OccultAcumen = set_combine(sets.midcast['Elemental Magic'].OccultAcumen, {
@@ -659,7 +589,7 @@ function init_gear_sets()
     }
 
     -- Idle mode that keeps PDT gear on, but doesn't prevent normal gear swaps for precast/etc.
-    sets.idle.PDT = {
+    sets.idle.DT = {
         main = "Malignance Pole",
         sub = "Oneiros Grip",
         ammo = "Staunch Tathlum",
@@ -676,10 +606,6 @@ function init_gear_sets()
         legs = "Assid. Pants +1",
         feet = "Mallquis Clogs +2"
     }
-
-    sets.idle.DTHippo = set_combine(sets.idle.PDT, {
-        feet = "Hippo. Socks +1"
-    })
 
     sets.idle.Death = {
         main = gear.grioavolr_nuke_staff,
@@ -901,7 +827,6 @@ function init_gear_sets()
         waist = "Gishdubar Sash",
         feet = "Inspirited Boots"
     }
-
 end
 
 -- Select default macro book on initial load or subjob change.

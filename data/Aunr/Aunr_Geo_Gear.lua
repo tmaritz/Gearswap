@@ -14,7 +14,7 @@ function user_job_setup()
     }
     gear.idle_jse_back = {
         name = "Nantosuelta's Cape",
-        augments = {'Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: "Regen"+5',}
+        augments = { 'Eva.+20 /Mag. Eva.+20', 'Pet: "Regen"+10', 'Pet: "Regen"+5', }
     }
 
     gear.obi_cure_back = "Tempered Cape +1"
@@ -316,8 +316,6 @@ function init_gear_sets()
         back = "Aurist's Cape +1"
     }
 
-    sets.ResistantMagicBurst = sets.MagicBurst
-
     sets.midcast['Elemental Magic'] = {
         main = "Marin Staff +1",
         sub = "Enki Strap",
@@ -337,46 +335,42 @@ function init_gear_sets()
     }
 
     sets.midcast['Elemental Magic'].OccultAcumen = {
-        ammo="Seraphic Ampulla",
-        head="Mall. Chapeau +2",
-        body="Azimuth Coat +3", -- Shango Robe
-        hands=gear.merlinic_occult_hands,
-        legs="Perdition Slops",
-        feet=gear.merlinic_occult_feet,
-        neck="Asperity Necklace", -- Lissome/Combatants better
-        waist="Oneiros Rope",
-        left_ear="Dedition Earring",
-        right_ear="Telos Earring",
-        left_ring="Chirich Ring +1",
-        right_ring="Crepuscular Ring",
-        back="Aurist's Cape +1",
+        ammo = "Seraphic Ampulla",
+        head = "Mall. Chapeau +2",
+        body = "Azimuth Coat +3", -- Shango Robe
+        hands = gear.merlinic_occult_hands,
+        legs = "Perdition Slops",
+        feet = gear.merlinic_occult_feet,
+        neck = "Asperity Necklace", -- Lissome/Combatants better
+        waist = "Oneiros Rope",
+        left_ear = "Dedition Earring",
+        right_ear = "Telos Earring",
+        left_ring = "Chirich Ring +1",
+        right_ring = "Crepuscular Ring",
+        back = "Aurist's Cape +1",
     }
 
 
     sets.midcast['Elemental Magic'].HighTierNuke = set_combine(sets.midcast['Elemental Magic'], {})
 
-    sets.midcast['Elemental Magic'].HighTierNuke.Resistant = set_combine(sets.midcast['Elemental Magic'], {})
-
-    sets.midcast['Elemental Magic'].HighTierNuke.Fodder = set_combine(sets.midcast['Elemental Magic'], {})
-
     sets.midcast['Dark Magic'] = set_combine(sets.midcast['Elemental Magic'], {})
 
     sets.midcast.Drain = {
-        main="Daybreak",
-        sub="Ammurapi Shield",
-        ammo="Plumose Sachet",
-        head="Bagua Galero +3",
-        body="Azimuth Coat +3",
-        hands=gear.merlinic_aspir_hands,
-        legs=gear.merlinic_aspir_legs,
-        feet=gear.merlinic_aspir_feet,
-        neck="Erra Pendant",
-        waist="Fucho-no-Obi",
-        left_ear="Hirudinea Earring",
-        right_ear="Malignance Earring",
-        left_ring="Medada's Ring",
-        right_ring="Evanescence Ring",
-        back="Aurist's Cape +1",
+        main = "Daybreak",
+        sub = "Ammurapi Shield",
+        ammo = "Plumose Sachet",
+        head = "Bagua Galero +3",
+        body = "Azimuth Coat +3",
+        hands = gear.merlinic_aspir_hands,
+        legs = gear.merlinic_aspir_legs,
+        feet = gear.merlinic_aspir_feet,
+        neck = "Erra Pendant",
+        waist = "Fucho-no-Obi",
+        left_ear = "Hirudinea Earring",
+        right_ear = "Malignance Earring",
+        left_ring = "Medada's Ring",
+        right_ring = "Evanescence Ring",
+        back = "Aurist's Cape +1",
     }
 
     sets.midcast.Aspir = sets.midcast.Drain
@@ -398,8 +392,6 @@ function init_gear_sets()
         legs = "Psycloth Lappas",
         feet = "Regal Pumps +1"
     }
-
-    sets.midcast.Stun.Resistant = sets.midcast.Stun
 
     sets.midcast.Impact = {
         main = "Daybreak",
@@ -460,30 +452,7 @@ function init_gear_sets()
         feet = "Agwo's Pigaches"
     }
 
-    sets.midcast['Enfeebling Magic'].Resistant = {
-        main = "Daybreak",
-        sub = "Ammurapi Shield",
-        ammo = "Floestone",
-        head = "Agwu's Cap",
-        neck = "Erra Pendant",
-        ear1 = "Barkarole Earring",
-        ear2 = "Malignance Earring",
-        body = "Agwu's Robe",
-        hands = "Geo. Mitaines +3",
-        ring1 = "Medada's Ring",
-        ring2 = "Stikini Ring",
-        back = gear.nuke_jse_back,
-        waist = "Luminary Sash",
-        legs = "Agwu's Slops",
-        feet = "Agwo's Pigaches"
-    }
-
     sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['Enfeebling Magic'], {
-        head = "Amalric Coif +1",
-        ear2 = "Malignance Earring",
-        waist = "Acuity Belt +1"
-    })
-    sets.midcast.ElementalEnfeeble.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
         head = "Amalric Coif +1",
         ear2 = "Malignance Earring",
         waist = "Acuity Belt +1"
@@ -494,17 +463,9 @@ function init_gear_sets()
         ear2 = "Malignance Earring",
         waist = "Acuity Belt +1"
     })
-    sets.midcast.IntEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
-        head = "Amalric Coif +1",
-        ear2 = "Malignance Earring",
-        waist = "Acuity Belt +1"
-    })
 
     sets.midcast.MndEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {
 
-    })
-
-    sets.midcast.MndEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {
     })
 
     sets.midcast.Dia = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
@@ -773,7 +734,6 @@ function init_gear_sets()
 
     sets.defense.GeoLock = sets.midcast.Geomancy.Indi
 
-    -- sets.Kiting = {feet="Geo. Sandals +1"}
     sets.Kiting = {
         feet = "Geo. Sandals +1"
     }
@@ -893,9 +853,3 @@ end
 function user_job_lockstyle()
     windower.chat.input('/lockstyleset 005')
 end
-
--- if state.Weapons.value == 'Lionheart' then
--- 	windower.chat.input('/lockstyleset 034')
--- else
--- 	windower.chat.input('/lockstyleset 033')
--- end
