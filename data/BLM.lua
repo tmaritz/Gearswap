@@ -466,6 +466,16 @@ function handle_elemental(cmdParams)
 	elseif command == 'ara' then
 		windower.chat.input('/ma "'..data.elements.nukera_of[state.ElementalMode.value]..'ra" '..target..'')		
 
+	elseif command == 'smallaga' then
+		local spell_recasts = windower.ffxi.get_spell_recasts()
+		local lower_spell = string.lower(data.elements.nukega_of[state.ElementalMode.value]..'ga II')
+		local spell_id = gearswap.validabils.english['/ma'][lower_spell]
+		if silent_can_use(spell_id) and spell_recasts[spell_id] < spell_latency and actual_cost(spell_id) < player.mp then
+			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga II'..'" '..target..'')
+		else
+			windower.chat.input('/ma "'..data.elements.nukega_of[state.ElementalMode.value]..'ga" '..target..'')
+		end
+
 	elseif command:contains('aga') or command:contains('aja') then
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 		if command == 'aga' then

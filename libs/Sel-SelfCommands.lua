@@ -86,14 +86,13 @@ function self_command(commandArgs)
         -- the list (it will be used to determine which function to call), and
         -- send the remaining words as parameters for the function.
         local handleCmd = (table.remove(commandArgs, 1)):lower()
+		local functionName = "handle_" .. handleCmd
 
-        if selfCommandMaps[handleCmd] then
-            selfCommandMaps[handleCmd](commandArgs)
-        end
+		if _G[functionName] then
+			_G[functionName](commandArgs)
+		end
     end
 end
-
-
 -------------------------------------------------------------------------------------------------------------------
 -- Functions for manipulating state vars.
 -------------------------------------------------------------------------------------------------------------------
@@ -920,42 +919,42 @@ function handle_stna(cmdParams)
 
 	if cmdParams[1] then
 		if tonumber(cmdParams[1]) then
-			removalTarget = windower.ffxi.get_mob_by_id(tonumber(cmdParams[1]))
+			removalTarget = get_party_member_by_id(tonumber(cmdParams[1]))
 		else
 			removalTarget = table.concat(cmdParams, ' ')
-			removalTarget = get_closest_mob_by_name(removalTarget) 
-			if not removalTarget.name then
-				if player.target then 
-					removalTarget = player.target
-				else
-					removalTarget = player
-				end
-			end
+			removalTarget = get_closest_party_member_by_name(removalTarget) 
 		end
-	elseif player.target.type == "SELF" or player.target.type == 'NONE' then
-		removalTarget = player
-	elseif player.target.type == 'MONSTER' then
-		send_command('gs c stna <stpt>')
-		return
-	else
-		removalTarget = player.target
 	end
-	if removalTarget.status == 'Dead' or removalTarget.status == 'Engaged dead' then
+	
+	if not removalTarget then
+		if player.target.type == "SELF" or player.target.type == 'NONE' then
+			removalTarget = get_party_member_by_id(player.id)
+		elseif player.target.type == 'MONSTER' then
+			send_command('gs c stna <stpt>')
+			return
+		elseif player.target.status == 'Dead' or player.target.status == 'Engaged dead' then
+			windower.chat.input('/ma "Arise" '..removalTarget.id..'')
+			return
+		elseif player.target.in_party then
+			removalTarget = get_party_member_by_id(player.target.id) 
+		end
+	end
+
+	if not removalTarget then
+		add_to_chat(123, 'STNA Target not found.')
+		return
+	elseif removalTarget.mob.status == 2 or removalTarget.mob.status == 3 then --Dead or Engaged Dead
 		windower.chat.input('/ma "Arise" '..removalTarget.id..'')
 		return
 	end
-	
-	for i in ipairs(party) do
-		if removalTarget.name == party[i].name then
-			targetBuffs = party[i].buffactive
-			break
-		end
-	end
-	
+
+	targetBuffs = removalTarget.buffactive
+
 	if not targetBuffs then
 		add_to_chat(123, 'STNA Target not found.')
 		return
 	end
+
 	for i in ipairs(data.status_map) do
 		if targetBuffs[data.status_map[i].buff] and silent_can_use(data.status_map[i].spell) then
 			windower.chat.input('/ma "'..data.status_map[i].spell..'" '..removalTarget.name)
@@ -964,7 +963,7 @@ function handle_stna(cmdParams)
 	end
 	if silent_can_use('Erase') then
 		for key in pairs(targetBuffs) do
-			if data.erasable_statuses:contains(key) or (type(key) == "string" and key:endswith(' down')) then
+			if type(key) == "string" and (data.erasable_statuses:contains(key) or key:endswith(' down')) then
 				windower.chat.input('/ma "Erase" '..removalTarget.name)
 				return
 			end
@@ -1217,6 +1216,7 @@ end
 -- A function for testing lua code.  Called via "gs c test".
 function handle_test(cmdParams)
 	table.vprint(party)
+	--table.vprint(player.target)
     if user_test then
         user_test(cmdParams)
     elseif job_test then
@@ -1227,42 +1227,3 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- The below table maps text commands to the above handler functions.
 -------------------------------------------------------------------------------------------------------------------
-
-selfCommandMaps = {
-    ['toggle']   		= handle_toggle,
-    ['cycle']    		= handle_cycle,
-    ['cycleback']		= handle_cycleback,
-    ['set']      		= handle_set,
-    ['reset']    		= handle_reset,
-    ['unset']    		= handle_unset,
-    ['update']   		= handle_update,
-    ['showtp']   		= handle_showtp,
-    ['naked']    		= handle_naked,
-	['weapons']  		= handle_weapons,
-	['showset']  		= handle_showset,
-    ['help']     		= handle_help,
-    ['forceequip']  	= handle_forceequip,
-	['useitem']			= handle_useitem,
-    ['quietenable'] 	= handle_quietenable,
-	['quietdisable']	= handle_quietdisable,
-	['autonuke'] 		= handle_autonuke,
-	['autows'] 			= handle_autows,
-	['autofood']		= handle_autofood,
-	['facemob']			= handle_facemob,
-    ['test']        	= handle_test,
-	['displayrune'] 	= handle_displayrune,
-	['displayshot'] 	= handle_displayshot,
-	['displayelement'] 	= handle_displayelement,
-	['curecheat'] 		= handle_curecheat,
-	['smartcure']		= handle_smartcure,
-	['mount'] 			= handle_mount,
-	['shadows']			= handle_shadows,
-	['buffup']			= handle_buffup,
-	['delayedcast']		= handle_delayedcast,
-	['runeelement']		= handle_runeelement,
-	['killstatue']		= handle_killstatue,
-	['smartws']			= handle_smartws,
-	['scholar']			= handle_scholar,
-	['macropage']		= handle_macropage,
-	['stna']			= handle_stna,
-}

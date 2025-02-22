@@ -830,4 +830,4 @@ data.status_map = {
 	[10] = {buff='diseased',spell='Viruna'},
 }
 
-data.erasable_statuses = S{"burn","frost","choke","rasp","shock","drown","dia","bio"}
+data.erasable_statuses = S{"bind","weight","burn","frost","choke","rasp","shock","drown","dia","bio","requiem","elegy"}

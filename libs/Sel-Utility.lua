@@ -2672,53 +2672,61 @@ function set_dual_wield()
 end
 
 function get_closest_mob_id_by_name(name)
-	local name = get_fuzzy_name(name)
-	local mobs = windower.ffxi.get_mob_array()
-	local fuzzy_list = T{}
-	local best_match = T{}
-
-	for i, mob in pairs(mobs) do
-		if mob.valid_target then
-			local fuzzy_mob_name = get_fuzzy_name(mob.name)
-			if (name:length() >= 3 and fuzzy_mob_name:contains(name)) or fuzzy_mob_name == name then
-				fuzzy_list[mob.id] = mob
-				fuzzy_list[mob.id].score = fuzzy_mob_name:length() - name:length()
-			end
-		end
-	end
-	
-	for i, mob in pairs(fuzzy_list) do
-		if (not best_match.score or mob.score < best_match.score) or (mob.score == best_match.score and (mob.distance < best_match.distance)) then
-			best_match = mob
-		end
-	end
-
-	return best_match.id or false
+	local mob = get_closest_mob_by_name(name)
+	return mob and mob.id or false
 end
 
 function get_closest_mob_by_name(name)
 	local name = get_fuzzy_name(name)
 	local mobs = windower.ffxi.get_mob_array()
-	local fuzzy_list = T{}
-	local best_match = T{}
+	local best_match = nil
 
 	for i, mob in pairs(mobs) do
 		if mob.valid_target then
 			local fuzzy_mob_name = get_fuzzy_name(mob.name)
 			if (name:length() >= 3 and fuzzy_mob_name:contains(name)) or fuzzy_mob_name == name then
-				fuzzy_list[mob.id] = mob
-				fuzzy_list[mob.id].score = fuzzy_mob_name:length() - name:length()
+				local potential_match = mob
+				potential_match.score = fuzzy_mob_name:length() - name:length()
+				
+				if not best_match or (best_match.distance > 20 and potential_match.distance <= 20) or (potential_match.score > best_match.score and potential_match.distance <= 20) or (potential_match.score == best_match.score and potential_match.distance < best_match.distance) then
+					best_match = potential_match
+				end
 			end
-		end
-	end
-	
-	for i, mob in pairs(fuzzy_list) do
-		if (not best_match.score or mob.score < best_match.score) or (mob.score == best_match.score and (mob.distance < best_match.distance)) then
-			best_match = mob
 		end
 	end
 
 	return best_match or false
+end
+
+function get_closest_party_member_by_name(name)
+	local name = get_fuzzy_name(name)
+	local best_match = nil
+
+	for i, member in ipairs(party) do
+		if member.valid_target then
+			local fuzzy_member_name = get_fuzzy_name(party[i].name)
+			if (name:length() >= 3 and fuzzy_member_name:contains(name)) or fuzzy_member_name == name then
+				local potential_match = member
+				potential_match.score = fuzzy_member_name:length() - name:length()
+				
+				if not best_match or (best_match.mob.distance > 20 and potential_match.mob.distance <= 20) or (potential_match.score > best_match.score and potential_match.mob.distance <= 20) or (potential_match.score == best_match.score and potential_match.mob.distance < best_match.mob.distance) then
+					best_match = potential_match
+				end
+			end
+		end
+	end
+
+	return best_match or false
+end
+
+function get_party_member_by_id(member_id)
+	for i in ipairs(party) do
+		if member_id == party[i].mob.id then
+			return party[i]
+		end
+	end
+
+	return false
 end
 
 function get_fuzzy_name(name)

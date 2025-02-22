@@ -347,10 +347,10 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 	if player.sub_job == 'SCH' then
-		set_macro_page(1, 2)
-	elseif player.sub_job == 'BLM' then
-		set_macro_page(2, 2)
+		set_macro_page(1, 4)
+	elseif player.sub_job == 'RDM' then
+		set_macro_page(2, 4)
 	else
-		set_macro_page(3, 2)
+		set_macro_page(3, 4)
 	end
 end
