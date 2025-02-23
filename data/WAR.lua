@@ -53,8 +53,12 @@ end
 function job_setup()
 
 	state.Buff['Brazen Rush'] = buffactive['Brazen Rush'] or false
+	state.Buff.Berserk = buffactive['Berserk'] or false
+	state.Buff.Aggressor = buffactive['Aggressor'] or false
 	state.Buff["Warrior's Charge"] = buffactive["Warrior's Charge"] or false
-	state.Buff['Mighty Strikes'] = buffactive['Mighty Strikes']  or false
+	state.Buff['Mighty Strikes'] = buffactive['Mighty Strikes'] or false
+	state.Buff.Warcry = buffactive['Warcry'] or false
+	state.Buff['Blood Rage'] = buffactive['Blood Rage'] or false
 	state.Buff.Retaliation = buffactive['Retaliation'] or false
 	state.Buff.Restraint = buffactive['Restraint'] or false
     state.Buff['Aftermath'] = buffactive['Aftermath'] or false
@@ -62,6 +66,7 @@ function job_setup()
 	state.Buff['Third Eye'] = buffactive['Third Eye'] or false
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
+	state.Buff['Sneak Attack'] = buffactive['Sneak Attack'] or false
 	state.Stance = M{['description']='Stance','Hasso','Seigan','None'}
 
 	autows = "Ukko's Fury"
@@ -97,7 +102,7 @@ end
 function job_precast(spell, spellMap, eventArgs)
 	if spell.type == 'WeaponSkill' and state.AutoBuffMode.value ~= 'Off' then
 		local abil_recasts = windower.ffxi.get_ability_recasts()
-		if player.tp < 2250 and not buffactive['Blood Rage'] and abil_recasts[2] < latency then
+		if player.tp < 2250 and not state.Buff['Blood Rage'] and not state.Buff.Warcry and abil_recasts[2] < latency then
 			eventArgs.cancel = true
 			windower.chat.input('/ja "Warcry" <me>')
 			windower.chat.input:schedule(1.1,'/ws "'..spell.english..'" '..spell.target.raw..'')
@@ -124,11 +129,11 @@ end
 -- Modify the default melee set after it was constructed.
 function job_customize_melee_set(meleeSet)
 
-	if not state.OffenseMode.value:contains('Acc') and state.HybridMode.value == 'Normal' and buffactive['Retaliation'] then
+	if not state.OffenseMode.value:contains('Acc') and state.HybridMode.value == 'Normal' and state.Buff['Retaliation'] then
 		meleeSet = set_combine(meleeSet, sets.buff.Retaliation)
 	end
 	
-	if not state.OffenseMode.value:contains('Acc') and state.HybridMode.value == 'Normal' and buffactive['Restraint'] then
+	if not state.OffenseMode.value:contains('Acc') and state.HybridMode.value == 'Normal' and state.Buff['Restraint'] then
 		meleeSet = set_combine(meleeSet, sets.buff.Restraint)
 	end
 	
@@ -145,7 +150,7 @@ function job_post_precast(spell, spellMap, eventArgs)
 		if (WSset.ear1 == "Moonshade Earring" or WSset.ear2 == "Moonshade Earring") then
 			-- Replace Moonshade Earring if we're at cap TP
 			if get_effective_player_tp(spell, WSset) > 3200 then
-				if wsacc:contains('Acc') and not buffactive['Sneak Attack'] and sets.AccMaxTP then
+				if wsacc:contains('Acc') and not state.Buff['Sneak Attack'] and sets.AccMaxTP then
 					local AccMaxTPset = standardize_set(sets.AccMaxTP)
 
 					if (AccMaxTPset.ear1:startswith("Lugra Earring") or AccMaxTPset.ear2:startswith("Lugra Earring")) and not classes.DuskToDawn and sets.AccDayMaxTPWSEars then
@@ -163,21 +168,21 @@ function job_post_precast(spell, spellMap, eventArgs)
 				else
 				end
 			else
-				if wsacc:contains('Acc') and not buffactive['Sneak Attack'] and (WSset.ear1:startswith("Lugra Earring") or WSset.ear2:startswith("Lugra Earring")) and not classes.DuskToDawn and sets.AccDayWSEars then
+				if wsacc:contains('Acc') and not state.Buff['Sneak Attack'] and (WSset.ear1:startswith("Lugra Earring") or WSset.ear2:startswith("Lugra Earring")) and not classes.DuskToDawn and sets.AccDayWSEars then
 					equip(sets.AccDayWSEars[spell.english] or sets.AccDayWSEars)
 				elseif (WSset.ear1:startswith("Lugra Earring") or WSset.ear2:startswith("Lugra Earring")) and not classes.DuskToDawn and sets.DayWSEars then
 					equip(sets.DayWSEars[spell.english] or sets.DayWSEars)
 				end
 			end
 		elseif (WSset.ear1:startswith("Lugra Earring") or WSset.ear2:startswith("Lugra Earring")) and not classes.DuskToDawn then
-			if wsacc:contains('Acc') and not buffactive['Sneak Attack'] and sets.AccDayWSEars then
+			if wsacc:contains('Acc') and not state.Buff['Sneak Attack'] and sets.AccDayWSEars then
 				equip(sets.AccDayWSEars[spell.english] or sets.AccDayWSEars)
 			elseif sets.DayWSEars then
 				equip(sets.DayWSEars[spell.english] or sets.DayWSEars)
 			end
 		end
 		
-		if wsacc:contains('Acc') and not buffactive['Sneak Attack'] then
+		if wsacc:contains('Acc') and not state.Buff['Sneak Attack'] then
 			if state.Buff.Charge and state.Buff['Mighty Strikes'] and sets.ACCWSMightyCharge then
 				equip(sets.ACCWSMightyCharge)
 			elseif state.Buff.Charge and sets.ACCWSCharge then
@@ -249,7 +254,7 @@ function update_melee_groups()
 			classes.CustomMeleeGroups:append('Mighty')
 		end
 		
-		if (player.equipment.main == "Conqueror" and buffactive['Aftermath: Lv.3']) or ((player.equipment.main == "Bravura" or player.equipment.main == "Ragnarok") and state.Buff['Aftermath']) then
+		if (player.equipment.main == "Conqueror" and state.Buff['Aftermath: Lv.3']) or ((player.equipment.main == "Bravura" or player.equipment.main == "Ragnarok") and state.Buff['Aftermath']) then
 				classes.CustomMeleeGroups:append('AM')
 		end
 	end
@@ -281,23 +286,23 @@ function job_check_buff()
 		
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 
-		if not buffactive.Retaliation and abil_recasts[8] < latency then
+		if not state.Buff.Retaliation and abil_recasts[8] < latency then
 			windower.chat.input('/ja "Retaliation" <me>')
 			add_tick_delay()
 			return true		
-		elseif not buffactive.Restraint and abil_recasts[9] < latency then
+		elseif not state.Buff.Restraint and abil_recasts[9] < latency then
 			windower.chat.input('/ja "Restraint" <me>')
 			add_tick_delay()
 			return true
-		elseif not buffactive['Blood Rage'] and abil_recasts[11] < latency then
+		elseif not state.Buff['Blood Rage'] and not state.Buff['Warcry'] and abil_recasts[11] < latency then
 			windower.chat.input('/ja "Blood Rage" <me>')
 			add_tick_delay()
 			return true
-		elseif not buffactive.Berserk and abil_recasts[1] < latency then
+		elseif not state.Buff.Berserk and abil_recasts[1] < latency then
 			windower.chat.input('/ja "Berserk" <me>')
 			add_tick_delay()
 			return true
-		elseif not buffactive.Aggressor and abil_recasts[4] < latency then
+		elseif not state.Buff.Aggressor and abil_recasts[4] < latency then
 			windower.chat.input('/ja "Aggressor" <me>')
 			add_tick_delay()
 			return true
