@@ -854,7 +854,7 @@ function user_job_lockstyle()
     windower.chat.input('/lockstyleset 005')
 end
 
--- I don't want this automatic dismissal behaviour
+-- Don't auto dismiss
 function job_filter_precast(spell, spellMap, eventArgs)
 	-- if spell.english:startswith('Geo-') and pet.isvalid then
 	-- 	eventArgs.cancel = true
@@ -863,7 +863,7 @@ function job_filter_precast(spell, spellMap, eventArgs)
 	-- end
 end
 
--- I don't want to switch to kiting if luopan is out
+-- Don't switch to kiting if luopan is out
 function apply_kiting(baseSet)
 	if sets.Kiting and (state.Kiting.value or (player.status == 'Idle' and moving and state.DefenseMode.value == 'None')) and not pet.isvalid then
 		baseSet = set_combine(baseSet, sets.Kiting)
