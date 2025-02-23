@@ -1,6 +1,8 @@
 --Place for settings and custom functions to work across one characters, all jobs.
 
 state.DisplayMode = M(true, 'Display Mode') --Set this to false if you don't want to display modes at the bottom of your screen.
+state.MiniQueue = M(false, 'MiniQueue')
+
 --Uncomment the settings below and change the values to edit the display's look.
 --displayx = 3
 --displayy = 1062
