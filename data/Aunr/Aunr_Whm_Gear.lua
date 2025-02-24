@@ -8,6 +8,8 @@ function user_job_setup()
     state.ResistDefenseMode:options('Refresh')
     state.Weapons:options('None', 'DualWield', 'Trial', 'MeleeWeapons', 'LowDmg')
 
+    state.AutoDivineCaress = M(false, 'Auto Divine Caress')
+
     -- state.BarElement = M{['description']='BarElement', 'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
     -- state.BarStatus = M{['description']='BarStatus', 'Baramnesra', 'Barvira', 'Barparalyzra', 'Barsilencera', 'Barpetra', 'Barpoisonra', 'Barblindra', 'Barsleepra'}
     -- state.BoostSpell = M{['description']='BoostSpell', 'Boost-STR', 'Boost-INT', 'Boost-AGI', 'Boost-VIT', 'Boost-DEX', 'Boost-MND', 'Boost-CHR'}
@@ -20,10 +22,6 @@ function user_job_setup()
     gear.obi_nuke_back = "Toro Cape"
 
     -- Additional local binds
-    -- send_command('bind ^\' input /ma "Arise" <t>')
-    -- send_command('bind !\' input /ja "Penury" <me>')
-    -- send_command('bind @\' gs c cycle MagicBurstMode')
-    -- send_command('bind ^@!\' gs c toggle AutoCaress')
     send_command('bind ^backspace input /ja "Sacrosanctity" <me>')
     send_command('bind @backspace input /ma "Aurorastorm" <me>')
     send_command('bind != gs c toggle AutoSubMode') -- Automatically uses sublimation.
@@ -35,33 +33,11 @@ function user_job_setup()
     send_command('bind @p input /ja "Light Arts" <me>; wait 2; input /ja "Addendum: White" <me>')
     send_command('bind @o input /ja "Dark Arts" <me>; wait 2; input /ja "Addendum: Black" <me>')
 
-    -- send_command('bind 1 input /ma "Cure III" <stal>')
-    -- send_command('bind 2 input /ma "Cure IV" <stal>')
-    -- send_command('bind 3 input /ma "Curaga III" <stal>')
-    -- send_command('bind 4 input /ma "Regen IV" <stal>')
-    -- send_command('bind 5 input /ma "" <stal>')
-    -- send_command('bind 6 input /ma "" <stal>')
-    -- send_command('bind 7 input /ma "Haste" <stal>')
-    -- send_command('bind 8 input /ma "Auspice" <stal>')
-    -- send_command('bind 9 input /ma "Protect V" <stal>')
-    -- send_command('bind 0 input /ma "Shell V" <stal>')
-
-    -- send_command('bind @1 input /ma "Poisona" <stal>')
-    -- send_command('bind @2 input /ma "Paralyna" <stal>')
-    -- send_command('bind @3 input /ma "Blindna" <stal>')
-    -- send_command('bind @4 input /ma "Silena" <stal>')
-    -- send_command('bind @5 input /ma "Stona" <stal>')
-    -- send_command('bind @6 input /ma "Viruna" <stal>')
-    -- send_command('bind @7 input /ma "" <stal>')
-    -- send_command('bind @8 input /ma "" <stal>')
-    -- send_command('bind @9 input /ma "Curaga" <stal>')
-    -- send_command('bind @0 input /ma "Curaga" <stal>')
 
     autows = 'Black Halo'
 
     select_default_macro_book()
     user_job_lockstyle()
-
 end
 
 -- Define sets and vars used by this job file.
@@ -641,7 +617,7 @@ function init_gear_sets()
         head = "Umuthi Hat",
         body = {
             name = "Telchine Chas.",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         hands = "Inyan. Dastanas +2",
         legs = "Piety Pantaln. +3",
@@ -662,15 +638,15 @@ function init_gear_sets()
         legs = "Shedir Seraweels",
         head = {
             name = "Telchine Cap",
-            augments = {'Enh. Mag. eff. dur. +9'}
+            augments = { 'Enh. Mag. eff. dur. +9' }
         },
         body = {
             name = "Telchine Chas.",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         hands = {
             name = "Telchine Gloves",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         feet = "Theo. Duckbills +2"
     })
@@ -679,19 +655,19 @@ function init_gear_sets()
         feet = "Ebers Duckbills +2",
         head = {
             name = "Telchine Cap",
-            augments = {'Enh. Mag. eff. dur. +9'}
+            augments = { 'Enh. Mag. eff. dur. +9' }
         },
         body = {
             name = "Telchine Chas.",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         hands = {
             name = "Telchine Gloves",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         legs = {
             name = "Telchine Braconi",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         waist = "Embla Sash"
     })
@@ -713,7 +689,7 @@ function init_gear_sets()
         waist = "Embla Sash",
         body = {
             name = "Telchine Chas.",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         legs = "Theo. Pant. +1",
         feet = "Theo. Duckbills +2"
@@ -724,19 +700,19 @@ function init_gear_sets()
         waist = "Sekhmet Corset",
         head = {
             name = "Telchine Cap",
-            augments = {'Enh. Mag. eff. dur. +9'}
+            augments = { 'Enh. Mag. eff. dur. +9' }
         },
         body = {
             name = "Telchine Chas.",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         hands = {
             name = "Telchine Gloves",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         legs = {
             name = "Telchine Braconi",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         feet = "Theo. Duckbills +2"
 
@@ -746,19 +722,19 @@ function init_gear_sets()
         waist = "Sekhmet Corset",
         head = {
             name = "Telchine Cap",
-            augments = {'Enh. Mag. eff. dur. +9'}
+            augments = { 'Enh. Mag. eff. dur. +9' }
         },
         body = {
             name = "Telchine Chas.",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         hands = {
             name = "Telchine Gloves",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         legs = {
             name = "Telchine Braconi",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         feet = "Theo. Duckbills +2"
     })
@@ -768,15 +744,15 @@ function init_gear_sets()
         waist = "Sekhmet Corset",
         head = {
             name = "Telchine Cap",
-            augments = {'Enh. Mag. eff. dur. +9'}
+            augments = { 'Enh. Mag. eff. dur. +9' }
         },
         body = {
             name = "Telchine Chas.",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         hands = {
             name = "Telchine Gloves",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         feet = "Theo. Duckbills +2"
     })
@@ -786,15 +762,15 @@ function init_gear_sets()
         waist = "Sekhmet Corset",
         head = {
             name = "Telchine Cap",
-            augments = {'Enh. Mag. eff. dur. +9'}
+            augments = { 'Enh. Mag. eff. dur. +9' }
         },
         body = {
             name = "Telchine Chas.",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         hands = {
             name = "Telchine Gloves",
-            augments = {'Enh. Mag. eff. dur. +10'}
+            augments = { 'Enh. Mag. eff. dur. +10' }
         },
         feet = "Theo. Duckbills +2"
     })
@@ -1040,7 +1016,7 @@ function init_gear_sets()
         right_ring = "Stikini Ring",
         back = {
             name = "Alaunus's Cape",
-            augments = {'MND+20', 'Eva.+20 /Mag. Eva.+20', '"Fast Cast"+10', 'Phys. dmg. taken-10%'}
+            augments = { 'MND+20', 'Eva.+20 /Mag. Eva.+20', '"Fast Cast"+10', 'Phys. dmg. taken-10%' }
         }
     }
 
@@ -1319,7 +1295,6 @@ function init_gear_sets()
     }
 
     sets.buff.Doom = set_combine(sets.buff.Doom, {})
-
 end
 
 -- Select default macro book on initial load or subjob change.
@@ -1329,4 +1304,34 @@ end
 
 function user_job_lockstyle()
     windower.chat.input('/lockstyleset 009')
+end
+
+-- AutoDivineCaress toggle
+function job_post_midcast(spell, spellMap, eventArgs)
+    -- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
+    if spellMap == 'StatusRemoval' then
+        if state.Buff['Divine Caress'] and state.MagicBurstMode.value then
+            equip(sets.buff['Divine Caress'])
+        end
+    elseif spellMap == 'BarElement' then
+        if (state.Buff['Light Arts'] or state.Buff['Addendum: White']) and sets.midcast.BarElement and sets.midcast.BarElement.LightArts then
+            equip(sets.midcast.BarElement.LightArts)
+        end
+    elseif spell.skill == 'Elemental Magic' and default_spell_map ~= 'ElementalEnfeeble' and spell.english ~= 'Impact' then
+        if state.MagicBurstMode.value ~= 'Off' then equip(sets.MagicBurst) end
+        if spell.element == world.weather_element or spell.element == world.day_element then
+            if state.CastingMode.value == 'Fodder' then
+                if spell.element == world.day_element then
+                    if item_available('Zodiac Ring') then
+                        sets.ZodiacRing = { ring2 = "Zodiac Ring" }
+                        equip(sets.ZodiacRing)
+                    end
+                end
+            end
+        end
+
+        if spell.element and sets.element[spell.element] then
+            equip(sets.element[spell.element])
+        end
+    end
 end
