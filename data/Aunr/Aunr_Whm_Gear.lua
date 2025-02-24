@@ -8,7 +8,7 @@ function user_job_setup()
     state.ResistDefenseMode:options('Refresh')
     state.Weapons:options('None', 'DualWield', 'Trial', 'MeleeWeapons', 'LowDmg')
 
-    state.AutoDivineCaress = M(false, 'Auto Divine Caress')
+    state.AutoCaress = M(false, 'Auto Caress Mode')
 
     -- state.BarElement = M{['description']='BarElement', 'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
     -- state.BarStatus = M{['description']='BarStatus', 'Baramnesra', 'Barvira', 'Barparalyzra', 'Barsilencera', 'Barpetra', 'Barpoisonra', 'Barblindra', 'Barsleepra'}
@@ -1304,34 +1304,4 @@ end
 
 function user_job_lockstyle()
     windower.chat.input('/lockstyleset 009')
-end
-
--- AutoDivineCaress toggle
-function job_post_midcast(spell, spellMap, eventArgs)
-    -- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
-    if spellMap == 'StatusRemoval' then
-        if state.Buff['Divine Caress'] and state.AutoDivineCaress.value then
-            equip(sets.buff['Divine Caress'])
-        end
-    elseif spellMap == 'BarElement' then
-        if (state.Buff['Light Arts'] or state.Buff['Addendum: White']) and sets.midcast.BarElement and sets.midcast.BarElement.LightArts then
-            equip(sets.midcast.BarElement.LightArts)
-        end
-    elseif spell.skill == 'Elemental Magic' and default_spell_map ~= 'ElementalEnfeeble' and spell.english ~= 'Impact' then
-        if state.MagicBurstMode.value ~= 'Off' then equip(sets.MagicBurst) end
-        if spell.element == world.weather_element or spell.element == world.day_element then
-            if state.CastingMode.value == 'Fodder' then
-                if spell.element == world.day_element then
-                    if item_available('Zodiac Ring') then
-                        sets.ZodiacRing = { ring2 = "Zodiac Ring" }
-                        equip(sets.ZodiacRing)
-                    end
-                end
-            end
-        end
-
-        if spell.element and sets.element[spell.element] then
-            equip(sets.element[spell.element])
-        end
-    end
 end
