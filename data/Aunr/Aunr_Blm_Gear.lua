@@ -37,6 +37,7 @@ function user_job_setup()
     send_command('bind !pause gs c toggle AutoSubMode') --Automatically uses sublimation and Myrkr.
 
     select_default_macro_book()
+    user_job_lockstyle()
 end
 
 function init_gear_sets()
@@ -505,20 +506,20 @@ function init_gear_sets()
     -- Elemental Magic sets
 
     sets.midcast['Elemental Magic'] = {
-        main = "Mpaca's Staff",
+        main = "Mpaca's Stagg",
         sub = "Enki Strap",
-        ammo = "Pemphredo Tathlum",
-        head = "Jhakri Coronal +2",
-        neck = "Src. Stole +1",
+        ammo = "Ghastly Tathlum +1",
+        head = "Wicce Petasos +2",
+        neck = "Sibyl Scarf",
         ear1 = "Barkaro. Earring",
-        ear2 = "Malignance Earring",
+        ear2 = "Friomisi Earring",
         body = "Wicce Coat +2",
-        hands = "Amalric Gages",
+        hands = "Wicce Gloves +2",
         ring1 = "Medada's Ring",
         ring2 = "Metamor. Ring +1",
         back = gear.nuke_jse_back,
-        waist = "Refoccilation Stone",
-        legs = "Agwu's Slops",
+        waist = "Acuity Belt +1",
+        legs = "Wicce Chausses +2",
         feet = "Wicce Sabots +2"
     }
 
@@ -574,18 +575,18 @@ function init_gear_sets()
         main = "Mpaca's Staff",
         sub = "Oneiros Grip",
         ammo = "Staunch Tathlum +1",
-        head = "Nyame Helm",
+        head = "Wicce Petasos +2",
         neck = "Sibyl Scarf",
         ear1 = "Eabani Earring",
         ear2 = "Infused Earring",
         body = "Wicce Coat +2",
-        hands = "Nyame Gauntlets",
+        hands = "Wicce Gloves +2",
         ring1 = "Defending Ring",
         ring2 = "Shadow Ring",
         back = gear.idlefc_jse_back,
         waist = "Fucho-no-Obi",
         legs = "Assid. Pants +1",
-        feet = "Nyame Sollerets"
+        feet = "Wicce Sabots +2"
     }
 
     -- Idle mode that keeps PDT gear on, but doesn't prevent normal gear swaps for precast/etc.
@@ -749,7 +750,18 @@ function init_gear_sets()
 
     sets.buff.Doom = set_combine(sets.buff.Doom, {})
     sets.buff['Mana Wall'] = {
-        back = gear.nuke_jse_back,
+        ammo = "Staunch Tathlum +1",
+        head = "Wicce Petasos +2",
+        neck = "Loricate Torque +1",
+        ear1 = "Hearty Earring",
+        ear2 = "Ethereal Earring",
+        body = "Wicce Coat +2",
+        hands = "Wicce Gloves +2",
+        ring1 = "Defending Ring",
+        ring2 = "Supershear Ring",
+        back = gear.idlefc_jse_back,
+        waist = "Plat. Mog. Belt",
+        legs = "Wicce Chausses +2",
         feet = "Wicce Sabots +2"
     }
 
@@ -832,4 +844,8 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     set_macro_page(1, 4)
+end
+
+function user_job_lockstyle()
+    windower.chat.input('/lockstyleset 011')
 end
