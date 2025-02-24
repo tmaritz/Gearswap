@@ -1310,7 +1310,7 @@ end
 function job_post_midcast(spell, spellMap, eventArgs)
     -- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
     if spellMap == 'StatusRemoval' then
-        if state.Buff['Divine Caress'] and state.MagicBurstMode.value then
+        if state.Buff['Divine Caress'] and state.AutoDivineCaress.value then
             equip(sets.buff['Divine Caress'])
         end
     elseif spellMap == 'BarElement' then
