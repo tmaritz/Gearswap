@@ -87,7 +87,7 @@ function init_gear_sets()
         body = "Agwu's Robe",
         hands = "Agwu's Gages",
         legs = "Agwu's Slops",
-        feet = "Regal Pumps +1",
+        feet = gear.merlinic_fc_feet,
         neck = "Voltsurge Torque",
         waist = "Witful Belt",
         left_ear = "Malignance Earring",
@@ -152,7 +152,7 @@ function init_gear_sets()
         ammo = "Dosis Tathlum",
         head = "Hagondes Hat +1",
         neck = "Saevus Pendant +1",
-        ear1 = "Friomisi Earring",
+        ear1 = "Malignance Earring",
         ear2 = "Crematio Earring",
         body = "Jhakri Robe +2",
         hands = "Jhakri Cuffs",
@@ -169,7 +169,7 @@ function init_gear_sets()
         ammo = "Dosis Tathlum",
         head = "Hagondes Hat +1",
         neck = "Saevus Pendant +1",
-        ear1 = "Friomisi Earring",
+        ear1 = "Malignance Earring",
         ear2 = "Crematio Earring",
         body = "Zendik Robe",
         hands = "Hagondes Cuffs +1",
@@ -506,13 +506,13 @@ function init_gear_sets()
     -- Elemental Magic sets
 
     sets.midcast['Elemental Magic'] = {
-        main = "Mpaca's Stagg",
+        main = "Mpaca's Staff",
         sub = "Enki Strap",
         ammo = "Ghastly Tathlum +1",
         head = "Wicce Petasos +2",
         neck = "Sibyl Scarf",
         ear1 = "Barkaro. Earring",
-        ear2 = "Friomisi Earring",
+        ear2 = "Malignance Earring",
         body = "Wicce Coat +2",
         hands = "Wicce Gloves +2",
         ring1 = "Medada's Ring",
@@ -584,7 +584,7 @@ function init_gear_sets()
         ring1 = "Defending Ring",
         ring2 = "Shadow Ring",
         back = gear.idlefc_jse_back,
-        waist = "Fucho-no-Obi",
+        waist = "Carrier's Sash",
         legs = "Assid. Pants +1",
         feet = "Wicce Sabots +2"
     }
@@ -701,7 +701,7 @@ function init_gear_sets()
     }
 
     sets.Kiting = {
-        feet = "Herald's Gaiters"
+        -- feet = "Herald's Gaiters"
     }
     sets.latent_refresh = {
         waist = "Fucho-no-obi"
@@ -767,28 +767,25 @@ function init_gear_sets()
 
     -- Gear that converts elemental damage done to recover MP.	
     sets.RecoverMP = {
-        body = "Spaekona's Coat +3"
+        body = "Spae. Coat +1",
     }
     -- Gear for Magic Burst mode.
     sets.MagicBurst = {
-        main = gear.grioavolr_nuke_staff,
+        main = "Mpaca's Staff",
         sub = "Enki Strap",
-        head = "Ea Hat",
+        ammo = "Ghastly Tathlum +1",
+        head = "Wicce Petasos +2",
+        neck = "Src. Stole +1",
+        ear1 = "Barkaro. Earring",
+        ear2 = "Malignance Earring",
         body = "Wicce Coat +2",
-        hands = "Amalric Gages",
-        ring1 = "Mujin Band",
-        legs = "Ea Slops",
-        feet = "Jhakri Pigaches"
-    }
-    sets.ResistantMagicBurst = {
-        main = gear.grioavolr_nuke_staff,
-        sub = "Enki Strap",
-        head = "Ea Hat",
-        body = "Ea Houppelande",
-        hands = "Amalric Gages",
-        ring1 = "Mujin Band",
-        legs = "Ea Slops",
-        feet = "Jhakri Pigaches"
+        hands = "Wicce Gloves +2",
+        ring1 = "Medada's Ring",
+        ring2 = "Mujin Band",
+        back = gear.nuke_jse_back,
+        waist = "Acuity Belt +1",
+        legs = "Wicce Chausses +2",
+        feet = "Wicce Sabots +2"
     }
 
     -- Gear for specific elemental nukes.
@@ -806,19 +803,19 @@ function init_gear_sets()
 
     -- Normal melee group
     sets.engaged = {
-        ammo = "Staunch Tathlum",
-        head = "Jhakri Coronal +1",
-        neck = "Combatant's Torque",
-        ear1 = "Mache Earring +1",
+        ammo = "Vanir Battery",
+        head = "Nyame Helm",
+        neck = "Asperity Necklace",
+        ear1 = "Cessance Earring",
         ear2 = "Telos Earring",
-        body = "Jhakri Robe +2",
-        hands = "Jhakri Cuffs",
-        ring1 = "Ramuh Ring +1",
-        ring2 = "Ramuh Ring +1",
-        back = gear.stp_jse_back,
-        waist = "Olseni Belt",
-        legs = "Jhakri Slops +1",
-        feet = "Jhakri Pigaches"
+        body = "Nyame Mail",
+        hands = "Nyame Gauntlets",
+        ring1 = "Chirich Ring +1",
+        ring2 = "Petrov Ring",
+        back = gear.idlefc_jse_back,
+        waist = "Cornelia's Belt",
+        legs = "Nyame Flanchard",
+        feet = "Nyame Sollerets"
     }
 
     -- Situational sets: Gear that is equipped on certain targets

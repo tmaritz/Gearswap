@@ -206,9 +206,9 @@ gear.merlinic_aspir_legs = {
     name = "Merlinic Shalwar",
     augments = { '"Drain" and "Aspir" potency +11', 'CHR+7', 'Mag. Acc.+7', }
 }
-gear.merlinic_nuke_feet = {
+gear.merlinic_fc_feet = {
     name = "Merlinic Crackows",
-    augments = { 'Mag. Acc.+19 "Mag.Atk.Bns."+19', '"Conserve MP"+1', 'INT+11', 'Mag. Acc.+3', '"Mag.Atk.Bns."+15' }
+    augments = {'"Mag.Atk.Bns."+8','"Fast Cast"+6','MND+2',}
 }
 gear.merlinic_aspir_feet = {
     name = "Merlinic Crackows",
