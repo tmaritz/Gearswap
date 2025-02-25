@@ -1093,6 +1093,7 @@ function init_gear_sets()
         legs = "Assid. Pants +1",
         feet = "Nyame Sollerets",
         neck = "Loricate Torque +1",
+        -- neck = "Yngvi Choker",
         waist = "Carrier's Sash",
         left_ear = "Eabani Earring",
         right_ear = "Hearty Earring",

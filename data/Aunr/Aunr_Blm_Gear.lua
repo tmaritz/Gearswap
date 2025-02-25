@@ -522,7 +522,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].OccultAcumen = {
         ammo = "Seraphic Ampulla",
         head = "Mall. Chapeau +2",
-        body = "Wicce Coat +2", -- Shango Robe
+        body = gear.merlinic_occult_body, -- Shango Robe?
         hands = gear.merlinic_occult_hands,
         legs = "Perdition Slops",
         feet = gear.merlinic_occult_feet,
@@ -771,13 +771,13 @@ function init_gear_sets()
         ear1 = "Barkaro. Earring",
         ear2 = "Malignance Earring",
         body = "Wicce Coat +2",
-        hands = "Wicce Gloves +2",
+        hands = "Agwu's Gloves",
         ring1 = "Medada's Ring",
         ring2 = "Mujin Band",
         back = gear.nuke_jse_back,
         waist = "Acuity Belt +1",
         legs = "Wicce Chausses +2",
-        feet = "Wicce Sabots +2"
+        feet = "Agwu's Pigaches"
     }
 
     -- Gear for specific elemental nukes.

@@ -304,9 +304,9 @@ function init_gear_sets()
         ammo = "Ghastly Tathlum +1",
         head = "Azimuth Hood +3",
         body = "Azimuth Coat +3",
-        hands = "Azimuth Gloves +2",
+        hands = "Agwu's Gloves",
         legs = "Azimuth Tights +2",
-        feet = "Azimuth Gaiters +2",
+        feet = "Agwu's Pigaches",
         neck = "Mizu. Kubikazari",
         waist = "Acuity Belt +1",
         left_ear = "Friomisi Earring",
@@ -337,7 +337,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].OccultAcumen = {
         ammo = "Seraphic Ampulla",
         head = "Mall. Chapeau +2",
-        body = "Azimuth Coat +3", -- Shango Robe
+        body = gear.merlinic_occult_body, -- Shango Robe?
         hands = gear.merlinic_occult_hands,
         legs = "Perdition Slops",
         feet = gear.merlinic_occult_feet,

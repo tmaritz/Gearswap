@@ -192,7 +192,7 @@ gear.merlinic_nuke_body = {
 }
 gear.merlinic_occult_body = {
     name = "Merlinic Jubbah",
-    augments = { 'Mag. Acc.+14', '"Occult Acumen"+11', 'MND+6' }
+    augments = {'"Occult Acumen"+11','MND+4','"Mag.Atk.Bns."+14',}
 }
 gear.merlinic_aspir_hands = {
     name = "Merlinic Dastanas",
