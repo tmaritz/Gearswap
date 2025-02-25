@@ -23,18 +23,9 @@ function user_job_setup()
     }
 
     -- Additional local binds
-    send_command('bind @` gs c cycle ElementalMode')
-    send_command('bind ^` gs c scholar dark')
-    send_command('bind !` gs c scholar light')
-    send_command('bind ^backspace input /ma "Aspir III" <t>')
-    send_command('bind !backspace input /ja "Manawell" <me>')
-    send_command('bind @backspace gs c scholar cost')
-    send_command('bind ^\\\\ gs c scholar speed')
-    send_command('bind @\\\\ input /ja "Mana Wall" <me>')
-    send_command('bind !\\\\ input /ma "Reraise III" <me>')
-    send_command('bind @f9 gs c cycle DeathMode')
-    send_command('bind @f10 gs c cycle RecoverMode')
-    send_command('bind !pause gs c toggle AutoSubMode') --Automatically uses sublimation and Myrkr.
+    send_command('bind ^\' gs c cycle MagicBurstMode')
+    send_command('bind !\' gs c cycle ElementalMode')
+    send_command('bind @\' gs c elemental weather')
 
     select_default_macro_book()
     user_job_lockstyle()
