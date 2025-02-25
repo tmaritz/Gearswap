@@ -25,6 +25,7 @@ function user_job_setup()
     -- Additional local binds
     send_command('bind ^\' gs c cycle MagicBurstMode')
     send_command('bind !\' gs c cycle ElementalMode')
+    send_command('bind !; gs c cycleback ElementalMode')
     send_command('bind @\' gs c elemental weather')
 
     select_default_macro_book()
